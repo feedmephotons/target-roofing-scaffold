@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { ExternalLink, Phone, ChevronRight, Play } from 'lucide-react'
+import { ExternalLink, Phone, ChevronRight } from 'lucide-react'
+import VideoCard from '@/components/VideoCard'
 
 export const metadata: Metadata = {
   title: 'Video Gallery',
@@ -8,56 +9,8 @@ export const metadata: Metadata = {
     'See Target Roofing in action. Watch our project showcases, customer testimonials, and community involvement videos.',
 }
 
-const videos = [
-  {
-    title: 'Target Roofing Overview',
-    url: 'https://www.youtube.com/embed/yz5H6FkrWhs',
-    description:
-      'Learn about Target Roofing & Sheet Metal and what makes us Southwest Florida\'s trusted commercial roofing partner.',
-  },
-  {
-    title: 'Our Process',
-    url: 'https://www.youtube.com/embed/cGLaC7x9btw',
-    description:
-      'See how we approach every project with precision, accountability, and cutting-edge technology.',
-  },
-  {
-    title: 'Colonial Country Club',
-    url: 'https://www.youtube.com/embed/A7Qz9tz8nNU',
-    description:
-      'A detailed look at our roofing work at the Colonial Country Club community in Fort Myers.',
-  },
-  {
-    title: 'Regatta Condominium Project',
-    url: 'https://www.youtube.com/embed/ehuUlnze8L8',
-    description:
-      'Watch our team complete a full roof replacement at the Regatta condominium in Naples.',
-  },
-  {
-    title: 'TPO Retrofit Spotlight',
-    url: 'https://www.youtube.com/embed/sNfPZctunRU',
-    description:
-      'See how we transformed a commercial property with a modern TPO roofing retrofit.',
-  },
-  {
-    title: 'Site Safety',
-    url: 'https://www.youtube.com/embed/fO-jeXa8bus',
-    description:
-      'Safety is our top priority. See how we maintain the highest safety standards on every job site.',
-  },
-  {
-    title: 'Community Involvement',
-    url: 'https://www.youtube.com/embed/rGueLVLaea8',
-    description:
-      'Target Roofing is proud to give back to the Southwest Florida community. See our outreach in action.',
-  },
-  {
-    title: 'Customer Testimonial',
-    url: 'https://www.youtube.com/embed/BGjzGHoxveQ',
-    description:
-      'Hear directly from our satisfied customers about their experience working with Target Roofing.',
-  },
-]
+import videosData from '@/data/videos.json'
+const videos = videosData
 
 export default function VideoGalleryPage() {
   return (
@@ -111,37 +64,7 @@ export default function VideoGalleryPage() {
           {/* Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {videos.map((video) => (
-              <div
-                key={video.url}
-                className="group bg-white rounded-sm shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden"
-              >
-                {/* Title bar */}
-                <div className="flex items-center gap-3 px-6 py-4 border-b border-[var(--gray-200)]">
-                  <span className="flex items-center justify-center w-8 h-8 bg-[var(--red)] rounded-sm">
-                    <Play className="w-4 h-4 text-white fill-white" />
-                  </span>
-                  <h3 className="text-lg font-bold text-[var(--black)] font-[family-name:var(--font-display)] leading-tight">
-                    {video.title}
-                  </h3>
-                </div>
-
-                {/* Video embed */}
-                <div className="video-container">
-                  <iframe
-                    src={video.url}
-                    title={video.title}
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  />
-                </div>
-
-                {/* Description */}
-                <div className="px-6 py-4">
-                  <p className="text-sm text-[var(--gray-600)] leading-relaxed">
-                    {video.description}
-                  </p>
-                </div>
-              </div>
+              <VideoCard key={video.url} video={video} />
             ))}
           </div>
         </div>

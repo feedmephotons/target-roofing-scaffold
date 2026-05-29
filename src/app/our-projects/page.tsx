@@ -101,33 +101,8 @@ const CATEGORIES: Category[] = [
   'Warehouses',
 ]
 
-const PROJECTS: Project[] = [
-  { name: 'Willow Glen', categories: ['Condos/HOA'] },
-  { name: 'Hotel Indigo', categories: ['Hospitality', 'Retail'] },
-  { name: 'Regatta', categories: ['High Rises'] },
-  { name: 'Boca Grande Health Clinic', categories: ['Healthcare'] },
-  { name: 'Riverside Club', categories: ['High Rises'] },
-  { name: 'The Club at Sterling Oaks', categories: ['Country Clubs'] },
-  { name: 'RT Moore Warehouse', categories: ['Warehouses'] },
-  { name: 'Beach Road Plaza', categories: ['Healthcare', 'Retail'] },
-  { name: 'Cypress Lake United Methodist Church', categories: ['Churches'] },
-  { name: 'Shady Acres RV Park', categories: ['RV Parks'] },
-  { name: 'Big Arts Performing Arts Theater', categories: ['Theaters'] },
-  { name: 'Legends Golf & Country Club', categories: ['Country Clubs'] },
-  { name: 'Barron Collier High School', categories: ['Schools'] },
-  { name: 'St. Elizabeth Seton School', categories: ['Schools'] },
-  { name: "St. Ann's Elementary", categories: ['Schools'] },
-  { name: 'Peace River Baptist Church', categories: ['Churches'] },
-  { name: 'Shadow Wood Country Club', categories: ['Country Clubs'] },
-  { name: 'Bonita Springs Recreation Center', categories: ['Government'] },
-  { name: 'Vault Structures', categories: ['Office'] },
-  { name: 'Winged Foot Title', categories: ['Office'] },
-  { name: 'Johnson Engineering', categories: ['Office'] },
-  { name: 'CrossFit Fort Myers', categories: ['Office'] },
-  { name: 'Broadhurst Loop', categories: ['Condos/HOA'] },
-  { name: 'Market Place Commons', categories: ['Retail'] },
-  { name: 'Colonial Country Club', categories: ['Country Clubs'] },
-]
+import PROJECTS_DATA from '@/data/projects.json'
+const PROJECTS: Project[] = PROJECTS_DATA as Project[]
 
 /* Category color mapping for card accents & gradients */
 const CATEGORY_COLORS: Record<Category, { gradient: string; accent: string; bg: string }> = {
@@ -174,11 +149,16 @@ function getPatternStyle(category: Category, index: number): React.CSSProperties
 /* ================================================================== */
 export default function OurProjectsPage() {
   const [activeFilter, setActiveFilter] = useState<string>('All')
+  const [searchQuery, setSearchQuery] = useState<string>('')
 
-  const filteredProjects =
-    activeFilter === 'All'
-      ? PROJECTS
-      : PROJECTS.filter((p) => p.categories.includes(activeFilter as Category))
+  const filteredProjects = PROJECTS.filter((p) => {
+    const matchesCategory =
+      activeFilter === 'All' || p.categories.includes(activeFilter as Category)
+    const matchesSearch =
+      searchQuery.trim() === '' ||
+      p.name.toLowerCase().includes(searchQuery.toLowerCase())
+    return matchesCategory && matchesSearch
+  })
 
   return (
     <>
@@ -187,6 +167,8 @@ export default function OurProjectsPage() {
         activeFilter={activeFilter}
         onFilterChange={setActiveFilter}
         projectCount={filteredProjects.length}
+        searchQuery={searchQuery}
+        onSearchChange={setSearchQuery}
       />
       <ProjectGrid projects={filteredProjects} activeFilter={activeFilter} />
       <StatsBar />
@@ -256,55 +238,72 @@ function FilterBar({
   activeFilter,
   onFilterChange,
   projectCount,
+  searchQuery,
+  onSearchChange,
 }: {
   activeFilter: string
   onFilterChange: (filter: string) => void
   projectCount: number
+  searchQuery: string
+  onSearchChange: (search: string) => void
 }) {
   const scrollRef = useRef<HTMLDivElement>(null)
 
   return (
     <section className="sticky top-[7.5rem] z-30 border-b border-[var(--gray-200)] bg-white/95 backdrop-blur-md shadow-sm">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center gap-4 py-4">
-          {/* Project count indicator */}
-          <div className="hidden sm:flex items-center gap-2 pr-4 border-r border-[var(--gray-300)]">
-            <FolderOpen className="h-4 w-4 text-[var(--gray-400)]" />
-            <span className="text-sm font-semibold text-[var(--gray-600)] whitespace-nowrap">
-              {projectCount} {projectCount === 1 ? 'Project' : 'Projects'}
-            </span>
-          </div>
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4 py-4">
+          <div className="flex items-center gap-4 w-full md:w-auto overflow-hidden">
+            {/* Project count indicator */}
+            <div className="hidden sm:flex items-center gap-2 pr-4 border-r border-[var(--gray-300)]">
+              <FolderOpen className="h-4 w-4 text-[var(--gray-400)]" />
+              <span className="text-sm font-semibold text-[var(--gray-600)] whitespace-nowrap">
+                {projectCount} {projectCount === 1 ? 'Project' : 'Projects'}
+              </span>
+            </div>
 
-          {/* Scrollable filter pills */}
-          <div
-            ref={scrollRef}
-            className="flex gap-2 overflow-x-auto hide-scrollbar py-1"
-          >
-            {/* All button */}
-            <button
-              onClick={() => onFilterChange('All')}
-              className={`shrink-0 rounded-full px-5 py-2 text-xs font-bold uppercase tracking-wider transition-all duration-200 border ${
-                activeFilter === 'All'
-                  ? 'bg-[var(--red)] text-white border-[var(--red)] shadow-md'
-                  : 'bg-white text-[var(--gray-700)] border-[var(--gray-300)] hover:border-[var(--red)] hover:text-[var(--red)]'
-              }`}
+            {/* Scrollable filter pills */}
+            <div
+              ref={scrollRef}
+              className="flex gap-2 overflow-x-auto hide-scrollbar py-1"
             >
-              All
-            </button>
-
-            {CATEGORIES.map((cat) => (
+              {/* All button */}
               <button
-                key={cat}
-                onClick={() => onFilterChange(cat)}
+                onClick={() => onFilterChange('All')}
                 className={`shrink-0 rounded-full px-5 py-2 text-xs font-bold uppercase tracking-wider transition-all duration-200 border ${
-                  activeFilter === cat
+                  activeFilter === 'All'
                     ? 'bg-[var(--red)] text-white border-[var(--red)] shadow-md'
                     : 'bg-white text-[var(--gray-700)] border-[var(--gray-300)] hover:border-[var(--red)] hover:text-[var(--red)]'
                 }`}
               >
-                {cat}
+                All
               </button>
-            ))}
+
+              {CATEGORIES.map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => onFilterChange(cat)}
+                  className={`shrink-0 rounded-full px-5 py-2 text-xs font-bold uppercase tracking-wider transition-all duration-200 border ${
+                    activeFilter === cat
+                      ? 'bg-[var(--red)] text-white border-[var(--red)] shadow-md'
+                      : 'bg-white text-[var(--gray-700)] border-[var(--gray-300)] hover:border-[var(--red)] hover:text-[var(--red)]'
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Search box */}
+          <div className="relative w-full md:w-64 shrink-0">
+            <input
+              type="text"
+              placeholder="Search projects..."
+              value={searchQuery}
+              onChange={(e) => onSearchChange(e.target.value)}
+              className="w-full rounded-full border border-[var(--gray-300)] px-4 py-2 text-sm text-[var(--black)] placeholder-[var(--gray-400)] focus:border-[var(--red)] focus:ring-1 focus:ring-[var(--red)] focus:outline-none transition-colors"
+            />
           </div>
         </div>
       </div>

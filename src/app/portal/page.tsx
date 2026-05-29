@@ -20,11 +20,15 @@ import {
   HardHat,
   ChevronRight,
 } from 'lucide-react'
+import { submitPortalLogin } from '@/app/actions'
 
 function LoginForm() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [errors, setErrors] = useState<Record<string, string>>({})
   const [showDemo, setShowDemo] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   if (showDemo) {
     return <PortalDashboard onLogout={() => setShowDemo(false)} />
@@ -50,12 +54,35 @@ function LoginForm() {
             </div>
 
             <form
-              onSubmit={(e) => {
+              onSubmit={async (e) => {
                 e.preventDefault()
-                setShowDemo(true)
+                setLoading(true)
+                setError(null)
+                setErrors({})
+
+                try {
+                  const res = await submitPortalLogin({ email, password })
+                  if (res.success) {
+                    setShowDemo(true)
+                  } else {
+                    setErrors(res.errors || {})
+                    setError(res.error || 'Invalid credentials. Please try again.')
+                  }
+                } catch (err) {
+                  setError('A connection error occurred. Please try again later.')
+                } finally {
+                  setLoading(false)
+                }
               }}
               className="space-y-5"
+              noValidate
             >
+              {error && (
+                <div className="p-4 bg-red-50 border-l-4 border-red-500 rounded text-red-700 text-sm font-semibold">
+                  {error}
+                </div>
+              )}
+
               <div>
                 <label className="mb-1.5 block text-sm font-semibold text-[var(--gray-700)]">
                   Email Address
@@ -65,11 +92,29 @@ function LoginForm() {
                   <input
                     type="email"
                     value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    onChange={(e) => {
+                      setEmail(e.target.value)
+                      if (errors.email) {
+                        setErrors((prev) => {
+                          const next = { ...prev }
+                          delete next.email
+                          return next
+                        })
+                      }
+                    }}
                     placeholder="you@company.com"
-                    className="w-full rounded-lg border border-[var(--gray-300)] bg-white py-3 pl-12 pr-4 text-[var(--black)] placeholder:text-[var(--gray-400)] focus:border-[var(--red)] focus:outline-none focus:ring-2 focus:ring-[var(--red)]/20"
+                    className={`w-full rounded-lg border bg-white py-3 pl-12 pr-4 text-[var(--black)] placeholder:text-[var(--gray-400)] focus:outline-none focus:ring-2 ${
+                      errors.email
+                        ? 'border-red-500 focus:ring-red-200'
+                        : 'border-[var(--gray-300)] focus:border-[var(--red)] focus:ring-[var(--red)]/20'
+                    }`}
                   />
                 </div>
+                {errors.email && (
+                  <p className="mt-1.5 text-xs font-semibold text-red-600">
+                    {errors.email}
+                  </p>
+                )}
               </div>
 
               <div>
@@ -86,18 +131,37 @@ function LoginForm() {
                   <input
                     type="password"
                     value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    onChange={(e) => {
+                      setPassword(e.target.value)
+                      if (errors.password) {
+                        setErrors((prev) => {
+                          const next = { ...prev }
+                          delete next.password
+                          return next
+                        })
+                      }
+                    }}
                     placeholder="••••••••"
-                    className="w-full rounded-lg border border-[var(--gray-300)] bg-white py-3 pl-12 pr-4 text-[var(--black)] placeholder:text-[var(--gray-400)] focus:border-[var(--red)] focus:outline-none focus:ring-2 focus:ring-[var(--red)]/20"
+                    className={`w-full rounded-lg border bg-white py-3 pl-12 pr-4 text-[var(--black)] placeholder:text-[var(--gray-400)] focus:outline-none focus:ring-2 ${
+                      errors.password
+                        ? 'border-red-500 focus:ring-red-200'
+                        : 'border-[var(--gray-300)] focus:border-[var(--red)] focus:ring-[var(--red)]/20'
+                    }`}
                   />
                 </div>
+                {errors.password && (
+                  <p className="mt-1.5 text-xs font-semibold text-red-600">
+                    {errors.password}
+                  </p>
+                )}
               </div>
 
               <button
                 type="submit"
-                className="flex w-full items-center justify-center gap-2 rounded-lg bg-[var(--red)] py-3.5 font-bold uppercase tracking-wider text-white transition-all hover:bg-[var(--red-dark)] hover:shadow-lg"
+                disabled={loading}
+                className="flex w-full items-center justify-center gap-2 rounded-lg bg-[var(--red)] py-3.5 font-bold uppercase tracking-wider text-white transition-all hover:bg-[var(--red-dark)] hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Sign In
+                {loading ? 'Signing In...' : 'Sign In'}
                 <ArrowRight className="h-5 w-5" />
               </button>
             </form>
