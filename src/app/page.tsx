@@ -75,6 +75,7 @@ export default function HomePage() {
   return (
     <>
       <HeroSection />
+      <TrustSignalsSection />
       <ServicesSection />
       <RepairFormSection />
       <StatsSection />
@@ -88,13 +89,63 @@ export default function HomePage() {
 }
 
 /* ------------------------------------------------------------------ */
+/*  TRUST SIGNALS                                                      */
+/* ------------------------------------------------------------------ */
+function TrustSignalsSection() {
+  return (
+    <section className="bg-blueprint-dark py-6 border-b border-white/10 text-white relative z-10">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 items-center justify-items-center text-center">
+          <div className="flex items-center gap-3">
+            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--red)]/10 text-[var(--red)] border border-[var(--red)]/20 flex-shrink-0">
+              <Award className="h-6 w-6" />
+            </div>
+            <div className="text-left">
+              <div className="font-bold text-sm tracking-wider uppercase font-[family-name:var(--font-display)]">GAF Master Elite</div>
+              <div className="text-xs text-[var(--gray-400)]">Certified Contractor</div>
+            </div>
+          </div>
+          <div className="flex items-center gap-3">
+            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--red)]/10 text-[var(--red)] border border-[var(--red)]/20 flex-shrink-0">
+              <Shield className="h-6 w-6" />
+            </div>
+            <div className="text-left">
+              <div className="font-bold text-sm tracking-wider uppercase font-[family-name:var(--font-display)]">A+ Accredited</div>
+              <div className="text-xs text-[var(--gray-400)]">Better Business Bureau</div>
+            </div>
+          </div>
+          <div className="flex items-center gap-3">
+            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--red)]/10 text-[var(--red)] border border-[var(--red)]/20 flex-shrink-0">
+              <Star className="h-6 w-6 fill-current text-[var(--red)]" />
+            </div>
+            <div className="text-left">
+              <div className="font-bold text-sm tracking-wider uppercase font-[family-name:var(--font-display)]">5-Star Rated</div>
+              <div className="text-xs text-[var(--gray-400)]">500+ Google Reviews</div>
+            </div>
+          </div>
+          <div className="flex items-center gap-3">
+            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--red)]/10 text-[var(--red)] border border-[var(--red)]/20 flex-shrink-0">
+              <CheckCircle className="h-6 w-6" />
+            </div>
+            <div className="text-left">
+              <div className="font-bold text-sm tracking-wider uppercase font-[family-name:var(--font-display)]">Licensed & Insured</div>
+              <div className="text-xs text-[var(--gray-400)]">License #CCC1334168</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* ------------------------------------------------------------------ */
 /*  1. HERO                                                            */
 /* ------------------------------------------------------------------ */
 function HeroSection() {
   const audiences = ['Property Managers', 'Contractors', 'Property Owners', 'Condos/HOAs']
 
   return (
-    <section className="relative -mt-[7.5rem] min-h-screen lg:h-screen overflow-hidden flex items-center pt-28 pb-12 lg:py-0">
+    <section className="relative -mt-[7.5rem] min-h-screen lg:h-screen overflow-hidden flex items-center pt-28 pb-12 lg:pt-[7.5rem] lg:pb-0">
       {/* YouTube video background */}
       <div className="absolute inset-0 z-0">
         <iframe
@@ -115,7 +166,7 @@ function HeroSection() {
         <div className="grid lg:grid-cols-12 gap-12 items-center">
           {/* Left Text Column */}
           <div className="lg:col-span-7 text-left text-white flex flex-col justify-center">
-            <h1 className="animate-fade-in-up mb-4 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl font-[family-name:var(--font-display)] uppercase leading-[1.05]">
+            <h1 className="animate-fade-in-up mb-4 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl font-[family-name:var(--font-display)] uppercase leading-[0.95]">
               Extend Your Roof&apos;s Life<br />
               <span className="text-[var(--red)]">With Expert Repairs</span>
             </h1>
@@ -307,12 +358,13 @@ function RepairFormSection() {
             />
           </div>
           {/* Right Column: Visual Infographic */}
-          <div className="hidden lg:block lg:col-span-5 relative h-full w-full bg-white rounded-lg overflow-hidden border border-[var(--gray-200)] shadow-md">
+          <div className="hidden lg:block lg:col-span-5 relative w-full h-full min-h-[400px]">
             <Image
-              src="/images/roof_survey_infographic.png"
+              src="/images/roof_survey_infographic_v3.png"
               alt="Target Roofing 10-Point Survey & Inspection Checklist Diagram"
               fill
-              className="object-contain p-6 bg-white"
+              className="object-contain mix-blend-multiply"
+              priority
             />
           </div>
         </div>
@@ -720,8 +772,8 @@ function PartnersSection() {
   const { ref, inView } = useInView()
 
   return (
-    <section ref={ref} className="border-t border-[var(--gray-200)] bg-[var(--gray-50)] py-20 lg:py-24">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section ref={ref} className="border-t border-[var(--gray-200)] bg-[var(--gray-50)] py-20 lg:py-24 w-full">
+      <div className="w-full px-4 sm:px-12 lg:px-24">
         {/* Header */}
         <div className={`mx-auto max-w-3xl text-center mb-14 transition-all duration-700 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <h2 className="text-3xl sm:text-4xl font-bold text-[var(--black)] font-[family-name:var(--font-display)] uppercase mb-4">
@@ -733,17 +785,17 @@ function PartnersSection() {
         </div>
 
         {/* Partner logos */}
-        <div className={`flex flex-wrap items-center justify-center gap-8 lg:gap-12 transition-all duration-700 delay-200 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+        <div className={`grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-8 items-center justify-items-center transition-all duration-700 delay-200 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           {partners.map((partner) => (
             <div
               key={partner.name}
-              className="group flex h-20 w-36 items-center justify-center"
+              className="group flex h-24 w-full items-center justify-center max-w-[160px]"
             >
               <Image
                 src={partner.img}
                 alt={partner.name}
-                width={140}
-                height={70}
+                width={180}
+                height={90}
                 className="max-h-16 w-auto object-contain opacity-60 grayscale transition-all duration-300 group-hover:opacity-100 group-hover:grayscale-0"
               />
             </div>
