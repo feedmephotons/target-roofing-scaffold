@@ -153,7 +153,7 @@ function HeroSection() {
             >
               <a
                 href="#repair-form"
-                className="inline-flex items-center justify-center gap-2 rounded bg-[var(--red)] px-8 py-3.5 text-sm font-bold uppercase tracking-wider text-white shadow-lg transition-all hover:bg-[var(--red-dark)] hover:shadow-xl hover:scale-[1.02]"
+                className="inline-flex items-center justify-center gap-2 rounded bg-brand-gradient hover-bg-brand-gradient px-8 py-3.5 text-sm font-bold uppercase tracking-wider text-white shadow-lg transition-all hover:shadow-xl hover:scale-[1.02]"
               >
                 <Wrench className="h-4.5 w-4.5" />
                 Schedule Repair
@@ -228,7 +228,7 @@ function ServicesSection() {
   const { ref, inView } = useInView()
 
   return (
-    <section ref={ref} className="bg-white py-24 lg:py-32">
+    <section ref={ref} className="bg-blueprint-light py-24 lg:py-32 relative">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className={`mx-auto max-w-3xl text-center mb-16 transition-all duration-700 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
@@ -293,13 +293,27 @@ function RepairFormSection() {
   const { ref, inView } = useInView()
   return (
     <section ref={ref} id="repair-form" className={`bg-[var(--gray-50)] py-20 border-t border-b border-[var(--gray-200)] scroll-mt-24 transition-all duration-750 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-        <InlineLeadForm
-          defaultService="repairs"
-          title="Schedule Your Roof Repair Inspection"
-          subtitle="Timely repairs extend roof life. Describe your leak or damage, and our certified crew in red polos will perform a comprehensive survey and provide an itemized estimate."
-          buttonText="Schedule Inspection Survey"
-        />
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          {/* Left Column: Form */}
+          <div className="col-span-12 lg:col-span-7">
+            <InlineLeadForm
+              defaultService="repairs"
+              title="Schedule Your Roof Repair Inspection"
+              subtitle="Timely repairs extend roof life. Describe your leak or damage, and our certified crew in red polos will perform a comprehensive survey and provide an itemized estimate."
+              buttonText="Schedule Inspection Survey"
+            />
+          </div>
+          {/* Right Column: Visual Infographic */}
+          <div className="hidden lg:block lg:col-span-5 relative h-[500px] w-full bg-white rounded-lg overflow-hidden border border-[var(--gray-200)] shadow-md">
+            <Image
+              src="/images/roof_survey_infographic.png"
+              alt="Target Roofing 10-Point Survey & Inspection Checklist Diagram"
+              fill
+              className="object-contain p-6 bg-white"
+            />
+          </div>
+        </div>
       </div>
     </section>
   )
@@ -480,7 +494,7 @@ function PortfolioSection() {
         <div className={`mt-14 text-center transition-all duration-700 delay-500 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <Link
             href="/our-projects"
-            className="inline-flex items-center gap-2 rounded bg-[var(--red)] px-8 py-4 text-base font-bold uppercase tracking-wider text-white shadow-lg transition-all hover:bg-[var(--red-dark)] hover:shadow-xl hover:scale-[1.02]"
+            className="inline-flex items-center gap-2 rounded bg-brand-gradient hover-bg-brand-gradient px-8 py-4 text-base font-bold uppercase tracking-wider text-white shadow-lg transition-all hover:shadow-xl hover:scale-[1.02]"
           >
             View All Projects
             <ArrowRight className="h-5 w-5" />
@@ -676,7 +690,7 @@ function NewsSection() {
         <div className={`mt-14 text-center transition-all duration-700 delay-500 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <Link
             href="/target-news"
-            className="inline-flex items-center gap-2 rounded bg-[var(--red)] px-8 py-4 text-base font-bold uppercase tracking-wider text-white shadow-lg transition-all hover:bg-[var(--red-dark)] hover:shadow-xl hover:scale-[1.02]"
+            className="inline-flex items-center gap-2 rounded bg-brand-gradient hover-bg-brand-gradient px-8 py-4 text-base font-bold uppercase tracking-wider text-white shadow-lg transition-all hover:shadow-xl hover:scale-[1.02]"
           >
             Visit Our Blog
             <ArrowRight className="h-5 w-5" />

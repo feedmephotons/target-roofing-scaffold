@@ -82,9 +82,9 @@ export default function InlineLeadForm({
   }
 
   const textClass = darkTheme ? 'text-white' : 'text-[var(--black)]'
-  const subtextClass = darkTheme ? 'text-[var(--gray-300)]' : 'text-[var(--gray-600)]'
-  const bgClass = darkTheme ? 'bg-white/5 border border-white/10 backdrop-blur-sm' : 'bg-white shadow-xl border border-[var(--gray-200)]'
-  const labelClass = darkTheme ? 'text-white/90' : 'text-[var(--gray-700)]'
+  const subtextClass = darkTheme ? 'text-white/80' : 'text-[var(--gray-600)]'
+  const bgClass = darkTheme ? 'bg-black/40 border border-white/10 backdrop-blur-md shadow-2xl' : 'bg-white shadow-xl border border-[var(--gray-200)]'
+  const labelClass = darkTheme ? 'text-white/95' : 'text-[var(--gray-700)]'
   const inputClass = (fieldName: string) => `w-full px-4 py-2.5 border rounded bg-white text-[var(--black)] placeholder-[var(--gray-400)] focus:outline-none focus:ring-2 transition-colors ${
     errors[fieldName]
       ? 'border-red-500 focus:ring-red-200 focus:border-red-500'
@@ -95,7 +95,7 @@ export default function InlineLeadForm({
     return (
       <div className={`rounded-lg p-8 text-center border-t-4 border-[var(--red)] ${bgClass}`}>
         <CheckCircle className="h-12 w-12 text-[var(--red)] mx-auto mb-4 animate-bounce" />
-        <h3 className="text-2xl font-bold uppercase mb-2 font-[family-name:var(--font-display)]">
+        <h3 className={`text-2xl font-bold uppercase mb-2 font-[family-name:var(--font-display)] ${textClass}`}>
           Thank You!
         </h3>
         <p className={subtextClass}>
@@ -108,7 +108,7 @@ export default function InlineLeadForm({
   return (
     <div className={`rounded-lg p-6 sm:p-8 border-t-4 border-[var(--red)] ${bgClass}`}>
       <div className="mb-6">
-        <h3 className="text-2xl sm:text-3xl font-bold uppercase tracking-wide font-[family-name:var(--font-display)]">
+        <h3 className={`text-2xl sm:text-3xl font-bold uppercase tracking-wide font-[family-name:var(--font-display)] ${textClass}`}>
           {title}
         </h3>
         <p className={`text-sm mt-1 leading-relaxed ${subtextClass}`}>
@@ -125,7 +125,7 @@ export default function InlineLeadForm({
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label htmlFor="firstName" className="block text-xs font-semibold mb-1 uppercase tracking-wider font-[family-name:var(--font-display)]">
+            <label htmlFor="firstName" className={`block text-xs font-semibold mb-1 uppercase tracking-wider font-[family-name:var(--font-display)] ${labelClass}`}>
               First Name <span className="text-[var(--red)]">*</span>
             </label>
             <input
@@ -144,7 +144,7 @@ export default function InlineLeadForm({
             )}
           </div>
           <div>
-            <label htmlFor="lastName" className="block text-xs font-semibold mb-1 uppercase tracking-wider font-[family-name:var(--font-display)]">
+            <label htmlFor="lastName" className={`block text-xs font-semibold mb-1 uppercase tracking-wider font-[family-name:var(--font-display)] ${labelClass}`}>
               Last Name <span className="text-[var(--red)]">*</span>
             </label>
             <input
@@ -166,7 +166,7 @@ export default function InlineLeadForm({
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label htmlFor="phone" className="block text-xs font-semibold mb-1 uppercase tracking-wider font-[family-name:var(--font-display)]">
+            <label htmlFor="phone" className={`block text-xs font-semibold mb-1 uppercase tracking-wider font-[family-name:var(--font-display)] ${labelClass}`}>
               Phone <span className="text-[var(--red)]">*</span>
             </label>
             <input
@@ -185,7 +185,7 @@ export default function InlineLeadForm({
             )}
           </div>
           <div>
-            <label htmlFor="email" className="block text-xs font-semibold mb-1 uppercase tracking-wider font-[family-name:var(--font-display)]">
+            <label htmlFor="email" className={`block text-xs font-semibold mb-1 uppercase tracking-wider font-[family-name:var(--font-display)] ${labelClass}`}>
               Email <span className="text-[var(--red)]">*</span>
             </label>
             <input
@@ -206,7 +206,7 @@ export default function InlineLeadForm({
         </div>
 
         <div>
-          <label htmlFor="streetAddress" className="block text-xs font-semibold mb-1 uppercase tracking-wider font-[family-name:var(--font-display)]">
+          <label htmlFor="streetAddress" className={`block text-xs font-semibold mb-1 uppercase tracking-wider font-[family-name:var(--font-display)] ${labelClass}`}>
             Street Address <span className="text-[var(--red)]">*</span>
           </label>
           <input
@@ -227,7 +227,7 @@ export default function InlineLeadForm({
 
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label htmlFor="city" className="block text-xs font-semibold mb-1 uppercase tracking-wider font-[family-name:var(--font-display)]">
+            <label htmlFor="city" className={`block text-xs font-semibold mb-1 uppercase tracking-wider font-[family-name:var(--font-display)] ${labelClass}`}>
               City <span className="text-[var(--red)]">*</span>
             </label>
             <input
@@ -246,7 +246,7 @@ export default function InlineLeadForm({
             )}
           </div>
           <div>
-            <label htmlFor="zip" className="block text-xs font-semibold mb-1 uppercase tracking-wider font-[family-name:var(--font-display)]">
+            <label htmlFor="zip" className={`block text-xs font-semibold mb-1 uppercase tracking-wider font-[family-name:var(--font-display)] ${labelClass}`}>
               ZIP Code <span className="text-[var(--red)]">*</span>
             </label>
             <input
@@ -268,7 +268,7 @@ export default function InlineLeadForm({
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div className="sm:col-span-1">
-            <label htmlFor="service" className="block text-xs font-semibold mb-1 uppercase tracking-wider font-[family-name:var(--font-display)]">
+            <label htmlFor="service" className={`block text-xs font-semibold mb-1 uppercase tracking-wider font-[family-name:var(--font-display)] ${labelClass}`}>
               Service <span className="text-[var(--red)]">*</span>
             </label>
             <select
@@ -296,7 +296,7 @@ export default function InlineLeadForm({
             )}
           </div>
           <div className="sm:col-span-2">
-            <label htmlFor="message" className="block text-xs font-semibold mb-1 uppercase tracking-wider font-[family-name:var(--font-display)]">
+            <label htmlFor="message" className={`block text-xs font-semibold mb-1 uppercase tracking-wider font-[family-name:var(--font-display)] ${labelClass}`}>
               Describe Needs <span className="text-[var(--red)]">*</span>
             </label>
             <input
@@ -321,7 +321,7 @@ export default function InlineLeadForm({
           disabled={loading}
           className="w-full inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-[var(--red)] text-white text-sm font-bold uppercase tracking-wider rounded hover:bg-[var(--red-dark)] transition-colors shadow-lg hover:shadow-xl font-[family-name:var(--font-display)] disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          <Send className="w-4 h-4" />
+          <Send className="w-4.5 h-4.5" />
           {loading ? 'Submitting Request...' : buttonText}
         </button>
 
