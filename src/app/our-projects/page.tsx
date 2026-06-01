@@ -9,6 +9,7 @@ import {
   Trophy,
   Clock,
   Eye,
+  X,
 } from 'lucide-react'
 
 /* ------------------------------------------------------------------ */
@@ -150,6 +151,7 @@ function getPatternStyle(category: Category, index: number): React.CSSProperties
 export default function OurProjectsPage() {
   const [activeFilter, setActiveFilter] = useState<string>('All')
   const [searchQuery, setSearchQuery] = useState<string>('')
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null)
 
   const filteredProjects = PROJECTS.filter((p) => {
     const matchesCategory =
@@ -170,7 +172,20 @@ export default function OurProjectsPage() {
         searchQuery={searchQuery}
         onSearchChange={setSearchQuery}
       />
-      <ProjectGrid projects={filteredProjects} activeFilter={activeFilter} />
+      <ProjectGrid 
+        projects={filteredProjects} 
+        activeFilter={activeFilter} 
+        onProjectSelect={setSelectedProject} 
+      />
+
+      {/* Lightbox Modal */}
+      {selectedProject && (
+        <ProjectLightbox 
+          project={selectedProject} 
+          onClose={() => setSelectedProject(null)} 
+        />
+      )}
+
       <StatsBar />
       <CTASection />
     </>
@@ -317,9 +332,11 @@ function FilterBar({
 function ProjectGrid({
   projects,
   activeFilter,
+  onProjectSelect,
 }: {
   projects: Project[]
   activeFilter: string
+  onProjectSelect: (project: Project) => void
 }) {
   const { ref, inView } = useInView(0.05)
 
@@ -347,6 +364,7 @@ function ProjectGrid({
               project={project}
               index={i}
               inView={inView}
+              onClick={() => onProjectSelect(project)}
             />
           ))}
         </div>
@@ -372,17 +390,24 @@ function ProjectCard({
   project,
   index,
   inView,
+  onClick,
 }: {
   project: Project
   index: number
   inView: boolean
+  onClick: () => void
 }) {
   const primaryCategory = project.categories[0]
   const colors = CATEGORY_COLORS[primaryCategory]
   const patternStyle = getPatternStyle(primaryCategory, index)
+  const [imageError, setImageError] = useState(false)
+
+  const imgSlug = project.name.toLowerCase().replace(/[^a-z0-9]+/g, '-')
+  const imageSrc = `/images/portfolio/${imgSlug}.jpg`
 
   return (
     <article
+      onClick={onClick}
       className={`group relative overflow-hidden rounded-lg shadow-md transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 cursor-pointer ${
         inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
       }`}
@@ -392,11 +417,27 @@ function ProjectCard({
       <div
         className={`relative aspect-[4/3] bg-gradient-to-br ${colors.gradient} flex flex-col justify-end p-6 overflow-hidden`}
       >
-        {/* Geometric pattern overlay */}
-        <div
-          className="absolute inset-0 z-0"
-          style={patternStyle}
-        />
+        {/* Project Image */}
+        {!imageError && (
+          <>
+            <img
+              src={imageSrc}
+              alt={project.name}
+              className="absolute inset-0 z-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+              onError={() => setImageError(true)}
+            />
+            {/* Dark overlay for text readability */}
+            <div className="absolute inset-0 z-[1] bg-gradient-to-t from-black/80 via-black/35 to-transparent" />
+          </>
+        )}
+
+        {/* Geometric pattern overlay (fallback) */}
+        {imageError && (
+          <div
+            className="absolute inset-0 z-0"
+            style={patternStyle}
+          />
+        )}
 
         {/* Large faded initial letter */}
         <div className="absolute top-3 right-4 z-0 text-[8rem] leading-none font-bold text-white/[0.04] font-[family-name:var(--font-display)] select-none pointer-events-none">
@@ -409,7 +450,7 @@ function ProjectCard({
         />
 
         {/* Category pills */}
-        <div className="relative z-10 mb-3 flex flex-wrap gap-1.5">
+        <div className="relative z-10 mb-3 flex flex-wrap gap-1.5 animate-relative">
           {project.categories.map((cat) => (
             <span
               key={cat}
@@ -436,6 +477,100 @@ function ProjectCard({
         </div>
       </div>
     </article>
+  )
+}
+
+/* ------------------------------------------------------------------ */
+/*  3b. LIGHTBOX MODAL                                                 */
+/* ------------------------------------------------------------------ */
+function ProjectLightbox({
+  project,
+  onClose,
+}: {
+  project: Project
+  onClose: () => void
+}) {
+  const [imageError, setImageError] = useState(false)
+  const imgSlug = project.name.toLowerCase().replace(/[^a-z0-9]+/g, '-')
+  const imageSrc = `/images/portfolio/${imgSlug}.jpg`
+
+  const primaryCategory = project.categories[0]
+  const colors = CATEGORY_COLORS[primaryCategory]
+
+  // Prevent scroll when modal is open
+  useEffect(() => {
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.body.style.overflow = 'unset'
+    }
+  }, [])
+
+  return (
+    <div 
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 sm:p-6 md:p-10 backdrop-blur-md transition-opacity duration-300"
+      onClick={onClose}
+    >
+      <div 
+        className="relative max-w-4xl w-full bg-[#1A1A1A] rounded-xl overflow-hidden border border-white/10 shadow-2xl flex flex-col"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Close Button */}
+        <button 
+          onClick={onClose}
+          className="absolute top-4 right-4 z-35 rounded-full bg-black/60 p-2 text-white/80 hover:text-white hover:bg-black/90 transition-colors"
+        >
+          <X className="h-6 w-6" />
+        </button>
+
+        {/* Media Area */}
+        <div className="relative aspect-[16/10] sm:aspect-[16/9] w-full bg-neutral-900 flex items-center justify-center overflow-hidden">
+          {!imageError ? (
+            <img 
+              src={imageSrc} 
+              alt={project.name}
+              className="max-h-full max-w-full object-contain"
+              onError={() => setImageError(true)}
+            />
+          ) : (
+            <div className={`w-full h-full bg-gradient-to-br ${colors.gradient} flex items-center justify-center p-8 relative`}>
+              <div className="absolute inset-0 opacity-[0.05] bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:16px_16px]" />
+              <Building2 className="h-24 w-24 text-white/20" />
+            </div>
+          )}
+        </div>
+
+        {/* Content Area */}
+        <div className="p-6 sm:p-8 bg-[#1A1A1A] border-t border-white/5">
+          <div className="flex flex-wrap gap-2 mb-3">
+            {project.categories.map((cat) => (
+              <span 
+                key={cat} 
+                className="rounded-full bg-[var(--red)]/10 border border-[var(--red)]/20 px-3 py-1 text-xs font-bold uppercase tracking-wider text-[var(--red)]"
+              >
+                {cat}
+              </span>
+            ))}
+          </div>
+
+          <h2 className="text-2xl sm:text-3xl font-bold uppercase text-white font-[family-name:var(--font-display)] mb-4">
+            {project.name}
+          </h2>
+
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mt-6 pt-6 border-t border-white/5">
+            <p className="text-white/60 text-sm max-w-md">
+              Need roofing work on a similar property in Southwest Florida? We specialize in reroofing, new construction, repairs, and proactive maintenance.
+            </p>
+            <Link 
+              href={`/contact?service=free-estimate&project=${encodeURIComponent(project.name)}`}
+              className="inline-flex items-center justify-center gap-2 rounded bg-brand-gradient hover-bg-brand-gradient px-6 py-3 text-sm font-bold uppercase tracking-wider text-white shadow-lg transition-all hover:scale-[1.02] shrink-0"
+            >
+              Inquire about this project
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+        </div>
+      </div>
+    </div>
   )
 }
 

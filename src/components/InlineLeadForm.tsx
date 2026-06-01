@@ -10,6 +10,7 @@ interface InlineLeadFormProps {
   subtitle?: string
   buttonText?: string
   darkTheme?: boolean
+  formId?: string
 }
 
 export default function InlineLeadForm({
@@ -18,6 +19,7 @@ export default function InlineLeadForm({
   subtitle = 'Get a professional evaluation and itemized estimate within 24 hours.',
   buttonText = 'Submit Repair Request',
   darkTheme = false,
+  formId = 'lead',
 }: InlineLeadFormProps) {
   const [form, setForm] = useState({
     firstName: '',
@@ -125,12 +127,12 @@ export default function InlineLeadForm({
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label htmlFor="firstName" className={`block text-xs font-semibold mb-1 uppercase tracking-wider font-[family-name:var(--font-display)] ${labelClass}`}>
+            <label htmlFor={`${formId}-firstName`} className={`block text-xs font-semibold mb-1 uppercase tracking-wider font-[family-name:var(--font-display)] ${labelClass}`}>
               First Name <span className="text-[var(--red)]">*</span>
             </label>
             <input
               type="text"
-              id="firstName"
+              id={`${formId}-firstName`}
               name="firstName"
               value={form.firstName}
               onChange={handleChange}
@@ -144,12 +146,12 @@ export default function InlineLeadForm({
             )}
           </div>
           <div>
-            <label htmlFor="lastName" className={`block text-xs font-semibold mb-1 uppercase tracking-wider font-[family-name:var(--font-display)] ${labelClass}`}>
+            <label htmlFor={`${formId}-lastName`} className={`block text-xs font-semibold mb-1 uppercase tracking-wider font-[family-name:var(--font-display)] ${labelClass}`}>
               Last Name <span className="text-[var(--red)]">*</span>
             </label>
             <input
               type="text"
-              id="lastName"
+              id={`${formId}-lastName`}
               name="lastName"
               value={form.lastName}
               onChange={handleChange}
@@ -166,12 +168,12 @@ export default function InlineLeadForm({
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label htmlFor="phone" className={`block text-xs font-semibold mb-1 uppercase tracking-wider font-[family-name:var(--font-display)] ${labelClass}`}>
+            <label htmlFor={`${formId}-phone`} className={`block text-xs font-semibold mb-1 uppercase tracking-wider font-[family-name:var(--font-display)] ${labelClass}`}>
               Phone <span className="text-[var(--red)]">*</span>
             </label>
             <input
               type="tel"
-              id="phone"
+              id={`${formId}-phone`}
               name="phone"
               value={form.phone}
               onChange={handleChange}
@@ -185,12 +187,12 @@ export default function InlineLeadForm({
             )}
           </div>
           <div>
-            <label htmlFor="email" className={`block text-xs font-semibold mb-1 uppercase tracking-wider font-[family-name:var(--font-display)] ${labelClass}`}>
+            <label htmlFor={`${formId}-email`} className={`block text-xs font-semibold mb-1 uppercase tracking-wider font-[family-name:var(--font-display)] ${labelClass}`}>
               Email <span className="text-[var(--red)]">*</span>
             </label>
             <input
               type="email"
-              id="email"
+              id={`${formId}-email`}
               name="email"
               value={form.email}
               onChange={handleChange}
@@ -206,12 +208,12 @@ export default function InlineLeadForm({
         </div>
 
         <div>
-          <label htmlFor="streetAddress" className={`block text-xs font-semibold mb-1 uppercase tracking-wider font-[family-name:var(--font-display)] ${labelClass}`}>
+          <label htmlFor={`${formId}-streetAddress`} className={`block text-xs font-semibold mb-1 uppercase tracking-wider font-[family-name:var(--font-display)] ${labelClass}`}>
             Street Address <span className="text-[var(--red)]">*</span>
           </label>
           <input
             type="text"
-            id="streetAddress"
+            id={`${formId}-streetAddress`}
             name="streetAddress"
             value={form.streetAddress}
             onChange={handleChange}
@@ -227,12 +229,12 @@ export default function InlineLeadForm({
 
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label htmlFor="city" className={`block text-xs font-semibold mb-1 uppercase tracking-wider font-[family-name:var(--font-display)] ${labelClass}`}>
+            <label htmlFor={`${formId}-city`} className={`block text-xs font-semibold mb-1 uppercase tracking-wider font-[family-name:var(--font-display)] ${labelClass}`}>
               City <span className="text-[var(--red)]">*</span>
             </label>
             <input
               type="text"
-              id="city"
+              id={`${formId}-city`}
               name="city"
               value={form.city}
               onChange={handleChange}
@@ -246,12 +248,12 @@ export default function InlineLeadForm({
             )}
           </div>
           <div>
-            <label htmlFor="zip" className={`block text-xs font-semibold mb-1 uppercase tracking-wider font-[family-name:var(--font-display)] ${labelClass}`}>
+            <label htmlFor={`${formId}-zip`} className={`block text-xs font-semibold mb-1 uppercase tracking-wider font-[family-name:var(--font-display)] ${labelClass}`}>
               ZIP Code <span className="text-[var(--red)]">*</span>
             </label>
             <input
               type="text"
-              id="zip"
+              id={`${formId}-zip`}
               name="zip"
               value={form.zip}
               onChange={handleChange}
@@ -268,11 +270,11 @@ export default function InlineLeadForm({
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div className="sm:col-span-1">
-            <label htmlFor="service" className={`block text-xs font-semibold mb-1 uppercase tracking-wider font-[family-name:var(--font-display)] ${labelClass}`}>
+            <label htmlFor={`${formId}-service`} className={`block text-xs font-semibold mb-1 uppercase tracking-wider font-[family-name:var(--font-display)] ${labelClass}`}>
               Service <span className="text-[var(--red)]">*</span>
             </label>
             <select
-              id="service"
+              id={`${formId}-service`}
               name="service"
               value={form.service}
               onChange={handleChange}
@@ -296,12 +298,12 @@ export default function InlineLeadForm({
             )}
           </div>
           <div className="sm:col-span-2">
-            <label htmlFor="message" className={`block text-xs font-semibold mb-1 uppercase tracking-wider font-[family-name:var(--font-display)] ${labelClass}`}>
+            <label htmlFor={`${formId}-message`} className={`block text-xs font-semibold mb-1 uppercase tracking-wider font-[family-name:var(--font-display)] ${labelClass}`}>
               Describe Needs <span className="text-[var(--red)]">*</span>
             </label>
             <input
               type="text"
-              id="message"
+              id={`${formId}-message`}
               name="message"
               value={form.message}
               onChange={handleChange}
