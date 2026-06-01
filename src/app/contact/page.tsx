@@ -2,6 +2,7 @@
 
 import { useState, type FormEvent } from 'react'
 import { Phone, Mail, MapPin, Clock, Send } from 'lucide-react'
+import { submitContactLead } from '@/app/actions'
 
 export default function ContactPage() {
   const [form, setForm] = useState({
@@ -15,18 +16,56 @@ export default function ContactPage() {
     service: '',
     message: '',
   })
+  const [errors, setErrors] = useState<Record<string, string>>({})
+  const [loading, setLoading] = useState(false)
+  const [success, setSuccess] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   function handleChange(
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
   ) {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }))
+    // Clear error when field changes
+    if (errors[e.target.name]) {
+      setErrors((prev) => {
+        const next = { ...prev }
+        delete next[e.target.name]
+        return next
+      })
+    }
   }
 
-  function handleSubmit(e: FormEvent) {
+  async function handleSubmit(e: FormEvent) {
     e.preventDefault()
-    alert(
-      'Thank you for your inquiry! A member of our team will be in touch shortly.'
-    )
+    setLoading(true)
+    setError(null)
+    setErrors({})
+    setSuccess(false)
+
+    try {
+      const res = await submitContactLead(form)
+      if (res.success) {
+        setSuccess(true)
+        setForm({
+          firstName: '',
+          lastName: '',
+          phone: '',
+          email: '',
+          streetAddress: '',
+          city: '',
+          zip: '',
+          service: '',
+          message: '',
+        })
+      } else {
+        setErrors(res.errors || {})
+        setError(res.error || 'Please correct the highlighted fields.')
+      }
+    } catch (err) {
+      setError('A connection error occurred. Please try again later.')
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -82,7 +121,17 @@ export default function ContactPage() {
                   as possible.
                 </p>
 
-                <form onSubmit={handleSubmit} className="space-y-5">
+                <form onSubmit={handleSubmit} className="space-y-5" noValidate>
+                  {success && (
+                    <div className="p-4 bg-green-50 border-l-4 border-green-500 rounded text-green-700 text-sm font-semibold">
+                      Thank you for your inquiry! A member of our team will be in touch shortly.
+                    </div>
+                  )}
+                  {error && (
+                    <div className="p-4 bg-red-50 border-l-4 border-red-500 rounded text-red-700 text-sm font-semibold">
+                      {error}
+                    </div>
+                  )}
                   {/* First + Last Name */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div>
@@ -96,12 +145,20 @@ export default function ContactPage() {
                         type="text"
                         id="firstName"
                         name="firstName"
-                        required
                         value={form.firstName}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 border border-[var(--gray-300)] rounded bg-white text-[var(--black)] placeholder-[var(--gray-400)] focus:outline-none focus:ring-2 focus:ring-[var(--red)] focus:border-[var(--red)] transition-colors"
+                        className={`w-full px-4 py-3 border rounded bg-white text-[var(--black)] placeholder-[var(--gray-400)] focus:outline-none focus:ring-2 transition-colors ${
+                          errors.firstName
+                            ? 'border-red-500 focus:ring-red-200 focus:border-red-500'
+                            : 'border-[var(--gray-300)] focus:ring-[var(--red)] focus:border-[var(--red)]'
+                        }`}
                         placeholder="John"
                       />
+                      {errors.firstName && (
+                        <p className="mt-1 text-xs font-semibold text-red-600">
+                          {errors.firstName}
+                        </p>
+                      )}
                     </div>
                     <div>
                       <label
@@ -114,12 +171,20 @@ export default function ContactPage() {
                         type="text"
                         id="lastName"
                         name="lastName"
-                        required
                         value={form.lastName}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 border border-[var(--gray-300)] rounded bg-white text-[var(--black)] placeholder-[var(--gray-400)] focus:outline-none focus:ring-2 focus:ring-[var(--red)] focus:border-[var(--red)] transition-colors"
+                        className={`w-full px-4 py-3 border rounded bg-white text-[var(--black)] placeholder-[var(--gray-400)] focus:outline-none focus:ring-2 transition-colors ${
+                          errors.lastName
+                            ? 'border-red-500 focus:ring-red-200 focus:border-red-500'
+                            : 'border-[var(--gray-300)] focus:ring-[var(--red)] focus:border-[var(--red)]'
+                        }`}
                         placeholder="Smith"
                       />
+                      {errors.lastName && (
+                        <p className="mt-1 text-xs font-semibold text-red-600">
+                          {errors.lastName}
+                        </p>
+                      )}
                     </div>
                   </div>
 
@@ -136,12 +201,20 @@ export default function ContactPage() {
                         type="tel"
                         id="phone"
                         name="phone"
-                        required
                         value={form.phone}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 border border-[var(--gray-300)] rounded bg-white text-[var(--black)] placeholder-[var(--gray-400)] focus:outline-none focus:ring-2 focus:ring-[var(--red)] focus:border-[var(--red)] transition-colors"
+                        className={`w-full px-4 py-3 border rounded bg-white text-[var(--black)] placeholder-[var(--gray-400)] focus:outline-none focus:ring-2 transition-colors ${
+                          errors.phone
+                            ? 'border-red-500 focus:ring-red-200 focus:border-red-500'
+                            : 'border-[var(--gray-300)] focus:ring-[var(--red)] focus:border-[var(--red)]'
+                        }`}
                         placeholder="(239) 555-0100"
                       />
+                      {errors.phone && (
+                        <p className="mt-1 text-xs font-semibold text-red-600">
+                          {errors.phone}
+                        </p>
+                      )}
                     </div>
                     <div>
                       <label
@@ -154,12 +227,20 @@ export default function ContactPage() {
                         type="email"
                         id="email"
                         name="email"
-                        required
                         value={form.email}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 border border-[var(--gray-300)] rounded bg-white text-[var(--black)] placeholder-[var(--gray-400)] focus:outline-none focus:ring-2 focus:ring-[var(--red)] focus:border-[var(--red)] transition-colors"
+                        className={`w-full px-4 py-3 border rounded bg-white text-[var(--black)] placeholder-[var(--gray-400)] focus:outline-none focus:ring-2 transition-colors ${
+                          errors.email
+                            ? 'border-red-500 focus:ring-red-200 focus:border-red-500'
+                            : 'border-[var(--gray-300)] focus:ring-[var(--red)] focus:border-[var(--red)]'
+                        }`}
                         placeholder="john@example.com"
                       />
+                      {errors.email && (
+                        <p className="mt-1 text-xs font-semibold text-red-600">
+                          {errors.email}
+                        </p>
+                      )}
                     </div>
                   </div>
 
@@ -175,12 +256,20 @@ export default function ContactPage() {
                       type="text"
                       id="streetAddress"
                       name="streetAddress"
-                      required
                       value={form.streetAddress}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border border-[var(--gray-300)] rounded bg-white text-[var(--black)] placeholder-[var(--gray-400)] focus:outline-none focus:ring-2 focus:ring-[var(--red)] focus:border-[var(--red)] transition-colors"
+                      className={`w-full px-4 py-3 border rounded bg-white text-[var(--black)] placeholder-[var(--gray-400)] focus:outline-none focus:ring-2 transition-colors ${
+                        errors.streetAddress
+                          ? 'border-red-500 focus:ring-red-200 focus:border-red-500'
+                          : 'border-[var(--gray-300)] focus:ring-[var(--red)] focus:border-[var(--red)]'
+                      }`}
                       placeholder="123 Main Street"
                     />
+                    {errors.streetAddress && (
+                      <p className="mt-1 text-xs font-semibold text-red-600">
+                        {errors.streetAddress}
+                      </p>
+                    )}
                   </div>
 
                   {/* City + ZIP */}
@@ -196,12 +285,20 @@ export default function ContactPage() {
                         type="text"
                         id="city"
                         name="city"
-                        required
                         value={form.city}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 border border-[var(--gray-300)] rounded bg-white text-[var(--black)] placeholder-[var(--gray-400)] focus:outline-none focus:ring-2 focus:ring-[var(--red)] focus:border-[var(--red)] transition-colors"
+                        className={`w-full px-4 py-3 border rounded bg-white text-[var(--black)] placeholder-[var(--gray-400)] focus:outline-none focus:ring-2 transition-colors ${
+                          errors.city
+                            ? 'border-red-500 focus:ring-red-200 focus:border-red-500'
+                            : 'border-[var(--gray-300)] focus:ring-[var(--red)] focus:border-[var(--red)]'
+                        }`}
                         placeholder="Fort Myers"
                       />
+                      {errors.city && (
+                        <p className="mt-1 text-xs font-semibold text-red-600">
+                          {errors.city}
+                        </p>
+                      )}
                     </div>
                     <div>
                       <label
@@ -214,12 +311,20 @@ export default function ContactPage() {
                         type="text"
                         id="zip"
                         name="zip"
-                        required
                         value={form.zip}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 border border-[var(--gray-300)] rounded bg-white text-[var(--black)] placeholder-[var(--gray-400)] focus:outline-none focus:ring-2 focus:ring-[var(--red)] focus:border-[var(--red)] transition-colors"
+                        className={`w-full px-4 py-3 border rounded bg-white text-[var(--black)] placeholder-[var(--gray-400)] focus:outline-none focus:ring-2 transition-colors ${
+                          errors.zip
+                            ? 'border-red-500 focus:ring-red-200 focus:border-red-500'
+                            : 'border-[var(--gray-300)] focus:ring-[var(--red)] focus:border-[var(--red)]'
+                        }`}
                         placeholder="33901"
                       />
+                      {errors.zip && (
+                        <p className="mt-1 text-xs font-semibold text-red-600">
+                          {errors.zip}
+                        </p>
+                      )}
                     </div>
                   </div>
 
@@ -235,10 +340,13 @@ export default function ContactPage() {
                     <select
                       id="service"
                       name="service"
-                      required
                       value={form.service}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border border-[var(--gray-300)] rounded bg-white text-[var(--black)] focus:outline-none focus:ring-2 focus:ring-[var(--red)] focus:border-[var(--red)] transition-colors appearance-none"
+                      className={`w-full px-4 py-3 border rounded bg-white text-[var(--black)] focus:outline-none focus:ring-2 transition-colors appearance-none ${
+                        errors.service
+                          ? 'border-red-500 focus:ring-red-200 focus:border-red-500'
+                          : 'border-[var(--gray-300)] focus:ring-[var(--red)] focus:border-[var(--red)]'
+                      }`}
                       style={{
                         backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236B7280' d='M6 8L1 3h10z'/%3E%3C/svg%3E")`,
                         backgroundRepeat: 'no-repeat',
@@ -252,6 +360,11 @@ export default function ContactPage() {
                       <option value="maintenance-plans">Maintenance Plans</option>
                       <option value="free-estimate">Free Estimate</option>
                     </select>
+                    {errors.service && (
+                      <p className="mt-1 text-xs font-semibold text-red-600">
+                        {errors.service}
+                      </p>
+                    )}
                   </div>
 
                   {/* Message */}
@@ -266,22 +379,31 @@ export default function ContactPage() {
                     <textarea
                       id="message"
                       name="message"
-                      required
                       rows={4}
                       value={form.message}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border border-[var(--gray-300)] rounded bg-white text-[var(--black)] placeholder-[var(--gray-400)] focus:outline-none focus:ring-2 focus:ring-[var(--red)] focus:border-[var(--red)] transition-colors resize-vertical"
+                      className={`w-full px-4 py-3 border rounded bg-white text-[var(--black)] placeholder-[var(--gray-400)] focus:outline-none focus:ring-2 transition-colors resize-vertical ${
+                        errors.message
+                          ? 'border-red-500 focus:ring-red-200 focus:border-red-500'
+                          : 'border-[var(--gray-300)] focus:ring-[var(--red)] focus:border-[var(--red)]'
+                      }`}
                       placeholder="Tell us about your roofing project..."
                     />
+                    {errors.message && (
+                      <p className="mt-1 text-xs font-semibold text-red-600">
+                        {errors.message}
+                      </p>
+                    )}
                   </div>
 
                   {/* Submit */}
                   <button
                     type="submit"
-                    className="w-full inline-flex items-center justify-center gap-2 px-8 py-4 bg-[var(--red)] text-white text-sm font-bold uppercase tracking-wide rounded hover:bg-[var(--red-dark)] transition-colors shadow-lg hover:shadow-xl font-[family-name:var(--font-display)]"
+                    disabled={loading}
+                    className="w-full inline-flex items-center justify-center gap-2 px-8 py-4 bg-[var(--red)] text-white text-sm font-bold uppercase tracking-wide rounded hover:bg-[var(--red-dark)] transition-colors shadow-lg hover:shadow-xl font-[family-name:var(--font-display)] disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     <Send className="w-4 h-4" />
-                    Request Free Estimate
+                    {loading ? 'Sending Request...' : 'Request Free Estimate'}
                   </button>
 
                   {/* Disclaimer */}

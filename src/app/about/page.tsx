@@ -15,11 +15,12 @@ import {
   Cpu,
   ClipboardCheck,
 } from 'lucide-react'
+import InlineLeadForm from '@/components/InlineLeadForm'
 
 export const metadata: Metadata = {
   title: 'About Us',
   description:
-    'Find the quality commercial roofing services you need in Southwest Florida with Target Roofing. We are the local, high-tech, reliable and responsive partner you need to succeed.',
+    'Target Roofing specializes in extending commercial roof lifespans through expert repairs and proactive maintenance in Southwest Florida. We manage replacement transitions seamlessly when needed.',
 }
 
 const certifications = [
@@ -124,16 +125,28 @@ export default function AboutPage() {
             </p>
 
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[0.95] mb-6 font-[family-name:var(--font-display)]">
-              What to Look for in a{' '}
-              <span className="text-[var(--red)]">Commercial Roofing</span>{' '}
-              Partner
+              Extend Your Roof&apos;s Lifespan with the Right{' '}
+              <span className="text-[var(--red)]">Repair &amp; Maintenance</span> Partner
             </h1>
 
             <p className="text-lg md:text-xl text-[var(--gray-300)] leading-relaxed max-w-2xl">
-              Find the quality commercial roofing services you&apos;re searching
-              for in Southwest Florida with Target Roofing. We are the local,
-              high-tech, reliable and responsive partner you need to succeed.
+              Hiring a commercial partner who prioritizes repairs is key to controlling capital expenditures. We focus on extending your roof&apos;s life through proactive maintenance, providing a smooth transition to full replacement only when necessary.
             </p>
+
+            <div className="mt-8 flex flex-col sm:flex-row gap-4">
+              <a
+                href="#lead-form"
+                className="inline-flex items-center justify-center px-8 py-3.5 bg-[var(--red)] text-white font-bold uppercase tracking-wide rounded hover:bg-[var(--red-dark)] transition-colors shadow-lg text-sm"
+              >
+                Schedule Repair
+              </a>
+              <a
+                href="#lead-form"
+                className="inline-flex items-center justify-center gap-2 px-8 py-3.5 border-2 border-white text-white font-bold uppercase tracking-wide rounded hover:bg-white/10 transition-colors text-sm"
+              >
+                Request a Survey
+              </a>
+            </div>
           </div>
         </div>
       </section>
@@ -302,49 +315,22 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ─── FREE ESTIMATE CTA ─── */}
-      <section className="relative bg-white py-24 md:py-32 overflow-hidden">
+      {/* ─── INLINE LEAD CAPTURE FORM ─── */}
+      <section id="lead-form" className="relative bg-white py-24 md:py-32 overflow-hidden scroll-mt-24">
         {/* Background accent */}
         <div
           className="absolute top-0 right-0 w-1/2 h-full bg-[var(--gray-50)]"
           style={{ clipPath: 'polygon(20% 0, 100% 0, 100% 100%, 0% 100%)' }}
         />
 
-        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto text-center">
-            {/* Eyebrow */}
-            <p className="inline-flex items-center gap-2 text-[var(--red)] text-sm font-bold uppercase tracking-[0.2em] mb-6 font-[family-name:var(--font-display)]">
-              <span className="w-8 h-[2px] bg-[var(--red)]" />
-              Get Started Today
-              <span className="w-8 h-[2px] bg-[var(--red)]" />
-            </p>
-
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[var(--black)] mb-6 font-[family-name:var(--font-display)]">
-              Request Your Free Estimate
-            </h2>
-
-            <p className="text-lg md:text-xl text-[var(--gray-600)] leading-relaxed mb-10 max-w-2xl mx-auto">
-              We respond to your call right away and evaluate the job in person,
-              providing an accurate estimate on the spot.
-            </p>
-
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link
-                href="/contact"
-                className="inline-flex items-center gap-2 px-10 py-4 bg-[var(--red)] text-white text-sm font-bold uppercase tracking-wide rounded hover:bg-[var(--red-dark)] transition-colors shadow-lg hover:shadow-xl"
-              >
-                Get a Free Estimate
-                <ChevronRight className="w-4 h-4" />
-              </Link>
-              <a
-                href="tel:239-332-5707"
-                className="inline-flex items-center gap-2 px-10 py-4 border-2 border-[var(--black)] text-[var(--black)] text-sm font-bold uppercase tracking-wide rounded hover:bg-[var(--black)] hover:text-white transition-colors"
-              >
-                <Phone className="w-4 h-4" />
-                239-332-5707
-              </a>
-            </div>
-          </div>
+        <div className="relative z-10 mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+          <InlineLeadForm
+            defaultService="repairs"
+            title="Request a Repair Estimate &amp; Survey"
+            subtitle="Let our expert team extend your roof's service life. Fill out the details below, and our crew in red polos will survey your roof and provide an itemized repair estimate."
+            buttonText="Request Survey &amp; Estimate"
+            darkTheme={false}
+          />
         </div>
       </section>
     </>

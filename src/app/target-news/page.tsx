@@ -1,126 +1,44 @@
-import type { Metadata } from 'next'
+'use client'
+
+import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight, Phone, ChevronRight } from 'lucide-react'
+import blogsData from '@/data/blogs.json'
 
-export const metadata: Metadata = {
-  title: 'Target News',
-  description:
-    'Everything you need to know about commercial roofing in Southwest Florida. News about Target Roofing & Sheet Metal and valuable information for our customers and partners.',
+interface BlogPost {
+  title: string
+  slug: string
+  date: string
+  category: string
+  excerpt: string
+  image?: string | null
+  color?: string | null
+  content?: string
 }
 
-const blogPosts = [
-  {
-    title: "Here's What a Great Roofing Service Team Looks Like",
-    slug: 'great-roofing-service-team',
-    excerpt:
-      'Discover the qualities that set a truly great roofing service team apart, from professionalism and expertise to cutting-edge technology and accountability.',
-    image: '/images/blog/good-service-header.webp',
-    category: 'Service',
-    color: 'bg-[var(--red)]',
-  },
-  {
-    title: 'Hurricane Preparedness',
-    slug: 'hurricane-preparedness',
-    excerpt:
-      'Southwest Florida is no stranger to hurricanes. Learn how to prepare your commercial roof for hurricane season and protect your investment.',
-    image: '/images/blog/hurricane-preparedness.jpg',
-    category: 'Hurricane',
-    color: 'bg-[#1B3A5C]',
-  },
-  {
-    title: 'Preparing Your Commercial Roof for Rainy Season',
-    slug: 'preparing-commercial-roof-rainy-season',
-    excerpt:
-      'Rainy season in Florida can be brutal on commercial roofs. Here are the steps you should take to ensure your roof is ready for the downpours.',
-    image: '/images/blog/rainy-season.jpg',
-    category: 'Maintenance',
-    color: 'bg-[#2D7A4F]',
-  },
-  {
-    title: 'Target Roofing Launches Eco-Friendly Roof Cleaning Service',
-    slug: 'eco-friendly-roof-cleaning',
-    excerpt:
-      'We are excited to announce our new eco-friendly softwash roof cleaning service, designed to protect your roof and the environment.',
-    image: null,
-    category: 'Company News',
-    color: 'bg-[var(--red)]',
-  },
-  {
-    title: 'These 3 Things Are Destroying Your Roof',
-    slug: 'three-things-destroying-your-roof',
-    excerpt:
-      'Your commercial roof faces threats every day that you might not even be aware of. Learn what the top three culprits are and how to stop them.',
-    image: null,
-    category: 'Maintenance',
-    color: 'bg-[#2D7A4F]',
-  },
-  {
-    title: 'How Your Exterior Walls Might Indicate a Problem with Your Roof',
-    slug: 'exterior-walls-roof-problems',
-    excerpt:
-      'Sometimes the signs of roof damage show up where you least expect them. Learn how to read the warning signs on your building\'s exterior walls.',
-    image: null,
-    category: 'Inspection',
-    color: 'bg-[#5B4A8A]',
-  },
-  {
-    title: "Why a High-Rise's Roof Matters to More Than Just Penthouse Residents",
-    slug: 'high-rise-roof-importance',
-    excerpt:
-      'A high-rise roof affects every resident and tenant in the building. Discover why proper maintenance is critical for the entire structure.',
-    image: null,
-    category: 'Commercial',
-    color: 'bg-[var(--black)]',
-  },
-  {
-    title: 'Why Santa (and You) Should Never Walk on Your Roof',
-    slug: 'never-walk-on-your-roof',
-    excerpt:
-      'Walking on your commercial roof can cause serious damage that leads to costly repairs. Here is why you should leave roof access to the professionals.',
-    image: null,
-    category: 'Safety',
-    color: 'bg-[#C75B12]',
-  },
-  {
-    title: '4 Reasons Metal Roofs Have an Advantage in Florida',
-    slug: 'metal-roofs-advantage-florida',
-    excerpt:
-      'Metal roofing offers distinct advantages for Florida\'s unique climate. From hurricane resistance to energy efficiency, here is why metal stands out.',
-    image: null,
-    category: 'Metal Roofing',
-    color: 'bg-[#4A6FA5]',
-  },
-  {
-    title: 'What Is TPO Roofing and Why Is It So Popular?',
-    slug: 'what-is-tpo-roofing',
-    excerpt:
-      'TPO roofing has become one of the most popular commercial roofing systems in the country. Learn what makes it such a smart choice for your building.',
-    image: null,
-    category: 'TPO Roofing',
-    color: 'bg-[#3B7DD8]',
-  },
-  {
-    title: 'Gutters: Critically Important for Health of a Roof',
-    slug: 'gutters-important-for-roof',
-    excerpt:
-      'Gutters play a vital role in protecting your roof and building from water damage. Learn why gutter maintenance should be a top priority.',
-    image: null,
-    category: 'Maintenance',
-    color: 'bg-[#2D7A4F]',
-  },
-  {
-    title: 'GAF Honors Target Roofing with Triple Excellence Award',
-    slug: 'gaf-triple-excellence-award',
-    excerpt:
-      'Target Roofing has been honored by GAF with the prestigious Triple Excellence Award, recognizing our commitment to installation, training, and consumer protection.',
-    image: null,
-    category: 'Awards',
-    color: 'bg-[#B8860B]',
-  },
-]
+const CATEGORY_COLORS: Record<string, string> = {
+  'Service': 'bg-[var(--red)]',
+  'Hurricane': 'bg-[#1B3A5C]',
+  'Maintenance': 'bg-[#2D7A4F]',
+  'Company News': 'bg-[var(--red)]',
+  'Inspection': 'bg-[#5B4A8A]',
+  'Commercial': 'bg-[var(--black)]',
+  'Safety': 'bg-[#C75B12]',
+  'Metal Roofing': 'bg-[#4A6FA5]',
+  'TPO Roofing': 'bg-[#3B7DD8]',
+  'Awards': 'bg-[#B8860B]',
+}
 
 export default function TargetNewsPage() {
+  const [visibleCount, setVisibleCount] = useState(12)
+
+  const sortedPosts = (blogsData as BlogPost[]).sort((a, b) => {
+    return new Date(b.date).getTime() - new Date(a.date).getTime()
+  })
+
+  const displayedPosts = sortedPosts.slice(0, visibleCount)
+
   return (
     <>
       {/* ─── HERO ─── */}
@@ -173,68 +91,84 @@ export default function TargetNewsPage() {
 
           {/* Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {blogPosts.map((post) => (
-              <article
-                key={post.slug}
-                className="group bg-white rounded-sm shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col"
-              >
-                {/* Image or Placeholder */}
-                <div className="relative aspect-[16/10] overflow-hidden">
-                  {post.image ? (
-                    <Image
-                      src={post.image}
-                      alt={post.title}
-                      fill
-                      className="object-cover transition-transform duration-700 group-hover:scale-105"
-                    />
-                  ) : (
-                    <div
-                      className={`absolute inset-0 ${post.color} flex items-center justify-center`}
-                    >
-                      {/* Decorative pattern */}
-                      <div className="absolute inset-0 opacity-10">
-                        <div
-                          className="absolute inset-0"
-                          style={{
-                            backgroundImage:
-                              'repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(255,255,255,0.1) 20px, rgba(255,255,255,0.1) 22px)',
-                          }}
-                        />
+            {displayedPosts.map((post) => {
+              const postColor = post.color || CATEGORY_COLORS[post.category] || 'bg-[var(--red)]'
+              return (
+                <article
+                  key={post.slug}
+                  className="group bg-white rounded-sm shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col"
+                >
+                  {/* Image or Placeholder */}
+                  <div className="relative aspect-[16/10] overflow-hidden">
+                    {post.image ? (
+                      <Image
+                        src={post.image}
+                        alt={post.title}
+                        fill
+                        className="object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
+                    ) : (
+                      <div
+                        className={`absolute inset-0 ${postColor} flex items-center justify-center`}
+                      >
+                        {/* Decorative pattern */}
+                        <div className="absolute inset-0 opacity-10">
+                          <div
+                            className="absolute inset-0"
+                            style={{
+                              backgroundImage:
+                                'repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(255,255,255,0.1) 20px, rgba(255,255,255,0.1) 22px)',
+                            }}
+                          />
+                        </div>
+                        <span className="relative text-white/90 text-sm font-bold uppercase tracking-[0.15em] font-[family-name:var(--font-display)]">
+                          {post.category}
+                        </span>
                       </div>
-                      <span className="relative text-white/90 text-sm font-bold uppercase tracking-[0.15em] font-[family-name:var(--font-display)]">
+                    )}
+                    {/* Category badge */}
+                    <div className="absolute top-4 left-4 z-10">
+                      <span
+                        className={`inline-block px-3 py-1 text-xs font-bold uppercase tracking-wider text-white ${postColor} rounded-sm shadow-lg font-[family-name:var(--font-display)]`}
+                      >
                         {post.category}
                       </span>
                     </div>
-                  )}
-                  {/* Category badge */}
-                  <div className="absolute top-4 left-4 z-10">
-                    <span
-                      className={`inline-block px-3 py-1 text-xs font-bold uppercase tracking-wider text-white ${post.color} rounded-sm shadow-lg font-[family-name:var(--font-display)]`}
-                    >
-                      {post.category}
-                    </span>
                   </div>
-                </div>
 
-                {/* Content */}
-                <div className="flex flex-col flex-1 p-6">
-                  <h3 className="text-lg font-bold text-[var(--black)] mb-3 leading-tight font-[family-name:var(--font-display)] group-hover:text-[var(--red)] transition-colors duration-300">
-                    {post.title}
-                  </h3>
-                  <p className="text-sm text-[var(--gray-600)] leading-relaxed mb-4 flex-1">
-                    {post.excerpt}
-                  </p>
-                  <Link
-                    href={`/target-news/${post.slug}`}
-                    className="inline-flex items-center gap-2 text-[var(--red)] text-sm font-bold uppercase tracking-wide hover:gap-3 transition-all duration-300 font-[family-name:var(--font-display)]"
-                  >
-                    Read More
-                    <ArrowRight className="w-4 h-4" />
-                  </Link>
-                </div>
-              </article>
-            ))}
+                  {/* Content */}
+                  <div className="flex flex-col flex-1 p-6">
+                    <h3 className="text-lg font-bold text-[var(--black)] mb-3 leading-tight font-[family-name:var(--font-display)] group-hover:text-[var(--red)] transition-colors duration-300">
+                      {post.title}
+                    </h3>
+                    <p className="text-sm text-[var(--gray-600)] leading-relaxed mb-4 flex-1">
+                      {post.excerpt}
+                    </p>
+                    <Link
+                      href={`/target-news/${post.slug}`}
+                      className="inline-flex items-center gap-2 text-[var(--red)] text-sm font-bold uppercase tracking-wide hover:gap-3 transition-all duration-300 font-[family-name:var(--font-display)]"
+                    >
+                      Read More
+                      <ArrowRight className="w-4 h-4" />
+                    </Link>
+                  </div>
+                </article>
+              )
+            })}
           </div>
+
+          {/* Load More Button */}
+          {visibleCount < sortedPosts.length && (
+            <div className="text-center mt-16">
+              <button
+                onClick={() => setVisibleCount((prev) => prev + 12)}
+                className="inline-flex items-center gap-3 px-10 py-4 bg-[var(--red)] text-white text-sm font-bold uppercase tracking-wide rounded hover:bg-[var(--red-dark)] transition-colors shadow-lg hover:shadow-xl font-[family-name:var(--font-display)]"
+              >
+                Load More Articles
+                <ChevronRight className="w-4 h-4" />
+              </button>
+            </div>
+          )}
         </div>
       </section>
 

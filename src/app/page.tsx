@@ -21,6 +21,7 @@ import {
   CheckCircle,
   Quote,
 } from 'lucide-react'
+import InlineLeadForm from '@/components/InlineLeadForm'
 
 /* ------------------------------------------------------------------ */
 /*  Animated Counter Hook                                              */
@@ -75,6 +76,7 @@ export default function HomePage() {
     <>
       <HeroSection />
       <ServicesSection />
+      <RepairFormSection />
       <StatsSection />
       <CommunitySection />
       <PortfolioSection />
@@ -92,7 +94,7 @@ function HeroSection() {
   const audiences = ['Property Managers', 'Contractors', 'Property Owners', 'Condos/HOAs']
 
   return (
-    <section className="relative -mt-[7.5rem] h-screen min-h-[700px] overflow-hidden">
+    <section className="relative -mt-[7.5rem] min-h-screen lg:h-screen overflow-hidden flex items-center pt-28 pb-12 lg:py-0">
       {/* YouTube video background */}
       <div className="absolute inset-0 z-0">
         <iframe
@@ -106,61 +108,92 @@ function HeroSection() {
       </div>
 
       {/* Dark overlay */}
-      <div className="absolute inset-0 z-[1] bg-gradient-to-b from-black/70 via-black/55 to-black/80" />
+      <div className="absolute inset-0 z-[1] bg-gradient-to-b from-black/85 via-black/70 to-black/85" />
 
       {/* Content */}
-      <div className="relative z-[2] flex h-full flex-col items-center justify-center px-4 text-center text-white">
-        <h1 className="animate-fade-in-up mb-4 max-w-5xl text-5xl font-bold tracking-tight sm:text-6xl md:text-7xl lg:text-8xl font-[family-name:var(--font-display)] uppercase">
-          Locally Owned<br className="hidden sm:block" /> and Operated
-        </h1>
+      <div className="relative z-[2] mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full">
+        <div className="grid lg:grid-cols-12 gap-12 items-center">
+          {/* Left Text Column */}
+          <div className="lg:col-span-7 text-left text-white flex flex-col justify-center">
+            <h1 className="animate-fade-in-up mb-4 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl font-[family-name:var(--font-display)] uppercase leading-[1.05]">
+              Extend Your Roof&apos;s Life<br />
+              <span className="text-[var(--red)]">With Expert Repairs</span>
+            </h1>
 
-        <h3 className="animate-fade-in-up mb-8 text-lg font-light tracking-wide text-white/80 sm:text-xl md:text-2xl font-[family-name:var(--font-display)] uppercase"
-          style={{ animationDelay: '0.15s' }}
-        >
-          Serving Sarasota, Tampa, Fort Myers, Naples
-        </h3>
+            <p className="animate-fade-in-up mb-6 text-base sm:text-lg text-white/90 leading-relaxed font-light font-[family-name:var(--font-body)]"
+               style={{ animationDelay: '0.15s' }}>
+              Timely, professional repairs prevent minor leaks from turning into catastrophic failures. We specialize in extending the service life of commercial and residential roofs in Southwest Florida, transitioning seamlessly to replacement only when repairs are no longer cost-effective.
+            </p>
 
-        {/* Audience pills */}
-        <div
-          className="animate-fade-in-up mb-10 flex flex-wrap items-center justify-center gap-3"
-          style={{ animationDelay: '0.3s' }}
-        >
-          {audiences.map((a, i) => (
-            <span
-              key={a}
-              className="rounded-full border border-white/30 bg-white/10 px-5 py-2 text-sm font-semibold uppercase tracking-wider backdrop-blur-sm transition-colors hover:bg-[var(--red)] hover:border-[var(--red)]"
+            <h3 className="animate-fade-in-up mb-6 text-sm sm:text-base font-semibold tracking-wide text-white/80 uppercase font-[family-name:var(--font-display)]"
+              style={{ animationDelay: '0.2s' }}
             >
-              {a}
-            </span>
-          ))}
-        </div>
+              Serving Sarasota, Tampa, Fort Myers, Naples
+            </h3>
 
-        {/* CTAs */}
-        <div
-          className="animate-fade-in-up flex flex-col gap-4 sm:flex-row"
-          style={{ animationDelay: '0.45s' }}
-        >
-          <Link
-            href="/portal"
-            className="inline-flex items-center justify-center gap-2 rounded bg-[var(--red)] px-8 py-4 text-base font-bold uppercase tracking-wider text-white shadow-lg transition-all hover:bg-[var(--red-dark)] hover:shadow-xl hover:scale-[1.02]"
+            {/* Audience pills */}
+            <div
+              className="animate-fade-in-up mb-8 flex flex-wrap gap-2.5"
+              style={{ animationDelay: '0.3s' }}
+            >
+              {audiences.map((a) => (
+                <span
+                  key={a}
+                  className="rounded-full border border-white/20 bg-white/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider backdrop-blur-sm transition-colors hover:bg-[var(--red)] hover:border-[var(--red)]"
+                >
+                  {a}
+                </span>
+              ))}
+            </div>
+
+            {/* CTAs */}
+            <div
+              className="animate-fade-in-up flex flex-col gap-4 sm:flex-row"
+              style={{ animationDelay: '0.4s' }}
+            >
+              <a
+                href="#repair-form"
+                className="inline-flex items-center justify-center gap-2 rounded bg-[var(--red)] px-8 py-3.5 text-sm font-bold uppercase tracking-wider text-white shadow-lg transition-all hover:bg-[var(--red-dark)] hover:shadow-xl hover:scale-[1.02]"
+              >
+                <Wrench className="h-4.5 w-4.5" />
+                Schedule Repair
+              </a>
+              <Link
+                href="/contact?service=free-estimate"
+                className="inline-flex items-center justify-center gap-2 rounded border-2 border-white px-8 py-3.5 text-sm font-bold uppercase tracking-wider text-white transition-all hover:bg-white hover:text-[var(--black)]"
+              >
+                <CalendarCheck className="h-4.5 w-4.5" />
+                Request a Survey
+              </Link>
+            </div>
+          </div>
+
+          {/* Right Crew Image Column */}
+          <div 
+            className="animate-fade-in-up hidden lg:block lg:col-span-5 relative h-[480px] w-full rounded-lg overflow-hidden border-4 border-white/10 shadow-2xl"
+            style={{ animationDelay: '0.45s' }}
           >
-            Customer Portal
-            <ArrowRight className="h-5 w-5" />
-          </Link>
-          <Link
-            href="/our-process"
-            className="inline-flex items-center justify-center gap-2 rounded border-2 border-white px-8 py-4 text-base font-bold uppercase tracking-wider text-white transition-all hover:bg-white hover:text-[var(--black)]"
-          >
-            <Play className="h-5 w-5" />
-            Our Process
-          </Link>
+            <Image
+              src="/images/crew/crew_repair_action.png"
+              alt="Target Roofing technicians in red polos performing expert commercial roof repair"
+              fill
+              className="object-cover"
+              priority
+            />
+            {/* Soft dark bottom overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+            <div className="absolute bottom-4 left-4 right-4 text-white">
+              <p className="text-sm font-bold uppercase tracking-wider font-[family-name:var(--font-display)]">Our Professional Crew</p>
+              <p className="text-xs text-white/80 font-light">Equipped, trained, and direct employees — never subcontractors.</p>
+            </div>
+          </div>
         </div>
       </div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-24 left-1/2 z-[2] -translate-x-1/2 animate-bounce">
+      <div className="absolute bottom-8 left-1/2 z-[2] -translate-x-1/2 animate-bounce hidden lg:block">
         <div className="h-10 w-6 rounded-full border-2 border-white/40 flex items-start justify-center pt-2">
-          <div className="h-2 w-1 rounded-full bg-white/70" />
+          <div className="h-2 w-1 bg-white/70 rounded-full" />
         </div>
       </div>
     </section>
@@ -173,26 +206,26 @@ function HeroSection() {
 const services = [
   {
     icon: Wrench,
-    title: 'Repairs',
-    desc: 'Quick response and a fair price for quality roof repairs and maintenance.',
+    title: 'Roof Repair',
+    desc: 'Extend your roof\'s life. We resolve leaks and structural wear early to prevent costly deterioration.',
     href: '/roofing-services#repairs',
   },
   {
     icon: Building,
-    title: 'Reroofing',
-    desc: 'Trusted and referred by property managers and homeowner associations.',
+    title: 'Replacement Transition',
+    desc: 'When repairs are no longer cost-effective, we guide you through a seamless transition to a new roof.',
     href: '/roofing-services#reroofing',
   },
   {
     icon: Shield,
-    title: 'Maintenance Plans',
-    desc: 'Reliable, proactive roof maintenance plans designed to save you time and money.',
+    title: 'Proactive Maintenance',
+    desc: 'Preventative checkups and minor repairs designed to maximize roof service life and satisfy warranties.',
     href: '/roofing-services#maintenance-plans',
   },
   {
     icon: Home,
-    title: 'New Roofs',
-    desc: 'General Contractors trust us to deliver on time and on budget.',
+    title: 'New Construction',
+    desc: 'Delivering top-tier new roof installations on-time and on-budget, built to withstand harsh weather.',
     href: '/roofing-services#new-roofs',
   },
 ]
@@ -206,10 +239,10 @@ function ServicesSection() {
         {/* Header */}
         <div className={`mx-auto max-w-3xl text-center mb-16 transition-all duration-700 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[var(--black)] font-[family-name:var(--font-display)] uppercase mb-6">
-            Targeted Commercial<br />Roofing Services
+            Commercial Roof Repair & Lifecycle Management
           </h2>
           <p className="text-lg text-[var(--gray-600)] leading-relaxed">
-            Turn to your local residential and commercial roofers for proactive roof maintenance and repair services, as well as quality reroofing and new construction roofing services. Our professionalism, reliability, customer service and innovation always hit the mark.
+            Maximize your roofing investment. We specialize in expert commercial roof repairs and proactive maintenance that extend your roof&apos;s lifespan. When replacement eventually becomes necessary, we leverage our deep property expertise to execute a seamless, stress-free transition.
           </p>
         </div>
 
@@ -254,6 +287,25 @@ function ServicesSection() {
             <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
           </Link>
         </div>
+      </div>
+    </section>
+  )
+}
+
+/* ------------------------------------------------------------------ */
+/*  Lead Capture Form Section                                         */
+/* ------------------------------------------------------------------ */
+function RepairFormSection() {
+  const { ref, inView } = useInView()
+  return (
+    <section ref={ref} id="repair-form" className={`bg-[var(--gray-50)] py-20 border-t border-b border-[var(--gray-200)] scroll-mt-24 transition-all duration-750 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <InlineLeadForm
+          defaultService="repairs"
+          title="Schedule Your Roof Repair Inspection"
+          subtitle="Timely repairs extend roof life. Describe your leak or damage, and our certified crew in red polos will perform a comprehensive survey and provide an itemized estimate."
+          buttonText="Schedule Inspection Survey"
+        />
       </div>
     </section>
   )

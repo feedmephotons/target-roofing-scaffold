@@ -72,7 +72,11 @@ export default function Header() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
-            <Link href="/" className="flex-shrink-0">
+            <Link
+              href="/"
+              className="flex-shrink-0"
+              onClick={() => setMobileMenuOpen(false)}
+            >
               <Image
                 src="/images/logos/target-roofing-logo.png"
                 alt="Target Roofing & Sheet Metal"
@@ -140,16 +144,14 @@ export default function Header() {
 
         {/* Mobile menu */}
         {mobileMenuOpen && (
-          <div className="lg:hidden bg-white border-t">
+          <div className="lg:hidden bg-white border-t overflow-y-auto max-h-[calc(100vh-120px)]">
             <div className="px-4 py-4 space-y-1">
               {navigation.map((item) => (
                 <div key={item.name}>
                   <Link
                     href={item.href}
                     className="block px-4 py-3 text-sm font-semibold uppercase text-[var(--black)] hover:text-[var(--red)] hover:bg-[var(--gray-50)] rounded transition-colors"
-                    onClick={() => {
-                      if (!item.children) setMobileMenuOpen(false)
-                    }}
+                    onClick={() => setMobileMenuOpen(false)}
                   >
                     {item.name}
                   </Link>

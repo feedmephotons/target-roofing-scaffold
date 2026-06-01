@@ -18,24 +18,24 @@ const sourceSans = Source_Sans_3({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Target Roofing & Sheet Metal | Southwest Florida Commercial Roofing',
+    default: 'Target Roofing & Sheet Metal | Southwest Florida Commercial Roof Repair',
     template: '%s | Target Roofing',
   },
   description:
-    'Southwest Florida\'s trusted commercial roofing contractor. New roofs, reroofing, repairs, and maintenance plans. Serving Fort Myers, Naples, Sarasota & Tampa. License #CCC1334168.',
+    'Southwest Florida\'s trusted commercial roof repair and maintenance specialist. We extend your roof\'s lifespan with expert repairs and manage replacement transitions when needed. Serving Fort Myers, Naples, Sarasota & Tampa. License #CCC1334168.',
   keywords: [
-    'commercial roofing',
+    'commercial roof repair',
     'roofing contractor',
     'Fort Myers roofing',
     'Southwest Florida roofing',
-    'roof repair',
+    'leak repair',
+    'roof maintenance plans',
     'reroofing',
-    'maintenance plans',
     'Target Roofing',
   ],
   openGraph: {
-    title: 'Target Roofing & Sheet Metal',
-    description: 'Southwest Florida\'s trusted commercial roofing contractor.',
+    title: 'Target Roofing & Sheet Metal | Commercial Roof Repair',
+    description: 'Southwest Florida\'s trusted commercial roof repair and maintenance specialist.',
     url: 'https://targetroofers.com',
     siteName: 'Target Roofing',
     type: 'website',

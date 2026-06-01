@@ -1,9 +1,11 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ArrowRight, ClipboardList, FileText, Handshake, BarChart3, ShieldCheck } from 'lucide-react'
+import InlineLeadForm from '@/components/InlineLeadForm'
 
 export const metadata: Metadata = {
   title: 'Our Process',
+  description: 'Our structured 5-step roofing process ensures smooth repairs and seamless replacements, maximizing your roof\'s lifecycle with clear milestones.',
 }
 
 const steps = [
@@ -58,8 +60,23 @@ export default function OurProcessPage() {
             <span className="text-[var(--red)]">Better</span> at Target Roofing
           </h1>
           <p className="max-w-3xl mx-auto text-lg md:text-xl text-[var(--gray-300)] leading-relaxed font-[family-name:var(--font-body)]">
-            At Target Roofing, we created a 5-Step Process designed to better serve our customers and ensure the project is on time and on target.
+            At Target Roofing, we created a 5-Step Process designed to better serve our customers, maximize roof lifespan through expert repairs, and coordinate seamless replacements when necessary.
           </p>
+
+          <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a
+              href="#lead-form"
+              className="inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-[var(--red)] text-white font-bold uppercase tracking-wide rounded hover:bg-[var(--red-dark)] transition-colors shadow-lg text-sm"
+            >
+              Schedule Repair
+            </a>
+            <a
+              href="#lead-form"
+              className="inline-flex items-center justify-center gap-2 px-8 py-3.5 border-2 border-white text-white font-bold uppercase tracking-wide rounded hover:bg-white/10 transition-colors text-sm"
+            >
+              Request a Survey
+            </a>
+          </div>
         </div>
       </section>
 
@@ -162,22 +179,16 @@ export default function OurProcessPage() {
         </div>
       </section>
 
-      {/* ── CTA ── */}
-      <section className="relative bg-[var(--black)] text-white noise-overlay">
-        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 md:py-28 text-center">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 font-[family-name:var(--font-display)]">
-            Ready to <span className="text-[var(--red)]">Get Started?</span>
-          </h2>
-          <p className="max-w-2xl mx-auto text-lg text-[var(--gray-300)] mb-10 font-[family-name:var(--font-body)]">
-            Contact us today for a free estimate. Our team is standing by to walk you through every step of your commercial roofing project.
-          </p>
-          <Link
-            href="/contact"
-            className="inline-flex items-center gap-2 px-10 py-4 bg-[var(--red)] text-white text-lg font-bold uppercase tracking-wide rounded hover:bg-[var(--red-dark)] transition-colors shadow-xl font-[family-name:var(--font-display)]"
-          >
-            Contact Us
-            <ArrowRight className="w-5 h-5" />
-          </Link>
+      {/* ── CTA INLINE LEAD FORM ── */}
+      <section id="lead-form" className="relative bg-[var(--black)] text-white noise-overlay py-20 md:py-28 scroll-mt-24">
+        <div className="relative z-10 mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+          <InlineLeadForm
+            defaultService="repairs"
+            title="Ready to Get Started?"
+            subtitle="Let our expert crew extend your roof's service life. Tell us about your repair needs, and our technicians in red polos will survey your property and provide an itemized proposal."
+            buttonText="Submit Lead Details"
+            darkTheme={true}
+          />
         </div>
       </section>
     </>
