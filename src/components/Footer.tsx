@@ -71,7 +71,7 @@ export default function Footer() {
             <div className="space-y-4 text-sm text-[var(--gray-400)]">
               <div className="flex items-start gap-3">
                 <MapPin className="h-5 w-5 text-[var(--red)] flex-shrink-0 mt-0.5" />
-                <span>2022 Hendry St #100<br />Fort Myers, Florida 33901</span>
+                <span>7011 Nalle Grade Rd<br />North Fort Myers, Florida 33917</span>
               </div>
               <div className="flex items-center gap-3">
                 <Phone className="h-5 w-5 text-[var(--red)] flex-shrink-0" />

@@ -111,16 +111,36 @@ export default function RoofingServicesPage() {
               </div>
             </div>
 
-            {/* Right Column: Crew Working Image */}
-            <div className="hidden lg:block lg:col-span-5 relative h-[380px] w-full rounded-lg overflow-hidden border-4 border-white/10 shadow-2xl">
-              <Image
-                src="/images/crew/crew_working_on_roof.png"
-                alt="Target Roofing technicians in red polos working on a commercial roof installation"
-                fill
-                className="object-cover"
-                priority
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
+            {/* Right Column: Trust & Standards Dashboard */}
+            <div className="hidden lg:flex lg:col-span-5 flex-col justify-between p-8 rounded-lg bg-white/5 border border-white/10 backdrop-blur-sm shadow-2xl relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--red)] rounded-full opacity-10 blur-2xl pointer-events-none" />
+              <div>
+                <h3 className="text-xl font-bold uppercase tracking-wider font-[family-name:var(--font-display)] text-white mb-6 border-b border-white/10 pb-3">
+                  Our Service Standards
+                </h3>
+                <div className="space-y-6">
+                  {[
+                    { label: "100% Direct Employees", desc: "No subcontractors. Fully background-checked, certified professionals in red polos." },
+                    { label: "24/7/365 Emergency Service", desc: "Always on call. Rapid dispatch across Sarasota, Fort Myers, and Naples." },
+                    { label: "1-Year Repair Warranty", desc: "We stand by our work. A full one-year warranty on nearly every repair." },
+                    { label: "Complimentary Surveys", desc: "Detailed inspection reports complete with photos and budget forecasts." }
+                  ].map((item, idx) => (
+                    <div key={idx} className="flex gap-4">
+                      <div className="flex-shrink-0 w-6 h-6 rounded-full bg-[var(--red)]/20 flex items-center justify-center text-[var(--red-light)] text-xs font-bold font-[family-name:var(--font-display)] mt-0.5">
+                        {idx + 1}
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-white text-sm">{item.label}</h4>
+                        <p className="text-xs text-[var(--gray-400)] mt-0.5 leading-relaxed">{item.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="mt-8 pt-4 border-t border-white/10 flex items-center justify-between text-[10px] text-[var(--gray-400)] font-mono">
+                <span>LICENSE: CCC1334168</span>
+                <span>STATE CERTIFIED</span>
+              </div>
             </div>
           </div>
         </div>
@@ -194,13 +214,36 @@ export default function RoofingServicesPage() {
 
             {/* Right side: Crew image and features */}
             <div className="lg:col-span-6 space-y-6">
-              <div className="relative aspect-[16/10] w-full rounded-lg overflow-hidden border border-[var(--gray-200)] shadow-md">
-                <Image
-                  src="/images/crew/crew_repair_action.png"
-                  alt="Target Roofing crew technicians in red polos doing expert roof repairs"
-                  fill
-                  className="object-cover"
-                />
+              <div className="relative bg-[var(--black)] rounded-lg shadow-md p-8 border-t-4 border-[var(--red)] text-white overflow-hidden noise-overlay">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--red)] rounded-full opacity-10 blur-2xl pointer-events-none" />
+                <div className="relative z-10 flex flex-col justify-between h-full">
+                  <div>
+                    <div className="flex items-center gap-2.5 mb-4">
+                      <span className="w-3 h-3 rounded-full bg-[var(--red)] animate-pulse" />
+                      <h3 className="font-bold text-sm uppercase tracking-wider text-[var(--red-light)] font-[family-name:var(--font-display)]">
+                        Emergency Repair Dispatch
+                      </h3>
+                    </div>
+                    <h4 className="text-2xl font-bold uppercase mb-4 font-[family-name:var(--font-display)]">
+                      Active Leak? Call the Hotline
+                    </h4>
+                    <p className="text-sm text-[var(--gray-300)] leading-relaxed mb-6">
+                      Minor leaks can quickly turn into major structural damages. Our local Southwest Florida repair teams are available 24/7/365 to stabilize and resolve active roof leaks.
+                    </p>
+                  </div>
+                  <div>
+                    <a
+                      href="tel:239-332-5707"
+                      className="inline-flex items-center justify-center gap-3 w-full py-4 bg-[var(--red)] text-white hover:bg-[var(--red-dark)] font-bold uppercase tracking-wider rounded transition-colors text-lg font-[family-name:var(--font-display)] shadow-lg shadow-black/25"
+                    >
+                      <Phone className="h-6 w-6 animate-bounce" />
+                      Call 239-332-5707
+                    </a>
+                    <p className="text-center text-[10px] text-[var(--gray-400)] mt-3">
+                      Average response time is under 2 hours for emergencies.
+                    </p>
+                  </div>
+                </div>
               </div>
               
               <div className="space-y-4">

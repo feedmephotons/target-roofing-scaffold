@@ -429,9 +429,9 @@ export default function ContactPage() {
                       Headquarters
                     </h3>
                     <p className="text-[var(--black)] font-medium leading-relaxed">
-                      2022 Hendry St #100
+                      7011 Nalle Grade Rd
                       <br />
-                      Fort Myers, Florida 33901
+                      North Fort Myers, Florida 33917
                     </p>
                   </div>
                 </div>
