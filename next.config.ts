@@ -47,7 +47,7 @@ try {
   console.error('[Config Hook] Error in build dataset generation:', e);
 }
 
-const nextConfig = {
+const nextConfig: NextConfig & { eslint?: { ignoreDuringBuilds?: boolean } } = {
   typescript: {
     ignoreBuildErrors: true,
   },
@@ -67,7 +67,7 @@ const nextConfig = {
     ],
   },
   experimental: {
-    cpus: 2,
+    cpus: 1,
   },
 }
 

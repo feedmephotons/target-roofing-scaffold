@@ -6,6 +6,7 @@ test.describe('Tier 2: Boundary & Corner Cases', () => {
   test.describe('Contact Form Boundaries', () => {
     test.beforeEach(async ({ page }) => {
       await page.goto('/contact');
+      await page.waitForTimeout(2000); // Ensure client-side hydration is complete
     });
 
     test('should show validation errors on empty submission', async ({ page }) => {
@@ -74,6 +75,7 @@ test.describe('Tier 2: Boundary & Corner Cases', () => {
   test.describe('Softwash Form Boundaries', () => {
     test.beforeEach(async ({ page }) => {
       await page.goto('/softwash');
+      await page.waitForTimeout(2000); // Ensure client-side hydration is complete
     });
 
     test('should show errors on empty submission', async ({ page }) => {
@@ -102,6 +104,7 @@ test.describe('Tier 2: Boundary & Corner Cases', () => {
   test.describe('Portal Login Boundaries', () => {
     test.beforeEach(async ({ page }) => {
       await page.goto('/portal');
+      await page.waitForTimeout(2000); // Ensure client-side hydration is complete
     });
 
     test('should show errors on empty login details', async ({ page }) => {

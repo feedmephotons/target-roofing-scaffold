@@ -21,7 +21,7 @@ test.describe('Mobile UX & Responsiveness Validation', () => {
 
   for (const url of PAGES) {
     test(`Page "${url}" should not have horizontal layout overflows`, async ({ page }) => {
-      await page.goto(url, { waitUntil: 'domcontentloaded' });
+      await page.goto(url, { waitUntil: 'networkidle' });
       await page.waitForLoadState('domcontentloaded');
 
       // Scroll down to trigger lazy loading and ensure layouts are fully calculated
@@ -81,7 +81,7 @@ test.describe('Mobile UX & Responsiveness Validation', () => {
   }
 
   test('Mobile hamburger menu should open and close successfully', async ({ page }) => {
-    await page.goto('/', { waitUntil: 'domcontentloaded' });
+    await page.goto('/', { waitUntil: 'networkidle' });
     await page.waitForTimeout(1500); // Ensure client-side hydration and stylesheets are fully loaded
     
     // Hamburger should be visible, desktop menu should be hidden
@@ -104,7 +104,7 @@ test.describe('Mobile UX & Responsiveness Validation', () => {
   });
 
   test('Buttons and anchors should meet WCAG touch target guidelines (min 44x44px)', async ({ page }) => {
-    await page.goto('/', { waitUntil: 'domcontentloaded' });
+    await page.goto('/', { waitUntil: 'networkidle' });
     await page.waitForLoadState('domcontentloaded');
     await page.waitForTimeout(2000);
     
