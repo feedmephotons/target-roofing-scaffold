@@ -91,10 +91,10 @@ export default function Footer() {
           {/* Services */}
           <div>
             <h3 className="text-sm font-bold uppercase tracking-wider text-white mb-6">Services</h3>
-            <ul className="space-y-3">
+            <ul className="space-y-1 lg:space-y-3">
               {footerLinks.services.map((link) => (
                 <li key={link.name}>
-                  <Link href={link.href} className="text-sm text-[var(--gray-400)] hover:text-[var(--red)] transition-colors">
+                  <Link href={link.href} className="block py-3 lg:py-1 text-sm text-[var(--gray-400)] hover:text-[var(--red)] transition-colors">
                     {link.name}
                   </Link>
                 </li>
@@ -105,10 +105,10 @@ export default function Footer() {
           {/* Company */}
           <div>
             <h3 className="text-sm font-bold uppercase tracking-wider text-white mb-6">Company</h3>
-            <ul className="space-y-3">
+            <ul className="space-y-1 lg:space-y-3">
               {footerLinks.company.map((link) => (
                 <li key={link.name}>
-                  <Link href={link.href} className="text-sm text-[var(--gray-400)] hover:text-[var(--red)] transition-colors">
+                  <Link href={link.href} className="block py-3 lg:py-1 text-sm text-[var(--gray-400)] hover:text-[var(--red)] transition-colors">
                     {link.name}
                   </Link>
                 </li>
@@ -119,10 +119,10 @@ export default function Footer() {
           {/* Resources & Certifications */}
           <div>
             <h3 className="text-sm font-bold uppercase tracking-wider text-white mb-6">Resources</h3>
-            <ul className="space-y-3 mb-8">
+            <ul className="space-y-1 lg:space-y-3 mb-8">
               {footerLinks.resources.map((link) => (
                 <li key={link.name}>
-                  <Link href={link.href} className="text-sm text-[var(--gray-400)] hover:text-[var(--red)] transition-colors">
+                  <Link href={link.href} className="block py-3 lg:py-1 text-sm text-[var(--gray-400)] hover:text-[var(--red)] transition-colors">
                     {link.name}
                   </Link>
                 </li>

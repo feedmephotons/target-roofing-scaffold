@@ -7,15 +7,22 @@ test.describe('Tier 3: Cross-Feature Combinations', () => {
     await page.goto('/');
     
     // 2. Click Repairs card link
-    const repairsLink = page.locator('a[href="/roofing-services#repairs"]').first();
+    const repairsLink = page.locator('main a[href="/roofing-services#repairs"]').first();
+    await repairsLink.scrollIntoViewIfNeeded();
     await expect(repairsLink).toBeVisible();
     await repairsLink.click();
     await page.waitForURL('**/roofing-services#repairs');
 
     // 3. Navigate to contact page from nav/CTA
-    const contactNav = page.locator('nav a[href="/contact"]').first();
-    await expect(contactNav).toBeVisible();
-    await contactNav.click();
+    const isMobile = (page.viewportSize()?.width ?? 1280) < 1024;
+    if (isMobile) {
+      await page.locator('button.lg\\:hidden').click();
+      await page.locator('nav.bg-white div.lg\\:hidden a[href="/contact"]').first().click();
+    } else {
+      const contactNav = page.locator('nav a[href="/contact"]').first();
+      await expect(contactNav).toBeVisible();
+      await contactNav.click();
+    }
     await page.waitForURL('**/contact');
 
     // 4. Submit contact form
@@ -68,7 +75,7 @@ test.describe('Tier 3: Cross-Feature Combinations', () => {
     await expect(page.locator('text=Back to News')).toBeVisible();
 
     // 3. Find and click "Request a Free Estimate" CTA at the bottom of the article
-    const estimateCta = page.locator('a[href="/contact"]').first();
+    const estimateCta = page.locator('text=Request a Free Estimate').first();
     await expect(estimateCta).toBeVisible();
     await estimateCta.click();
 
@@ -110,9 +117,15 @@ test.describe('Tier 3: Cross-Feature Combinations', () => {
     await page.goto('/softwash');
     
     // 2. Click navigation link to roofing services
-    const headerServicesLink = page.locator('nav a[href="/roofing-services"]').first();
-    await expect(headerServicesLink).toBeVisible();
-    await headerServicesLink.click();
+    const isMobile = (page.viewportSize()?.width ?? 1280) < 1024;
+    if (isMobile) {
+      await page.locator('button.lg\\:hidden').click();
+      await page.locator('nav.bg-white div.lg\\:hidden a[href="/roofing-services"]').first().click();
+    } else {
+      const headerServicesLink = page.locator('nav a[href="/roofing-services"]').first();
+      await expect(headerServicesLink).toBeVisible();
+      await headerServicesLink.click();
+    }
     
     // 3. Verify we are on roofing services page
     await page.waitForURL('**/roofing-services');

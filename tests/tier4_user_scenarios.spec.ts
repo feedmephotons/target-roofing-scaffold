@@ -11,8 +11,14 @@ test.describe('Tier 4: Real-world User Scenario Flows', () => {
     await expect(headerPhone).toBeVisible();
 
     // 3. User clicks on "Contact" in the header
-    const contactNav = page.locator('nav a[href="/contact"]').first();
-    await contactNav.click();
+    const isMobile = (page.viewportSize()?.width ?? 1280) < 1024;
+    if (isMobile) {
+      await page.locator('button.lg\\:hidden').click();
+      await page.locator('nav.bg-white div.lg\\:hidden a[href="/contact"]').first().click();
+    } else {
+      const contactNav = page.locator('nav a[href="/contact"]').first();
+      await contactNav.click();
+    }
     await page.waitForURL('**/contact');
 
     // 4. User fills out the form specifically requesting urgent roof repairs
@@ -109,9 +115,17 @@ test.describe('Tier 4: Real-world User Scenario Flows', () => {
     await expect(page.locator('text=Current Openings').first()).toBeVisible();
 
     // 3. Seeker clicks CTA to contact HR or apply
-    const applyCta = page.locator('a[href="/contact"]').first();
-    await expect(applyCta).toBeVisible();
-    await applyCta.click();
+    const isMobile = (page.viewportSize()?.width ?? 1280) < 1024;
+    if (isMobile) {
+      await page.locator('button.lg\\:hidden').click();
+      const applyCta = page.locator('nav.bg-white div.lg\\:hidden a[href="/contact"]').first();
+      await expect(applyCta).toBeVisible();
+      await applyCta.click();
+    } else {
+      const applyCta = page.locator('a[href="/contact"]').first();
+      await expect(applyCta).toBeVisible();
+      await applyCta.click();
+    }
 
     // 4. Arrives on contact page and fills information
     await page.waitForURL('**/contact');

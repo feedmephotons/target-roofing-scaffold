@@ -89,12 +89,13 @@ export default function SoftwashContactForm() {
             name="firstName"
             value={formData.firstName}
             onChange={handleChange}
-            className={`w-full rounded border px-4 py-3 text-[var(--black)] focus:outline-none focus:ring-2 transition-colors ${
+            className={`w-full rounded border px-4 py-3 text-base text-[var(--black)] focus:outline-none focus:ring-2 transition-colors ${
               errors.firstName
                 ? 'border-red-500 focus:ring-red-200 focus:border-red-500'
                 : 'border-[var(--gray-300)] focus:border-[var(--red)] focus:ring-[var(--red)]/20'
             }`}
             placeholder="John"
+            autoComplete="given-name"
           />
           {errors.firstName && (
             <p className="mt-1 text-xs font-semibold text-red-600">
@@ -115,12 +116,13 @@ export default function SoftwashContactForm() {
             name="lastName"
             value={formData.lastName}
             onChange={handleChange}
-            className={`w-full rounded border px-4 py-3 text-[var(--black)] focus:outline-none focus:ring-2 transition-colors ${
+            className={`w-full rounded border px-4 py-3 text-base text-[var(--black)] focus:outline-none focus:ring-2 transition-colors ${
               errors.lastName
                 ? 'border-red-500 focus:ring-red-200 focus:border-red-500'
                 : 'border-[var(--gray-300)] focus:border-[var(--red)] focus:ring-[var(--red)]/20'
             }`}
             placeholder="Doe"
+            autoComplete="family-name"
           />
           {errors.lastName && (
             <p className="mt-1 text-xs font-semibold text-red-600">
@@ -144,12 +146,13 @@ export default function SoftwashContactForm() {
             name="phone"
             value={formData.phone}
             onChange={handleChange}
-            className={`w-full rounded border px-4 py-3 text-[var(--black)] focus:outline-none focus:ring-2 transition-colors ${
+            className={`w-full rounded border px-4 py-3 text-base text-[var(--black)] focus:outline-none focus:ring-2 transition-colors ${
               errors.phone
                 ? 'border-red-500 focus:ring-red-200 focus:border-red-500'
                 : 'border-[var(--gray-300)] focus:border-[var(--red)] focus:ring-[var(--red)]/20'
             }`}
             placeholder="(239) 555-0123"
+            autoComplete="tel"
           />
           {errors.phone && (
             <p className="mt-1 text-xs font-semibold text-red-600">
@@ -170,12 +173,13 @@ export default function SoftwashContactForm() {
             name="email"
             value={formData.email}
             onChange={handleChange}
-            className={`w-full rounded border px-4 py-3 text-[var(--black)] focus:outline-none focus:ring-2 transition-colors ${
+            className={`w-full rounded border px-4 py-3 text-base text-[var(--black)] focus:outline-none focus:ring-2 transition-colors ${
               errors.email
                 ? 'border-red-500 focus:ring-red-200 focus:border-red-500'
                 : 'border-[var(--gray-300)] focus:border-[var(--red)] focus:ring-[var(--red)]/20'
             }`}
             placeholder="john@example.com"
+            autoComplete="email"
           />
           {errors.email && (
             <p className="mt-1 text-xs font-semibold text-red-600">
@@ -198,12 +202,13 @@ export default function SoftwashContactForm() {
           name="serviceAddress"
           value={formData.serviceAddress}
           onChange={handleChange}
-          className={`w-full rounded border px-4 py-3 text-[var(--black)] focus:outline-none focus:ring-2 transition-colors ${
+          className={`w-full rounded border px-4 py-3 text-base text-[var(--black)] focus:outline-none focus:ring-2 transition-colors ${
             errors.serviceAddress
               ? 'border-red-500 focus:ring-red-200 focus:border-red-500'
               : 'border-[var(--gray-300)] focus:border-[var(--red)] focus:ring-[var(--red)]/20'
           }`}
           placeholder="123 Main St, Fort Myers, FL"
+          autoComplete="street-address"
         />
         {errors.serviceAddress && (
           <p className="mt-1 text-xs font-semibold text-red-600">

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import { Mail } from 'lucide-react'
 
 export const metadata: Metadata = {
@@ -123,9 +124,11 @@ export default function OurTeamPage() {
                 <div className="p-8 text-center">
                   {/* Headshot Image */}
                   <div className="mx-auto mb-6 relative h-28 w-28 overflow-hidden rounded-full border-4 border-white shadow-lg transition-all duration-300 group-hover:scale-105 group-hover:border-[var(--red)]">
-                    <img
+                    <Image
                       src={member.image}
                       alt={member.name}
+                      width={112}
+                      height={112}
                       className="h-full w-full object-cover"
                     />
                   </div>

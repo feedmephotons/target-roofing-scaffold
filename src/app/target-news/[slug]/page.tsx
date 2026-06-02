@@ -164,6 +164,7 @@ export default async function BlogPostDetailPage({ params }: PageProps) {
                     alt={post.title}
                     fill
                     priority
+                    sizes="(max-width: 1024px) 100vw, 896px"
                     className="object-cover"
                   />
                 </div>
@@ -172,9 +173,38 @@ export default async function BlogPostDetailPage({ params }: PageProps) {
               {/* Blog body / Fallsback dynamically */}
               {post.content ? (
                 // Full Blog Layout
-                <article className="blog-body-content text-lg leading-relaxed text-[var(--gray-700)] font-[family-name:var(--font-body)]">
-                  <div dangerouslySetInnerHTML={{ __html: post.content }} />
-                </article>
+                <div className="space-y-12">
+                  <article className="blog-body-content text-lg leading-relaxed text-[var(--gray-700)] font-[family-name:var(--font-body)]">
+                    <div dangerouslySetInnerHTML={{ __html: post.content }} />
+                  </article>
+                  
+                  {/* CTA Block */}
+                  <div className="border border-[var(--gray-200)] rounded-lg p-8 text-center bg-[var(--gray-50)] mt-12">
+                    <h3 className="text-2xl font-bold text-[var(--black)] font-[family-name:var(--font-display)] uppercase mb-4">
+                      Need Professional Roofing Services?
+                    </h3>
+                    <p className="text-[var(--gray-600)] max-w-xl mx-auto mb-8">
+                      We offer free, high-resolution photo-documented inspections and estimate services 
+                      for commercial, industrial, and HOA properties in Southwest Florida.
+                    </p>
+                    <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
+                      <Link
+                        href="/contact"
+                        className="inline-flex items-center gap-2 px-8 py-4 bg-[var(--red)] text-white text-sm font-bold uppercase tracking-wider rounded hover:bg-[var(--red-dark)] transition-colors shadow-md hover:shadow-lg font-[family-name:var(--font-display)]"
+                      >
+                        Request a Free Estimate
+                        <ChevronRight className="w-4 h-4" />
+                      </Link>
+                      <a
+                        href="tel:239-332-5707"
+                        className="inline-flex items-center gap-2 px-8 py-4 border-2 border-[var(--black)] text-[var(--black)] text-sm font-bold uppercase tracking-wider rounded hover:bg-[var(--black)] hover:text-white transition-colors font-[family-name:var(--font-display)]"
+                      >
+                        <Phone className="w-4 h-4" />
+                        239-332-5707
+                      </a>
+                    </div>
+                  </div>
+                </div>
               ) : (
                 // Fallback Archive Layout
                 <div className="space-y-8 font-[family-name:var(--font-body)]">

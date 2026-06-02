@@ -134,7 +134,7 @@ export default function Header() {
             {/* Mobile menu button */}
             <button
               type="button"
-              className="lg:hidden p-2 text-[var(--black)]"
+              className="lg:hidden p-3 text-[var(--black)]"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
               {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -143,45 +143,43 @@ export default function Header() {
         </div>
 
         {/* Mobile menu */}
-        {mobileMenuOpen && (
-          <div className="lg:hidden bg-white border-t overflow-y-auto max-h-[calc(100vh-120px)]">
-            <div className="px-4 py-4 space-y-1">
-              {navigation.map((item) => (
-                <div key={item.name}>
-                  <Link
-                    href={item.href}
-                    className="block px-4 py-3 text-sm font-semibold uppercase text-[var(--black)] hover:text-[var(--red)] hover:bg-[var(--gray-50)] rounded transition-colors"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    {item.name}
-                  </Link>
-                  {item.children && (
-                    <div className="pl-6 space-y-1">
-                      {item.children.map((child) => (
-                        <Link
-                          key={child.name}
-                          href={child.href}
-                          className="block px-4 py-2 text-sm text-[var(--gray-600)] hover:text-[var(--red)] transition-colors"
-                          onClick={() => setMobileMenuOpen(false)}
-                        >
-                          {child.name}
-                        </Link>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              ))}
-              <Link
-                href="/portal"
-                className="flex items-center justify-center gap-2 mx-4 mt-4 px-6 py-3 bg-[var(--red)] text-white text-sm font-bold uppercase rounded hover:bg-[var(--red-dark)] transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                <LogIn className="h-4 w-4" />
-                Customer Login
-              </Link>
-            </div>
+        <div className={`lg:hidden bg-white border-t transition-all duration-300 ease-in-out overflow-hidden mobile-menu-container ${mobileMenuOpen ? 'max-h-[calc(100vh-120px)] opacity-100' : 'max-h-0 opacity-0 pointer-events-none invisible'}`}>
+          <div className="px-4 py-4 space-y-1 overflow-y-auto max-h-[calc(100vh-120px)]">
+            {navigation.map((item) => (
+              <div key={item.name}>
+                <Link
+                  href={item.href}
+                  className="block px-4 py-3.5 text-sm font-semibold uppercase text-[var(--black)] hover:text-[var(--red)] hover:bg-[var(--gray-50)] rounded transition-colors"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {item.name}
+                </Link>
+                {item.children && (
+                  <div className="pl-6 space-y-1">
+                    {item.children.map((child) => (
+                      <Link
+                        key={child.name}
+                        href={child.href}
+                        className="block px-4 py-3 text-sm text-[var(--gray-600)] hover:text-[var(--red)] transition-colors"
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        {child.name}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+            <Link
+              href="/portal"
+              className="flex items-center justify-center gap-2 mx-4 mt-4 px-6 py-3.5 bg-[var(--red)] text-white text-sm font-bold uppercase rounded hover:bg-[var(--red-dark)] transition-colors"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              <LogIn className="h-4 w-4" />
+              Customer Login
+            </Link>
           </div>
-        )}
+        </div>
       </nav>
     </header>
   )
