@@ -75,11 +75,11 @@ export default function Footer() {
               </div>
               <div className="flex items-center gap-3">
                 <Phone className="h-5 w-5 text-[var(--red)] flex-shrink-0" />
-                <a href="tel:239-332-5707" className="hover:text-white transition-colors">239-332-5707</a>
+                <a href="tel:239-332-5707" className="hover:text-white transition-colors inline-block py-3 px-3">239-332-5707</a>
               </div>
               <div className="flex items-center gap-3">
                 <Mail className="h-5 w-5 text-[var(--red)] flex-shrink-0" />
-                <a href="mailto:projects@targetroofers.com" className="hover:text-white transition-colors">projects@targetroofers.com</a>
+                <a href="mailto:projects@targetroofers.com" className="hover:text-white transition-colors inline-block py-3 px-3">projects@targetroofers.com</a>
               </div>
               <div className="flex items-start gap-3">
                 <Clock className="h-5 w-5 text-[var(--red)] flex-shrink-0 mt-0.5" />

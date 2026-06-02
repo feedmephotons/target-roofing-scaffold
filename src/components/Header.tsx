@@ -51,14 +51,14 @@ export default function Header() {
       {/* Top bar */}
       <div className="bg-[var(--red)] text-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-10 text-sm">
+          <div className="flex items-center justify-between h-12 text-sm">
             <div className="flex items-center gap-6">
               <span className="hidden sm:inline">License #CCC1334168</span>
               <span className="hidden md:inline">Serving Sarasota, Tampa, Fort Myers, Naples</span>
             </div>
             <a
               href="tel:239-332-5707"
-              className="flex items-center gap-2 font-semibold hover:text-white/90 transition-colors"
+              className="flex items-center gap-2 font-semibold hover:text-white/90 transition-colors min-h-[48px] px-2"
             >
               <Phone className="h-3.5 w-3.5" />
               239-332-5707

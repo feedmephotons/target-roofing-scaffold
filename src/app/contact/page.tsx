@@ -444,7 +444,7 @@ export default function ContactPage() {
                       href="https://www.google.com/maps/dir/?api=1&destination=7011+Nalle+Grade+Rd+North+Fort+Myers+FL+33917"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="mt-2 inline-flex items-center text-xs font-bold uppercase tracking-wider text-[var(--red)] hover:text-[var(--red-dark)] transition-colors"
+                      className="mt-2 inline-flex items-center text-xs font-bold uppercase tracking-wider text-[var(--red)] hover:text-[var(--red-dark)] transition-colors min-h-[44px] px-2 py-1"
                     >
                       Get Directions &rarr;
                     </a>
@@ -464,7 +464,7 @@ export default function ContactPage() {
                     </h3>
                     <a
                       href="tel:239-332-5707"
-                      className="text-[var(--black)] font-medium text-base sm:text-lg hover:text-[var(--red)] transition-colors break-all"
+                      className="text-[var(--black)] font-medium text-base sm:text-lg hover:text-[var(--red)] transition-colors break-all inline-block py-3 px-2"
                     >
                       (239) 332-5707
                     </a>
@@ -484,7 +484,7 @@ export default function ContactPage() {
                     </h3>
                     <a
                       href="mailto:projects@targetroofers.com"
-                      className="text-[var(--black)] font-medium text-sm sm:text-base hover:text-[var(--red)] transition-colors break-all"
+                      className="text-[var(--black)] font-medium text-sm sm:text-base hover:text-[var(--red)] transition-colors break-all inline-block py-3 px-2"
                     >
                       projects@targetroofers.com
                     </a>
@@ -526,7 +526,7 @@ export default function ContactPage() {
                   </p>
                   <a
                     href="tel:239-332-5707"
-                    className="inline-flex items-center gap-1.5 xs:gap-2 sm:gap-3 text-lg xs:text-2xl md:text-3xl font-bold text-white hover:text-[var(--red-light)] transition-colors font-[family-name:var(--font-display)] break-all max-w-full"
+                    className="inline-flex items-center gap-1.5 xs:gap-2 sm:gap-3 text-lg xs:text-2xl md:text-3xl font-bold text-white hover:text-[var(--red-light)] transition-colors font-[family-name:var(--font-display)] break-all max-w-full min-h-[44px] py-1.5 px-2"
                   >
                     <Phone className="w-4 h-4 xs:w-7 xs:h-7 flex-shrink-0" />
                     239-332-5707

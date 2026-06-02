@@ -205,7 +205,7 @@ export default function RoofingServicesPage() {
                   <p className="font-bold text-[var(--black)] text-sm uppercase tracking-wide font-[family-name:var(--font-display)]">
                     24/7/365 Emergency Response
                   </p>
-                  <a href="tel:239-332-5707" className="text-[var(--red)] font-semibold hover:text-[var(--red-dark)] transition-colors">
+                  <a href="tel:239-332-5707" className="text-[var(--red)] font-semibold hover:text-[var(--red-dark)] transition-colors inline-block py-3 px-2">
                     239-332-5707
                   </a>
                 </div>
@@ -385,7 +385,7 @@ export default function RoofingServicesPage() {
               </p>
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 text-[var(--red)] font-semibold hover:text-[var(--red-dark)] transition-colors text-sm uppercase tracking-wider font-[family-name:var(--font-display)]"
+                className="inline-flex items-center gap-2 text-[var(--red)] font-semibold hover:text-[var(--red-dark)] transition-colors text-sm uppercase tracking-wider font-[family-name:var(--font-display)] min-h-[44px] py-2 px-3"
               >
                 Request a Quote
                 <ArrowRight className="h-4 w-4" />

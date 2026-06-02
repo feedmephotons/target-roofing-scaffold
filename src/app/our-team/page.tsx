@@ -149,7 +149,7 @@ export default function OurTeamPage() {
                   {/* Email */}
                   <a
                     href={`mailto:${member.email}`}
-                    className="inline-flex items-center gap-2 text-sm text-[var(--gray-600)] transition-colors duration-200 hover:text-[var(--red)]"
+                    className="inline-flex items-center gap-2 min-h-[44px] py-1 px-3 text-sm text-[var(--gray-600)] transition-colors duration-200 hover:text-[var(--red)]"
                   >
                     <Mail className="h-4 w-4" />
                     {member.email}

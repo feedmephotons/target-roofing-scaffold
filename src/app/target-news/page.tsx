@@ -147,7 +147,7 @@ export default function TargetNewsPage() {
                     </p>
                     <Link
                       href={`/target-news/${post.slug}`}
-                      className="inline-flex items-center gap-2 text-[var(--red)] text-sm font-bold uppercase tracking-wide hover:gap-3 transition-all duration-300 font-[family-name:var(--font-display)]"
+                      className="inline-flex items-center gap-2 text-[var(--red)] text-sm font-bold uppercase tracking-wide hover:gap-3 transition-all duration-300 font-[family-name:var(--font-display)] min-h-[44px] py-2 px-3"
                     >
                       Read More
                       <ArrowRight className="w-4 h-4" />

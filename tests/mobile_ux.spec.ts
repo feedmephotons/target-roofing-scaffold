@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import fs from 'fs';
 
 const PAGES = [
   '/',
@@ -105,6 +106,7 @@ test.describe('Mobile UX & Responsiveness Validation', () => {
   test('Buttons and anchors should meet WCAG touch target guidelines (min 44x44px)', async ({ page }) => {
     await page.goto('/', { waitUntil: 'domcontentloaded' });
     await page.waitForLoadState('domcontentloaded');
+    await page.waitForTimeout(2000);
     
     const smallTargets = await page.evaluate(() => {
       const elements = Array.from(document.querySelectorAll('button, a'));
@@ -122,6 +124,7 @@ test.describe('Mobile UX & Responsiveness Validation', () => {
     });
 
     // Log warnings for small elements instead of hard failing immediately
+    fs.writeFileSync('small_targets.json', JSON.stringify(smallTargets, null, 2));
     if (smallTargets.length > 0) {
       console.warn(`Found ${smallTargets.length} small touch targets:`, smallTargets);
     }
