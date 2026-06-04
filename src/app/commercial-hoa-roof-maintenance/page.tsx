@@ -415,32 +415,32 @@ export default function MaintenancePage() {
       </div>
 
       {/* ==================== FINAL CTA ==================== */}
-      <section className="bg-white py-20 md:py-28">
+      <section className="bg-[var(--red)] text-white py-20 md:py-28">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-[var(--black)] font-[family-name:var(--font-display)] uppercase mb-6">
+          <h2 className="text-3xl md:text-4xl font-bold text-white font-[family-name:var(--font-display)] uppercase mb-6">
             Get Started with TotalCoverage&trade;
           </h2>
-          <p className="text-lg text-[var(--gray-600)] leading-relaxed mb-10 max-w-2xl mx-auto">
+          <p className="text-lg text-white/85 leading-relaxed mb-10 max-w-2xl mx-auto">
             Protect your roof investment with a proactive maintenance plan tailored to your property.
             Contact us today for a free consultation.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center gap-2 px-10 py-4 bg-[var(--red)] text-white font-bold uppercase tracking-wide rounded hover:bg-[var(--red-dark)] transition-colors shadow-lg text-sm"
+              className="inline-flex items-center justify-center gap-2 px-10 py-4 bg-white text-[var(--black)] font-bold uppercase tracking-wide rounded hover:bg-white/90 transition-colors shadow-lg text-sm"
             >
               Contact Us Today
               <ArrowRight className="h-4 w-4" />
             </Link>
             <a
               href="tel:239-332-5707"
-              className="inline-flex items-center justify-center gap-2 px-10 py-4 border-2 border-[var(--black)] text-[var(--black)] font-bold uppercase tracking-wide rounded hover:bg-[var(--black)] hover:text-white transition-colors text-sm"
+              className="inline-flex items-center justify-center gap-2 px-10 py-4 border-2 border-white text-white font-bold uppercase tracking-wide rounded hover:bg-white/10 transition-colors text-sm"
             >
               <Phone className="h-4 w-4" />
               239-332-5707
             </a>
           </div>
-          <p className="mt-8 text-sm text-[var(--gray-500)]">
+          <p className="mt-8 text-sm text-white/60">
             Florida License: CCC1334168
           </p>
         </div>

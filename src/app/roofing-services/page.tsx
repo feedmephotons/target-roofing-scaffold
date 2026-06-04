@@ -410,7 +410,7 @@ export default function RoofingServicesPage() {
       </section>
 
       {/* ==================== INLINE LEAD CAPTURE FORM ==================== */}
-      <section id="lead-form" className="bg-blueprint-dark text-white py-20 md:py-28 scroll-mt-24 relative">
+      <section id="lead-form" className="bg-[var(--red)] text-white py-20 md:py-28 scroll-mt-24 relative">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <InlineLeadForm
             defaultService="repairs"

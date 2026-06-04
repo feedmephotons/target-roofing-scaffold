@@ -349,7 +349,7 @@ function ServicesSection() {
 function RepairFormSection() {
   const { ref, inView } = useInView()
   return (
-    <section ref={ref} id="repair-form" className={`bg-[var(--gray-50)] py-20 border-t border-b border-[var(--gray-200)] scroll-mt-24 transition-all duration-750 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+    <section ref={ref} id="repair-form" className={`bg-[var(--red)] py-20 scroll-mt-24 transition-all duration-750 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch">
           {/* Left Column: Form */}
@@ -360,15 +360,16 @@ function RepairFormSection() {
               subtitle="Timely repairs extend roof life. Describe your leak or damage, and our certified crew in red polos will perform a comprehensive survey and provide an itemized estimate."
               buttonText="Schedule Inspection Survey"
               formId="repair"
+              darkTheme={true}
             />
           </div>
           {/* Right Column: Visual Infographic */}
-          <div className="hidden lg:block lg:col-span-5 relative w-full h-full min-h-[400px]">
+          <div className="hidden lg:block lg:col-span-5 relative w-full h-full min-h-[400px] rounded-lg bg-white/10 backdrop-blur-sm p-4 border border-white/10">
             <Image
               src="/images/roof_survey_infographic_v3.png"
               alt="Target Roofing 10-Point Survey & Inspection Checklist Diagram"
               fill
-              className="object-contain mix-blend-multiply"
+              className="object-contain mix-blend-multiply opacity-90 p-4"
               priority
               sizes="(max-width: 1024px) 100vw, 42vw"
             />
