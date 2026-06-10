@@ -225,3 +225,127 @@ export async function submitPortalLogin(formData: {
   })
 }
 
+export async function getLeads(): Promise<LeadRecord[]> {
+  try {
+    const workspaceRoot = findWorkspaceRoot()
+    const filePath = path.join(workspaceRoot, 'leads.json')
+    try {
+      await fs.promises.access(filePath, fs.constants.F_OK)
+      const fileContent = await fs.promises.readFile(filePath, 'utf8')
+      if (fileContent.trim()) {
+        return JSON.parse(fileContent)
+      }
+    } catch {
+      return []
+    }
+  } catch (error) {
+    console.error('Error fetching leads:', error)
+  }
+  return []
+}
+
+export async function updateLeadStatus(
+  id: string,
+  status: 'new' | 'processed' | 'spam'
+): Promise<{ success: boolean; error?: string }> {
+  try {
+    const workspaceRoot = findWorkspaceRoot()
+    const filePath = path.join(workspaceRoot, 'leads.json')
+    await fs.promises.access(filePath, fs.constants.F_OK)
+    const fileContent = await fs.promises.readFile(filePath, 'utf8')
+    let leads: LeadRecord[] = []
+    if (fileContent.trim()) {
+      leads = JSON.parse(fileContent)
+    }
+
+    const idx = leads.findIndex((l) => l.id === id)
+    if (idx !== -1) {
+      leads[idx].status = status
+      await fs.promises.writeFile(filePath, JSON.stringify(leads, null, 2), 'utf8')
+      return { success: true }
+    }
+    return { success: false, error: 'Lead not found.' }
+  } catch (error) {
+    console.error('Error updating lead status:', error)
+    return { success: false, error: 'Failed to update lead status.' }
+  }
+}
+
+export async function addReview(reviewData: {
+  name: string
+  source: string
+  text: string
+  date?: string
+}) {
+  try {
+    const workspaceRoot = findWorkspaceRoot()
+    const filePath = path.join(workspaceRoot, 'site/src/data/reviews.json')
+    let reviews = []
+    try {
+      const fileContent = await fs.promises.readFile(filePath, 'utf8')
+      reviews = JSON.parse(fileContent)
+    } catch {
+      reviews = []
+    }
+
+    const newReview = {
+      name: reviewData.name,
+      date: reviewData.date || new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long' }),
+      source: reviewData.source || 'Google',
+      text: reviewData.text,
+    }
+
+    reviews.unshift(newReview)
+    await fs.promises.writeFile(filePath, JSON.stringify(reviews, null, 2), 'utf8')
+    return { success: true }
+  } catch (error) {
+    console.error('Error adding review:', error)
+    return { success: false, error: 'Failed to save review.' }
+  }
+}
+
+export async function getSeoConfig() {
+  try {
+    const workspaceRoot = findWorkspaceRoot()
+    const filePath = path.join(workspaceRoot, 'site/src/data/seo-config.json')
+    try {
+      const fileContent = await fs.promises.readFile(filePath, 'utf8')
+      return JSON.parse(fileContent)
+    } catch {
+      // Default initial config
+      const defaultConfig = {
+        home: { title: "Target Roofing | Roof Repair SWFL", description: "Target Roofing specializes in commercial roof repairs and proactive maintenance plans across Southwest Florida.", keywords: "roof repair, fort myers roofer, commercial roof maintenance" },
+        services: { title: "Our Roofing Services | Target Roofing", description: "Extend your roof's service life with expert repairs, maintenance, and seamless replacement transitions.", keywords: "roof repairs, roof maintenance, commercial reroofing" },
+        about: { title: "About Target Roofing | SWFL Roofer", description: "Learn about Target Roofing's team, direct-employee values, and process in Fort Myers, Naples, and Sarasota.", keywords: "about target roofing, roofing team, florida roofing contractor" },
+        softwash: { title: "Target Softwash | Exterior Roof Cleaning", description: "Gentle, damage-free low-pressure softwash cleaning to extend roof life and restore curb appeal.", keywords: "softwash roof cleaning, florida roof wash, tile roof cleaning" }
+      }
+      await fs.promises.writeFile(filePath, JSON.stringify(defaultConfig, null, 2), 'utf8')
+      return defaultConfig
+    }
+  } catch (error) {
+    console.error('Error getting SEO config:', error)
+    return {}
+  }
+}
+
+export async function updateSeoConfig(route: string, data: { title: string; description: string; keywords: string }) {
+  try {
+    const workspaceRoot = findWorkspaceRoot()
+    const filePath = path.join(workspaceRoot, 'site/src/data/seo-config.json')
+    let config: Record<string, any> = {}
+    try {
+      const fileContent = await fs.promises.readFile(filePath, 'utf8')
+      config = JSON.parse(fileContent)
+    } catch {
+      config = {}
+    }
+    config[route] = data
+    await fs.promises.writeFile(filePath, JSON.stringify(config, null, 2), 'utf8')
+    return { success: true }
+  } catch (error) {
+    console.error('Error updating SEO config:', error)
+    return { success: false, error: 'Failed to save SEO config.' }
+  }
+}
+
+

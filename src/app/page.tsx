@@ -168,24 +168,18 @@ function HeroSection() {
             </div>
           </div>
 
-          {/* Right Crew Image Column */}
+          {/* Right Column: Lead Capture Form */}
           <div 
-            className="animate-fade-in-up hidden lg:block lg:col-span-5 relative h-[480px] w-full rounded-lg overflow-hidden border-4 border-white/10 shadow-2xl"
+            className="animate-fade-in-up col-span-12 lg:col-span-5 w-full relative z-10"
             style={{ animationDelay: '0.45s' }}
           >
-            <Image
-              src="/images/crew/crew_repair_action.png"
-              alt="Target Roofing technicians in red polos performing expert commercial roof repair"
-              fill
-              className="object-cover"
-              priority
+            <InlineLeadForm
+              defaultService="repairs"
+              darkTheme={true}
+              title="Get a Roof Repair Survey"
+              subtitle="SWFL's local, reliable roofing experts. 24-hour response."
+              buttonText="Schedule Inspection Survey"
             />
-            {/* Soft dark bottom overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
-            <div className="absolute bottom-4 left-4 right-4 text-white">
-              <p className="text-sm font-bold uppercase tracking-wider font-[family-name:var(--font-display)]">Our Professional Crew</p>
-              <p className="text-xs text-white/80 font-light">Equipped, trained, and direct employees — never subcontractors.</p>
-            </div>
           </div>
         </div>
       </div>

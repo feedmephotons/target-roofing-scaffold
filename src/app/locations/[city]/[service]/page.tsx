@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
-import { Star, Quote, CheckCircle, Wrench, RotateCcw, Building2 } from 'lucide-react'
+import { Star, Quote, CheckCircle, Wrench, RotateCcw, Building2, ShieldCheck, Users, Clock, HardHat } from 'lucide-react'
 import InlineLeadForm from '@/components/InlineLeadForm'
 import reviewsData from '@/data/reviews.json'
 import projectsData from '@/data/projects.json'
@@ -311,16 +311,33 @@ export default async function LocationPage({ params }: PageProps) {
               </div>
             </div>
 
-            {/* Right Column: Crew Image */}
-            <div className="lg:col-span-5 relative h-[380px] w-full rounded-lg overflow-hidden border border-[var(--gray-200)] shadow-lg">
-              <Image
-                src="/images/crew/crew_working_on_roof.png"
-                alt="Target Roofing technicians in red polos working on a roof in Florida"
-                fill
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 40vw"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
+            {/* Right Column: SWFL Standards Card */}
+            <div className="lg:col-span-5 relative overflow-hidden bg-white border border-[var(--gray-200)] shadow-lg rounded-lg p-8 flex flex-col justify-between">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--red)]/5 rounded-full opacity-50 blur-2xl pointer-events-none" />
+              <div>
+                <h3 className="text-lg font-bold uppercase tracking-wider font-[family-name:var(--font-display)] text-[var(--black)] mb-6 border-b border-[var(--gray-100)] pb-3">
+                  Local Trust &amp; Quality
+                </h3>
+                <ul className="space-y-4">
+                  {[
+                    { title: "Florida Building Code", desc: "All projects strictly adhere to local county regulations and FBC compliance." },
+                    { title: "High-Velocity Hurricane Zone", desc: "Materials and fastings rated for wind resistance up to 160+ MPH." },
+                    { title: "Licensed & State Certified", desc: "Registered under license CCC1334168. Fully bonded and insured." },
+                    { title: "GAF Master Silver Star", desc: "Certified installers eligible for premium manufacturer warranties." }
+                  ].map((item, idx) => (
+                    <li key={idx} className="flex items-start gap-3">
+                      <CheckCircle className="h-5 w-5 text-[var(--red)] flex-shrink-0 mt-0.5" />
+                      <div>
+                        <h4 className="font-semibold text-sm text-[var(--black)]">{item.title}</h4>
+                        <p className="text-xs text-[var(--gray-500)] mt-0.5 leading-relaxed">{item.desc}</p>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="mt-8 pt-4 border-t border-[var(--gray-100)] text-center text-xs text-[var(--gray-400)] font-semibold uppercase tracking-wider">
+                Target Roofing Trust Guarantee
+              </div>
             </div>
           </div>
         </div>
@@ -330,16 +347,25 @@ export default async function LocationPage({ params }: PageProps) {
       <section className="bg-[var(--gray-50)] py-16 md:py-24 border-y border-[var(--gray-200)]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-12 gap-12 items-center">
-            {/* Left Column: Image */}
-            <div className="lg:col-span-5 order-2 lg:order-1 relative h-[380px] w-full rounded-lg overflow-hidden border border-[var(--gray-200)] shadow-lg">
-              <Image
-                src="/images/crew/crew_repair_action.png"
-                alt="Target Roofing technicians in red polos performing roof repairs"
-                fill
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 40vw"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
+            {/* Left Column: Strengths Grid */}
+            <div className="lg:col-span-5 order-2 lg:order-1 grid grid-cols-2 gap-4">
+              {[
+                { icon: ShieldCheck, title: "100% Insured", desc: "Full liability & worker's comp coverage." },
+                { icon: HardHat, title: "Certified Crew", desc: "Highly-trained professional employees." },
+                { icon: Clock, title: "24/7 Dispatch", desc: "Emergency service whenever you need it." },
+                { icon: Wrench, title: "Expert Tools", desc: "State-of-the-art diagnostic equipment." }
+              ].map((item, idx) => {
+                const Icon = item.icon
+                return (
+                  <div key={idx} className="bg-white p-5 rounded-lg border border-[var(--gray-200)] hover:border-[var(--red)] transition-colors shadow-sm flex flex-col justify-between">
+                    <Icon className="h-8 w-8 text-[var(--red)] mb-4" />
+                    <div>
+                      <h4 className="font-bold text-sm text-[var(--black)] font-[family-name:var(--font-display)] uppercase tracking-wide">{item.title}</h4>
+                      <p className="text-[11px] text-[var(--gray-500)] mt-1 leading-relaxed">{item.desc}</p>
+                    </div>
+                  </div>
+                )
+              })}
             </div>
 
             {/* Right Column: Content */}
