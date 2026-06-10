@@ -179,6 +179,7 @@ function HeroSection() {
               title="Get a Roof Repair Survey"
               subtitle="SWFL's local, reliable roofing experts. 24-hour response."
               buttonText="Schedule Inspection Survey"
+              formId="hero"
             />
           </div>
         </div>
@@ -294,7 +295,7 @@ function RepairFormSection() {
   return (
     <section ref={ref} id="repair-form" className={`bg-[var(--gray-50)] py-20 border-t border-b border-[var(--gray-200)] scroll-mt-24 transition-all duration-750 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch">
           {/* Left Column: Form */}
           <div className="col-span-12 lg:col-span-7">
             <InlineLeadForm
@@ -302,10 +303,11 @@ function RepairFormSection() {
               title="Schedule Your Roof Repair Inspection"
               subtitle="Timely repairs extend roof life. Describe your leak or damage, and our certified crew in red polos will perform a comprehensive survey and provide an itemized estimate."
               buttonText="Schedule Inspection Survey"
+              formId="repair"
             />
           </div>
           {/* Right Column: Visual Infographic */}
-          <div className="hidden lg:block lg:col-span-5 relative h-[500px] w-full bg-white rounded-lg overflow-hidden border border-[var(--gray-200)] shadow-md">
+          <div className="hidden lg:block lg:col-span-5 relative h-full w-full bg-white rounded-lg overflow-hidden border border-[var(--gray-200)] shadow-md">
             <Image
               src="/images/roof_survey_infographic.png"
               alt="Target Roofing 10-Point Survey & Inspection Checklist Diagram"

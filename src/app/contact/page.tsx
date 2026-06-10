@@ -433,6 +433,14 @@ export default function ContactPage() {
                       <br />
                       North Fort Myers, Florida 33917
                     </p>
+                    <a
+                      href="https://www.google.com/maps/dir/?api=1&destination=7011+Nalle+Grade+Rd+North+Fort+Myers+FL+33917"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-2 inline-flex items-center text-xs font-bold uppercase tracking-wider text-[var(--red)] hover:text-[var(--red-dark)] transition-colors"
+                    >
+                      Get Directions &rarr;
+                    </a>
                   </div>
                 </div>
               </div>

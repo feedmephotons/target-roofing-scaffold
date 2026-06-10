@@ -97,10 +97,10 @@ export default function ReviewsPage() {
               </span>
             </div>
 
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[0.95] mb-6">
-              What Our{' '}
-              <span className="text-[var(--red)]">Customers</span>{' '}
-              Say
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[0.95] mb-6 uppercase font-[family-name:var(--font-display)]">
+              {"What Our "}
+              <span className="text-[var(--red)]">Customers</span>
+              {" Say"}
             </h1>
 
             <p className="text-lg md:text-xl text-[var(--gray-300)] leading-relaxed max-w-2xl">
