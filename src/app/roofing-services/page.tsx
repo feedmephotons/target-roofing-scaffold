@@ -80,7 +80,7 @@ export default function RoofingServicesPage() {
   return (
     <>
       {/* ==================== HERO ==================== */}
-      <section className="relative bg-[var(--black)] text-white noise-overlay">
+      <section className="relative bg-blueprint-dark text-white noise-overlay">
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-24 md:py-32">
           <div className="grid lg:grid-cols-12 gap-12 items-center">
             {/* Left Column: Text & CTAs */}
@@ -97,7 +97,7 @@ export default function RoofingServicesPage() {
               <div className="flex flex-col sm:flex-row gap-4">
                 <a
                   href="#lead-form"
-                  className="inline-flex items-center justify-center px-8 py-3.5 bg-[var(--red)] text-white font-bold uppercase tracking-wide rounded hover:bg-[var(--red-dark)] transition-colors shadow-lg text-sm"
+                  className="inline-flex items-center justify-center px-8 py-3.5 bg-brand-gradient hover-bg-brand-gradient text-white font-bold uppercase tracking-wide rounded transition-colors shadow-lg text-sm"
                 >
                   Schedule Repair
                 </a>
@@ -175,7 +175,7 @@ export default function RoofingServicesPage() {
       </section>
 
       {/* ==================== REPAIRS SECTION ==================== */}
-      <section id="repairs" className="bg-[var(--gray-50)] py-20 md:py-28 scroll-mt-32">
+      <section id="repairs" className="bg-blueprint-light py-20 md:py-28 scroll-mt-32 relative">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
             {/* Left side: Content */}
@@ -234,7 +234,7 @@ export default function RoofingServicesPage() {
                   <div>
                     <a
                       href="tel:239-332-5707"
-                      className="inline-flex items-center justify-center gap-3 w-full py-4 bg-[var(--red)] text-white hover:bg-[var(--red-dark)] font-bold uppercase tracking-wider rounded transition-colors text-lg font-[family-name:var(--font-display)] shadow-lg shadow-black/25"
+                      className="inline-flex items-center justify-center gap-3 w-full py-4 bg-brand-gradient hover-bg-brand-gradient text-white font-bold uppercase tracking-wider rounded transition-colors text-lg font-[family-name:var(--font-display)] shadow-lg shadow-black/25"
                     >
                       <Phone className="h-6 w-6 animate-bounce" />
                       Call 239-332-5707
@@ -319,7 +319,7 @@ export default function RoofingServicesPage() {
       </section>
 
       {/* ==================== REROOFING ==================== */}
-      <section id="reroofing" className="bg-[var(--gray-50)] py-20 md:py-28 scroll-mt-32">
+      <section id="reroofing" className="bg-blueprint-light py-20 md:py-28 scroll-mt-32 relative">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
             <div className="inline-flex items-center gap-2 mb-4 px-3 py-1.5 bg-[var(--red)]/10 rounded">
@@ -410,7 +410,7 @@ export default function RoofingServicesPage() {
       </section>
 
       {/* ==================== INLINE LEAD CAPTURE FORM ==================== */}
-      <section id="lead-form" className="bg-[var(--black)] text-white noise-overlay py-20 md:py-28 scroll-mt-24">
+      <section id="lead-form" className="bg-blueprint-dark text-white py-20 md:py-28 scroll-mt-24 relative">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <InlineLeadForm
             defaultService="repairs"

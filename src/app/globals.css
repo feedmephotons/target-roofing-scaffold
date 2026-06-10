@@ -133,3 +133,25 @@ html {
   width: 4px;
   background: var(--red);
 }
+
+/* Premium backgrounds & textures */
+.bg-blueprint-light {
+  background-image: linear-gradient(rgba(255, 255, 255, 0.94), rgba(255, 255, 255, 0.94)), url("/images/backgrounds/blueprint-light.png");
+  background-size: cover;
+  background-position: center;
+}
+
+.bg-blueprint-dark {
+  background-image: linear-gradient(rgba(26, 26, 26, 0.94), rgba(26, 26, 26, 0.94)), url("/images/backgrounds/blueprint-dark.png");
+  background-size: cover;
+  background-position: center;
+}
+
+.bg-brand-gradient {
+  background: linear-gradient(135deg, var(--red-light) 0%, var(--red) 100%) !important;
+}
+
+.hover-bg-brand-gradient:hover {
+  background: linear-gradient(135deg, var(--red) 0%, var(--red-dark) 100%) !important;
+}
+
