@@ -12,56 +12,67 @@ const teamMembers = [
     name: 'Casey Crowther',
     title: 'Culture Captain',
     email: 'casey@targetroofers.com',
+    image: '/images/team/casey-crowther.jpg',
   },
   {
     name: 'Patrick Davis',
     title: 'Service/Sales Manager',
     email: 'patrick@targetroofers.com',
+    image: '/images/team/patrick-davis.jpg',
   },
   {
     name: 'Erik Depaz',
     title: 'Service Coordinator',
     email: 'erik@targetroofers.com',
+    image: '/images/team/erik-depaz.jpg',
   },
   {
     name: 'Haylee VanZeyl',
     title: 'Marketing Manager',
     email: 'haylee@targetroofers.com',
+    image: '/images/team/haylee-vanzeyl.png',
   },
   {
     name: 'Brent Westerfield',
     title: 'Account Manager',
     email: 'brent@targetroofers.com',
+    image: '/images/team/brent-westerfield.jpg',
   },
   {
     name: 'Shanda Carpenter',
     title: 'Project Manager',
     email: 'shanda@targetroofers.com',
+    image: '/images/team/shanda-carpenter.jpg',
   },
   {
     name: 'Matt Oberski',
     title: 'Account Manager',
     email: 'matt@targetroofers.com',
+    image: '/images/team/matt-oberski.jpg',
   },
   {
     name: 'Arturo Reyes',
     title: 'Estimator',
     email: 'arturo@targetroofers.com',
+    image: '/images/team/arturo-reyes.jpg',
   },
   {
     name: 'Sarka Heatherington',
     title: 'Controller',
     email: 'sarka@targetroofers.com',
+    image: '/images/team/sarka-heatherington.jpg',
   },
   {
     name: 'Chayla Carlyle',
     title: 'Lead Intake',
     email: 'chayla@targetroofers.com',
+    image: '/images/team/chayla-carlyle.jpg',
   },
   {
     name: 'John Sherwood',
     title: 'Senior Surveyor',
     email: 'john@targetroofers.com',
+    image: '/images/team/john-sherwood.jpg',
   },
 ]
 
@@ -110,11 +121,13 @@ export default function OurTeamPage() {
                 <div className="h-1 w-full bg-[var(--red)] transition-all duration-300 group-hover:h-1.5" />
 
                 <div className="p-8 text-center">
-                  {/* Avatar with initials */}
-                  <div className="mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-full bg-[var(--black)] shadow-lg transition-all duration-300 group-hover:scale-105 group-hover:bg-[var(--red)]">
-                    <span className="font-[family-name:var(--font-display)] text-2xl font-bold tracking-wider text-white">
-                      {getInitials(member.name)}
-                    </span>
+                  {/* Headshot Image */}
+                  <div className="mx-auto mb-6 relative h-28 w-28 overflow-hidden rounded-full border-4 border-white shadow-lg transition-all duration-300 group-hover:scale-105 group-hover:border-[var(--red)]">
+                    <img
+                      src={member.image}
+                      alt={member.name}
+                      className="h-full w-full object-cover"
+                    />
                   </div>
 
                   {/* Name */}
