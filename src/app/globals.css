@@ -4,7 +4,7 @@
   --red: #B91C1C;
   --red-dark: #991B1B;
   --red-light: #DC2626;
-  --black: #1A1A1A;
+  --black: #0A0A0A;
   --black-pure: #000000;
   --white: #FFFFFF;
   --gray-50: #F9FAFB;
@@ -18,7 +18,7 @@
   --gray-800: #1F2937;
   --gray-900: #111827;
   --background: #ffffff;
-  --foreground: #1A1A1A;
+  --foreground: #0A0A0A;
 }
 
 @theme inline {
@@ -28,7 +28,7 @@
   --color-red-dark: var(--red-dark);
   --color-red-light: var(--red-light);
   --color-target-black: var(--black);
-  --font-display: var(--font-oswald);
+  --font-display: var(--font-poppins);
   --font-body: var(--font-source-sans);
 }
 
@@ -142,7 +142,7 @@ html {
 }
 
 .bg-blueprint-dark {
-  background-image: linear-gradient(rgba(26, 26, 26, 0.94), rgba(26, 26, 26, 0.94)), url("/images/backgrounds/blueprint-dark.png");
+  background-image: linear-gradient(rgba(10, 10, 10, 0.94), rgba(10, 10, 10, 0.94)), url("/images/backgrounds/blueprint-dark.png");
   background-size: cover;
   background-position: center;
 }

@@ -66,7 +66,7 @@ export default function Footer() {
               alt="Target Roofing"
               width={200}
               height={46}
-              className="h-10 w-auto mb-6 brightness-0 invert"
+              className="h-10 w-auto mb-6"
             />
             <div className="space-y-4 text-sm text-[var(--gray-400)]">
               <div className="flex items-start gap-3">
