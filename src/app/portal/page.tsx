@@ -104,11 +104,12 @@ function LoginForm() {
                       }
                     }}
                     placeholder="you@company.com"
-                    className={`w-full rounded-lg border bg-white py-3 pl-12 pr-4 text-[var(--black)] placeholder:text-[var(--gray-400)] focus:outline-none focus:ring-2 ${
+                    className={`w-full rounded-lg border bg-white py-3 pl-12 pr-4 text-base text-[var(--black)] placeholder:text-[var(--gray-400)] focus:outline-none focus:ring-2 ${
                       errors.email
                         ? 'border-red-500 focus:ring-red-200'
                         : 'border-[var(--gray-300)] focus:border-[var(--red)] focus:ring-[var(--red)]/20'
                     }`}
+                    autoComplete="username email"
                   />
                 </div>
                 {errors.email && (
@@ -143,11 +144,12 @@ function LoginForm() {
                       }
                     }}
                     placeholder="••••••••"
-                    className={`w-full rounded-lg border bg-white py-3 pl-12 pr-4 text-[var(--black)] placeholder:text-[var(--gray-400)] focus:outline-none focus:ring-2 ${
+                    className={`w-full rounded-lg border bg-white py-3 pl-12 pr-4 text-base text-[var(--black)] placeholder:text-[var(--gray-400)] focus:outline-none focus:ring-2 ${
                       errors.password
                         ? 'border-red-500 focus:ring-red-200'
                         : 'border-[var(--gray-300)] focus:border-[var(--red)] focus:ring-[var(--red)]/20'
                     }`}
+                    autoComplete="current-password"
                   />
                 </div>
                 {errors.password && (
@@ -345,7 +347,7 @@ function PortalDashboard({ onLogout }: { onLogout: () => void }) {
           </div>
           <button
             onClick={onLogout}
-            className="text-xs font-bold uppercase tracking-wider text-[var(--gray-500)] hover:text-[var(--red)] border border-[var(--gray-200)] px-4 py-2 rounded transition-all bg-white hover:border-[var(--red)]"
+            className="text-xs font-bold uppercase tracking-wider text-[var(--gray-500)] hover:text-[var(--red)] border border-[var(--gray-200)] px-4 py-3.5 rounded transition-all bg-white hover:border-[var(--red)]"
           >
             Sign Out
           </button>
@@ -388,7 +390,7 @@ function PortalDashboard({ onLogout }: { onLogout: () => void }) {
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`rounded-md px-6 py-2.5 text-xs font-bold uppercase tracking-wider transition-colors ${
+              className={`rounded-md px-6 py-3.5 text-xs font-bold uppercase tracking-wider transition-colors ${
                 activeTab === tab
                   ? 'bg-[var(--red)] text-white'
                   : 'text-[var(--gray-500)] hover:text-[var(--black)]'
@@ -446,7 +448,7 @@ function PortalDashboard({ onLogout }: { onLogout: () => void }) {
                     </div>
                     <button 
                       onClick={() => setSelectedProject(project)}
-                      className="flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-[var(--red)] hover:text-[var(--red-dark)] border border-[var(--red)] rounded-md px-4 py-2 hover:bg-[var(--red)]/5 transition-all"
+                      className="flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-[var(--red)] hover:text-[var(--red-dark)] border border-[var(--red)] rounded-md px-4 py-3.5 hover:bg-[var(--red)]/5 transition-all"
                     >
                       View Details
                     </button>
@@ -492,7 +494,7 @@ function PortalDashboard({ onLogout }: { onLogout: () => void }) {
                       </td>
                       <td className="px-6 py-4 text-right">
                         {inv.status === 'Paid' ? (
-                          <button className="text-xs font-bold uppercase tracking-wider text-[var(--gray-500)] hover:text-[var(--black)] border border-[var(--gray-200)] px-3 py-1.5 rounded transition-all bg-white">
+                          <button className="text-xs font-bold uppercase tracking-wider text-[var(--gray-500)] hover:text-[var(--black)] border border-[var(--gray-200)] px-3 py-3.5 rounded transition-all bg-white inline-flex items-center">
                             Download PDF
                           </button>
                         ) : (
@@ -505,7 +507,7 @@ function PortalDashboard({ onLogout }: { onLogout: () => void }) {
                               setCardExpiry('')
                               setCardCVV('')
                             }}
-                            className="text-xs font-bold uppercase tracking-wider text-white bg-[var(--red)] hover:bg-[var(--red-dark)] px-4 py-1.5 rounded transition-all shadow-sm hover:shadow"
+                            className="text-xs font-bold uppercase tracking-wider text-white bg-[var(--red)] hover:bg-[var(--red-dark)] px-4 py-3.5 rounded transition-all shadow-sm hover:shadow inline-flex items-center"
                           >
                             Pay Now
                           </button>
@@ -570,7 +572,7 @@ function PortalDashboard({ onLogout }: { onLogout: () => void }) {
                   value={typedMessage}
                   onChange={(e) => setTypedMessage(e.target.value)}
                   disabled={isTypingReply}
-                  className="flex-1 px-4 py-3 rounded-lg border border-[var(--gray-200)] bg-[var(--gray-50)] text-sm text-[var(--black)] placeholder-[var(--gray-400)] focus:outline-none focus:ring-2 focus:ring-[var(--red)] focus:bg-white transition-all disabled:opacity-50"
+                  className="flex-1 px-4 py-3 rounded-lg border border-[var(--gray-200)] bg-[var(--gray-50)] text-base text-[var(--black)] placeholder-[var(--gray-400)] focus:outline-none focus:ring-2 focus:ring-[var(--red)] focus:bg-white transition-all disabled:opacity-50"
                 />
                 <button
                   type="submit"
@@ -643,7 +645,7 @@ function PortalDashboard({ onLogout }: { onLogout: () => void }) {
               </div>
               <button 
                 onClick={() => setSelectedProject(null)}
-                className="text-white/80 hover:text-white bg-white/10 hover:bg-white/20 p-2 rounded-full text-xs font-bold"
+                className="text-white/80 hover:text-white bg-white/10 hover:bg-white/20 py-3.5 px-4 rounded-full text-xs font-bold"
               >
                 &times; Close
               </button>
@@ -758,7 +760,7 @@ function PortalDashboard({ onLogout }: { onLogout: () => void }) {
               </div>
               <button 
                 onClick={() => setSelectedInvoice(null)}
-                className="text-white/85 hover:text-white bg-white/10 hover:bg-white/20 px-3 py-1 rounded-full text-xs font-bold"
+                className="text-white/85 hover:text-white bg-white/10 hover:bg-white/20 py-3.5 px-4 rounded-full text-xs font-bold"
               >
                 &times; Close
               </button>
@@ -790,7 +792,8 @@ function PortalDashboard({ onLogout }: { onLogout: () => void }) {
                       placeholder="John Davis"
                       value={cardName}
                       onChange={(e) => setCardName(e.target.value)}
-                      className="w-full px-3.5 py-2.5 rounded border border-[var(--gray-300)] bg-white text-sm text-[var(--black)] focus:outline-none focus:ring-2 focus:ring-[var(--red)] focus:border-[var(--red)]"
+                      className="w-full px-3.5 py-2.5 rounded border border-[var(--gray-300)] bg-white text-base text-[var(--black)] focus:outline-none focus:ring-2 focus:ring-[var(--red)] focus:border-[var(--red)]"
+                      autoComplete="cc-name"
                     />
                   </div>
 
@@ -807,7 +810,8 @@ function PortalDashboard({ onLogout }: { onLogout: () => void }) {
                         const v = e.target.value.replace(/\D/g, '').replace(/(.{4})/g, '$1 ').trim();
                         setCardNumber(v);
                       }}
-                      className="w-full px-3.5 py-2.5 rounded border border-[var(--gray-300)] bg-white text-sm font-mono text-[var(--black)] focus:outline-none focus:ring-2 focus:ring-[var(--red)] focus:border-[var(--red)]"
+                      className="w-full px-3.5 py-2.5 rounded border border-[var(--gray-300)] bg-white text-base font-mono text-[var(--black)] focus:outline-none focus:ring-2 focus:ring-[var(--red)] focus:border-[var(--red)]"
+                      autoComplete="cc-number"
                     />
                   </div>
 
@@ -828,7 +832,8 @@ function PortalDashboard({ onLogout }: { onLogout: () => void }) {
                             setCardExpiry(v);
                           }
                         }}
-                        className="w-full px-3.5 py-2.5 rounded border border-[var(--gray-300)] bg-white text-sm font-mono text-[var(--black)] focus:outline-none focus:ring-2 focus:ring-[var(--red)] focus:border-[var(--red)]"
+                        className="w-full px-3.5 py-2.5 rounded border border-[var(--gray-300)] bg-white text-base font-mono text-[var(--black)] focus:outline-none focus:ring-2 focus:ring-[var(--red)] focus:border-[var(--red)]"
+                        autoComplete="cc-exp"
                       />
                     </div>
                     <div>
@@ -840,7 +845,8 @@ function PortalDashboard({ onLogout }: { onLogout: () => void }) {
                         placeholder="•••"
                         value={cardCVV}
                         onChange={(e) => setCardCVV(e.target.value.replace(/\D/g, ''))}
-                        className="w-full px-3.5 py-2.5 rounded border border-[var(--gray-300)] bg-white text-sm font-mono text-[var(--black)] focus:outline-none focus:ring-2 focus:ring-[var(--red)] focus:border-[var(--red)]"
+                        className="w-full px-3.5 py-2.5 rounded border border-[var(--gray-300)] bg-white text-base font-mono text-[var(--black)] focus:outline-none focus:ring-2 focus:ring-[var(--red)] focus:border-[var(--red)]"
+                        autoComplete="cc-csc"
                       />
                     </div>
                   </div>

@@ -9,8 +9,8 @@ test.describe('Tier 1: Feature Coverage', () => {
     });
 
     test('should display main navigation and header elements', async ({ page }) => {
-      // Check license number in top bar
-      await expect(page.locator('text=License #CCC1334168').first()).toBeVisible();
+      // Check license number in footer
+      await expect(page.locator('text=License #CCC1334168').last()).toBeVisible();
       // Check phone number link
       const phoneLink = page.locator('a[href="tel:239-332-5707"]').first();
       await expect(phoneLink).toBeVisible();
@@ -25,10 +25,10 @@ test.describe('Tier 1: Feature Coverage', () => {
       await expect(heroIframe).toBeAttached();
       
       // Verify primary CTAs
-      const portalCta = page.locator('a[href="/portal"]').first();
-      const processCta = page.locator('a[href="/our-process"]').first();
-      await expect(portalCta).toBeVisible();
-      await expect(processCta).toBeVisible();
+      const repairCta = page.locator('main a[href="#repair-form"]').first();
+      const surveyCta = page.locator('main a[href*="/contact?service=free-estimate"]').first();
+      await expect(repairCta).toBeVisible();
+      await expect(surveyCta).toBeVisible();
     });
 
     test('should display services overview cards with links', async ({ page }) => {
@@ -39,7 +39,8 @@ test.describe('Tier 1: Feature Coverage', () => {
         '/roofing-services#new-roofs',
       ];
       for (const href of serviceLinks) {
-        const link = page.locator(`a[href="${href}"]`).first();
+        const link = page.locator(`main a[href="${href}"]`).first();
+        await link.scrollIntoViewIfNeeded();
         await expect(link).toBeVisible();
       }
     });
@@ -57,7 +58,8 @@ test.describe('Tier 1: Feature Coverage', () => {
       const newsHeader = page.locator('text=News About Target Roofing');
       await expect(newsHeader).toBeVisible();
       
-      const blogCta = page.locator('a[href="/target-news"]').first();
+      const blogCta = page.locator('main a[href="/target-news"]').first();
+      await blogCta.scrollIntoViewIfNeeded();
       await expect(blogCta).toBeVisible();
     });
   });
@@ -98,8 +100,8 @@ test.describe('Tier 1: Feature Coverage', () => {
     test('Roofing Services: should display categories and repair/maintenance details', async ({ page }) => {
       await page.goto('/roofing-services');
       await expect(page.locator('h1')).toContainText("Extend Your Roof's Lifespan with Expert Repairs & Maintenance");
-      await expect(page.locator('text=Repairs').first()).toBeVisible();
-      await expect(page.locator('text=Maintenance Plans').first()).toBeVisible();
+      await expect(page.locator('main >> text=Repairs').first()).toBeVisible();
+      await expect(page.locator('main >> text=Maintenance Plans').first()).toBeVisible();
     });
 
     test('Softwash Page: should detail softwash process and contain estimate form', async ({ page }) => {

@@ -81,7 +81,8 @@ function AdminLogin({ onLogin }: { onLogin: () => void }) {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="super@targetroofing.com"
-              className="w-full px-4 py-3 rounded-lg border border-[var(--gray-300)] bg-white text-sm text-[var(--black)] focus:outline-none focus:ring-2 focus:ring-[var(--red)] focus:border-[var(--red)] transition-all"
+              className="w-full px-4 py-3 rounded-lg border border-[var(--gray-300)] bg-white text-base text-[var(--black)] focus:outline-none focus:ring-2 focus:ring-[var(--red)] focus:border-[var(--red)] transition-all"
+              autoComplete="username email"
             />
           </div>
 
@@ -95,7 +96,8 @@ function AdminLogin({ onLogin }: { onLogin: () => void }) {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="••••••••"
-              className="w-full px-4 py-3 rounded-lg border border-[var(--gray-300)] bg-white text-sm text-[var(--black)] focus:outline-none focus:ring-2 focus:ring-[var(--red)] focus:border-[var(--red)] transition-all"
+              className="w-full px-4 py-3 rounded-lg border border-[var(--gray-300)] bg-white text-base text-[var(--black)] focus:outline-none focus:ring-2 focus:ring-[var(--red)] focus:border-[var(--red)] transition-all"
+              autoComplete="current-password"
             />
           </div>
 
@@ -290,7 +292,7 @@ function AdminDashboard({ onLogout }: { onLogout: () => void }) {
             <span className="hidden md:inline text-xs text-[var(--gray-400)] font-medium">Logged in as: <span className="text-white font-bold">Superintendent</span></span>
             <button
               onClick={onLogout}
-              className="inline-flex items-center gap-1.5 px-4 py-2 border border-white/20 rounded hover:border-[var(--red)] hover:text-[var(--red-light)] transition-all text-xs font-bold uppercase bg-white/5"
+              className="inline-flex items-center gap-1.5 px-4 py-3.5 border border-white/20 rounded hover:border-[var(--red)] hover:text-[var(--red-light)] transition-all text-xs font-bold uppercase bg-white/5"
             >
               <LogOut className="h-4 w-4" />
               Log Out
@@ -311,8 +313,8 @@ function AdminDashboard({ onLogout }: { onLogout: () => void }) {
             return (
               <button
                 key={tab.id}
-                onClick={() => setActiveTab(tab.id as any)}
-                className={`flex items-center gap-2 rounded-lg px-6 py-3 text-xs font-bold uppercase tracking-wider transition-all ${
+                onClick={() => setActiveTab(tab.id as 'leads' | 'seo' | 'reviews')}
+                className={`flex items-center gap-2 rounded-lg px-6 py-3.5 text-xs font-bold uppercase tracking-wider transition-all ${
                   activeTab === tab.id
                     ? 'bg-[var(--red)] text-white shadow-md'
                     : 'text-[var(--gray-500)] hover:bg-[var(--gray-50)] hover:text-[var(--black)]'
@@ -351,7 +353,7 @@ function AdminDashboard({ onLogout }: { onLogout: () => void }) {
                   <button
                     key={status}
                     onClick={() => setLeadFilter(status)}
-                    className={`rounded-md px-4 py-2 text-xs font-semibold uppercase tracking-wider transition-colors ${
+                    className={`rounded-md px-4 py-3.5 text-xs font-semibold uppercase tracking-wider transition-colors ${
                       leadFilter === status
                         ? 'bg-[var(--black)] text-white font-bold'
                         : 'bg-[var(--gray-50)] text-[var(--gray-500)] border border-[var(--gray-200)] hover:text-[var(--black)]'
@@ -369,7 +371,7 @@ function AdminDashboard({ onLogout }: { onLogout: () => void }) {
                   placeholder="Search by name, email, city..."
                   value={leadSearch}
                   onChange={(e) => setLeadSearch(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2 rounded-lg border border-[var(--gray-300)] bg-white text-xs text-[var(--black)] focus:outline-none focus:ring-2 focus:ring-[var(--red)] transition-all placeholder-[var(--gray-400)] font-medium"
+                  className="w-full pl-10 pr-4 py-3 rounded-lg border border-[var(--gray-300)] bg-white text-base text-[var(--black)] focus:outline-none focus:ring-2 focus:ring-[var(--red)] transition-all placeholder-[var(--gray-400)] font-medium"
                 />
               </div>
             </div>
@@ -384,7 +386,7 @@ function AdminDashboard({ onLogout }: { onLogout: () => void }) {
                 <button 
                   onClick={fetchLeadsData}
                   disabled={loadingLeads}
-                  className="p-1 rounded text-[var(--gray-400)] hover:text-[var(--red)] transition-colors hover:bg-white border border-[var(--gray-200)]"
+                  className="p-2.5 px-3 rounded text-[var(--gray-400)] hover:text-[var(--red)] transition-colors hover:bg-white border border-[var(--gray-200)]"
                   title="Reload Leads"
                 >
                   <RefreshCw className={`h-4 w-4 ${loadingLeads ? 'animate-spin text-[var(--red)]' : ''}`} />
@@ -490,7 +492,7 @@ function AdminDashboard({ onLogout }: { onLogout: () => void }) {
                               {lead.status !== 'processed' && (
                                 <button
                                   onClick={() => handleUpdateStatus(lead.id, 'processed')}
-                                  className="text-[10px] font-bold uppercase tracking-wider text-green-700 hover:bg-green-50 border border-green-200 bg-white rounded px-2.5 py-1 transition-all"
+                                  className="text-[10px] font-bold uppercase tracking-wider text-green-700 hover:bg-green-50 border border-green-200 bg-white rounded px-2.5 py-3.5 min-h-[44px] inline-flex items-center transition-all"
                                   title="Mark as Processed"
                                 >
                                   Process
@@ -499,7 +501,7 @@ function AdminDashboard({ onLogout }: { onLogout: () => void }) {
                               {lead.status !== 'spam' && (
                                 <button
                                   onClick={() => handleUpdateStatus(lead.id, 'spam')}
-                                  className="text-[10px] font-bold uppercase tracking-wider text-amber-700 hover:bg-amber-50 border border-amber-200 bg-white rounded px-2.5 py-1 transition-all"
+                                  className="text-[10px] font-bold uppercase tracking-wider text-amber-700 hover:bg-amber-50 border border-amber-200 bg-white rounded px-2.5 py-3.5 min-h-[44px] inline-flex items-center transition-all"
                                   title="Flag as Spam"
                                 >
                                   Spam
@@ -508,7 +510,7 @@ function AdminDashboard({ onLogout }: { onLogout: () => void }) {
                               {lead.status !== 'new' && (
                                 <button
                                   onClick={() => handleUpdateStatus(lead.id, 'new')}
-                                  className="text-[10px] font-bold uppercase tracking-wider text-[var(--gray-600)] hover:bg-[var(--gray-50)] border border-[var(--gray-200)] bg-white rounded px-2.5 py-1 transition-all"
+                                  className="text-[10px] font-bold uppercase tracking-wider text-[var(--gray-600)] hover:bg-[var(--gray-50)] border border-[var(--gray-200)] bg-white rounded px-2.5 py-3.5 min-h-[44px] inline-flex items-center transition-all"
                                   title="Restore to New"
                                 >
                                   Reset
@@ -541,7 +543,7 @@ function AdminDashboard({ onLogout }: { onLogout: () => void }) {
                 <button
                   key={route.id}
                   onClick={() => setSelectedSeoRoute(route.id)}
-                  className={`w-full text-left rounded-lg p-3 border transition-all text-xs font-bold uppercase tracking-wider flex justify-between items-center ${
+                  className={`w-full text-left rounded-lg py-3.5 px-3 border transition-all text-xs font-bold uppercase tracking-wider flex justify-between items-center ${
                     selectedSeoRoute === route.id
                       ? 'border-[var(--red)] bg-[var(--red)]/5 text-[var(--red)]'
                       : 'border-[var(--gray-200)] hover:border-[var(--red)] bg-white text-[var(--gray-600)]'
@@ -584,7 +586,7 @@ function AdminDashboard({ onLogout }: { onLogout: () => void }) {
                       value={seoTitle}
                       onChange={(e) => setSeoTitle(e.target.value)}
                       placeholder="Target Roofing | Roof Repair SWFL"
-                      className="w-full px-4.5 py-3 rounded-lg border border-[var(--gray-300)] bg-white text-xs text-[var(--black)] focus:outline-none focus:ring-2 focus:ring-[var(--red)] transition-all font-medium"
+                      className="w-full px-4.5 py-3 rounded-lg border border-[var(--gray-300)] bg-white text-base text-[var(--black)] focus:outline-none focus:ring-2 focus:ring-[var(--red)] transition-all font-medium"
                     />
                     <p className="text-[10px] text-[var(--gray-400)] mt-1.5">Optimal length: 50-60 characters. Current: <span className="font-bold text-[var(--gray-600)]">{seoTitle.length}</span></p>
                   </div>
@@ -597,7 +599,7 @@ function AdminDashboard({ onLogout }: { onLogout: () => void }) {
                       value={seoDescription}
                       onChange={(e) => setSeoDescription(e.target.value)}
                       placeholder="Target Roofing specializes in commercial roof repairs..."
-                      className="w-full px-4.5 py-3 rounded-lg border border-[var(--gray-300)] bg-white text-xs text-[var(--black)] focus:outline-none focus:ring-2 focus:ring-[var(--red)] transition-all font-medium resize-none"
+                      className="w-full px-4.5 py-3 rounded-lg border border-[var(--gray-300)] bg-white text-base text-[var(--black)] focus:outline-none focus:ring-2 focus:ring-[var(--red)] transition-all font-medium resize-none"
                     />
                     <p className="text-[10px] text-[var(--gray-400)] mt-1.5">Optimal length: 150-160 characters. Current: <span className="font-bold text-[var(--gray-600)]">{seoDescription.length}</span></p>
                   </div>
@@ -610,13 +612,13 @@ function AdminDashboard({ onLogout }: { onLogout: () => void }) {
                       value={seoKeywords}
                       onChange={(e) => setSeoKeywords(e.target.value)}
                       placeholder="roof repair, roof replacement, fort myers"
-                      className="w-full px-4.5 py-3 rounded-lg border border-[var(--gray-300)] bg-white text-xs text-[var(--black)] focus:outline-none focus:ring-2 focus:ring-[var(--red)] transition-all font-medium"
+                      className="w-full px-4.5 py-3 rounded-lg border border-[var(--gray-300)] bg-white text-base text-[var(--black)] focus:outline-none focus:ring-2 focus:ring-[var(--red)] transition-all font-medium"
                     />
                   </div>
 
                   <button
                     type="submit"
-                    className="inline-flex items-center gap-2 px-6 py-3 bg-[var(--red)] hover:bg-[var(--red-dark)] text-white text-xs font-bold uppercase tracking-wider rounded transition-colors shadow-sm font-[family-name:var(--font-display)]"
+                    className="inline-flex items-center gap-2 px-6 py-3.5 bg-[var(--red)] hover:bg-[var(--red-dark)] text-white text-xs font-bold uppercase tracking-wider rounded transition-colors shadow-sm font-[family-name:var(--font-display)]"
                   >
                     Save Route Metadata
                   </button>
@@ -651,7 +653,7 @@ function AdminDashboard({ onLogout }: { onLogout: () => void }) {
                     value={newReviewAuthor}
                     onChange={(e) => setNewReviewAuthor(e.target.value)}
                     placeholder="E.g., Samantha Miller"
-                    className="w-full px-4.5 py-2.5 rounded border border-[var(--gray-300)] bg-white text-xs text-[var(--black)] focus:outline-none focus:ring-2 focus:ring-[var(--red)] focus:border-[var(--red)]"
+                    className="w-full px-4.5 py-2.5 rounded border border-[var(--gray-300)] bg-white text-base text-[var(--black)] focus:outline-none focus:ring-2 focus:ring-[var(--red)] focus:border-[var(--red)]"
                   />
                 </div>
 
@@ -660,7 +662,7 @@ function AdminDashboard({ onLogout }: { onLogout: () => void }) {
                   <select
                     value={newReviewSource}
                     onChange={(e) => setNewReviewSource(e.target.value)}
-                    className="w-full px-4.5 py-2.5 rounded border border-[var(--gray-300)] bg-white text-xs text-[var(--black)] focus:outline-none focus:ring-2 focus:ring-[var(--red)] focus:border-[var(--red)]"
+                    className="w-full px-4.5 py-2.5 rounded border border-[var(--gray-300)] bg-white text-base text-[var(--black)] focus:outline-none focus:ring-2 focus:ring-[var(--red)] focus:border-[var(--red)]"
                   >
                     <option value="Google">Google Reviews</option>
                     <option value="Facebook">Facebook Recommendations</option>
@@ -677,13 +679,13 @@ function AdminDashboard({ onLogout }: { onLogout: () => void }) {
                     value={newReviewText}
                     onChange={(e) => setNewReviewText(e.target.value)}
                     placeholder="Paste the review text here..."
-                    className="w-full px-4.5 py-2.5 rounded border border-[var(--gray-300)] bg-white text-xs text-[var(--black)] focus:outline-none focus:ring-2 focus:ring-[var(--red)] focus:border-[var(--red)] resize-none"
+                    className="w-full px-4.5 py-2.5 rounded border border-[var(--gray-300)] bg-white text-base text-[var(--black)] focus:outline-none focus:ring-2 focus:ring-[var(--red)] focus:border-[var(--red)] resize-none"
                   />
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full inline-flex items-center justify-center gap-1.5 py-3 bg-[var(--red)] hover:bg-[var(--red-dark)] text-white text-xs font-bold uppercase tracking-wider rounded transition-colors shadow-sm font-[family-name:var(--font-display)]"
+                  className="w-full inline-flex items-center justify-center gap-1.5 py-3.5 bg-[var(--red)] hover:bg-[var(--red-dark)] text-white text-xs font-bold uppercase tracking-wider rounded transition-colors shadow-sm font-[family-name:var(--font-display)]"
                 >
                   <Plus className="h-4.5 w-4.5" />
                   Save and Publish Review

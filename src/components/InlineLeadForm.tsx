@@ -87,7 +87,7 @@ export default function InlineLeadForm({
   const subtextClass = darkTheme ? 'text-white/80' : 'text-[var(--gray-600)]'
   const bgClass = darkTheme ? 'bg-black/40 border border-white/10 backdrop-blur-md shadow-2xl' : 'bg-white shadow-xl border border-[var(--gray-200)]'
   const labelClass = darkTheme ? 'text-white/95' : 'text-[var(--gray-700)]'
-  const inputClass = (fieldName: string) => `w-full px-4 py-2.5 border rounded bg-white text-[var(--black)] placeholder-[var(--gray-400)] focus:outline-none focus:ring-2 transition-colors ${
+  const inputClass = (fieldName: string) => `w-full px-4 py-2.5 border rounded bg-white text-base text-[var(--black)] placeholder-[var(--gray-400)] focus:outline-none focus:ring-2 transition-colors ${
     errors[fieldName]
       ? 'border-red-500 focus:ring-red-200 focus:border-red-500'
       : 'border-[var(--gray-300)] focus:ring-[var(--red)] focus:border-[var(--red)]'
@@ -138,6 +138,7 @@ export default function InlineLeadForm({
               onChange={handleChange}
               className={inputClass('firstName')}
               placeholder="First Name"
+              autoComplete="given-name"
             />
             {errors.firstName && (
               <p className="mt-0.5 text-[10px] font-semibold text-red-600">
@@ -157,6 +158,7 @@ export default function InlineLeadForm({
               onChange={handleChange}
               className={inputClass('lastName')}
               placeholder="Last Name"
+              autoComplete="family-name"
             />
             {errors.lastName && (
               <p className="mt-0.5 text-[10px] font-semibold text-red-600">
@@ -179,6 +181,7 @@ export default function InlineLeadForm({
               onChange={handleChange}
               className={inputClass('phone')}
               placeholder="(239) 332-5707"
+              autoComplete="tel"
             />
             {errors.phone && (
               <p className="mt-0.5 text-[10px] font-semibold text-red-600">
@@ -198,6 +201,7 @@ export default function InlineLeadForm({
               onChange={handleChange}
               className={inputClass('email')}
               placeholder="email@example.com"
+              autoComplete="email"
             />
             {errors.email && (
               <p className="mt-0.5 text-[10px] font-semibold text-red-600">
@@ -219,6 +223,7 @@ export default function InlineLeadForm({
             onChange={handleChange}
             className={inputClass('streetAddress')}
             placeholder="Property Address"
+            autoComplete="street-address"
           />
           {errors.streetAddress && (
             <p className="mt-0.5 text-[10px] font-semibold text-red-600">
@@ -240,6 +245,7 @@ export default function InlineLeadForm({
               onChange={handleChange}
               className={inputClass('city')}
               placeholder="City"
+              autoComplete="address-level2"
             />
             {errors.city && (
               <p className="mt-0.5 text-[10px] font-semibold text-red-600">
@@ -259,6 +265,7 @@ export default function InlineLeadForm({
               onChange={handleChange}
               className={inputClass('zip')}
               placeholder="ZIP"
+              autoComplete="postal-code"
             />
             {errors.zip && (
               <p className="mt-0.5 text-[10px] font-semibold text-red-600">
@@ -278,7 +285,7 @@ export default function InlineLeadForm({
               name="service"
               value={form.service}
               onChange={handleChange}
-              className="w-full px-4 py-2.5 border rounded bg-white text-[var(--black)] focus:outline-none focus:ring-2 transition-colors appearance-none"
+              className="w-full px-4 py-2.5 border rounded bg-white text-base text-[var(--black)] focus:outline-none focus:ring-2 transition-colors appearance-none"
               style={{
                 backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236B7280' d='M6 8L1 3h10z'/%3E%3C/svg%3E")`,
                 backgroundRepeat: 'no-repeat',

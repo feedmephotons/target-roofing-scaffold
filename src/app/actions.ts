@@ -332,7 +332,7 @@ export async function updateSeoConfig(route: string, data: { title: string; desc
   try {
     const workspaceRoot = findWorkspaceRoot()
     const filePath = path.join(workspaceRoot, 'site/src/data/seo-config.json')
-    let config: Record<string, any> = {}
+    let config: Record<string, unknown> = {}
     try {
       const fileContent = await fs.promises.readFile(filePath, 'utf8')
       config = JSON.parse(fileContent)

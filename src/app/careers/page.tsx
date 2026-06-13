@@ -167,17 +167,17 @@ export default function CareersPage() {
           <div className="mt-8 flex flex-col items-center justify-center gap-6 sm:flex-row">
             <a
               href="mailto:hr@targetroofers.com"
-              className="inline-flex items-center gap-3 bg-white px-8 py-3 font-[family-name:var(--font-display)] text-sm font-bold tracking-widest text-[var(--red)] uppercase transition-all duration-200 hover:bg-[var(--black)] hover:text-white"
+              className="inline-flex items-center gap-1.5 xs:gap-2 sm:gap-3 bg-white px-2.5 xs:px-4 sm:px-8 py-3 font-[family-name:var(--font-display)] text-[10px] xs:text-xs sm:text-sm font-bold tracking-normal xs:tracking-wider sm:tracking-widest text-[var(--red)] uppercase transition-all duration-200 hover:bg-[var(--black)] hover:text-white max-w-full"
             >
-              <Mail className="h-5 w-5" />
-              hr@targetroofers.com
+              <Mail className="h-4 w-4 xs:h-5 xs:w-5 flex-shrink-0" />
+              <span className="break-all">hr@targetroofers.com</span>
             </a>
             <a
               href="tel:239-332-5707"
-              className="inline-flex items-center gap-3 border-2 border-white px-8 py-3 font-[family-name:var(--font-display)] text-sm font-bold tracking-widest text-white uppercase transition-all duration-200 hover:bg-white hover:text-[var(--red)]"
+              className="inline-flex items-center gap-1.5 xs:gap-2 sm:gap-3 border-2 border-white px-2.5 xs:px-4 sm:px-8 py-3 font-[family-name:var(--font-display)] text-[10px] xs:text-xs sm:text-sm font-bold tracking-normal xs:tracking-wider sm:tracking-widest text-white uppercase transition-all duration-200 hover:bg-white hover:text-[var(--red)] max-w-full"
             >
-              <Phone className="h-5 w-5" />
-              239-332-5707
+              <Phone className="h-4 w-4 xs:h-5 xs:w-5 flex-shrink-0" />
+              <span className="break-all">239-332-5707</span>
             </a>
           </div>
         </div>

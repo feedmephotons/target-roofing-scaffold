@@ -4,20 +4,15 @@ import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import {
-  Phone,
   Shield,
-  Clock,
   Wrench,
   Building,
   ChevronRight,
   Star,
-  Play,
-  Users,
   Award,
   ArrowRight,
   Home,
   CalendarCheck,
-  Hammer,
   CheckCircle,
   Quote,
 } from 'lucide-react'
@@ -96,38 +91,38 @@ function TrustSignalsSection() {
     <section className="bg-blueprint-dark py-6 border-b border-white/10 text-white relative z-10">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 items-center justify-items-center text-center">
-          <div className="flex items-center gap-3">
+          <div className="flex flex-col sm:flex-row items-center gap-3">
             <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--red)]/10 text-[var(--red)] border border-[var(--red)]/20 flex-shrink-0">
               <Award className="h-6 w-6" />
             </div>
-            <div className="text-left">
+            <div className="text-center sm:text-left">
               <div className="font-bold text-sm tracking-wider uppercase font-[family-name:var(--font-display)]">GAF Master Elite</div>
               <div className="text-xs text-[var(--gray-400)]">Certified Contractor</div>
             </div>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex flex-col sm:flex-row items-center gap-3">
             <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--red)]/10 text-[var(--red)] border border-[var(--red)]/20 flex-shrink-0">
               <Shield className="h-6 w-6" />
             </div>
-            <div className="text-left">
+            <div className="text-center sm:text-left">
               <div className="font-bold text-sm tracking-wider uppercase font-[family-name:var(--font-display)]">A+ Accredited</div>
               <div className="text-xs text-[var(--gray-400)]">Better Business Bureau</div>
             </div>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex flex-col sm:flex-row items-center gap-3">
             <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--red)]/10 text-[var(--red)] border border-[var(--red)]/20 flex-shrink-0">
               <Star className="h-6 w-6 fill-current text-[var(--red)]" />
             </div>
-            <div className="text-left">
+            <div className="text-center sm:text-left">
               <div className="font-bold text-sm tracking-wider uppercase font-[family-name:var(--font-display)]">5-Star Rated</div>
               <div className="text-xs text-[var(--gray-400)]">500+ Google Reviews</div>
             </div>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex flex-col sm:flex-row items-center gap-3">
             <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--red)]/10 text-[var(--red)] border border-[var(--red)]/20 flex-shrink-0">
               <CheckCircle className="h-6 w-6" />
             </div>
-            <div className="text-left">
+            <div className="text-center sm:text-left">
               <div className="font-bold text-sm tracking-wider uppercase font-[family-name:var(--font-display)]">Licensed & Insured</div>
               <div className="text-xs text-[var(--gray-400)]">License #CCC1334168</div>
             </div>
@@ -145,17 +140,27 @@ function HeroSection() {
   const audiences = ['Property Managers', 'Contractors', 'Property Owners', 'Condos/HOAs']
 
   return (
-    <section className="relative -mt-[7.5rem] min-h-screen lg:h-screen overflow-hidden flex items-center pt-28 pb-12 lg:pt-[7.5rem] lg:pb-0">
+    <section className="relative -mt-[7.5rem] min-h-screen lg:h-screen overflow-hidden flex items-center pt-36 pb-12 lg:pt-[7.5rem] lg:pb-0 bg-[var(--black)]">
       {/* YouTube video background */}
       <div className="absolute inset-0 z-0">
         <iframe
-          className="absolute top-1/2 left-1/2 h-[120%] w-[120%] -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+          className="hidden md:block absolute top-1/2 left-1/2 h-[120%] w-[120%] -translate-x-1/2 -translate-y-1/2 pointer-events-none"
           style={{ minWidth: '100vw', minHeight: '100vh' }}
           src="https://www.youtube.com/embed/yz5H6FkrWhs?autoplay=1&mute=1&loop=1&playlist=yz5H6FkrWhs&controls=0&showinfo=0&modestbranding=1&playsinline=1&rel=0&enablejsapi=1&origin=https://targetroofers.com"
           title="Target Roofing Background Video"
           allow="autoplay; encrypted-media"
           allowFullScreen
         />
+        <div className="md:hidden absolute inset-0">
+          <Image
+            src="/images/backgrounds/hero-fallback.jpg"
+            alt="Target Roofing Background Fallback"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover opacity-60"
+          />
+        </div>
       </div>
 
       {/* Dark overlay */}
@@ -163,9 +168,9 @@ function HeroSection() {
 
       {/* Content */}
       <div className="relative z-[2] mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full">
-        <div className="grid lg:grid-cols-12 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           {/* Left Text Column */}
-          <div className="lg:col-span-7 text-left text-white flex flex-col justify-center">
+          <div className="col-span-1 lg:col-span-7 text-left text-white flex flex-col justify-center">
             <h1 className="animate-fade-in-up mb-4 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl font-[family-name:var(--font-display)] uppercase leading-[0.95]">
               Extend Your Roof&apos;s Life<br />
               <span className="text-[var(--red)]">With Expert Repairs</span>
@@ -221,7 +226,7 @@ function HeroSection() {
 
           {/* Right Column: Lead Capture Form */}
           <div 
-            className="animate-fade-in-up col-span-12 lg:col-span-5 w-full relative z-10"
+            className="animate-fade-in-up col-span-1 lg:col-span-5 w-full relative z-10"
             style={{ animationDelay: '0.45s' }}
           >
             <InlineLeadForm
@@ -348,7 +353,7 @@ function RepairFormSection() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch">
           {/* Left Column: Form */}
-          <div className="col-span-12 lg:col-span-7">
+          <div className="col-span-1 lg:col-span-7">
             <InlineLeadForm
               defaultService="repairs"
               title="Schedule Your Roof Repair Inspection"
@@ -365,6 +370,7 @@ function RepairFormSection() {
               fill
               className="object-contain mix-blend-multiply"
               priority
+              sizes="(max-width: 1024px) 100vw, 42vw"
             />
           </div>
         </div>

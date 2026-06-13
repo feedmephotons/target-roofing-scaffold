@@ -101,6 +101,7 @@ export default function AboutPage() {
             src="/images/backgrounds/services-bg.jpg"
             alt=""
             fill
+            sizes="100vw"
             className="object-cover opacity-30"
             priority
           />
@@ -176,8 +177,8 @@ export default function AboutPage() {
                     <div
                       className={`absolute -z-0 w-full h-full bg-[var(--red)] rounded-sm ${
                         isReversed
-                          ? '-top-4 -left-4'
-                          : '-top-4 -right-4'
+                          ? 'top-0 left-0 sm:-top-4 sm:-left-4'
+                          : 'top-0 right-0 sm:-top-4 sm:-right-4'
                       }`}
                     />
                     <div className="relative aspect-[4/3] rounded-sm overflow-hidden shadow-2xl">
@@ -185,6 +186,7 @@ export default function AboutPage() {
                         src={prop.image}
                         alt={prop.imageAlt}
                         fill
+                        sizes="(max-width: 1024px) 100vw, 50vw"
                         className="object-cover transition-transform duration-700 group-hover:scale-105"
                       />
                       {/* Gradient overlay */}
@@ -224,7 +226,7 @@ export default function AboutPage() {
       {/* ─── STATS STRIP ─── */}
       <section className="bg-[var(--red)] text-white py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8 text-center">
             {[
               { number: '30+', label: 'Years of Experience' },
               { number: '10,000+', label: 'Projects Completed' },
@@ -232,7 +234,7 @@ export default function AboutPage() {
               { number: '24/7', label: 'Emergency Response' },
             ].map((stat) => (
               <div key={stat.label}>
-                <p className="text-4xl md:text-5xl font-bold font-[family-name:var(--font-display)] mb-2">
+                <p className="text-3xl sm:text-4xl md:text-5xl font-bold font-[family-name:var(--font-display)] mb-2">
                   {stat.number}
                 </p>
                 <p className="text-sm uppercase tracking-wider text-white/80 font-[family-name:var(--font-display)]">

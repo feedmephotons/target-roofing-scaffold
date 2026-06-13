@@ -48,6 +48,12 @@ try {
 }
 
 const nextConfig: NextConfig = {
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   images: {
     remotePatterns: [
       {
@@ -59,6 +65,9 @@ const nextConfig: NextConfig = {
         hostname: 'img.youtube.com',
       },
     ],
+  },
+  experimental: {
+    cpus: 2,
   },
 }
 

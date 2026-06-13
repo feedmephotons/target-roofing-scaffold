@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import {
   ArrowRight,
   Building2,
@@ -285,7 +286,7 @@ function FilterBar({
               {/* All button */}
               <button
                 onClick={() => onFilterChange('All')}
-                className={`shrink-0 rounded-full px-5 py-2 text-xs font-bold uppercase tracking-wider transition-all duration-200 border ${
+                className={`shrink-0 rounded-full px-5 py-3.5 text-xs font-bold uppercase tracking-wider transition-all duration-200 border ${
                   activeFilter === 'All'
                     ? 'bg-[var(--red)] text-white border-[var(--red)] shadow-md'
                     : 'bg-white text-[var(--gray-700)] border-[var(--gray-300)] hover:border-[var(--red)] hover:text-[var(--red)]'
@@ -298,7 +299,7 @@ function FilterBar({
                 <button
                   key={cat}
                   onClick={() => onFilterChange(cat)}
-                  className={`shrink-0 rounded-full px-5 py-2 text-xs font-bold uppercase tracking-wider transition-all duration-200 border ${
+                  className={`shrink-0 rounded-full px-5 py-3.5 text-xs font-bold uppercase tracking-wider transition-all duration-200 border ${
                     activeFilter === cat
                       ? 'bg-[var(--red)] text-white border-[var(--red)] shadow-md'
                       : 'bg-white text-[var(--gray-700)] border-[var(--gray-300)] hover:border-[var(--red)] hover:text-[var(--red)]'
@@ -317,7 +318,7 @@ function FilterBar({
               placeholder="Search projects..."
               value={searchQuery}
               onChange={(e) => onSearchChange(e.target.value)}
-              className="w-full rounded-full border border-[var(--gray-300)] px-4 py-2 text-sm text-[var(--black)] placeholder-[var(--gray-400)] focus:border-[var(--red)] focus:ring-1 focus:ring-[var(--red)] focus:outline-none transition-colors"
+              className="w-full rounded-full border border-[var(--gray-300)] px-4 py-2.5 text-base text-[var(--black)] placeholder-[var(--gray-400)] focus:border-[var(--red)] focus:ring-1 focus:ring-[var(--red)] focus:outline-none transition-colors"
             />
           </div>
         </div>
@@ -420,9 +421,11 @@ function ProjectCard({
         {/* Project Image */}
         {!imageError && (
           <>
-            <img
+            <Image
               src={imageSrc}
               alt={project.name}
+              fill
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
               className="absolute inset-0 z-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
               onError={() => setImageError(true)}
             />
@@ -517,7 +520,7 @@ function ProjectLightbox({
         {/* Close Button */}
         <button 
           onClick={onClose}
-          className="absolute top-4 right-4 z-35 rounded-full bg-black/60 p-2 text-white/80 hover:text-white hover:bg-black/90 transition-colors"
+          className="absolute top-4 right-4 z-35 rounded-full bg-black/60 p-3 text-white/80 hover:text-white hover:bg-black/90 transition-colors"
         >
           <X className="h-6 w-6" />
         </button>
@@ -525,9 +528,11 @@ function ProjectLightbox({
         {/* Media Area */}
         <div className="relative aspect-[16/10] sm:aspect-[16/9] w-full bg-neutral-900 flex items-center justify-center overflow-hidden">
           {!imageError ? (
-            <img 
+            <Image 
               src={imageSrc} 
               alt={project.name}
+              fill
+              sizes="(max-width: 1024px) 100vw, 1024px"
               className="max-h-full max-w-full object-contain"
               onError={() => setImageError(true)}
             />

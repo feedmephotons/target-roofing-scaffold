@@ -112,7 +112,7 @@ export default function ContactPage() {
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16">
             {/* ── Left: Contact Form ── */}
             <div className="lg:col-span-3">
-              <div className="bg-white rounded-sm shadow-xl p-8 md:p-10">
+              <div className="bg-white rounded-sm shadow-xl p-4 xs:p-8 md:p-10">
                 <h2 className="text-2xl md:text-3xl font-bold text-[var(--black)] mb-2 font-[family-name:var(--font-display)]">
                   Request a Free Estimate
                 </h2>
@@ -147,12 +147,13 @@ export default function ContactPage() {
                         name="firstName"
                         value={form.firstName}
                         onChange={handleChange}
-                        className={`w-full px-4 py-3 border rounded bg-white text-[var(--black)] placeholder-[var(--gray-400)] focus:outline-none focus:ring-2 transition-colors ${
+                        className={`w-full px-4 py-3 border rounded bg-white text-base text-[var(--black)] placeholder-[var(--gray-400)] focus:outline-none focus:ring-2 transition-colors ${
                           errors.firstName
                             ? 'border-red-500 focus:ring-red-200 focus:border-red-500'
                             : 'border-[var(--gray-300)] focus:ring-[var(--red)] focus:border-[var(--red)]'
                         }`}
                         placeholder="John"
+                        autoComplete="given-name"
                       />
                       {errors.firstName && (
                         <p className="mt-1 text-xs font-semibold text-red-600">
@@ -173,12 +174,13 @@ export default function ContactPage() {
                         name="lastName"
                         value={form.lastName}
                         onChange={handleChange}
-                        className={`w-full px-4 py-3 border rounded bg-white text-[var(--black)] placeholder-[var(--gray-400)] focus:outline-none focus:ring-2 transition-colors ${
+                        className={`w-full px-4 py-3 border rounded bg-white text-base text-[var(--black)] placeholder-[var(--gray-400)] focus:outline-none focus:ring-2 transition-colors ${
                           errors.lastName
                             ? 'border-red-500 focus:ring-red-200 focus:border-red-500'
                             : 'border-[var(--gray-300)] focus:ring-[var(--red)] focus:border-[var(--red)]'
                         }`}
                         placeholder="Smith"
+                        autoComplete="family-name"
                       />
                       {errors.lastName && (
                         <p className="mt-1 text-xs font-semibold text-red-600">
@@ -203,12 +205,13 @@ export default function ContactPage() {
                         name="phone"
                         value={form.phone}
                         onChange={handleChange}
-                        className={`w-full px-4 py-3 border rounded bg-white text-[var(--black)] placeholder-[var(--gray-400)] focus:outline-none focus:ring-2 transition-colors ${
+                        className={`w-full px-4 py-3 border rounded bg-white text-base text-[var(--black)] placeholder-[var(--gray-400)] focus:outline-none focus:ring-2 transition-colors ${
                           errors.phone
                             ? 'border-red-500 focus:ring-red-200 focus:border-red-500'
                             : 'border-[var(--gray-300)] focus:ring-[var(--red)] focus:border-[var(--red)]'
                         }`}
                         placeholder="(239) 555-0100"
+                        autoComplete="tel"
                       />
                       {errors.phone && (
                         <p className="mt-1 text-xs font-semibold text-red-600">
@@ -229,12 +232,13 @@ export default function ContactPage() {
                         name="email"
                         value={form.email}
                         onChange={handleChange}
-                        className={`w-full px-4 py-3 border rounded bg-white text-[var(--black)] placeholder-[var(--gray-400)] focus:outline-none focus:ring-2 transition-colors ${
+                        className={`w-full px-4 py-3 border rounded bg-white text-base text-[var(--black)] placeholder-[var(--gray-400)] focus:outline-none focus:ring-2 transition-colors ${
                           errors.email
                             ? 'border-red-500 focus:ring-red-200 focus:border-red-500'
                             : 'border-[var(--gray-300)] focus:ring-[var(--red)] focus:border-[var(--red)]'
                         }`}
                         placeholder="john@example.com"
+                        autoComplete="email"
                       />
                       {errors.email && (
                         <p className="mt-1 text-xs font-semibold text-red-600">
@@ -258,12 +262,13 @@ export default function ContactPage() {
                       name="streetAddress"
                       value={form.streetAddress}
                       onChange={handleChange}
-                      className={`w-full px-4 py-3 border rounded bg-white text-[var(--black)] placeholder-[var(--gray-400)] focus:outline-none focus:ring-2 transition-colors ${
+                      className={`w-full px-4 py-3 border rounded bg-white text-base text-[var(--black)] placeholder-[var(--gray-400)] focus:outline-none focus:ring-2 transition-colors ${
                         errors.streetAddress
                           ? 'border-red-500 focus:ring-red-200 focus:border-red-500'
                           : 'border-[var(--gray-300)] focus:ring-[var(--red)] focus:border-[var(--red)]'
                       }`}
                       placeholder="123 Main Street"
+                      autoComplete="street-address"
                     />
                     {errors.streetAddress && (
                       <p className="mt-1 text-xs font-semibold text-red-600">
@@ -287,12 +292,13 @@ export default function ContactPage() {
                         name="city"
                         value={form.city}
                         onChange={handleChange}
-                        className={`w-full px-4 py-3 border rounded bg-white text-[var(--black)] placeholder-[var(--gray-400)] focus:outline-none focus:ring-2 transition-colors ${
+                        className={`w-full px-4 py-3 border rounded bg-white text-base text-[var(--black)] placeholder-[var(--gray-400)] focus:outline-none focus:ring-2 transition-colors ${
                           errors.city
                             ? 'border-red-500 focus:ring-red-200 focus:border-red-500'
                             : 'border-[var(--gray-300)] focus:ring-[var(--red)] focus:border-[var(--red)]'
                         }`}
                         placeholder="Fort Myers"
+                        autoComplete="address-level2"
                       />
                       {errors.city && (
                         <p className="mt-1 text-xs font-semibold text-red-600">
@@ -313,12 +319,13 @@ export default function ContactPage() {
                         name="zip"
                         value={form.zip}
                         onChange={handleChange}
-                        className={`w-full px-4 py-3 border rounded bg-white text-[var(--black)] placeholder-[var(--gray-400)] focus:outline-none focus:ring-2 transition-colors ${
+                        className={`w-full px-4 py-3 border rounded bg-white text-base text-[var(--black)] placeholder-[var(--gray-400)] focus:outline-none focus:ring-2 transition-colors ${
                           errors.zip
                             ? 'border-red-500 focus:ring-red-200 focus:border-red-500'
                             : 'border-[var(--gray-300)] focus:ring-[var(--red)] focus:border-[var(--red)]'
                         }`}
                         placeholder="33901"
+                        autoComplete="postal-code"
                       />
                       {errors.zip && (
                         <p className="mt-1 text-xs font-semibold text-red-600">
@@ -342,7 +349,7 @@ export default function ContactPage() {
                       name="service"
                       value={form.service}
                       onChange={handleChange}
-                      className={`w-full px-4 py-3 border rounded bg-white text-[var(--black)] focus:outline-none focus:ring-2 transition-colors appearance-none ${
+                      className={`w-full px-4 py-3 border rounded bg-white text-base text-[var(--black)] focus:outline-none focus:ring-2 transition-colors appearance-none ${
                         errors.service
                           ? 'border-red-500 focus:ring-red-200 focus:border-red-500'
                           : 'border-[var(--gray-300)] focus:ring-[var(--red)] focus:border-[var(--red)]'
@@ -382,7 +389,7 @@ export default function ContactPage() {
                       rows={4}
                       value={form.message}
                       onChange={handleChange}
-                      className={`w-full px-4 py-3 border rounded bg-white text-[var(--black)] placeholder-[var(--gray-400)] focus:outline-none focus:ring-2 transition-colors resize-vertical ${
+                      className={`w-full px-4 py-3 border rounded bg-white text-base text-[var(--black)] placeholder-[var(--gray-400)] focus:outline-none focus:ring-2 transition-colors resize-vertical ${
                         errors.message
                           ? 'border-red-500 focus:ring-red-200 focus:border-red-500'
                           : 'border-[var(--gray-300)] focus:ring-[var(--red)] focus:border-[var(--red)]'
@@ -419,16 +426,16 @@ export default function ContactPage() {
             {/* ── Right: Contact Info Cards ── */}
             <div className="lg:col-span-2 space-y-5">
               {/* Headquarters */}
-              <div className="group bg-white rounded-sm shadow-md p-6 border-l-4 border-[var(--red)] hover:shadow-lg transition-shadow">
-                <div className="flex items-start gap-4">
+              <div className="group bg-white rounded-sm shadow-md p-4 sm:p-6 border-l-4 border-[var(--red)] hover:shadow-lg transition-shadow">
+                <div className="flex items-start gap-3 sm:gap-4">
                   <div className="flex-shrink-0 w-12 h-12 bg-[var(--red)]/10 rounded-sm flex items-center justify-center group-hover:bg-[var(--red)] transition-colors">
                     <MapPin className="w-6 h-6 text-[var(--red)] group-hover:text-white transition-colors" />
                   </div>
-                  <div>
+                  <div className="min-w-0 flex-1">
                     <h3 className="text-sm font-bold uppercase tracking-wide text-[var(--gray-400)] mb-1 font-[family-name:var(--font-display)]">
                       Headquarters
                     </h3>
-                    <p className="text-[var(--black)] font-medium leading-relaxed">
+                    <p className="text-[var(--black)] font-medium leading-relaxed text-sm sm:text-base">
                       7011 Nalle Grade Rd
                       <br />
                       North Fort Myers, Florida 33917
@@ -446,18 +453,18 @@ export default function ContactPage() {
               </div>
 
               {/* Phone */}
-              <div className="group bg-white rounded-sm shadow-md p-6 border-l-4 border-[var(--red)] hover:shadow-lg transition-shadow">
-                <div className="flex items-start gap-4">
+              <div className="group bg-white rounded-sm shadow-md p-4 sm:p-6 border-l-4 border-[var(--red)] hover:shadow-lg transition-shadow">
+                <div className="flex items-start gap-3 sm:gap-4">
                   <div className="flex-shrink-0 w-12 h-12 bg-[var(--red)]/10 rounded-sm flex items-center justify-center group-hover:bg-[var(--red)] transition-colors">
                     <Phone className="w-6 h-6 text-[var(--red)] group-hover:text-white transition-colors" />
                   </div>
-                  <div>
+                  <div className="min-w-0 flex-1">
                     <h3 className="text-sm font-bold uppercase tracking-wide text-[var(--gray-400)] mb-1 font-[family-name:var(--font-display)]">
                       Phone
                     </h3>
                     <a
                       href="tel:239-332-5707"
-                      className="text-[var(--black)] font-medium text-lg hover:text-[var(--red)] transition-colors"
+                      className="text-[var(--black)] font-medium text-base sm:text-lg hover:text-[var(--red)] transition-colors break-all"
                     >
                       (239) 332-5707
                     </a>
@@ -466,18 +473,18 @@ export default function ContactPage() {
               </div>
 
               {/* Email */}
-              <div className="group bg-white rounded-sm shadow-md p-6 border-l-4 border-[var(--red)] hover:shadow-lg transition-shadow">
-                <div className="flex items-start gap-4">
+              <div className="group bg-white rounded-sm shadow-md p-4 sm:p-6 border-l-4 border-[var(--red)] hover:shadow-lg transition-shadow">
+                <div className="flex items-start gap-3 sm:gap-4">
                   <div className="flex-shrink-0 w-12 h-12 bg-[var(--red)]/10 rounded-sm flex items-center justify-center group-hover:bg-[var(--red)] transition-colors">
                     <Mail className="w-6 h-6 text-[var(--red)] group-hover:text-white transition-colors" />
                   </div>
-                  <div>
+                  <div className="min-w-0 flex-1">
                     <h3 className="text-sm font-bold uppercase tracking-wide text-[var(--gray-400)] mb-1 font-[family-name:var(--font-display)]">
                       Email
                     </h3>
                     <a
                       href="mailto:projects@targetroofers.com"
-                      className="text-[var(--black)] font-medium hover:text-[var(--red)] transition-colors"
+                      className="text-[var(--black)] font-medium text-sm sm:text-base hover:text-[var(--red)] transition-colors break-all"
                     >
                       projects@targetroofers.com
                     </a>
@@ -486,16 +493,16 @@ export default function ContactPage() {
               </div>
 
               {/* Hours */}
-              <div className="group bg-white rounded-sm shadow-md p-6 border-l-4 border-[var(--red)] hover:shadow-lg transition-shadow">
-                <div className="flex items-start gap-4">
+              <div className="group bg-white rounded-sm shadow-md p-4 sm:p-6 border-l-4 border-[var(--red)] hover:shadow-lg transition-shadow">
+                <div className="flex items-start gap-3 sm:gap-4">
                   <div className="flex-shrink-0 w-12 h-12 bg-[var(--red)]/10 rounded-sm flex items-center justify-center group-hover:bg-[var(--red)] transition-colors">
                     <Clock className="w-6 h-6 text-[var(--red)] group-hover:text-white transition-colors" />
                   </div>
-                  <div>
+                  <div className="min-w-0 flex-1">
                     <h3 className="text-sm font-bold uppercase tracking-wide text-[var(--gray-400)] mb-1 font-[family-name:var(--font-display)]">
                       Hours
                     </h3>
-                    <p className="text-[var(--black)] font-medium leading-relaxed">
+                    <p className="text-[var(--black)] font-medium leading-relaxed text-sm sm:text-base">
                       Monday &ndash; Friday: 8:00 AM &ndash; 5:00 PM
                       <br />
                       Saturday: 8:00 AM &ndash; 5:00 PM
@@ -505,7 +512,7 @@ export default function ContactPage() {
               </div>
 
               {/* Emergency Service */}
-              <div className="bg-[var(--black)] rounded-sm shadow-md p-6 text-white">
+              <div className="bg-[var(--black)] rounded-sm shadow-md p-4 sm:p-6 text-white">
                 <div className="noise-overlay absolute inset-0 pointer-events-none" />
                 <div className="relative">
                   <div className="flex items-center gap-2 mb-3">
@@ -514,14 +521,14 @@ export default function ContactPage() {
                       Emergency Service
                     </h3>
                   </div>
-                  <p className="text-[var(--gray-300)] mb-4">
+                  <p className="text-[var(--gray-300)] mb-4 text-sm sm:text-base">
                     24/7 Emergency Roof Repairs Available
                   </p>
                   <a
                     href="tel:239-332-5707"
-                    className="inline-flex items-center gap-3 text-2xl md:text-3xl font-bold text-white hover:text-[var(--red-light)] transition-colors font-[family-name:var(--font-display)]"
+                    className="inline-flex items-center gap-1.5 xs:gap-2 sm:gap-3 text-lg xs:text-2xl md:text-3xl font-bold text-white hover:text-[var(--red-light)] transition-colors font-[family-name:var(--font-display)] break-all max-w-full"
                   >
-                    <Phone className="w-7 h-7" />
+                    <Phone className="w-4 h-4 xs:w-7 xs:h-7 flex-shrink-0" />
                     239-332-5707
                   </a>
                 </div>
