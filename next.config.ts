@@ -47,7 +47,7 @@ try {
   console.error('[Config Hook] Error in build dataset generation:', e);
 }
 
-const nextConfig: NextConfig = {
+const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
@@ -71,5 +71,5 @@ const nextConfig: NextConfig = {
   },
 }
 
-export default nextConfig
+export default nextConfig as NextConfig
 
