@@ -124,7 +124,7 @@ function LoginForm() {
                   <label className="block text-sm font-semibold text-[var(--gray-700)]">
                     Password
                   </label>
-                  <button type="button" className="text-sm text-[var(--red)] hover:underline">
+                  <button type="button" className="text-sm text-[var(--red)] hover:underline inline-block py-3 px-2">
                     Forgot password?
                   </button>
                 </div>
@@ -172,7 +172,7 @@ function LoginForm() {
             <div className="mt-6 text-center">
               <p className="text-sm text-[var(--gray-500)]">
                 Don&apos;t have an account?{' '}
-                <Link href="/contact" className="font-semibold text-[var(--red)] hover:underline">
+                <Link href="/contact" className="font-semibold text-[var(--red)] hover:underline inline-block py-3 px-2">
                   Contact us
                 </Link>{' '}
                 to get set up.

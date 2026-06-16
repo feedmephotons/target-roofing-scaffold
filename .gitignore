@@ -44,3 +44,8 @@ next-env.d.ts
 /playwright-report/
 /test-results/
 /test-leads.ts
+
+# Local logs/scripts
+*.log
+run_tests.sh
+small_targets.json

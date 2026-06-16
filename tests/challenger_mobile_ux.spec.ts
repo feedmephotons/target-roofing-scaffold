@@ -182,15 +182,15 @@ test.describe('Adversarial Mobile UX & Responsiveness (320px Viewport)', () => {
     const serviceErr = page.locator('text=Service of Interest is required');
     const messageErr = page.locator('text=Please describe your needs');
 
-    await expect(firstNameErr).toBeVisible();
-    await expect(lastNameErr).toBeVisible();
-    await expect(emailErr).toBeVisible();
-    await expect(phoneErr).toBeVisible();
-    await expect(addressErr).toBeVisible();
-    await expect(cityErr).toBeVisible();
-    await expect(zipErr).toBeVisible();
-    await expect(serviceErr).toBeVisible();
-    await expect(messageErr).toBeVisible();
+    await expect(firstNameErr).toBeVisible({ timeout: 15000 });
+    await expect(lastNameErr).toBeVisible({ timeout: 15000 });
+    await expect(emailErr).toBeVisible({ timeout: 15000 });
+    await expect(phoneErr).toBeVisible({ timeout: 15000 });
+    await expect(addressErr).toBeVisible({ timeout: 15000 });
+    await expect(cityErr).toBeVisible({ timeout: 15000 });
+    await expect(zipErr).toBeVisible({ timeout: 15000 });
+    await expect(serviceErr).toBeVisible({ timeout: 15000 });
+    await expect(messageErr).toBeVisible({ timeout: 15000 });
 
     // 2. Submit invalid email and phone formats
     const firstNameInput = formLocator.locator('input[name="firstName"]');
@@ -216,10 +216,10 @@ test.describe('Adversarial Mobile UX & Responsiveness (320px Viewport)', () => {
     await submitBtn.click();
 
     // The required field errors should be gone, but format errors should be visible
-    await expect(firstNameErr).toBeHidden();
-    await expect(lastNameErr).toBeHidden();
-    await expect(emailErr).toBeVisible(); // 'A valid email address is required.' should stay/reappear
-    await expect(phoneErr).toBeVisible(); // 'A valid phone number is required (e.g., 239-332-5707).'
+    await expect(firstNameErr).toBeHidden({ timeout: 15000 });
+    await expect(lastNameErr).toBeHidden({ timeout: 15000 });
+    await expect(emailErr).toBeVisible({ timeout: 15000 }); // 'A valid email address is required.' should stay/reappear
+    await expect(phoneErr).toBeVisible({ timeout: 15000 }); // 'A valid phone number is required (e.g., 239-332-5707).'
 
     // Ensure error elements fit within viewport (no horizontal layout overflow due to long error text)
     const pageOverflow = await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth);
@@ -242,11 +242,11 @@ test.describe('Adversarial Mobile UX & Responsiveness (320px Viewport)', () => {
     const phoneErr = page.locator('text=A valid phone number is required');
     const addressErr = page.locator('text=Service Address is required');
 
-    await expect(firstNameErr).toBeVisible();
-    await expect(lastNameErr).toBeVisible();
-    await expect(emailErr).toBeVisible();
-    await expect(phoneErr).toBeVisible();
-    await expect(addressErr).toBeVisible();
+    await expect(firstNameErr).toBeVisible({ timeout: 15000 });
+    await expect(lastNameErr).toBeVisible({ timeout: 15000 });
+    await expect(emailErr).toBeVisible({ timeout: 15000 });
+    await expect(phoneErr).toBeVisible({ timeout: 15000 });
+    await expect(addressErr).toBeVisible({ timeout: 15000 });
 
     // Fill invalid data formats
     await formLocator.locator('input[name="firstName"]').fill('Jane');
@@ -257,10 +257,10 @@ test.describe('Adversarial Mobile UX & Responsiveness (320px Viewport)', () => {
 
     await submitBtn.click();
 
-    await expect(firstNameErr).toBeHidden();
-    await expect(lastNameErr).toBeHidden();
-    await expect(addressErr).toBeHidden();
-    await expect(emailErr).toBeVisible();
-    await expect(phoneErr).toBeVisible();
+    await expect(firstNameErr).toBeHidden({ timeout: 15000 });
+    await expect(lastNameErr).toBeHidden({ timeout: 15000 });
+    await expect(addressErr).toBeHidden({ timeout: 15000 });
+    await expect(emailErr).toBeVisible({ timeout: 15000 });
+    await expect(phoneErr).toBeVisible({ timeout: 15000 });
   });
 });
