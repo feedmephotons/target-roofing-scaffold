@@ -179,6 +179,7 @@ test.describe('Tier 1: Feature Coverage', () => {
   test.describe('Forms', () => {
     test('Contact Page Form: should submit successfully with valid data', async ({ page }) => {
       await page.goto('/contact');
+      await page.waitForTimeout(2000); // Ensure client-side hydration is complete
       
       await page.fill('input[name="firstName"]', 'Jane');
       await page.fill('input[name="lastName"]', 'Doe');
@@ -199,6 +200,7 @@ test.describe('Tier 1: Feature Coverage', () => {
 
     test('Softwash Form: should submit successfully with valid data', async ({ page }) => {
       await page.goto('/softwash');
+      await page.waitForTimeout(2000); // Ensure client-side hydration is complete
       
       await page.fill('input[name="firstName"]', 'Bob');
       await page.fill('input[name="lastName"]', 'Johnson');
@@ -214,6 +216,7 @@ test.describe('Tier 1: Feature Coverage', () => {
 
     test('Portal Login Form: should log in successfully with valid credentials and show dashboard', async ({ page }) => {
       await page.goto('/portal');
+      await page.waitForTimeout(2000); // Ensure client-side hydration is complete
       
       await page.fill('input[type="email"]', 'manager@coastalrealty.com');
       await page.fill('input[type="password"]', 'secure123');

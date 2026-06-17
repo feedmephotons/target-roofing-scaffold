@@ -75,11 +75,11 @@ export default function Footer() {
               </div>
               <div className="flex items-center gap-3">
                 <Phone className="h-5 w-5 text-[var(--red)] flex-shrink-0" />
-                <a href="tel:239-332-5707" className="hover:text-white transition-colors inline-block py-3 px-3">239-332-5707</a>
+                <a href="tel:239-332-5707" className="hover:text-white transition-colors inline-block py-3.5 px-3">239-332-5707</a>
               </div>
               <div className="flex items-center gap-3">
                 <Mail className="h-5 w-5 text-[var(--red)] flex-shrink-0" />
-                <a href="mailto:projects@targetroofers.com" className="hover:text-white transition-colors inline-block py-3 px-3">projects@targetroofers.com</a>
+                <a href="mailto:projects@targetroofers.com" className="hover:text-white transition-colors inline-block py-3.5 px-3">projects@targetroofers.com</a>
               </div>
               <div className="flex items-start gap-3">
                 <Clock className="h-5 w-5 text-[var(--red)] flex-shrink-0 mt-0.5" />
@@ -94,7 +94,7 @@ export default function Footer() {
             <ul className="space-y-1 lg:space-y-3">
               {footerLinks.services.map((link) => (
                 <li key={link.name}>
-                  <Link href={link.href} className="block py-3 lg:py-1 text-sm text-[var(--gray-400)] hover:text-[var(--red)] transition-colors">
+                  <Link href={link.href} className="block py-3.5 lg:py-1 text-sm text-[var(--gray-400)] hover:text-[var(--red)] transition-colors">
                     {link.name}
                   </Link>
                 </li>
@@ -108,7 +108,7 @@ export default function Footer() {
             <ul className="space-y-1 lg:space-y-3">
               {footerLinks.company.map((link) => (
                 <li key={link.name}>
-                  <Link href={link.href} className="block py-3 lg:py-1 text-sm text-[var(--gray-400)] hover:text-[var(--red)] transition-colors">
+                  <Link href={link.href} className="block py-3.5 lg:py-1 text-sm text-[var(--gray-400)] hover:text-[var(--red)] transition-colors">
                     {link.name}
                   </Link>
                 </li>
@@ -122,7 +122,7 @@ export default function Footer() {
             <ul className="space-y-1 lg:space-y-3 mb-8">
               {footerLinks.resources.map((link) => (
                 <li key={link.name}>
-                  <Link href={link.href} className="block py-3 lg:py-1 text-sm text-[var(--gray-400)] hover:text-[var(--red)] transition-colors">
+                  <Link href={link.href} className="block py-3.5 lg:py-1 text-sm text-[var(--gray-400)] hover:text-[var(--red)] transition-colors">
                     {link.name}
                   </Link>
                 </li>

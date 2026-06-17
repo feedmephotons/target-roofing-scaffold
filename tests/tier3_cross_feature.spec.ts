@@ -24,6 +24,7 @@ test.describe('Tier 3: Cross-Feature Combinations', () => {
       await contactNav.click();
     }
     await page.waitForURL('**/contact');
+    await page.waitForTimeout(2000); // Ensure client-side hydration is complete
 
     // 4. Submit contact form
     await page.fill('input[name="firstName"]', 'Journey');
@@ -43,6 +44,7 @@ test.describe('Tier 3: Cross-Feature Combinations', () => {
   test('Journey 2: Localized Landing Page Form Submission', async ({ page }) => {
     // 1. Visit Fort Myers Roof Repair landing page (expected to exist after Milestone 5)
     const response = await page.goto('/locations/fort-myers/roof-repair');
+    await page.waitForTimeout(2000); // Ensure client-side hydration is complete
     // If not implemented, skip this check to allow the test framework to run but mark failure on this specific test
     expect(response?.status()).toBe(200);
 
@@ -87,6 +89,7 @@ test.describe('Tier 3: Cross-Feature Combinations', () => {
   test('Journey 4: Portal Login -> Dashboard Tab Navigation -> Log Out', async ({ page }) => {
     // 1. Visit portal login
     await page.goto('/portal');
+    await page.waitForTimeout(2000); // Ensure client-side hydration is complete
     
     // 2. Fill details and sign in
     await page.fill('input[type="email"]', 'john.davis@coastal.com');

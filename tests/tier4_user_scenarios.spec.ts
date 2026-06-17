@@ -20,6 +20,7 @@ test.describe('Tier 4: Real-world User Scenario Flows', () => {
       await contactNav.click();
     }
     await page.waitForURL('**/contact');
+    await page.waitForTimeout(2000); // Ensure client-side hydration is complete
 
     // 4. User fills out the form specifically requesting urgent roof repairs
     await page.fill('input[name="firstName"]', 'Emergency');
@@ -42,6 +43,7 @@ test.describe('Tier 4: Real-world User Scenario Flows', () => {
   test('Scenario 2: Naples Local Search & Landing Page Conversion Flow', async ({ page }) => {
     // 1. User search lands them directly on the Naples Roof Replacement page
     const response = await page.goto('/locations/naples/roof-replacement');
+    await page.waitForTimeout(2000); // Ensure client-side hydration is complete
     expect(response?.status()).toBe(200);
 
     // 2. User reads local Naples reviews and code details (verifying dynamic content existence)
@@ -69,6 +71,7 @@ test.describe('Tier 4: Real-world User Scenario Flows', () => {
   test('Scenario 3: HOA Board Member Softwash Estimate Flow', async ({ page }) => {
     // 1. User navigates directly to the softwash roof cleaning page
     await page.goto('/softwash');
+    await page.waitForTimeout(2000); // Ensure client-side hydration is complete
 
     // 2. Reads about softwash vs pressure washing, decides to get estimate
     await expect(page.locator('h1')).toContainText("Roof Cleaning & Soft Wash");
@@ -90,6 +93,7 @@ test.describe('Tier 4: Real-world User Scenario Flows', () => {
   test('Scenario 4: Property Manager Project Progress Verification Flow', async ({ page }) => {
     // 1. Property Manager logs in to portal to check active projects
     await page.goto('/portal');
+    await page.waitForTimeout(2000); // Ensure client-side hydration is complete
     await page.fill('input[type="email"]', 'manager@coastalrealty.com');
     await page.fill('input[type="password"]', 'secure123');
     await page.click('button[type="submit"]');
@@ -129,6 +133,7 @@ test.describe('Tier 4: Real-world User Scenario Flows', () => {
 
     // 4. Arrives on contact page and fills information
     await page.waitForURL('**/contact');
+    await page.waitForTimeout(2000); // Ensure client-side hydration is complete
     await page.fill('input[name="firstName"]', 'Applicant');
     await page.fill('input[name="lastName"]', 'Job');
     await page.fill('input[name="phone"]', '239-555-7788');

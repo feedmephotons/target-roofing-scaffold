@@ -21,7 +21,7 @@ test.describe('Adversarial Mobile UX & Responsiveness (320px Viewport)', () => {
 
   for (const url of PAGES) {
     test(`Page "${url}" - layout integrity & no horizontal overflows at 320px`, async ({ page }) => {
-      await page.goto(url, { waitUntil: 'domcontentloaded' });
+      await page.goto(url, { waitUntil: 'networkidle' });
       await page.waitForLoadState('domcontentloaded');
 
       // Scroll slowly to trigger lazy load images and calculate layout sizes
@@ -106,7 +106,7 @@ test.describe('Adversarial Mobile UX & Responsiveness (320px Viewport)', () => {
     });
 
     test(`Page "${url}" - Touch target compliance (min 44x44px)`, async ({ page }) => {
-      await page.goto(url, { waitUntil: 'domcontentloaded' });
+      await page.goto(url, { waitUntil: 'networkidle' });
       await page.waitForLoadState('domcontentloaded');
 
       const violations = await page.evaluate(() => {
@@ -162,7 +162,7 @@ test.describe('Adversarial Mobile UX & Responsiveness (320px Viewport)', () => {
   }
 
   test('Form validation - Contact Form boundary cases', async ({ page }) => {
-    await page.goto('/contact', { waitUntil: 'domcontentloaded' });
+    await page.goto('/contact', { waitUntil: 'networkidle' });
     await page.waitForLoadState('domcontentloaded');
     await page.waitForTimeout(1500); // Ensure client-side hydration is complete
 
@@ -227,7 +227,7 @@ test.describe('Adversarial Mobile UX & Responsiveness (320px Viewport)', () => {
   });
 
   test('Form validation - Softwash Form boundary cases', async ({ page }) => {
-    await page.goto('/softwash', { waitUntil: 'domcontentloaded' });
+    await page.goto('/softwash', { waitUntil: 'networkidle' });
     await page.waitForLoadState('domcontentloaded');
     await page.waitForTimeout(1500); // Ensure client-side hydration is complete
 
