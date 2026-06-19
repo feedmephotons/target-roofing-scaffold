@@ -120,30 +120,30 @@ export default function SoftwashPage() {
           className="absolute bottom-0 left-0 right-0 h-20"
           style={{
             clipPath: 'polygon(0 60%, 100% 0, 100% 100%, 0% 100%)',
-            background: 'var(--black)',
+            background: 'var(--red)',
           }}
         />
       </div>
 
-      <section className="relative bg-[var(--black)] py-20 md:py-28 noise-overlay">
+      <section className="relative bg-[var(--red)] text-white py-20 md:py-28 noise-overlay">
         <div className="relative z-10 mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 font-[family-name:var(--font-display)] uppercase">
             Don&apos;t Let a Dirty Roof Ruin Your Curb Appeal
           </h2>
-          <p className="text-lg text-[var(--gray-300)] leading-relaxed mb-8">
+          <p className="text-lg text-white/90 leading-relaxed mb-8">
             Get your free same-day estimate now.
           </p>
           <a
             href="tel:239-332-5707"
-            className="inline-flex items-center gap-3 text-3xl md:text-4xl font-bold text-[var(--red)] hover:text-[var(--red-light)] transition-colors font-[family-name:var(--font-display)]"
+            className="inline-flex items-center gap-3 text-2xl md:text-3xl font-bold text-white hover:scale-[1.02] transition-transform font-[family-name:var(--font-display)] border-2 border-white px-8 py-3 rounded"
           >
-            <Phone className="h-8 w-8" />
+            <Phone className="h-6 w-6" />
             Call or Text: 239.332.5707
           </a>
         </div>
       </section>
 
-      <div className="relative bg-[var(--black)]">
+      <div className="relative bg-[var(--red)]">
         <div className="h-0" />
         <div
           className="absolute bottom-0 left-0 right-0 h-20"

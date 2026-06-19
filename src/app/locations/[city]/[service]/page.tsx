@@ -483,7 +483,7 @@ export default async function LocationPage({ params }: PageProps) {
       </section>
 
       {/* Inline Lead Capture Form */}
-      <section className="bg-[var(--black)] text-white noise-overlay py-20 md:py-28">
+      <section className="bg-[var(--red)] text-white noise-overlay py-20 md:py-28">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <InlineLeadForm
             defaultService={serviceData.defaultService}
