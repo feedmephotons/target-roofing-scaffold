@@ -20,6 +20,7 @@ import {
   ArrowRight,
 } from 'lucide-react'
 import InlineLeadForm from '@/components/InlineLeadForm'
+import AnimateIn from '@/components/AnimateIn'
 
 export const metadata: Metadata = {
   title: 'Our Roofing Services',
@@ -147,29 +148,50 @@ export default function RoofingServicesPage() {
       </section>
 
       {/* ==================== COMMITMENT SECTION ==================== */}
-      <section className="bg-white py-20 md:py-28">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+      <section className="relative bg-white py-20 md:py-28">
+        {/* Subtle monochrome background */}
+        <div className="absolute inset-0">
+          <Image src="/images/backgrounds/bg-aerial-mono.jpg" alt="" fill className="object-cover opacity-[0.04]" />
+        </div>
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-[var(--black)] mb-6">
-                Our Commitment to You
-              </h2>
-              <div className="red-accent-left">
-                <p className="text-lg text-[var(--gray-600)] leading-relaxed">
-                  At Target Roofing, we hold ourselves to the highest standards of service.
-                  When you work with us, you can count on:
-                </p>
+              <AnimateIn animation="fade-up">
+                <h2 className="text-3xl md:text-4xl font-bold text-[var(--black)] mb-6">
+                  Our Commitment to You
+                </h2>
+              </AnimateIn>
+              <AnimateIn animation="fade-up" delay={100}>
+                <div className="red-accent-left mb-8">
+                  <p className="text-lg text-[var(--gray-600)] leading-relaxed">
+                    At Target Roofing, we hold ourselves to the highest standards of service.
+                    When you work with us, you can count on:
+                  </p>
+                </div>
+              </AnimateIn>
+              <div className="space-y-5">
+                {commitments.map((item, idx) => (
+                  <AnimateIn key={idx} animation="fade-left" delay={idx * 100}>
+                    <div className="flex items-start gap-4">
+                      <CheckCircle className="h-6 w-6 text-[var(--red)] flex-shrink-0 mt-0.5" />
+                      <p className="text-[var(--gray-700)] leading-relaxed">{item}</p>
+                    </div>
+                  </AnimateIn>
+                ))}
               </div>
             </div>
 
-            <div className="space-y-5">
-              {commitments.map((item, idx) => (
-                <div key={idx} className="flex items-start gap-4">
-                  <CheckCircle className="h-6 w-6 text-[var(--red)] flex-shrink-0 mt-0.5" />
-                  <p className="text-[var(--gray-700)] leading-relaxed">{item}</p>
-                </div>
-              ))}
-            </div>
+            <AnimateIn animation="fade-up" delay={200}>
+              <div className="relative aspect-[4/3] rounded-lg overflow-hidden shadow-2xl">
+                <Image
+                  src="/images/crew/crew-team-photo.jpg"
+                  alt="Target Roofing crew standing confidently on a completed commercial roof"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover"
+                />
+              </div>
+            </AnimateIn>
           </div>
         </div>
       </section>
@@ -180,83 +202,122 @@ export default function RoofingServicesPage() {
           <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
             {/* Left side: Content */}
             <div className="lg:col-span-6">
-              <div className="inline-flex items-center gap-2 mb-4 px-3 py-1.5 bg-[var(--red)]/10 rounded">
-                <Wrench className="h-5 w-5 text-[var(--red)]" />
-                <span className="text-sm font-semibold text-[var(--red)] uppercase tracking-wider font-[family-name:var(--font-display)]">
-                  Emergency &amp; Scheduled Repairs
-                </span>
-              </div>
-              <h2 className="text-3xl md:text-4xl font-bold text-[var(--black)] mb-6">
-                Roof Repairs &amp; Restoration
-              </h2>
-              <div className="red-accent-left mb-8">
-                <p className="text-lg text-[var(--gray-600)] leading-relaxed">
-                  Proactive repairs are the single most effective way to extend your roof&apos;s life and protect your building. Our rapid-response teams locate and repair leaks immediately, preventing minor issues from turning into major capital expenditures.
-                </p>
-              </div>
-              
-              <p className="text-[var(--gray-600)] leading-relaxed mb-8">
-                By investing in high-quality professional repairs early, you postpone the need for costly replacements. When a roof does reach the end of its useful lifespan, we provide clear diagnostics and support a seamless transition.
-              </p>
-
-              <div className="flex items-center gap-4 p-4 bg-white border border-[var(--gray-200)] shadow-sm rounded-lg">
-                <Clock className="h-8 w-8 text-[var(--red)] flex-shrink-0" />
-                <div>
-                  <p className="font-bold text-[var(--black)] text-sm uppercase tracking-wide font-[family-name:var(--font-display)]">
-                    24/7/365 Emergency Response
-                  </p>
-                  <a href="tel:239-332-5707" className="text-[var(--red)] font-semibold hover:text-[var(--red-dark)] transition-colors inline-block py-3 px-2">
-                    239-332-5707
-                  </a>
+              <AnimateIn animation="fade-up">
+                <div className="inline-flex items-center gap-2 mb-4 px-3 py-1.5 bg-[var(--red)]/10 rounded">
+                  <Wrench className="h-5 w-5 text-[var(--red)]" />
+                  <span className="text-sm font-semibold text-[var(--red)] uppercase tracking-wider font-[family-name:var(--font-display)]">
+                    Emergency &amp; Scheduled Repairs
+                  </span>
                 </div>
-              </div>
+                <h2 className="text-3xl md:text-4xl font-bold text-[var(--black)] mb-6">
+                  Roof Repairs &amp; Restoration
+                </h2>
+              </AnimateIn>
+              <AnimateIn animation="fade-up" delay={100}>
+                <div className="red-accent-left mb-8">
+                  <p className="text-lg text-[var(--gray-600)] leading-relaxed">
+                    Proactive repairs are the single most effective way to extend your roof&apos;s life and protect your building. Our rapid-response teams locate and repair leaks immediately, preventing minor issues from turning into major capital expenditures.
+                  </p>
+                </div>
+              </AnimateIn>
+
+              <AnimateIn animation="fade-up" delay={200}>
+                <p className="text-[var(--gray-600)] leading-relaxed mb-8">
+                  By investing in high-quality professional repairs early, you postpone the need for costly replacements. When a roof does reach the end of its useful lifespan, we provide clear diagnostics and support a seamless transition.
+                </p>
+              </AnimateIn>
+
+              {/* Crew image: welding closeup */}
+              <AnimateIn animation="fade-up" delay={300}>
+                <div className="relative aspect-[16/9] rounded-lg overflow-hidden shadow-lg mb-8">
+                  <Image
+                    src="/images/crew/crew-welding-closeup.jpg"
+                    alt="Target Roofing crew member performing TPO welding with visible company logo"
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    className="object-cover"
+                  />
+                </div>
+              </AnimateIn>
+
+              <AnimateIn animation="fade-up" delay={400}>
+                <div className="flex items-center gap-4 p-4 bg-white border border-[var(--gray-200)] shadow-sm rounded-lg">
+                  <Clock className="h-8 w-8 text-[var(--red)] flex-shrink-0" />
+                  <div>
+                    <p className="font-bold text-[var(--black)] text-sm uppercase tracking-wide font-[family-name:var(--font-display)]">
+                      24/7/365 Emergency Response
+                    </p>
+                    <a href="tel:239-332-5707" className="text-[var(--red)] font-semibold hover:text-[var(--red-dark)] transition-colors inline-block py-3 px-2">
+                      239-332-5707
+                    </a>
+                  </div>
+                </div>
+              </AnimateIn>
             </div>
 
-            {/* Right side: Crew image and features */}
+            {/* Right side: Emergency card, crew image, and features */}
             <div className="lg:col-span-6 space-y-6">
-              <div className="relative bg-[var(--black)] rounded-lg shadow-md p-8 border-t-4 border-[var(--red)] text-white overflow-hidden noise-overlay">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--red)] rounded-full opacity-10 blur-2xl pointer-events-none" />
-                <div className="relative z-10 flex flex-col justify-between h-full">
-                  <div>
-                    <div className="flex items-center gap-2.5 mb-4">
-                      <span className="w-3 h-3 rounded-full bg-[var(--red)] animate-pulse" />
-                      <h3 className="font-bold text-sm uppercase tracking-wider text-[var(--red-light)] font-[family-name:var(--font-display)]">
-                        Emergency Repair Dispatch
-                      </h3>
+              <AnimateIn animation="fade-right">
+                <div className="relative bg-[var(--black)] rounded-lg shadow-md p-8 border-t-4 border-[var(--red)] text-white overflow-hidden noise-overlay">
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--red)] rounded-full opacity-10 blur-2xl pointer-events-none" />
+                  <div className="relative z-10 flex flex-col justify-between h-full">
+                    <div>
+                      <div className="flex items-center gap-2.5 mb-4">
+                        <span className="w-3 h-3 rounded-full bg-[var(--red)] animate-pulse" />
+                        <h3 className="font-bold text-sm uppercase tracking-wider text-[var(--red-light)] font-[family-name:var(--font-display)]">
+                          Emergency Repair Dispatch
+                        </h3>
+                      </div>
+                      <h4 className="text-2xl font-bold uppercase mb-4 font-[family-name:var(--font-display)]">
+                        Active Leak? Call the Hotline
+                      </h4>
+                      <p className="text-sm text-[var(--gray-300)] leading-relaxed mb-6">
+                        Minor leaks can quickly turn into major structural damages. Our local Southwest Florida repair teams are available 24/7/365 to stabilize and resolve active roof leaks.
+                      </p>
                     </div>
-                    <h4 className="text-2xl font-bold uppercase mb-4 font-[family-name:var(--font-display)]">
-                      Active Leak? Call the Hotline
-                    </h4>
-                    <p className="text-sm text-[var(--gray-300)] leading-relaxed mb-6">
-                      Minor leaks can quickly turn into major structural damages. Our local Southwest Florida repair teams are available 24/7/365 to stabilize and resolve active roof leaks.
-                    </p>
-                  </div>
-                  <div>
-                    <a
-                      href="tel:239-332-5707"
-                      className="inline-flex items-center justify-center gap-3 w-full py-4 bg-brand-gradient hover-bg-brand-gradient text-white font-bold uppercase tracking-wider rounded transition-colors text-lg font-[family-name:var(--font-display)] shadow-lg shadow-black/25"
-                    >
-                      <Phone className="h-6 w-6 animate-bounce" />
-                      Call 239-332-5707
-                    </a>
-                    <p className="text-center text-[10px] text-[var(--gray-400)] mt-3">
-                      Average response time is under 2 hours for emergencies.
-                    </p>
+                    <div>
+                      <AnimateIn animation="scale" delay={300}>
+                        <a
+                          href="tel:239-332-5707"
+                          className="inline-flex items-center justify-center gap-3 w-full py-4 bg-brand-gradient hover-bg-brand-gradient text-white font-bold uppercase tracking-wider rounded transition-colors text-lg font-[family-name:var(--font-display)] shadow-lg shadow-black/25"
+                        >
+                          <Phone className="h-6 w-6 animate-bounce" />
+                          Call 239-332-5707
+                        </a>
+                      </AnimateIn>
+                      <p className="text-center text-[10px] text-[var(--gray-400)] mt-3">
+                        Average response time is under 2 hours for emergencies.
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </div>
-              
+              </AnimateIn>
+
+              {/* Crew image: repairing roof */}
+              <AnimateIn animation="fade-up" delay={200}>
+                <div className="relative aspect-[16/9] rounded-lg overflow-hidden shadow-lg">
+                  <Image
+                    src="/images/crew/crew-repairing-roof.png"
+                    alt="Target Roofing worker applying sealant during a commercial roof repair"
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    className="object-cover"
+                  />
+                </div>
+              </AnimateIn>
+
               <div className="space-y-4">
-                {repairFeatures.map((feature) => {
+                {repairFeatures.map((feature, idx) => {
                   const Icon = feature.icon
                   return (
-                    <div
-                      key={feature.label}
-                      className="flex items-center gap-4 p-4 bg-white rounded-lg border border-[var(--gray-200)] hover:border-[var(--red)] transition-colors"
-                    >
-                      <Icon className="h-6 w-6 text-[var(--red)] flex-shrink-0" />
-                      <span className="font-semibold text-[var(--black)]">{feature.label}</span>
-                    </div>
+                    <AnimateIn key={feature.label} animation="fade-up" delay={idx * 100}>
+                      <div
+                        className="flex items-center gap-4 p-4 bg-white rounded-lg border border-[var(--gray-200)] hover:border-[var(--red)] transition-colors"
+                      >
+                        <Icon className="h-6 w-6 text-[var(--red)] flex-shrink-0" />
+                        <span className="font-semibold text-[var(--black)]">{feature.label}</span>
+                      </div>
+                    </AnimateIn>
                   )
                 })}
               </div>
@@ -266,55 +327,66 @@ export default function RoofingServicesPage() {
       </section>
 
       {/* ==================== MAINTENANCE PLANS OVERVIEW ==================== */}
-      <section id="maintenance-plans" className="bg-white py-20 md:py-28 scroll-mt-32">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <section id="maintenance-plans" className="relative bg-white py-20 md:py-28 scroll-mt-32">
+        {/* Subtle monochrome background */}
+        <div className="absolute inset-0">
+          <Image src="/images/backgrounds/bg-welding-mono.jpg" alt="" fill className="object-cover opacity-[0.03]" />
+        </div>
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center mb-12">
-            <div className="inline-flex items-center gap-2 mb-4 px-3 py-1.5 bg-[var(--red)]/10 rounded">
-              <ShieldCheck className="h-5 w-5 text-[var(--red)]" />
-              <span className="text-sm font-semibold text-[var(--red)] uppercase tracking-wider font-[family-name:var(--font-display)]">
-                Protect Your Investment
-              </span>
-            </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-[var(--black)] mb-6">
-              Preventative Maintenance Plans
-            </h2>
-            <p className="text-lg text-[var(--gray-600)] leading-relaxed">
-              Many property managers take advantage of Target Roofing&apos;s preventative maintenance plans. Regular checks identify minor repair needs before they create massive interior damage. Regular maintenance satisfies manufacturer warranties and helps extend your roof&apos;s service life by years.
-            </p>
+            <AnimateIn animation="fade-up">
+              <div className="inline-flex items-center gap-2 mb-4 px-3 py-1.5 bg-[var(--red)]/10 rounded">
+                <ShieldCheck className="h-5 w-5 text-[var(--red)]" />
+                <span className="text-sm font-semibold text-[var(--red)] uppercase tracking-wider font-[family-name:var(--font-display)]">
+                  Protect Your Investment
+                </span>
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold text-[var(--black)] mb-6">
+                Preventative Maintenance Plans
+              </h2>
+            </AnimateIn>
+            <AnimateIn animation="fade-up" delay={100}>
+              <p className="text-lg text-[var(--gray-600)] leading-relaxed">
+                Many property managers take advantage of Target Roofing&apos;s preventative maintenance plans. Regular checks identify minor repair needs before they create massive interior damage. Regular maintenance satisfies manufacturer warranties and helps extend your roof&apos;s service life by years.
+              </p>
+            </AnimateIn>
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
             {maintenanceServices.map((service, idx) => {
               const Icon = service.icon
               return (
-                <div
-                  key={idx}
-                  className="bg-[var(--gray-50)] rounded-lg p-6 shadow-sm border border-[var(--gray-200)] hover:shadow-md hover:border-[var(--red)] transition-all"
-                >
-                  <Icon className="h-8 w-8 text-[var(--red)] mb-4" />
-                  <h3 className="font-bold text-[var(--black)] font-[family-name:var(--font-display)] uppercase tracking-wide">
-                    {service.label}
-                  </h3>
-                </div>
+                <AnimateIn key={idx} animation="fade-up" delay={idx * 100}>
+                  <div
+                    className="bg-[var(--gray-50)] rounded-lg p-6 shadow-sm border border-[var(--gray-200)] hover:shadow-md hover:border-[var(--red)] transition-all"
+                  >
+                    <Icon className="h-8 w-8 text-[var(--red)] mb-4" />
+                    <h3 className="font-bold text-[var(--black)] font-[family-name:var(--font-display)] uppercase tracking-wide">
+                      {service.label}
+                    </h3>
+                  </div>
+                </AnimateIn>
               )
             })}
           </div>
 
-          <div className="max-w-2xl mx-auto">
-            <div className="bg-[var(--gray-50)] rounded-lg shadow-md p-8 border-t-4 border-[var(--red)]">
-              <h3 className="text-xl font-bold text-[var(--black)] mb-6 font-[family-name:var(--font-display)] uppercase tracking-wide">
-                Complimentary Reports Include:
-              </h3>
-              <ul className="space-y-4">
-                {complimentaryReports.map((item, idx) => (
-                  <li key={idx} className="flex items-center gap-3">
-                    <CheckCircle className="h-5 w-5 text-[var(--red)] flex-shrink-0" />
-                    <span className="text-[var(--gray-700)]">{item}</span>
-                  </li>
-                ))}
-              </ul>
+          <AnimateIn animation="fade-up" delay={200}>
+            <div className="max-w-2xl mx-auto">
+              <div className="bg-[var(--gray-50)] rounded-lg shadow-md p-8 border-t-4 border-[var(--red)]">
+                <h3 className="text-xl font-bold text-[var(--black)] mb-6 font-[family-name:var(--font-display)] uppercase tracking-wide">
+                  Complimentary Reports Include:
+                </h3>
+                <ul className="space-y-4">
+                  {complimentaryReports.map((item, idx) => (
+                    <li key={idx} className="flex items-center gap-3">
+                      <CheckCircle className="h-5 w-5 text-[var(--red)] flex-shrink-0" />
+                      <span className="text-[var(--gray-700)]">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
-          </div>
+          </AnimateIn>
         </div>
       </section>
 
@@ -322,42 +394,62 @@ export default function RoofingServicesPage() {
       <section id="reroofing" className="bg-blueprint-light py-20 md:py-28 scroll-mt-32 relative">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
-            <div className="inline-flex items-center gap-2 mb-4 px-3 py-1.5 bg-[var(--red)]/10 rounded">
-              <RotateCcw className="h-5 w-5 text-[var(--red)]" />
-              <span className="text-sm font-semibold text-[var(--red)] uppercase tracking-wider font-[family-name:var(--font-display)]">
-                Roof Replacement
-              </span>
-            </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-[var(--black)] mb-6">
-              Reroofing &amp; Transition Management
-            </h2>
-            <p className="text-[var(--gray-600)] leading-relaxed text-lg max-w-3xl mx-auto">
-              When repair is no longer a viable or cost-effective option, our team transitions you seamlessly to a full roof replacement. We handle all logistics, schedules, and safety protocols to ensure a smooth, worry-free process with zero disruption to your daily operations.
-            </p>
+            <AnimateIn animation="fade-up">
+              <div className="inline-flex items-center gap-2 mb-4 px-3 py-1.5 bg-[var(--red)]/10 rounded">
+                <RotateCcw className="h-5 w-5 text-[var(--red)]" />
+                <span className="text-sm font-semibold text-[var(--red)] uppercase tracking-wider font-[family-name:var(--font-display)]">
+                  Roof Replacement
+                </span>
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold text-[var(--black)] mb-6">
+                Reroofing &amp; Transition Management
+              </h2>
+            </AnimateIn>
+            <AnimateIn animation="fade-up" delay={100}>
+              <p className="text-[var(--gray-600)] leading-relaxed text-lg max-w-3xl mx-auto">
+                When repair is no longer a viable or cost-effective option, our team transitions you seamlessly to a full roof replacement. We handle all logistics, schedules, and safety protocols to ensure a smooth, worry-free process with zero disruption to your daily operations.
+              </p>
+            </AnimateIn>
           </div>
 
+          {/* Crew image: metal fabrication */}
+          <AnimateIn animation="fade-up" delay={150}>
+            <div className="relative aspect-[21/9] rounded-lg overflow-hidden shadow-lg mb-12 max-w-4xl mx-auto">
+              <Image
+                src="/images/crew/crew-metal-fabrication.png"
+                alt="Target Roofing worker operating a metal brake machine for custom sheet metal fabrication"
+                fill
+                sizes="(max-width: 1024px) 100vw, 60vw"
+                className="object-cover"
+              />
+            </div>
+          </AnimateIn>
+
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-            {reroofingFeatures.map((feature) => {
+            {reroofingFeatures.map((feature, idx) => {
               const Icon = feature.icon
               return (
-                <div
-                  key={feature.label}
-                  className="bg-white rounded-lg p-6 shadow-sm border border-[var(--gray-200)] hover:shadow-md hover:border-[var(--red)] transition-all"
-                >
-                  <Icon className="h-8 w-8 text-[var(--red)] mb-4" />
-                  <h3 className="font-bold text-[var(--black)] text-lg font-[family-name:var(--font-display)] uppercase tracking-wide">
-                    {feature.label}
-                  </h3>
-                </div>
+                <AnimateIn key={feature.label} animation="fade-up" delay={idx * 100}>
+                  <div
+                    className="bg-white rounded-lg p-6 shadow-sm border border-[var(--gray-200)] hover:shadow-md hover:border-[var(--red)] transition-all"
+                  >
+                    <Icon className="h-8 w-8 text-[var(--red)] mb-4" />
+                    <h3 className="font-bold text-[var(--black)] text-lg font-[family-name:var(--font-display)] uppercase tracking-wide">
+                      {feature.label}
+                    </h3>
+                  </div>
+                </AnimateIn>
               )
             })}
           </div>
 
-          <div className="max-w-2xl mx-auto text-center">
-            <p className="text-[var(--gray-600)] leading-relaxed">
-              We are happy to provide references from the many property owners, property managers and condo/HOA boards we have served through replacement transitions over the years.
-            </p>
-          </div>
+          <AnimateIn animation="fade-up" delay={200}>
+            <div className="max-w-2xl mx-auto text-center">
+              <p className="text-[var(--gray-600)] leading-relaxed">
+                We are happy to provide references from the many property owners, property managers and condo/HOA boards we have served through replacement transitions over the years.
+              </p>
+            </div>
+          </AnimateIn>
         </div>
       </section>
 
@@ -366,43 +458,63 @@ export default function RoofingServicesPage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             <div>
-              <div className="inline-flex items-center gap-2 mb-4 px-3 py-1.5 bg-[var(--red)]/10 rounded">
-                <Building2 className="h-5 w-5 text-[var(--red)]" />
-                <span className="text-sm font-semibold text-[var(--red)] uppercase tracking-wider font-[family-name:var(--font-display)]">
-                  New Construction
-                </span>
-              </div>
-              <h2 className="text-3xl md:text-4xl font-bold text-[var(--black)] mb-6">
-                New Roofs
-              </h2>
-              <div className="red-accent-left mb-8">
-                <p className="text-lg text-[var(--gray-600)] leading-relaxed">
-                  It&apos;s our honor to provide commercial roofing services to some premier general contractors.
+              <AnimateIn animation="fade-up">
+                <div className="inline-flex items-center gap-2 mb-4 px-3 py-1.5 bg-[var(--red)]/10 rounded">
+                  <Building2 className="h-5 w-5 text-[var(--red)]" />
+                  <span className="text-sm font-semibold text-[var(--red)] uppercase tracking-wider font-[family-name:var(--font-display)]">
+                    New Construction
+                  </span>
+                </div>
+                <h2 className="text-3xl md:text-4xl font-bold text-[var(--black)] mb-6">
+                  New Roofs
+                </h2>
+              </AnimateIn>
+              <AnimateIn animation="fade-up" delay={100}>
+                <div className="red-accent-left mb-8">
+                  <p className="text-lg text-[var(--gray-600)] leading-relaxed">
+                    It&apos;s our honor to provide commercial roofing services to some premier general contractors.
+                  </p>
+                </div>
+                <p className="text-[var(--gray-600)] leading-relaxed mb-8">
+                  Ask about our value engineering approach to helping you deliver projects on-time and on-budget.
                 </p>
-              </div>
-              <p className="text-[var(--gray-600)] leading-relaxed mb-8">
-                Ask about our value engineering approach to helping you deliver projects on-time and on-budget.
-              </p>
-              <Link
-                href="/contact"
-                className="inline-flex items-center gap-2 text-[var(--red)] font-semibold hover:text-[var(--red-dark)] transition-colors text-sm uppercase tracking-wider font-[family-name:var(--font-display)] min-h-[44px] py-2 px-3"
-              >
-                Request a Quote
-                <ArrowRight className="h-4 w-4" />
-              </Link>
+              </AnimateIn>
+              <AnimateIn animation="scale" delay={200}>
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center gap-2 text-[var(--red)] font-semibold hover:text-[var(--red-dark)] transition-colors text-sm uppercase tracking-wider font-[family-name:var(--font-display)] min-h-[44px] py-2 px-3"
+                >
+                  Request a Quote
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </AnimateIn>
+
+              {/* Crew image: crane lift */}
+              <AnimateIn animation="fade-up" delay={300}>
+                <div className="relative aspect-[16/9] rounded-lg overflow-hidden shadow-lg mt-8">
+                  <Image
+                    src="/images/crew/crew-crane-lift.jpg"
+                    alt="Crane lifting roofing materials to a commercial building for a new roof installation"
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    className="object-cover"
+                  />
+                </div>
+              </AnimateIn>
             </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-              {newRoofTypes.map((type) => (
-                <div
-                  key={type}
-                  className="bg-[var(--gray-50)] border border-[var(--gray-200)] rounded-lg p-5 text-center hover:border-[var(--red)] hover:shadow-md transition-all"
-                >
-                  <Building2 className="h-8 w-8 text-[var(--red)] mx-auto mb-3" />
-                  <span className="text-sm font-semibold text-[var(--black)] uppercase tracking-wide font-[family-name:var(--font-display)]">
-                    {type}
-                  </span>
-                </div>
+              {newRoofTypes.map((type, idx) => (
+                <AnimateIn key={type} animation="fade-up" delay={idx * 100}>
+                  <div
+                    className="bg-[var(--gray-50)] border border-[var(--gray-200)] rounded-lg p-5 text-center hover:border-[var(--red)] hover:shadow-md transition-all"
+                  >
+                    <Building2 className="h-8 w-8 text-[var(--red)] mx-auto mb-3" />
+                    <span className="text-sm font-semibold text-[var(--black)] uppercase tracking-wide font-[family-name:var(--font-display)]">
+                      {type}
+                    </span>
+                  </div>
+                </AnimateIn>
               ))}
             </div>
           </div>
@@ -412,6 +524,7 @@ export default function RoofingServicesPage() {
       {/* ==================== INLINE LEAD CAPTURE FORM ==================== */}
       <section id="lead-form" className="bg-[var(--red)] text-white py-20 md:py-28 scroll-mt-24 relative">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+          <AnimateIn animation="scale">
           <InlineLeadForm
             defaultService="repairs"
             title="Schedule a Survey &amp; Repair Estimate"
@@ -419,6 +532,7 @@ export default function RoofingServicesPage() {
             buttonText="Submit Estimate Request"
             darkTheme={true}
           />
+          </AnimateIn>
         </div>
       </section>
     </>

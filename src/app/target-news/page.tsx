@@ -5,6 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight, Phone, ChevronRight } from 'lucide-react'
 import blogsData from '@/data/blogs.json'
+import AnimateIn from '@/components/AnimateIn'
 
 interface BlogPost {
   title: string
@@ -43,33 +44,50 @@ export default function TargetNewsPage() {
     <>
       {/* ─── HERO ─── */}
       <section className="relative bg-[var(--black)] text-white overflow-hidden">
+        {/* Monochrome background */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/backgrounds/bg-aerial-mono.jpg"
+            alt=""
+            fill
+            className="object-cover opacity-[0.04]"
+            sizes="100vw"
+          />
+        </div>
+
         {/* Noise overlay */}
-        <div className="noise-overlay absolute inset-0" />
+        <div className="noise-overlay absolute inset-0 z-[1]" />
 
         {/* Diagonal accent */}
         <div
-          className="absolute top-0 right-0 w-1/3 h-full bg-[var(--red)] hidden lg:block"
+          className="absolute top-0 right-0 w-1/3 h-full bg-[var(--red)] hidden lg:block z-[1]"
           style={{ clipPath: 'polygon(30% 0, 100% 0, 100% 100%, 0% 100%)' }}
         />
 
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-28 md:py-36 lg:py-44">
           <div className="max-w-3xl">
             {/* Eyebrow */}
-            <p className="inline-flex items-center gap-2 text-[var(--red-light)] text-sm font-bold uppercase tracking-[0.2em] mb-6 font-[family-name:var(--font-display)]">
-              <span className="w-8 h-[2px] bg-[var(--red)]" />
-              News &amp; Insights
-            </p>
+            <AnimateIn animation="fade-up">
+              <p className="inline-flex items-center gap-2 text-[var(--red-light)] text-sm font-bold uppercase tracking-[0.2em] mb-6 font-[family-name:var(--font-display)]">
+                <span className="w-8 h-[2px] bg-[var(--red)]" />
+                News &amp; Insights
+              </p>
+            </AnimateIn>
 
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[0.95] mb-6 font-[family-name:var(--font-display)]">
-              Target <span className="text-[var(--red)]">News</span>
-            </h1>
+            <AnimateIn animation="fade-up" delay={100}>
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[0.95] mb-6 font-[family-name:var(--font-display)]">
+                Target <span className="text-[var(--red)]">News</span>
+              </h1>
+            </AnimateIn>
 
-            <p className="text-lg md:text-xl text-[var(--gray-300)] leading-relaxed max-w-2xl">
-              Everything You Need to Know About Commercial Roofing in Southwest
-              Florida. Here, you&apos;ll find news about Target Roofing &amp;
-              Sheet Metal, as well as information we know will be valuable to our
-              customers and partners.
-            </p>
+            <AnimateIn animation="fade-up" delay={200}>
+              <p className="text-lg md:text-xl text-[var(--gray-300)] leading-relaxed max-w-2xl">
+                Everything You Need to Know About Commercial Roofing in Southwest
+                Florida. Here, you&apos;ll find news about Target Roofing &amp;
+                Sheet Metal, as well as information we know will be valuable to our
+                customers and partners.
+              </p>
+            </AnimateIn>
           </div>
         </div>
       </section>
@@ -91,12 +109,12 @@ export default function TargetNewsPage() {
 
           {/* Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {displayedPosts.map((post) => {
+            {displayedPosts.map((post, index) => {
               const postColor = post.color || CATEGORY_COLORS[post.category] || 'bg-[var(--red)]'
               return (
+                <AnimateIn key={post.slug} animation="fade-up" delay={Math.min(index * 100, 500)}>
                 <article
-                  key={post.slug}
-                  className="group bg-white rounded-sm shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col"
+                  className="group bg-white rounded-sm shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col h-full"
                 >
                   {/* Image or Placeholder */}
                   <div className="relative aspect-[16/10] overflow-hidden">
@@ -154,6 +172,7 @@ export default function TargetNewsPage() {
                     </Link>
                   </div>
                 </article>
+                </AnimateIn>
               )
             })}
           </div>

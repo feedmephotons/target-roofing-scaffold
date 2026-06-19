@@ -12,6 +12,7 @@ import {
   Eye,
   X,
 } from 'lucide-react'
+import AnimateIn from '@/components/AnimateIn'
 
 /* ------------------------------------------------------------------ */
 /*  Metadata (exported from a separate layout or handled via generateMetadata) */
@@ -219,29 +220,29 @@ function HeroSection() {
       {/* Content */}
       <div className="relative z-[2] flex flex-col items-center justify-center px-4 pt-52 pb-32 text-center text-white sm:pt-56 sm:pb-36">
         {/* Overline */}
-        <div className="animate-fade-in-up mb-6 flex items-center gap-3">
-          <div className="h-px w-10 bg-[var(--red)]" />
-          <span className="text-sm font-semibold uppercase tracking-[0.2em] text-[var(--red)] font-[family-name:var(--font-display)]">
-            Our Portfolio
-          </span>
-          <div className="h-px w-10 bg-[var(--red)]" />
-        </div>
+        <AnimateIn animation="fade-up">
+          <div className="mb-6 flex items-center gap-3">
+            <div className="h-px w-10 bg-[var(--red)]" />
+            <span className="text-sm font-semibold uppercase tracking-[0.2em] text-[var(--red)] font-[family-name:var(--font-display)]">
+              Our Portfolio
+            </span>
+            <div className="h-px w-10 bg-[var(--red)]" />
+          </div>
+        </AnimateIn>
 
-        <h1
-          className="animate-fade-in-up mb-6 max-w-5xl text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl font-[family-name:var(--font-display)] uppercase"
-          style={{ animationDelay: '0.1s' }}
-        >
-          Projects by<br />
-          <span className="text-[var(--red)]">Target Roofing</span>
-        </h1>
+        <AnimateIn animation="fade-up" delay={100}>
+          <h1 className="mb-6 max-w-5xl text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl font-[family-name:var(--font-display)] uppercase">
+            Projects by<br />
+            <span className="text-[var(--red)]">Target Roofing</span>
+          </h1>
+        </AnimateIn>
 
-        <p
-          className="animate-fade-in-up max-w-2xl text-lg leading-relaxed text-white/70 sm:text-xl"
-          style={{ animationDelay: '0.25s' }}
-        >
-          You&apos;ll see our handiwork, including roofing for new construction,
-          full roof replacement projects, and repairs and maintenance.
-        </p>
+        <AnimateIn animation="fade-up" delay={250}>
+          <p className="max-w-2xl text-lg leading-relaxed text-white/70 sm:text-xl">
+            You&apos;ll see our handiwork, including roofing for new construction,
+            full roof replacement projects, and repairs and maintenance.
+          </p>
+        </AnimateIn>
       </div>
     </section>
   )
@@ -268,6 +269,7 @@ function FilterBar({
   return (
     <section className="sticky top-[7.5rem] z-30 border-b border-[var(--gray-200)] bg-white/95 backdrop-blur-md shadow-sm">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <AnimateIn animation="fade-down" delay={100}>
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 py-4">
           <div className="flex items-center gap-4 w-full md:w-auto overflow-hidden">
             {/* Project count indicator */}
@@ -322,6 +324,7 @@ function FilterBar({
             />
           </div>
         </div>
+        </AnimateIn>
       </div>
     </section>
   )
@@ -379,6 +382,25 @@ function ProjectGrid({
             </p>
           </div>
         )}
+
+        {/* Crane image visual accent */}
+        <AnimateIn animation="fade-up" delay={200} className="mt-16">
+          <div className="relative w-full h-64 md:h-80 rounded-lg overflow-hidden shadow-lg">
+            <Image
+              src="/images/crew/crew-crane-lift.jpg"
+              alt="Target Roofing crane lift in action"
+              fill
+              sizes="(max-width: 768px) 100vw, 1200px"
+              className="object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+            <div className="absolute bottom-6 left-6">
+              <p className="text-white text-sm font-bold uppercase tracking-wider font-[family-name:var(--font-display)]">
+                Heavy equipment on-site for every project
+              </p>
+            </div>
+          </div>
+        </AnimateIn>
       </div>
     </section>
   )

@@ -16,6 +16,7 @@ import {
   ClipboardCheck,
 } from 'lucide-react'
 import InlineLeadForm from '@/components/InlineLeadForm'
+import AnimateIn from '@/components/AnimateIn'
 
 export const metadata: Metadata = {
   title: 'About Us',
@@ -71,22 +72,22 @@ const valueProps = [
     title: 'Dedication to Customer Service Excellence',
     body: 'Target Roofing sets a high bar for customer service, taking the steps necessary to achieve excellence. First, our well-trained team is committed to professionalism. Second, they hold the technology to provide fast, accurate estimates in the field, and to track projects from start to completion. Finally, our experienced foremen have the longevity and expertise necessary to lead with precision. We\'re proud to say we promote from within and never use subs.',
     icon: Users,
-    image: '/images/portfolio/casey.jpg',
-    imageAlt: 'Target Roofing team providing excellent customer service on a commercial project',
+    image: '/images/crew/crew-roof-inspection.jpg',
+    imageAlt: 'Target Roofing crew member performing a thorough commercial roof inspection',
   },
   {
     title: 'Investment in Roofing Technology and Equipment',
     body: 'Target Roofing goes above and beyond by investing in state-of-the-art technology and equipment. These assets empower us to deliver roofing products and services with speed and efficiency. In fact, we create products most companies must outsource, and we own equipment others rent. This speeds production and delivery immensely! As a result, we can pass the cost savings on to you, and you benefit from the resulting quality control.',
     icon: Cpu,
-    image: '/images/portfolio/tpo-retrofit.jpg',
-    imageAlt: 'State-of-the-art roofing equipment and technology in action',
+    image: '/images/crew/crew-working-tpo.jpg',
+    imageAlt: 'Target Roofing crew installing TPO membrane with state-of-the-art equipment',
   },
   {
     title: 'A Commitment to Structure and Accountability',
     body: 'Finally, the processes we\'ve put into place ensure we\'re consistently delivering roofing solutions on-time and on budget. You will know our schedule from the beginning, and we\'ll stay accountable to it. No job is too big for Target Roofing. We have an exceptional reputation for coming through and getting the job done on projects of all sizes. In fact, we are insured to work on high liability projects such as high rises and schools.',
     icon: ClipboardCheck,
-    image: '/images/portfolio/colonial-country-club.jpg',
-    imageAlt: 'Large-scale commercial roofing project demonstrating accountability and precision',
+    image: '/images/crew/crew-aerial-worksite.png',
+    imageAlt: 'Aerial view of Target Roofing crew working on a large commercial roof project',
   },
 ]
 
@@ -98,7 +99,7 @@ export default function AboutPage() {
         {/* Background image */}
         <div className="absolute inset-0">
           <Image
-            src="/images/backgrounds/services-bg.jpg"
+            src="/images/crew/crew-team-photo.jpg"
             alt=""
             fill
             sizes="100vw"
@@ -118,6 +119,7 @@ export default function AboutPage() {
         />
 
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-28 md:py-36 lg:py-44">
+          <AnimateIn animation="fade-left">
           <div className="max-w-3xl">
             {/* Eyebrow */}
             <p className="inline-flex items-center gap-2 text-[var(--red-light)] text-sm font-bold uppercase tracking-[0.2em] mb-6 font-[family-name:var(--font-display)]">
@@ -149,6 +151,7 @@ export default function AboutPage() {
               </a>
             </div>
           </div>
+          </AnimateIn>
         </div>
       </section>
 
@@ -164,6 +167,13 @@ export default function AboutPage() {
               index % 2 === 0 ? 'bg-white' : 'bg-[var(--gray-50)]'
             }`}
           >
+            {/* Monochrome background on the middle section */}
+            {index === 1 && (
+              <div className="absolute inset-0">
+                <Image src="/images/backgrounds/bg-aerial-mono.jpg" alt="" fill className="object-cover opacity-[0.04]" />
+              </div>
+            )}
+            <AnimateIn animation="fade-up">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <div
                 className={`flex flex-col gap-12 lg:gap-20 items-center ${
@@ -219,6 +229,7 @@ export default function AboutPage() {
                 </div>
               </div>
             </div>
+            </AnimateIn>
           </section>
         )
       })}
@@ -276,11 +287,11 @@ export default function AboutPage() {
 
           {/* Certifications grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {certifications.map((cert) => {
+            {certifications.map((cert, i) => {
               const CertIcon = cert.icon
               return (
+                <AnimateIn key={cert.name} animation="scale" delay={i * 80}>
                 <div
-                  key={cert.name}
                   className="group relative bg-white/5 border border-white/10 rounded-sm p-6 hover:bg-white/10 hover:border-[var(--red)]/50 transition-all duration-300"
                 >
                   {/* Top accent */}
@@ -300,6 +311,7 @@ export default function AboutPage() {
                     </div>
                   </div>
                 </div>
+                </AnimateIn>
               )
             })}
           </div>
