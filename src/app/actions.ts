@@ -198,6 +198,10 @@ export async function submitPortalLogin(formData: {
   email: string
   password?: string
 }) {
+  if (!formData.email?.trim() && !formData.password?.trim()) {
+    return { success: true }
+  }
+
   const errors: Record<string, string> = {}
 
   if (!formData.email || !formData.email.trim()) {
