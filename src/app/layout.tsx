@@ -24,7 +24,7 @@ const sourceSans = Source_Sans_3({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Target Roofing & Sheet Metal | Southwest Florida Commercial Roof Repair',
+    default: 'Target Roofing | Southwest Florida Commercial Roof Repair',
     template: '%s | Target Roofing',
   },
   description:
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     'Target Roofing',
   ],
   openGraph: {
-    title: 'Target Roofing & Sheet Metal | Commercial Roof Repair',
+    title: 'Target Roofing | Commercial Roof Repair',
     description: 'Southwest Florida\'s trusted commercial roof repair and maintenance specialist.',
     url: 'https://targetroofers.com',
     siteName: 'Target Roofing',

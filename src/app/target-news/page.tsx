@@ -83,8 +83,8 @@ export default function TargetNewsPage() {
             <AnimateIn animation="fade-up" delay={200}>
               <p className="text-lg md:text-xl text-[var(--gray-300)] leading-relaxed max-w-2xl">
                 Everything You Need to Know About Commercial Roofing in Southwest
-                Florida. Here, you&apos;ll find news about Target Roofing &amp;
-                Sheet Metal, as well as information we know will be valuable to our
+                Florida. Here, you&apos;ll find news about Target Roofing,
+                as well as information we know will be valuable to our
                 customers and partners.
               </p>
             </AnimateIn>

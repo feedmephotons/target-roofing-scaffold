@@ -412,12 +412,12 @@ export default function RoofingServicesPage() {
             </AnimateIn>
           </div>
 
-          {/* Crew image: metal fabrication */}
+          {/* Crew image: reroofing work */}
           <AnimateIn animation="fade-up" delay={150}>
             <div className="relative aspect-[21/9] rounded-lg overflow-hidden shadow-lg mb-12 max-w-4xl mx-auto">
               <Image
-                src="/images/crew/crew-metal-fabrication.png"
-                alt="Target Roofing worker operating a metal brake machine for custom sheet metal fabrication"
+                src="/images/crew/crew-aerial-worksite.png"
+                alt="Aerial view of Target Roofing crew working on a commercial reroofing project"
                 fill
                 sizes="(max-width: 1024px) 100vw, 60vw"
                 className="object-cover"

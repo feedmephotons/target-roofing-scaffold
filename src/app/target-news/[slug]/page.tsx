@@ -229,7 +229,7 @@ export default async function BlogPostDetailPage({ params }: PageProps) {
                       </p>
                       <p className="text-base text-[var(--gray-600)] leading-relaxed mt-3">
                         Our full service department offers 24/7/365 emergency response, preventive maintenance checkups, 
-                        and custom sheet metal fabrication.
+                        and preventive maintenance plans.
                       </p>
                     </div>
                   </div>

@@ -143,7 +143,7 @@ export default function Footer() {
       <div className="border-t border-white/10">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-[var(--gray-500)]">
-            <p>&copy; {new Date().getFullYear()} Target Roofing & Sheet Metal. All rights reserved. License #CCC1334168</p>
+            <p>&copy; {new Date().getFullYear()} Target Roofing. All rights reserved. License #CCC1334168</p>
             <div className="flex items-center gap-6">
               <span>Serving Lee, Collier, Charlotte & Sarasota Counties</span>
             </div>

@@ -15,6 +15,10 @@ import {
   CalendarCheck,
   CheckCircle,
   Quote,
+  MapPin,
+  Play,
+  Crosshair,
+  ShieldCheck,
 } from 'lucide-react'
 import InlineLeadForm from '@/components/InlineLeadForm'
 import AnimateIn from '@/components/AnimateIn'
@@ -73,6 +77,7 @@ export default function HomePage() {
       <HeroSection />
       <TrustSignalsSection />
       <ServicesSection />
+      <VideoShowcaseSection />
       <RepairFormSection />
       <StatsSection />
       <CommunitySection />
@@ -147,7 +152,7 @@ function HeroSection() {
         <iframe
           className="hidden md:block absolute top-1/2 left-1/2 h-[120%] w-[120%] -translate-x-1/2 -translate-y-1/2 pointer-events-none"
           style={{ minWidth: '100vw', minHeight: '100vh' }}
-          src="https://www.youtube.com/embed/yz5H6FkrWhs?autoplay=1&mute=1&loop=1&playlist=yz5H6FkrWhs&controls=0&showinfo=0&modestbranding=1&playsinline=1&rel=0&enablejsapi=1&origin=https://targetroofers.com"
+          src="https://www.youtube.com/embed/yz5H6FkrWhs?autoplay=1&mute=1&loop=1&playlist=yz5H6FkrWhs&controls=0&showinfo=0&modestbranding=1&playsinline=1&rel=0&enablejsapi=1&start=3&origin=https://targetroofers.com"
           title="Target Roofing Background Video"
           allow="autoplay; encrypted-media"
           allowFullScreen
@@ -332,17 +337,36 @@ function ServicesSection() {
           })}
         </div>
 
-        {/* Equipment spread image */}
+        {/* Service Areas */}
         <AnimateIn animation="fade-up" delay={200} className="mt-16">
-          <div className="relative h-64 lg:h-80 rounded-lg overflow-hidden">
-            <Image
-              src="/images/crew/crew-equipment-spread.jpg"
-              alt="Professional roofing tools and equipment"
-              fill
-              className="object-cover"
-              sizes="(max-width: 1280px) 100vw, 1280px"
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-black/30" />
+          <div className="rounded-lg border border-[var(--gray-200)] bg-white p-6 sm:p-8 shadow-sm">
+            <div className="flex items-center gap-2 mb-5">
+              <MapPin className="h-5 w-5 text-[var(--red)]" />
+              <h3 className="text-lg font-bold uppercase tracking-wide text-[var(--black)] font-[family-name:var(--font-display)]">
+                Service Areas
+              </h3>
+            </div>
+            <div className="flex gap-2.5 overflow-x-auto pb-2 sm:pb-0 sm:flex-wrap sm:overflow-visible scrollbar-hide">
+              {[
+                { name: 'Fort Myers', slug: 'fort-myers' },
+                { name: 'Naples', slug: 'naples' },
+                { name: 'Cape Coral', slug: 'cape-coral' },
+                { name: 'Sarasota', slug: 'sarasota' },
+                { name: 'Bonita Springs', slug: 'bonita-springs' },
+                { name: 'Punta Gorda', slug: 'punta-gorda' },
+                { name: 'Port Charlotte', slug: 'port-charlotte' },
+                { name: 'Sanibel', slug: 'sanibel' },
+              ].map((area) => (
+                <Link
+                  key={area.slug}
+                  href={`/locations/${area.slug}/roof-repair`}
+                  className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full border border-[var(--gray-300)] bg-white px-4 py-2 text-xs font-semibold uppercase tracking-wider text-[var(--black)] transition-all duration-200 hover:bg-[var(--red)] hover:border-[var(--red)] hover:text-white flex-shrink-0"
+                >
+                  <MapPin className="h-3.5 w-3.5" />
+                  {area.name}
+                </Link>
+              ))}
+            </div>
           </div>
         </AnimateIn>
 
@@ -602,8 +626,8 @@ function PortfolioSection() {
           <AnimateIn animation="fade-up" delay={0}>
             <div className="relative aspect-[4/3] rounded-lg overflow-hidden">
               <Image
-                src="/images/crew/crew-crane-lift.jpg"
-                alt="Crane lifting roofing materials onto building"
+                src="/images/crew/crew-emergency-tarp.png"
+                alt="Target Roofing crew installing emergency tarp after storm damage"
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 33vw"
@@ -611,7 +635,7 @@ function PortfolioSection() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-4">
                 <p className="text-white text-sm font-bold uppercase tracking-wide font-[family-name:var(--font-display)] drop-shadow-lg">
-                  Heavy Lift Capability
+                  Emergency Storm Response
                 </p>
               </div>
             </div>
@@ -847,8 +871,8 @@ function NewsSection() {
           <div className="grid grid-cols-2 gap-4">
             <div className="relative h-48 lg:h-64 rounded-lg overflow-hidden">
               <Image
-                src="/images/crew/crew-metal-fabrication.png"
-                alt="Worker in sheet metal fabrication shop"
+                src="/images/crew/crew-repairing-roof.png"
+                alt="Target Roofing crew repairing a commercial roof"
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 50vw"
@@ -884,7 +908,201 @@ function NewsSection() {
 }
 
 /* ------------------------------------------------------------------ */
-/*  8. PARTNERS                                                        */
+/*  8b. VIDEO SHOWCASE                                                 */
+/* ------------------------------------------------------------------ */
+const showcaseVideos = [
+  {
+    id: 'yz5H6FkrWhs',
+    title: 'Target Roofing Overview',
+    description: 'See what makes Target Roofing Southwest Florida\'s trusted commercial roofing partner.',
+    duration: '3:42',
+  },
+  {
+    id: 'A7Qz9tz8nNU',
+    title: 'Colonial Country Club',
+    description: 'Full roof replacement at Colonial Country Club in Fort Myers.',
+    duration: '2:18',
+  },
+  {
+    id: 'Ywio4IhCQPI',
+    title: 'Water Test Inspection',
+    description: 'Our thorough water test procedure to detect and diagnose roof leaks.',
+    duration: '2:57',
+  },
+  {
+    id: '-o8JhirAPR8',
+    title: 'Service Department',
+    description: 'Behind the scenes with the Target Roofing service team on repairs and maintenance.',
+    duration: '3:05',
+  },
+  {
+    id: 'cGLaC7x9btw',
+    title: 'Our Process',
+    description: 'How we approach every project with precision, accountability, and cutting-edge technology.',
+    duration: '2:31',
+  },
+]
+
+function VideoShowcaseSection() {
+  const [activeIdx, setActiveIdx] = useState(0)
+  const active = showcaseVideos[activeIdx]
+
+  return (
+    <section className="relative py-20 md:py-28 overflow-hidden">
+      {/* Background image - full bleed */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/images/backgrounds/bg-learn-from-pros.png"
+          alt=""
+          fill
+          className="object-fill"
+          sizes="100vw"
+          priority
+        />
+      </div>
+
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <AnimateIn animation="fade-up" className="text-center mb-12 md:mb-16">
+          <div className="flex items-center justify-center gap-4 mb-4">
+            <span className="text-[var(--red)] text-2xl font-bold tracking-widest">&raquo;&raquo;&raquo;</span>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold font-[family-name:var(--font-display)] uppercase leading-[0.95]">
+              Watch Target Roofing{' '}
+              <span className="text-[var(--red)]">In Action</span>
+            </h2>
+            <span className="text-[var(--red)] text-2xl font-bold tracking-widest">&laquo;&laquo;&laquo;</span>
+          </div>
+          <div className="w-16 h-[3px] bg-[var(--red)] mx-auto mb-4" />
+          <p className="text-lg text-[var(--gray-600)] max-w-2xl mx-auto">
+            Project walkthroughs, inspections, and behind-the-scenes footage from Southwest Florida&apos;s top commercial roofing team.
+          </p>
+        </AnimateIn>
+
+        {/* Video grid */}
+        <AnimateIn animation="fade-up" delay={150}>
+          <div className="flex flex-col lg:flex-row gap-6">
+            {/* Main player */}
+            <div className="flex-1 min-w-0">
+              <div className="relative w-full aspect-video rounded-lg overflow-hidden shadow-2xl bg-black">
+                <iframe
+                  key={active.id}
+                  src={`https://www.youtube.com/embed/${active.id}?rel=0&modestbranding=1`}
+                  title={active.title}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="absolute inset-0 w-full h-full"
+                />
+              </div>
+              {/* Now playing info */}
+              <div className="mt-4 flex items-start gap-3">
+                <span className="flex-shrink-0 mt-1 flex items-center justify-center w-8 h-8 rounded-full bg-[var(--red)] text-white">
+                  <Play className="w-4 h-4 fill-current" />
+                </span>
+                <div>
+                  <h3 className="text-lg font-bold text-[var(--black)] font-[family-name:var(--font-display)] uppercase">
+                    {active.title}
+                  </h3>
+                  <p className="text-sm text-[var(--gray-500)]">{active.description}</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Sidebar playlist */}
+            <div className="lg:w-80 xl:w-96 flex flex-row lg:flex-col gap-3 overflow-x-auto lg:overflow-x-visible pb-2 lg:pb-0">
+              {showcaseVideos.map((video, idx) => (
+                <button
+                  key={video.id}
+                  onClick={() => setActiveIdx(idx)}
+                  className={`group flex-shrink-0 w-64 lg:w-full flex items-start gap-3 p-3 rounded-lg transition-all text-left ${
+                    idx === activeIdx
+                      ? 'bg-[var(--red)] text-white shadow-lg'
+                      : 'bg-white/80 hover:bg-white shadow-md hover:shadow-lg'
+                  }`}
+                >
+                  {/* Thumbnail */}
+                  <div className="relative flex-shrink-0 w-28 aspect-video rounded overflow-hidden">
+                    <Image
+                      src={`https://img.youtube.com/vi/${video.id}/mqdefault.jpg`}
+                      alt={video.title}
+                      fill
+                      className="object-cover"
+                      sizes="112px"
+                    />
+                    <div className={`absolute inset-0 flex items-center justify-center ${idx === activeIdx ? 'bg-black/20' : 'bg-black/30'}`}>
+                      <div className={`w-8 h-8 rounded-full flex items-center justify-center ${idx === activeIdx ? 'bg-white/90' : 'bg-white/80'}`}>
+                        <Play className={`w-3.5 h-3.5 fill-current ${idx === activeIdx ? 'text-[var(--red)]' : 'text-[var(--black)]'}`} />
+                      </div>
+                    </div>
+                    <span className={`absolute bottom-1 right-1 text-[10px] font-bold px-1.5 py-0.5 rounded ${idx === activeIdx ? 'bg-white text-[var(--red)]' : 'bg-black/70 text-white'}`}>
+                      {video.duration}
+                    </span>
+                  </div>
+                  {/* Info */}
+                  <div className="min-w-0 flex-1">
+                    <h4 className={`text-sm font-bold font-[family-name:var(--font-display)] uppercase leading-tight ${idx === activeIdx ? 'text-white' : 'text-[var(--black)]'}`}>
+                      {video.title}
+                    </h4>
+                    <p className={`text-xs mt-1 leading-snug line-clamp-2 ${idx === activeIdx ? 'text-white/80' : 'text-[var(--gray-500)]'}`}>
+                      {video.description}
+                    </p>
+                  </div>
+                </button>
+              ))}
+            </div>
+          </div>
+        </AnimateIn>
+
+        {/* CTA button */}
+        <AnimateIn animation="fade-up" delay={300} className="mt-10 text-center">
+          <Link
+            href="/video-gallery"
+            className="inline-flex items-center gap-3 bg-[var(--red)] hover:bg-[var(--red-dark)] text-white font-bold uppercase tracking-wider text-sm px-10 py-4 rounded shadow-lg transition-all hover:shadow-xl hover:scale-[1.02]"
+          >
+            <Play className="w-5 h-5 fill-current" />
+            Watch All Videos
+            <ChevronRight className="w-5 h-5" />
+          </Link>
+        </AnimateIn>
+      </div>
+
+      {/* Bottom black bar */}
+      <div className="relative z-10 mt-20 bg-[var(--black)]">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <span className="flex items-center justify-center w-10 h-10 rounded-full bg-[var(--red)]/20">
+                <ShieldCheck className="w-5 h-5 text-[var(--red)]" />
+              </span>
+              <div>
+                <p className="text-sm font-bold text-[var(--red)] uppercase tracking-wide font-[family-name:var(--font-display)]">
+                  Real Knowledge. Real Protection.
+                </p>
+                <p className="text-xs text-[var(--gray-400)]">
+                  Trusted advice from the roofing experts at Target Roofing.
+                </p>
+              </div>
+            </div>
+            <div className="flex items-center gap-3">
+              <Crosshair className="w-6 h-6 text-[var(--gray-500)]" />
+              <p className="text-sm font-bold text-[var(--red)] uppercase tracking-wide font-[family-name:var(--font-display)]">
+                Learn More. Protect More. Worry Less.
+              </p>
+              {/* Diagonal accent stripes */}
+              <div className="hidden md:flex gap-1 ml-2">
+                {[...Array(4)].map((_, i) => (
+                  <div key={i} className="w-2 h-8 bg-[var(--red)] -skew-x-12" />
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* ------------------------------------------------------------------ */
+/*  9. PARTNERS                                                        */
 /* ------------------------------------------------------------------ */
 const partners = [
   { img: '/images/partners/englert.jpg', name: 'Englert' },
@@ -916,14 +1134,14 @@ function PartnersSection() {
             {partners.map((partner) => (
               <div
                 key={partner.name}
-                className="group flex h-24 w-full items-center justify-center max-w-[160px]"
+                className="group flex h-32 w-full items-center justify-center max-w-[200px]"
               >
                 <Image
                   src={partner.img}
                   alt={partner.name}
                   width={180}
                   height={90}
-                  className="max-h-16 w-auto object-contain opacity-60 grayscale transition-all duration-300 group-hover:opacity-100 group-hover:grayscale-0"
+                  className="max-h-24 w-auto object-contain opacity-60 grayscale transition-all duration-300 group-hover:opacity-100 group-hover:grayscale-0"
                 />
               </div>
             ))}

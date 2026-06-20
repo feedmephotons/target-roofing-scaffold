@@ -16,7 +16,7 @@ import AnimateIn from '@/components/AnimateIn'
 export const metadata: Metadata = {
   title: 'Careers',
   description:
-    'Join Target Roofing & Sheet Metal, one of Florida\'s fastest-growing roofing companies. Explore career opportunities in sales, marketing, operations, service, and finance.',
+    'Join Target Roofing, one of Florida\'s fastest-growing roofing companies. Explore career opportunities in sales, marketing, operations, service, and finance.',
 }
 
 const benefits = [
