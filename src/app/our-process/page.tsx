@@ -197,7 +197,7 @@ export default function OurProcessPage() {
             <AnimateIn animation="fade-left">
               <div className="relative aspect-[16/9] rounded-lg overflow-hidden shadow-xl">
                 <Image
-                  src="/images/crew/crew-welding-closeup.jpg"
+                  src="/images/crew/crew-tpo-welding.png"
                   alt="Close-up of Target Roofing crew member welding on a commercial roof"
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"
@@ -209,7 +209,7 @@ export default function OurProcessPage() {
             <AnimateIn animation="fade-right">
               <div className="relative aspect-[16/9] rounded-lg overflow-hidden shadow-xl">
                 <Image
-                  src="/images/crew/crew-equipment-spread.jpg"
+                  src="/images/crew/crew-overhead-worksite.png"
                   alt="Target Roofing professional equipment laid out for a commercial roofing job"
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"

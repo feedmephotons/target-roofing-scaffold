@@ -82,7 +82,7 @@ export default function VideoGalleryPage() {
           <AnimateIn animation="fade-up" delay={200} className="mt-16">
             <div className="relative w-full h-64 md:h-80 rounded-lg overflow-hidden shadow-lg">
               <Image
-                src="/images/crew/crew-welding-closeup.jpg"
+                src="/images/crew/crew-tpo-welding.png"
                 alt="Target Roofing crew welding closeup"
                 fill
                 sizes="(max-width: 768px) 100vw, 1200px"

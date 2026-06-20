@@ -200,7 +200,7 @@ export default function TpoPvcMembraneRoofingPage() {
             <AnimateIn animation="fade-up" delay={200}>
               <div className="relative aspect-[4/3] rounded-lg overflow-hidden shadow-2xl">
                 <Image
-                  src="/images/crew/crew-welding-closeup.jpg"
+                  src="/images/crew/crew-tpo-welding.png"
                   alt="Close-up of a Target Roofing technician heat-welding a TPO membrane seam"
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"

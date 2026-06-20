@@ -643,7 +643,7 @@ function PortfolioSection() {
           <AnimateIn animation="fade-up" delay={150}>
             <div className="relative aspect-[4/3] rounded-lg overflow-hidden">
               <Image
-                src="/images/crew/crew-welding-closeup.jpg"
+                src="/images/crew/crew-tpo-welding.png"
                 alt="Close-up of hands welding TPO seams"
                 fill
                 className="object-cover"

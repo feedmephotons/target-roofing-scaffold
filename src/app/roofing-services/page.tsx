@@ -231,7 +231,7 @@ export default function RoofingServicesPage() {
               <AnimateIn animation="fade-up" delay={300}>
                 <div className="relative aspect-[16/9] rounded-lg overflow-hidden shadow-lg mb-8">
                   <Image
-                    src="/images/crew/crew-welding-closeup.jpg"
+                    src="/images/crew/crew-tpo-welding.png"
                     alt="Target Roofing crew member performing TPO welding with visible company logo"
                     fill
                     sizes="(max-width: 1024px) 100vw, 50vw"
