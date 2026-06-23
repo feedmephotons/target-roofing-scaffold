@@ -59,7 +59,7 @@ function AdminLogin({ onLogin }: { onLogin: () => void }) {
 
     // Simulate authentication check
     setTimeout(() => {
-      if (email === 'admin@targetroofing.com' && password === 'target2026') {
+      if (email === 'admin@targetroofers.com' && password === 'target2026') {
         onLogin()
       } else {
         setError('Invalid admin credentials. Access Denied.')
@@ -74,7 +74,7 @@ function AdminLogin({ onLogin }: { onLogin: () => void }) {
         <div className="text-center mb-8">
           <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-[var(--red)]/10 px-4 py-1.5 text-xs font-bold text-[var(--red)] uppercase tracking-wider">
             <Shield className="h-4 w-4" />
-            Superintendent Access Only
+            Admin Access
           </div>
           <h1 className="text-3xl font-bold font-[family-name:var(--font-display)] uppercase tracking-tight text-[var(--black)]">
             Target Management
@@ -91,14 +91,14 @@ function AdminLogin({ onLogin }: { onLogin: () => void }) {
 
           <div>
             <label className="block text-xs font-bold uppercase tracking-wider text-[var(--gray-500)] mb-1.5">
-              Superintendent Email
+              Email
             </label>
             <input
               type="email"
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="super@targetroofing.com"
+              placeholder="admin@targetroofers.com"
               className="w-full px-4 py-3 rounded-lg border border-[var(--gray-300)] bg-white text-base text-[var(--black)] focus:outline-none focus:ring-2 focus:ring-[var(--red)] focus:border-[var(--red)] transition-all"
               autoComplete="username email"
             />
@@ -476,12 +476,12 @@ function AdminDashboard({ onLogout }: { onLogout: () => void }) {
             </div>
             <div>
               <h2 className="text-sm font-bold uppercase tracking-wider font-[family-name:var(--font-display)]">Target Roofing Admin</h2>
-              <p className="text-[10px] text-[var(--gray-400)] font-semibold">Superintendent Control Console</p>
+              <p className="text-[10px] text-[var(--gray-400)] font-semibold">Administrative Console</p>
             </div>
           </div>
 
           <div className="flex items-center gap-4">
-            <span className="hidden md:inline text-xs text-[var(--gray-400)] font-medium">Logged in as: <span className="text-white font-bold">Superintendent</span></span>
+            <span className="hidden md:inline text-xs text-[var(--gray-400)] font-medium">Logged in as: <span className="text-white font-bold">Admin</span></span>
             <button
               onClick={onLogout}
               className="inline-flex items-center gap-1.5 px-4 py-3.5 border border-white/20 rounded hover:border-[var(--red)] hover:text-[var(--red-light)] transition-all text-xs font-bold uppercase bg-white/5"
