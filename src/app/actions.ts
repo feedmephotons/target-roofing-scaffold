@@ -1,7 +1,6 @@
 'use server'
 
-import fs from 'fs'
-import path from 'path'
+import { supabase } from '@/lib/supabase'
 
 interface LeadSaveResult {
   success: boolean
@@ -10,98 +9,46 @@ interface LeadSaveResult {
 }
 
 export interface LeadRecord {
-  id: string;
-  timestamp: string;
-  formType: 'contact' | 'softwash' | 'portal_login';
-  status: 'new' | 'processed' | 'spam';
-  firstName?: string;
-  lastName?: string;
-  email: string;
-  phone?: string;
-  streetAddress?: string;
-  city?: string;
-  zip?: string;
-  service?: string;
-  message?: string;
-  serviceAddress?: string;
-  password?: string;
+  id: string
+  created_at: string
+  form_type: 'contact' | 'softwash' | 'portal_login'
+  status: 'new' | 'processed' | 'spam'
+  first_name?: string
+  last_name?: string
+  email: string
+  phone?: string
+  street_address?: string
+  city?: string
+  zip?: string
+  service?: string
+  message?: string
+  service_address?: string
 }
-
-function findWorkspaceRoot(): string {
-  const startPaths = [];
-  if (typeof __dirname !== 'undefined' && __dirname) {
-    startPaths.push(__dirname);
-  }
-  startPaths.push(process.cwd());
-
-  for (const startPath of startPaths) {
-    let currentDir = path.resolve(startPath);
-    const maxDepth = 12;
-    for (let i = 0; i < maxDepth; i++) {
-      const projectMdPath = path.join(currentDir, 'PROJECT.md');
-      const agentsPath = path.join(currentDir, '.agents');
-      if (fs.existsSync(projectMdPath) || fs.existsSync(agentsPath)) {
-        return currentDir;
-      }
-      const parentDir = path.dirname(currentDir);
-      if (parentDir === currentDir) {
-        break;
-      }
-      currentDir = parentDir;
-    }
-  }
-  return process.cwd();
-}
-
-let saveQueue: Promise<unknown> = Promise.resolve();
 
 async function saveLead(
   formType: 'contact' | 'softwash' | 'portal_login',
-  data: Partial<LeadRecord> & { email: string }
+  data: Record<string, string | undefined>
 ): Promise<LeadSaveResult> {
-  return new Promise<LeadSaveResult>((resolve) => {
-    saveQueue = saveQueue
-      .then(async () => {
-        try {
-          const workspaceRoot = findWorkspaceRoot();
-          const filePath = path.join(workspaceRoot, 'leads.json');
-          let leads: LeadRecord[] = [];
-
-          try {
-            await fs.promises.access(filePath, fs.constants.F_OK);
-            const fileContent = await fs.promises.readFile(filePath, 'utf8');
-            if (fileContent.trim()) {
-              leads = JSON.parse(fileContent);
-            }
-          } catch {
-            leads = [];
-          }
-
-          const newLead: LeadRecord = {
-            id: Math.random().toString(36).substring(2, 9),
-            timestamp: new Date().toISOString(),
-            formType,
-            status: 'new',
-            ...data,
-          };
-
-          // Backup log for serverless environment filesystem fallbacks
-          console.log('Flat lead record captured:', newLead);
-
-          leads.push(newLead);
-
-          await fs.promises.writeFile(filePath, JSON.stringify(leads, null, 2), 'utf8');
-          resolve({ success: true });
-        } catch (error) {
-          console.error('Error saving lead:', error);
-          resolve({ success: false, error: 'Failed to save lead details locally.' });
-        }
-      })
-      .catch((err) => {
-        console.error('Unhandled error in saveQueue:', err);
-        resolve({ success: false, error: 'Failed to save lead details due to queue error.' });
-      });
-  });
+  try {
+    const { error } = await supabase.from('leads').insert({
+      form_type: formType,
+      first_name: data.firstName,
+      last_name: data.lastName,
+      email: data.email,
+      phone: data.phone,
+      street_address: data.streetAddress,
+      city: data.city,
+      zip: data.zip,
+      service: data.service,
+      message: data.message,
+      service_address: data.serviceAddress,
+    })
+    if (error) throw error
+    return { success: true }
+  } catch (error) {
+    console.error('Error saving lead:', error)
+    return { success: false, error: 'Failed to save lead details.' }
+  }
 }
 
 export async function submitContactLead(formData: {
@@ -223,29 +170,21 @@ export async function submitPortalLogin(formData: {
     return { success: false, errors, error: 'Please correct the highlighted fields.' }
   }
 
-  return await saveLead('portal_login', {
-    email: formData.email,
-    password: '[REDACTED]',
-  })
+  return await saveLead('portal_login', { email: formData.email })
 }
 
 export async function getLeads(): Promise<LeadRecord[]> {
   try {
-    const workspaceRoot = findWorkspaceRoot()
-    const filePath = path.join(workspaceRoot, 'leads.json')
-    try {
-      await fs.promises.access(filePath, fs.constants.F_OK)
-      const fileContent = await fs.promises.readFile(filePath, 'utf8')
-      if (fileContent.trim()) {
-        return JSON.parse(fileContent)
-      }
-    } catch {
-      return []
-    }
+    const { data, error } = await supabase
+      .from('leads')
+      .select('*')
+      .order('created_at', { ascending: false })
+    if (error) throw error
+    return data || []
   } catch (error) {
     console.error('Error fetching leads:', error)
+    return []
   }
-  return []
 }
 
 export async function updateLeadStatus(
@@ -253,22 +192,12 @@ export async function updateLeadStatus(
   status: 'new' | 'processed' | 'spam'
 ): Promise<{ success: boolean; error?: string }> {
   try {
-    const workspaceRoot = findWorkspaceRoot()
-    const filePath = path.join(workspaceRoot, 'leads.json')
-    await fs.promises.access(filePath, fs.constants.F_OK)
-    const fileContent = await fs.promises.readFile(filePath, 'utf8')
-    let leads: LeadRecord[] = []
-    if (fileContent.trim()) {
-      leads = JSON.parse(fileContent)
-    }
-
-    const idx = leads.findIndex((l) => l.id === id)
-    if (idx !== -1) {
-      leads[idx].status = status
-      await fs.promises.writeFile(filePath, JSON.stringify(leads, null, 2), 'utf8')
-      return { success: true }
-    }
-    return { success: false, error: 'Lead not found.' }
+    const { error } = await supabase
+      .from('leads')
+      .update({ status })
+      .eq('id', id)
+    if (error) throw error
+    return { success: true }
   } catch (error) {
     console.error('Error updating lead status:', error)
     return { success: false, error: 'Failed to update lead status.' }
@@ -282,25 +211,13 @@ export async function addReview(reviewData: {
   date?: string
 }) {
   try {
-    const workspaceRoot = findWorkspaceRoot()
-    const filePath = path.join(workspaceRoot, 'site/src/data/reviews.json')
-    let reviews = []
-    try {
-      const fileContent = await fs.promises.readFile(filePath, 'utf8')
-      reviews = JSON.parse(fileContent)
-    } catch {
-      reviews = []
-    }
-
-    const newReview = {
+    const { error } = await supabase.from('reviews').insert({
       name: reviewData.name,
       date: reviewData.date || new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long' }),
       source: reviewData.source || 'Google',
       text: reviewData.text,
-    }
-
-    reviews.unshift(newReview)
-    await fs.promises.writeFile(filePath, JSON.stringify(reviews, null, 2), 'utf8')
+    })
+    if (error) throw error
     return { success: true }
   } catch (error) {
     console.error('Error adding review:', error)
@@ -310,22 +227,13 @@ export async function addReview(reviewData: {
 
 export async function getSeoConfig() {
   try {
-    const workspaceRoot = findWorkspaceRoot()
-    const filePath = path.join(workspaceRoot, 'site/src/data/seo-config.json')
-    try {
-      const fileContent = await fs.promises.readFile(filePath, 'utf8')
-      return JSON.parse(fileContent)
-    } catch {
-      // Default initial config
-      const defaultConfig = {
-        home: { title: "Target Roofing | Roof Repair SWFL", description: "Target Roofing specializes in commercial roof repairs and proactive maintenance plans across Southwest Florida.", keywords: "roof repair, fort myers roofer, commercial roof maintenance" },
-        services: { title: "Our Roofing Services | Target Roofing", description: "Extend your roof's service life with expert repairs, maintenance, and seamless replacement transitions.", keywords: "roof repairs, roof maintenance, commercial reroofing" },
-        about: { title: "About Target Roofing | SWFL Roofer", description: "Learn about Target Roofing's team, direct-employee values, and process in Fort Myers, Naples, and Sarasota.", keywords: "about target roofing, roofing team, florida roofing contractor" },
-        softwash: { title: "Target Softwash | Exterior Roof Cleaning", description: "Gentle, damage-free low-pressure softwash cleaning to extend roof life and restore curb appeal.", keywords: "softwash roof cleaning, florida roof wash, tile roof cleaning" }
-      }
-      await fs.promises.writeFile(filePath, JSON.stringify(defaultConfig, null, 2), 'utf8')
-      return defaultConfig
+    const { data, error } = await supabase.from('seo_config').select('*')
+    if (error) throw error
+    const config: Record<string, { title: string; description: string; keywords: string }> = {}
+    for (const row of data || []) {
+      config[row.route] = { title: row.title, description: row.description, keywords: row.keywords }
     }
+    return config
   } catch (error) {
     console.error('Error getting SEO config:', error)
     return {}
@@ -334,17 +242,10 @@ export async function getSeoConfig() {
 
 export async function updateSeoConfig(route: string, data: { title: string; description: string; keywords: string }) {
   try {
-    const workspaceRoot = findWorkspaceRoot()
-    const filePath = path.join(workspaceRoot, 'site/src/data/seo-config.json')
-    let config: Record<string, unknown> = {}
-    try {
-      const fileContent = await fs.promises.readFile(filePath, 'utf8')
-      config = JSON.parse(fileContent)
-    } catch {
-      config = {}
-    }
-    config[route] = data
-    await fs.promises.writeFile(filePath, JSON.stringify(config, null, 2), 'utf8')
+    const { error } = await supabase
+      .from('seo_config')
+      .upsert({ route, ...data })
+    if (error) throw error
     return { success: true }
   } catch (error) {
     console.error('Error updating SEO config:', error)
@@ -363,43 +264,14 @@ export interface ShowcaseVideo {
   duration: string
 }
 
-const DEFAULT_SHOWCASE_VIDEOS: ShowcaseVideo[] = [
-  { id: 'yz5H6FkrWhs', title: 'Target Roofing Overview', description: "See what makes Target Roofing Southwest Florida's trusted commercial roofing partner.", duration: '3:42' },
-  { id: 'A7Qz9tz8nNU', title: 'Colonial Country Club', description: 'Full roof replacement at Colonial Country Club in Fort Myers.', duration: '2:18' },
-  { id: 'Ywio4IhCQPI', title: 'Water Test Inspection', description: 'Our thorough water test procedure to detect and diagnose roof leaks.', duration: '2:57' },
-  { id: '-o8JhirAPR8', title: 'Service Department', description: 'Behind the scenes with the Target Roofing service team on repairs and maintenance.', duration: '3:05' },
-  { id: 'cGLaC7x9btw', title: 'Our Process', description: 'How we approach every project with precision, accountability, and cutting-edge technology.', duration: '2:31' },
-]
-
-async function readShowcaseVideosFile(): Promise<ShowcaseVideo[]> {
-  const workspaceRoot = findWorkspaceRoot()
-  const filePath = path.join(workspaceRoot, 'site/src/data/showcase-videos.json')
-  try {
-    const fileContent = await fs.promises.readFile(filePath, 'utf8')
-    if (fileContent.trim()) {
-      return JSON.parse(fileContent)
-    }
-  } catch {
-    // File doesn't exist yet - create with defaults
-    const dir = path.dirname(filePath)
-    await fs.promises.mkdir(dir, { recursive: true })
-    await fs.promises.writeFile(filePath, JSON.stringify(DEFAULT_SHOWCASE_VIDEOS, null, 2), 'utf8')
-    return [...DEFAULT_SHOWCASE_VIDEOS]
-  }
-  return [...DEFAULT_SHOWCASE_VIDEOS]
-}
-
-async function writeShowcaseVideosFile(videos: ShowcaseVideo[]): Promise<void> {
-  const workspaceRoot = findWorkspaceRoot()
-  const filePath = path.join(workspaceRoot, 'site/src/data/showcase-videos.json')
-  const dir = path.dirname(filePath)
-  await fs.promises.mkdir(dir, { recursive: true })
-  await fs.promises.writeFile(filePath, JSON.stringify(videos, null, 2), 'utf8')
-}
-
 export async function getShowcaseVideos(): Promise<ShowcaseVideo[]> {
   try {
-    return await readShowcaseVideosFile()
+    const { data, error } = await supabase
+      .from('showcase_videos')
+      .select('id, title, description, duration')
+      .order('sort_order', { ascending: true })
+    if (error) throw error
+    return data || []
   } catch (error) {
     console.error('Error fetching showcase videos:', error)
     return []
@@ -413,12 +285,32 @@ export async function addShowcaseVideo(data: {
   duration: string
 }): Promise<{ success: boolean; error?: string }> {
   try {
-    const videos = await readShowcaseVideosFile()
-    if (videos.some((v) => v.id === data.id)) {
+    const { data: existing } = await supabase
+      .from('showcase_videos')
+      .select('id')
+      .eq('id', data.id)
+      .single()
+    if (existing) {
       return { success: false, error: 'A video with that ID already exists.' }
     }
-    videos.push({ id: data.id, title: data.title, description: data.description, duration: data.duration })
-    await writeShowcaseVideosFile(videos)
+
+    const { data: maxOrder } = await supabase
+      .from('showcase_videos')
+      .select('sort_order')
+      .order('sort_order', { ascending: false })
+      .limit(1)
+      .single()
+
+    const nextOrder = (maxOrder?.sort_order ?? -1) + 1
+
+    const { error } = await supabase.from('showcase_videos').insert({
+      id: data.id,
+      title: data.title,
+      description: data.description,
+      duration: data.duration,
+      sort_order: nextOrder,
+    })
+    if (error) throw error
     return { success: true }
   } catch (error) {
     console.error('Error adding showcase video:', error)
@@ -428,13 +320,11 @@ export async function addShowcaseVideo(data: {
 
 export async function removeShowcaseVideo(videoId: string): Promise<{ success: boolean; error?: string }> {
   try {
-    const videos = await readShowcaseVideosFile()
-    const idx = videos.findIndex((v) => v.id === videoId)
-    if (idx === -1) {
-      return { success: false, error: 'Video not found.' }
-    }
-    videos.splice(idx, 1)
-    await writeShowcaseVideosFile(videos)
+    const { error } = await supabase
+      .from('showcase_videos')
+      .delete()
+      .eq('id', videoId)
+    if (error) throw error
     return { success: true }
   } catch (error) {
     console.error('Error removing showcase video:', error)
@@ -444,21 +334,13 @@ export async function removeShowcaseVideo(videoId: string): Promise<{ success: b
 
 export async function reorderShowcaseVideos(ids: string[]): Promise<{ success: boolean; error?: string }> {
   try {
-    const videos = await readShowcaseVideosFile()
-    const videoMap = new Map(videos.map((v) => [v.id, v]))
-    const reordered: ShowcaseVideo[] = []
-    for (const id of ids) {
-      const video = videoMap.get(id)
-      if (video) {
-        reordered.push(video)
-        videoMap.delete(id)
-      }
+    for (let i = 0; i < ids.length; i++) {
+      const { error } = await supabase
+        .from('showcase_videos')
+        .update({ sort_order: i })
+        .eq('id', ids[i])
+      if (error) throw error
     }
-    // Append any videos not included in the ids list at the end
-    for (const remaining of videoMap.values()) {
-      reordered.push(remaining)
-    }
-    await writeShowcaseVideosFile(reordered)
     return { success: true }
   } catch (error) {
     console.error('Error reordering showcase videos:', error)
@@ -479,63 +361,17 @@ export interface JobListing {
   description: string
   requirements: string[]
   active: boolean
-  createdAt: string
-}
-
-const DEFAULT_JOB_LISTINGS: JobListing[] = [
-  {
-    id: '1',
-    title: 'Commercial Roofing Foreman',
-    department: 'Operations',
-    type: 'Full-Time',
-    location: 'Fort Myers, FL',
-    description: 'Lead commercial roofing crews on projects across Southwest Florida.',
-    requirements: ['5+ years commercial roofing experience', 'Foreman or supervisor experience', 'Valid Florida driver\'s license', 'OSHA 30 certification preferred'],
-    active: true,
-    createdAt: '2026-06-01',
-  },
-  {
-    id: '2',
-    title: 'Service Technician',
-    department: 'Service',
-    type: 'Full-Time',
-    location: 'Fort Myers, FL',
-    description: 'Perform roof repairs, maintenance inspections, and emergency service calls.',
-    requirements: ['2+ years roofing repair experience', 'Ability to work at heights', 'Strong problem-solving skills', 'Clean driving record'],
-    active: true,
-    createdAt: '2026-06-15',
-  },
-]
-
-async function readJobListingsFile(): Promise<JobListing[]> {
-  const workspaceRoot = findWorkspaceRoot()
-  const filePath = path.join(workspaceRoot, 'site/src/data/job-listings.json')
-  try {
-    const fileContent = await fs.promises.readFile(filePath, 'utf8')
-    if (fileContent.trim()) {
-      return JSON.parse(fileContent)
-    }
-  } catch {
-    // File doesn't exist yet - create with defaults
-    const dir = path.dirname(filePath)
-    await fs.promises.mkdir(dir, { recursive: true })
-    await fs.promises.writeFile(filePath, JSON.stringify(DEFAULT_JOB_LISTINGS, null, 2), 'utf8')
-    return [...DEFAULT_JOB_LISTINGS]
-  }
-  return [...DEFAULT_JOB_LISTINGS]
-}
-
-async function writeJobListingsFile(listings: JobListing[]): Promise<void> {
-  const workspaceRoot = findWorkspaceRoot()
-  const filePath = path.join(workspaceRoot, 'site/src/data/job-listings.json')
-  const dir = path.dirname(filePath)
-  await fs.promises.mkdir(dir, { recursive: true })
-  await fs.promises.writeFile(filePath, JSON.stringify(listings, null, 2), 'utf8')
+  created_at: string
 }
 
 export async function getJobListings(): Promise<JobListing[]> {
   try {
-    return await readJobListingsFile()
+    const { data, error } = await supabase
+      .from('job_listings')
+      .select('*')
+      .order('created_at', { ascending: false })
+    if (error) throw error
+    return data || []
   } catch (error) {
     console.error('Error fetching job listings:', error)
     return []
@@ -551,24 +387,15 @@ export async function addJobListing(data: {
   requirements: string[]
 }): Promise<{ success: boolean; error?: string }> {
   try {
-    const listings = await readJobListingsFile()
-    const maxId = listings.reduce((max, l) => {
-      const num = parseInt(l.id, 10)
-      return isNaN(num) ? max : Math.max(max, num)
-    }, 0)
-    const newListing: JobListing = {
-      id: String(maxId + 1),
+    const { error } = await supabase.from('job_listings').insert({
       title: data.title,
       department: data.department,
       type: data.type,
       location: data.location,
       description: data.description,
       requirements: data.requirements,
-      active: true,
-      createdAt: new Date().toISOString().split('T')[0],
-    }
-    listings.push(newListing)
-    await writeJobListingsFile(listings)
+    })
+    if (error) throw error
     return { success: true }
   } catch (error) {
     console.error('Error adding job listing:', error)
@@ -578,16 +405,14 @@ export async function addJobListing(data: {
 
 export async function updateJobListing(
   id: string,
-  data: Partial<Omit<JobListing, 'id' | 'createdAt'>>
+  data: Partial<Omit<JobListing, 'id' | 'created_at'>>
 ): Promise<{ success: boolean; error?: string }> {
   try {
-    const listings = await readJobListingsFile()
-    const idx = listings.findIndex((l) => l.id === id)
-    if (idx === -1) {
-      return { success: false, error: 'Job listing not found.' }
-    }
-    listings[idx] = { ...listings[idx], ...data }
-    await writeJobListingsFile(listings)
+    const { error } = await supabase
+      .from('job_listings')
+      .update(data)
+      .eq('id', id)
+    if (error) throw error
     return { success: true }
   } catch (error) {
     console.error('Error updating job listing:', error)
@@ -597,13 +422,11 @@ export async function updateJobListing(
 
 export async function removeJobListing(id: string): Promise<{ success: boolean; error?: string }> {
   try {
-    const listings = await readJobListingsFile()
-    const idx = listings.findIndex((l) => l.id === id)
-    if (idx === -1) {
-      return { success: false, error: 'Job listing not found.' }
-    }
-    listings.splice(idx, 1)
-    await writeJobListingsFile(listings)
+    const { error } = await supabase
+      .from('job_listings')
+      .delete()
+      .eq('id', id)
+    if (error) throw error
     return { success: true }
   } catch (error) {
     console.error('Error removing job listing:', error)
@@ -613,13 +436,19 @@ export async function removeJobListing(id: string): Promise<{ success: boolean; 
 
 export async function toggleJobListing(id: string): Promise<{ success: boolean; error?: string }> {
   try {
-    const listings = await readJobListingsFile()
-    const idx = listings.findIndex((l) => l.id === id)
-    if (idx === -1) {
-      return { success: false, error: 'Job listing not found.' }
-    }
-    listings[idx].active = !listings[idx].active
-    await writeJobListingsFile(listings)
+    const { data: listing, error: fetchError } = await supabase
+      .from('job_listings')
+      .select('active')
+      .eq('id', id)
+      .single()
+    if (fetchError) throw fetchError
+    if (!listing) return { success: false, error: 'Job listing not found.' }
+
+    const { error } = await supabase
+      .from('job_listings')
+      .update({ active: !listing.active })
+      .eq('id', id)
+    if (error) throw error
     return { success: true }
   } catch (error) {
     console.error('Error toggling job listing:', error)

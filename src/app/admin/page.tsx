@@ -187,7 +187,7 @@ function AdminDashboard({ onLogout }: { onLogout: () => void }) {
     try {
       const data = await getLeads()
       // sort leads descending by date/timestamp
-      data.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
+      data.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
       setLeads(data)
     } catch (e) {
       console.error(e)
@@ -451,8 +451,8 @@ function AdminDashboard({ onLogout }: { onLogout: () => void }) {
     if (!leadSearch.trim()) return true
     const q = leadSearch.toLowerCase()
     return (
-      (lead.firstName || '').toLowerCase().includes(q) ||
-      (lead.lastName || '').toLowerCase().includes(q) ||
+      (lead.first_name || '').toLowerCase().includes(q) ||
+      (lead.last_name || '').toLowerCase().includes(q) ||
       lead.email.toLowerCase().includes(q) ||
       (lead.city || '').toLowerCase().includes(q) ||
       (lead.service || '').toLowerCase().includes(q)
@@ -617,10 +617,10 @@ function AdminDashboard({ onLogout }: { onLogout: () => void }) {
                           {/* Info */}
                           <td className="px-6 py-4">
                             <p className="font-bold text-[var(--black)]">
-                              {lead.firstName ? `${lead.firstName} ${lead.lastName}` : 'System Log'}
+                              {lead.first_name ? `${lead.first_name} ${lead.last_name}` : 'System Log'}
                             </p>
                             <span className="text-[10px] font-bold font-mono text-[var(--gray-400)] bg-[var(--gray-100)] rounded px-1.5 py-0.5 mt-1 block w-fit">
-                              {lead.formType.toUpperCase()}
+                              {lead.form_type.toUpperCase()}
                             </span>
                           </td>
                           {/* Contact */}
@@ -638,16 +638,16 @@ function AdminDashboard({ onLogout }: { onLogout: () => void }) {
                           </td>
                           {/* Details */}
                           <td className="px-6 py-4 space-y-1.5 max-w-xs">
-                            {lead.streetAddress && (
+                            {lead.street_address && (
                               <div className="flex items-start gap-1 text-[var(--gray-500)]">
                                 <MapPin className="h-3 w-3 flex-shrink-0 mt-0.5 text-[var(--red)]" />
-                                <span>{lead.streetAddress}, {lead.city}, FL {lead.zip}</span>
+                                <span>{lead.street_address}, {lead.city}, FL {lead.zip}</span>
                               </div>
                             )}
-                            {lead.serviceAddress && (
+                            {lead.service_address && (
                               <div className="flex items-start gap-1 text-[var(--gray-500)] font-medium">
                                 <MapPin className="h-3 w-3 flex-shrink-0 mt-0.5 text-[var(--red)]" />
-                                <span>Site: {lead.serviceAddress}</span>
+                                <span>Site: {lead.service_address}</span>
                               </div>
                             )}
                             {lead.service && (
@@ -663,8 +663,8 @@ function AdminDashboard({ onLogout }: { onLogout: () => void }) {
                           </td>
                           {/* Date */}
                           <td className="px-6 py-4 text-[var(--gray-500)] font-semibold font-mono">
-                            {new Date(lead.timestamp).toLocaleDateString('en-US', { month: 'short', day: '2-digit' })} &bull;{' '}
-                            {new Date(lead.timestamp).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}
+                            {new Date(lead.created_at).toLocaleDateString('en-US', { month: 'short', day: '2-digit' })} &bull;{' '}
+                            {new Date(lead.created_at).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}
                           </td>
                           {/* Status */}
                           <td className="px-6 py-4">
@@ -1213,7 +1213,7 @@ function AdminDashboard({ onLogout }: { onLogout: () => void }) {
                           )}
 
                           <p className="text-[9px] font-mono text-[var(--gray-400)] mt-3">
-                            Posted: {new Date(job.createdAt).toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' })}
+                            Posted: {new Date(job.created_at).toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' })}
                           </p>
                         </div>
 
