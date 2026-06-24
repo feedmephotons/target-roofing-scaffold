@@ -192,7 +192,7 @@ export default function WaterproofingCoatingSystemsPage() {
             <AnimateIn animation="fade-up" delay={200}>
               <div className="relative aspect-[4/3] rounded-lg overflow-hidden shadow-2xl">
                 <Image
-                  src="/images/crew/crew-roof-inspection.jpg"
+                  src="/images/crew/crew-roof-inspection.png"
                   alt="Target Roofing technician inspecting a commercial roof surface before coating application"
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"

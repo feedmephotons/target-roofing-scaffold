@@ -96,7 +96,7 @@ export default function CareersPage() {
       {/* Crew Team Photo */}
       <section className="relative h-56 md:h-72 overflow-hidden">
         <Image
-          src="/images/crew/crew-team-photo.jpg"
+          src="/images/crew/crew-team-photo.png"
           alt="Target Roofing crew team"
           fill
           className="object-cover"
