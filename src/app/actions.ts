@@ -310,6 +310,30 @@ export async function getShowcaseVideos(): Promise<ShowcaseVideo[]> {
   }
 }
 
+export interface GalleryVideo {
+  title: string
+  url: string
+  description: string
+}
+
+export async function getGalleryVideos(): Promise<GalleryVideo[]> {
+  try {
+    const { data, error } = await supabase
+      .from('showcase_videos')
+      .select('id, title, description')
+      .order('sort_order', { ascending: true })
+    if (error) throw error
+    return (data || []).map(v => ({
+      title: v.title,
+      url: `https://www.youtube.com/embed/${v.id}`,
+      description: v.description,
+    }))
+  } catch (error) {
+    console.error('Error fetching gallery videos:', error)
+    return []
+  }
+}
+
 export async function addShowcaseVideo(data: {
   id: string
   title: string
