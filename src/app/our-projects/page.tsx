@@ -13,6 +13,7 @@ import {
   X,
 } from 'lucide-react'
 import AnimateIn from '@/components/AnimateIn'
+import RoofSchematic from '@/components/RoofSchematic'
 
 /* ------------------------------------------------------------------ */
 /*  Metadata (exported from a separate layout or handled via generateMetadata) */
@@ -200,6 +201,9 @@ export default function OurProjectsPage() {
 function HeroSection() {
   return (
     <section className="relative -mt-[7.5rem] overflow-hidden bg-[var(--black)]">
+      {/* Roof schematic background */}
+      <RoofSchematic className="text-white/[0.04] z-0" />
+
       {/* Diagonal red accent stripe */}
       <div
         className="absolute inset-0 z-0 opacity-[0.07]"

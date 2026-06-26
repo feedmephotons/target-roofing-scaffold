@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { ArrowRight, ClipboardList, FileText, Handshake, BarChart3, ShieldCheck } from 'lucide-react'
 import InlineLeadForm from '@/components/InlineLeadForm'
 import AnimateIn from '@/components/AnimateIn'
+import RoofSchematic from '@/components/RoofSchematic'
 
 export const metadata: Metadata = {
   title: 'Our Process',
@@ -52,7 +53,8 @@ export default function OurProcessPage() {
   return (
     <>
       {/* ── Hero ── */}
-      <section className="relative bg-[var(--black)] text-white noise-overlay">
+      <section className="relative bg-[var(--black)] text-white noise-overlay overflow-hidden">
+        <RoofSchematic className="text-white/[0.04] z-0" />
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-24 md:py-32 text-center">
           <AnimateIn animation="fade-up">
           <span className="inline-block mb-4 px-4 py-1.5 border border-[var(--red)] text-[var(--red)] text-xs font-bold uppercase tracking-[0.2em] font-[family-name:var(--font-display)]">

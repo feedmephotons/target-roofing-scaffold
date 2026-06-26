@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { ExternalLink, Phone, ChevronRight } from 'lucide-react'
 import VideoCard from '@/components/VideoCard'
 import AnimateIn from '@/components/AnimateIn'
+import RoofSchematic from '@/components/RoofSchematic'
 
 export const metadata: Metadata = {
   title: 'Video Gallery',
@@ -19,6 +20,9 @@ export default async function VideoGalleryPage() {
     <>
       {/* ─── HERO ─── */}
       <section className="relative bg-[var(--black)] text-white overflow-hidden">
+        {/* Roof schematic background */}
+        <RoofSchematic className="text-white/[0.04] z-0" />
+
         {/* Noise overlay */}
         <div className="noise-overlay absolute inset-0" />
 

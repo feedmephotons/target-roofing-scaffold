@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { Star, Quote, ArrowRight, Phone } from 'lucide-react'
 import AnimateIn from '@/components/AnimateIn'
+import RoofSchematic from '@/components/RoofSchematic'
 
 export const metadata: Metadata = {
   title: 'Reviews',
@@ -82,6 +83,9 @@ export default async function ReviewsPage() {
     <>
       {/* ── Hero ── */}
       <section className="relative bg-[var(--black)] text-white overflow-hidden noise-overlay">
+        {/* Roof schematic background */}
+        <RoofSchematic className="text-white/[0.04] z-0" />
+
         {/* Diagonal accent lines */}
         <div className="absolute inset-0 opacity-[0.04]">
           <div className="absolute top-0 right-0 w-[600px] h-[600px] border-r-2 border-white/20 transform rotate-12 translate-x-1/2 -translate-y-1/4" />

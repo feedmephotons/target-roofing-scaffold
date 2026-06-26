@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { Phone, Mail, MapPin, Clock, Send } from 'lucide-react'
 import { submitContactLead } from '@/app/actions'
 import AnimateIn from '@/components/AnimateIn'
+import RoofSchematic from '@/components/RoofSchematic'
 
 export default function ContactPage() {
   const [form, setForm] = useState({
@@ -74,6 +75,9 @@ export default function ContactPage() {
     <>
       {/* ─── HERO ─── */}
       <section className="relative bg-[var(--black)] text-white overflow-hidden">
+        {/* Roof schematic background */}
+        <RoofSchematic className="text-white/[0.04] z-0" />
+
         {/* Noise overlay */}
         <div className="noise-overlay absolute inset-0" />
 

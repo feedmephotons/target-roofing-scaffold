@@ -12,6 +12,7 @@ import {
   Briefcase,
 } from 'lucide-react'
 import AnimateIn from '@/components/AnimateIn'
+import RoofSchematic from '@/components/RoofSchematic'
 import { getJobListings } from '@/app/actions'
 
 export const metadata: Metadata = {
@@ -59,7 +60,8 @@ export default async function CareersPage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative bg-[var(--black)] py-28 text-white">
+      <section className="relative bg-[var(--black)] py-28 text-white overflow-hidden">
+        <RoofSchematic className="text-white/[0.04] z-0" />
         <div className="noise-overlay absolute inset-0" />
         <div className="relative z-10 mx-auto max-w-5xl px-6 text-center">
           <AnimateIn animation="fade-up">
