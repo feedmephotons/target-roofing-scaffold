@@ -41,6 +41,7 @@ import {
   addJobListing,
   removeJobListing,
   toggleJobListing,
+  verifyAdminLogin,
   type LeadRecord,
   type ShowcaseVideo,
   type JobListing,
@@ -52,20 +53,18 @@ function AdminLogin({ onLogin }: { onLogin: () => void }) {
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
     setError(null)
 
-    // Simulate authentication check
-    setTimeout(() => {
-      if (email === 'admin@targetroofers.com' && password === 'target2026') {
-        onLogin()
-      } else {
-        setError('Invalid admin credentials. Access Denied.')
-      }
-      setLoading(false)
-    }, 1000)
+    const result = await verifyAdminLogin(email, password)
+    if (result.success) {
+      onLogin()
+    } else {
+      setError(result.error || 'Invalid admin credentials. Access Denied.')
+    }
+    setLoading(false)
   }
 
   return (

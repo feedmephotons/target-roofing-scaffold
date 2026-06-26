@@ -2,6 +2,24 @@
 
 import { supabase } from '@/lib/supabase'
 
+// ---------------------------------------------------------------------------
+// Admin Authentication
+// ---------------------------------------------------------------------------
+
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'admin@targetroofers.com'
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'target2026'
+
+export async function verifyAdminLogin(email: string, password: string): Promise<{ success: boolean; error?: string }> {
+  if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
+    return { success: true }
+  }
+  return { success: false, error: 'Invalid admin credentials. Access Denied.' }
+}
+
+// ---------------------------------------------------------------------------
+// Leads
+// ---------------------------------------------------------------------------
+
 interface LeadSaveResult {
   success: boolean
   error?: string
@@ -201,6 +219,20 @@ export async function updateLeadStatus(
   } catch (error) {
     console.error('Error updating lead status:', error)
     return { success: false, error: 'Failed to update lead status.' }
+  }
+}
+
+export async function getReviews(): Promise<{ name: string; date: string; source: string; text: string }[]> {
+  try {
+    const { data, error } = await supabase
+      .from('reviews')
+      .select('name, date, source, text')
+      .order('created_at', { ascending: false })
+    if (error) throw error
+    return data || []
+  } catch (error) {
+    console.error('Error fetching reviews:', error)
+    return []
   }
 }
 
