@@ -4,8 +4,7 @@
   --red: #B91C1C;
   --red-dark: #991B1B;
   --red-light: #DC2626;
-  --black: #0A0A0A;
-  --black-pure: #000000;
+  --black: #000000;
   --white: #FFFFFF;
   --gray-50: #F9FAFB;
   --gray-100: #F3F4F6;
@@ -18,7 +17,7 @@
   --gray-800: #1F2937;
   --gray-900: #111827;
   --background: #ffffff;
-  --foreground: #0A0A0A;
+  --foreground: #000000;
 }
 
 @theme inline {
@@ -142,7 +141,7 @@ html {
 }
 
 .bg-blueprint-dark {
-  background-image: linear-gradient(rgba(10, 10, 10, 0.94), rgba(10, 10, 10, 0.94)), url("/images/backgrounds/blueprint-dark.png");
+  background-image: linear-gradient(rgba(0, 0, 0, 0.94), rgba(0, 0, 0, 0.94)), url("/images/backgrounds/blueprint-dark.png");
   background-size: cover;
   background-position: center;
 }

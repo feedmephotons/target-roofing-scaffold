@@ -540,7 +540,7 @@ function ProjectLightbox({
       onClick={onClose}
     >
       <div 
-        className="relative max-w-4xl w-full bg-[#1A1A1A] rounded-xl overflow-hidden border border-white/10 shadow-2xl flex flex-col"
+        className="relative max-w-4xl w-full bg-black rounded-xl overflow-hidden border border-white/10 shadow-2xl flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close Button */}
@@ -571,7 +571,7 @@ function ProjectLightbox({
         </div>
 
         {/* Content Area */}
-        <div className="p-6 sm:p-8 bg-[#1A1A1A] border-t border-white/5">
+        <div className="p-6 sm:p-8 bg-black border-t border-white/5">
           <div className="flex flex-wrap gap-2 mb-3">
             {project.categories.map((cat) => (
               <span 
