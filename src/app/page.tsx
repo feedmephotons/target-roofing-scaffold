@@ -967,8 +967,7 @@ function VideoShowcaseSection() {
           <div className="flex items-center justify-center gap-4 mb-4">
             <span className="text-[var(--red)] text-2xl font-bold tracking-widest">&raquo;&raquo;&raquo;</span>
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold font-[family-name:var(--font-display)] uppercase leading-[0.95]">
-              Watch Target Roofing{' '}
-              <span className="text-[var(--red)]">In Action</span>
+              Watch <span className="text-[var(--red)]">Target Roofing</span>
             </h2>
             <span className="text-[var(--red)] text-2xl font-bold tracking-widest">&laquo;&laquo;&laquo;</span>
           </div>
