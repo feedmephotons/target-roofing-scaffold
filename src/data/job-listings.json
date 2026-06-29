@@ -1,0 +1,34 @@
+[
+  {
+    "id": "1",
+    "title": "Commercial Roofing Foreman",
+    "department": "Operations",
+    "type": "Full-Time",
+    "location": "Fort Myers, FL",
+    "description": "Lead commercial roofing crews on projects across Southwest Florida.",
+    "requirements": [
+      "5+ years commercial roofing experience",
+      "Foreman or supervisor experience",
+      "Valid Florida driver's license",
+      "OSHA 30 certification preferred"
+    ],
+    "active": true,
+    "createdAt": "2026-06-01"
+  },
+  {
+    "id": "2",
+    "title": "Service Technician",
+    "department": "Service",
+    "type": "Full-Time",
+    "location": "Fort Myers, FL",
+    "description": "Perform roof repairs, maintenance inspections, and emergency service calls.",
+    "requirements": [
+      "2+ years roofing repair experience",
+      "Ability to work at heights",
+      "Strong problem-solving skills",
+      "Clean driving record"
+    ],
+    "active": true,
+    "createdAt": "2026-06-15"
+  }
+]

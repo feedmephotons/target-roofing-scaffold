@@ -352,4 +352,277 @@ export async function updateSeoConfig(route: string, data: { title: string; desc
   }
 }
 
+// ---------------------------------------------------------------------------
+// Showcase Videos
+// ---------------------------------------------------------------------------
 
+export interface ShowcaseVideo {
+  id: string
+  title: string
+  description: string
+  duration: string
+}
+
+const DEFAULT_SHOWCASE_VIDEOS: ShowcaseVideo[] = [
+  { id: 'yz5H6FkrWhs', title: 'Target Roofing Overview', description: "See what makes Target Roofing Southwest Florida's trusted commercial roofing partner.", duration: '3:42' },
+  { id: 'A7Qz9tz8nNU', title: 'Colonial Country Club', description: 'Full roof replacement at Colonial Country Club in Fort Myers.', duration: '2:18' },
+  { id: 'Ywio4IhCQPI', title: 'Water Test Inspection', description: 'Our thorough water test procedure to detect and diagnose roof leaks.', duration: '2:57' },
+  { id: '-o8JhirAPR8', title: 'Service Department', description: 'Behind the scenes with the Target Roofing service team on repairs and maintenance.', duration: '3:05' },
+  { id: 'cGLaC7x9btw', title: 'Our Process', description: 'How we approach every project with precision, accountability, and cutting-edge technology.', duration: '2:31' },
+]
+
+async function readShowcaseVideosFile(): Promise<ShowcaseVideo[]> {
+  const workspaceRoot = findWorkspaceRoot()
+  const filePath = path.join(workspaceRoot, 'site/src/data/showcase-videos.json')
+  try {
+    const fileContent = await fs.promises.readFile(filePath, 'utf8')
+    if (fileContent.trim()) {
+      return JSON.parse(fileContent)
+    }
+  } catch {
+    // File doesn't exist yet - create with defaults
+    const dir = path.dirname(filePath)
+    await fs.promises.mkdir(dir, { recursive: true })
+    await fs.promises.writeFile(filePath, JSON.stringify(DEFAULT_SHOWCASE_VIDEOS, null, 2), 'utf8')
+    return [...DEFAULT_SHOWCASE_VIDEOS]
+  }
+  return [...DEFAULT_SHOWCASE_VIDEOS]
+}
+
+async function writeShowcaseVideosFile(videos: ShowcaseVideo[]): Promise<void> {
+  const workspaceRoot = findWorkspaceRoot()
+  const filePath = path.join(workspaceRoot, 'site/src/data/showcase-videos.json')
+  const dir = path.dirname(filePath)
+  await fs.promises.mkdir(dir, { recursive: true })
+  await fs.promises.writeFile(filePath, JSON.stringify(videos, null, 2), 'utf8')
+}
+
+export async function getShowcaseVideos(): Promise<ShowcaseVideo[]> {
+  try {
+    return await readShowcaseVideosFile()
+  } catch (error) {
+    console.error('Error fetching showcase videos:', error)
+    return []
+  }
+}
+
+export async function addShowcaseVideo(data: {
+  id: string
+  title: string
+  description: string
+  duration: string
+}): Promise<{ success: boolean; error?: string }> {
+  try {
+    const videos = await readShowcaseVideosFile()
+    if (videos.some((v) => v.id === data.id)) {
+      return { success: false, error: 'A video with that ID already exists.' }
+    }
+    videos.push({ id: data.id, title: data.title, description: data.description, duration: data.duration })
+    await writeShowcaseVideosFile(videos)
+    return { success: true }
+  } catch (error) {
+    console.error('Error adding showcase video:', error)
+    return { success: false, error: 'Failed to add showcase video.' }
+  }
+}
+
+export async function removeShowcaseVideo(videoId: string): Promise<{ success: boolean; error?: string }> {
+  try {
+    const videos = await readShowcaseVideosFile()
+    const idx = videos.findIndex((v) => v.id === videoId)
+    if (idx === -1) {
+      return { success: false, error: 'Video not found.' }
+    }
+    videos.splice(idx, 1)
+    await writeShowcaseVideosFile(videos)
+    return { success: true }
+  } catch (error) {
+    console.error('Error removing showcase video:', error)
+    return { success: false, error: 'Failed to remove showcase video.' }
+  }
+}
+
+export async function reorderShowcaseVideos(ids: string[]): Promise<{ success: boolean; error?: string }> {
+  try {
+    const videos = await readShowcaseVideosFile()
+    const videoMap = new Map(videos.map((v) => [v.id, v]))
+    const reordered: ShowcaseVideo[] = []
+    for (const id of ids) {
+      const video = videoMap.get(id)
+      if (video) {
+        reordered.push(video)
+        videoMap.delete(id)
+      }
+    }
+    // Append any videos not included in the ids list at the end
+    for (const remaining of videoMap.values()) {
+      reordered.push(remaining)
+    }
+    await writeShowcaseVideosFile(reordered)
+    return { success: true }
+  } catch (error) {
+    console.error('Error reordering showcase videos:', error)
+    return { success: false, error: 'Failed to reorder showcase videos.' }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Job Listings
+// ---------------------------------------------------------------------------
+
+export interface JobListing {
+  id: string
+  title: string
+  department: string
+  type: string
+  location: string
+  description: string
+  requirements: string[]
+  active: boolean
+  createdAt: string
+}
+
+const DEFAULT_JOB_LISTINGS: JobListing[] = [
+  {
+    id: '1',
+    title: 'Commercial Roofing Foreman',
+    department: 'Operations',
+    type: 'Full-Time',
+    location: 'Fort Myers, FL',
+    description: 'Lead commercial roofing crews on projects across Southwest Florida.',
+    requirements: ['5+ years commercial roofing experience', 'Foreman or supervisor experience', 'Valid Florida driver\'s license', 'OSHA 30 certification preferred'],
+    active: true,
+    createdAt: '2026-06-01',
+  },
+  {
+    id: '2',
+    title: 'Service Technician',
+    department: 'Service',
+    type: 'Full-Time',
+    location: 'Fort Myers, FL',
+    description: 'Perform roof repairs, maintenance inspections, and emergency service calls.',
+    requirements: ['2+ years roofing repair experience', 'Ability to work at heights', 'Strong problem-solving skills', 'Clean driving record'],
+    active: true,
+    createdAt: '2026-06-15',
+  },
+]
+
+async function readJobListingsFile(): Promise<JobListing[]> {
+  const workspaceRoot = findWorkspaceRoot()
+  const filePath = path.join(workspaceRoot, 'site/src/data/job-listings.json')
+  try {
+    const fileContent = await fs.promises.readFile(filePath, 'utf8')
+    if (fileContent.trim()) {
+      return JSON.parse(fileContent)
+    }
+  } catch {
+    // File doesn't exist yet - create with defaults
+    const dir = path.dirname(filePath)
+    await fs.promises.mkdir(dir, { recursive: true })
+    await fs.promises.writeFile(filePath, JSON.stringify(DEFAULT_JOB_LISTINGS, null, 2), 'utf8')
+    return [...DEFAULT_JOB_LISTINGS]
+  }
+  return [...DEFAULT_JOB_LISTINGS]
+}
+
+async function writeJobListingsFile(listings: JobListing[]): Promise<void> {
+  const workspaceRoot = findWorkspaceRoot()
+  const filePath = path.join(workspaceRoot, 'site/src/data/job-listings.json')
+  const dir = path.dirname(filePath)
+  await fs.promises.mkdir(dir, { recursive: true })
+  await fs.promises.writeFile(filePath, JSON.stringify(listings, null, 2), 'utf8')
+}
+
+export async function getJobListings(): Promise<JobListing[]> {
+  try {
+    return await readJobListingsFile()
+  } catch (error) {
+    console.error('Error fetching job listings:', error)
+    return []
+  }
+}
+
+export async function addJobListing(data: {
+  title: string
+  department: string
+  type: string
+  location: string
+  description: string
+  requirements: string[]
+}): Promise<{ success: boolean; error?: string }> {
+  try {
+    const listings = await readJobListingsFile()
+    const maxId = listings.reduce((max, l) => {
+      const num = parseInt(l.id, 10)
+      return isNaN(num) ? max : Math.max(max, num)
+    }, 0)
+    const newListing: JobListing = {
+      id: String(maxId + 1),
+      title: data.title,
+      department: data.department,
+      type: data.type,
+      location: data.location,
+      description: data.description,
+      requirements: data.requirements,
+      active: true,
+      createdAt: new Date().toISOString().split('T')[0],
+    }
+    listings.push(newListing)
+    await writeJobListingsFile(listings)
+    return { success: true }
+  } catch (error) {
+    console.error('Error adding job listing:', error)
+    return { success: false, error: 'Failed to add job listing.' }
+  }
+}
+
+export async function updateJobListing(
+  id: string,
+  data: Partial<Omit<JobListing, 'id' | 'createdAt'>>
+): Promise<{ success: boolean; error?: string }> {
+  try {
+    const listings = await readJobListingsFile()
+    const idx = listings.findIndex((l) => l.id === id)
+    if (idx === -1) {
+      return { success: false, error: 'Job listing not found.' }
+    }
+    listings[idx] = { ...listings[idx], ...data }
+    await writeJobListingsFile(listings)
+    return { success: true }
+  } catch (error) {
+    console.error('Error updating job listing:', error)
+    return { success: false, error: 'Failed to update job listing.' }
+  }
+}
+
+export async function removeJobListing(id: string): Promise<{ success: boolean; error?: string }> {
+  try {
+    const listings = await readJobListingsFile()
+    const idx = listings.findIndex((l) => l.id === id)
+    if (idx === -1) {
+      return { success: false, error: 'Job listing not found.' }
+    }
+    listings.splice(idx, 1)
+    await writeJobListingsFile(listings)
+    return { success: true }
+  } catch (error) {
+    console.error('Error removing job listing:', error)
+    return { success: false, error: 'Failed to remove job listing.' }
+  }
+}
+
+export async function toggleJobListing(id: string): Promise<{ success: boolean; error?: string }> {
+  try {
+    const listings = await readJobListingsFile()
+    const idx = listings.findIndex((l) => l.id === id)
+    if (idx === -1) {
+      return { success: false, error: 'Job listing not found.' }
+    }
+    listings[idx].active = !listings[idx].active
+    await writeJobListingsFile(listings)
+    return { success: true }
+  } catch (error) {
+    console.error('Error toggling job listing:', error)
+    return { success: false, error: 'Failed to toggle job listing status.' }
+  }
+}

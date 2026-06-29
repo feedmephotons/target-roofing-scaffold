@@ -18,6 +18,15 @@ import {
   Phone,
   Mail,
   MapPin,
+  Video,
+  Trash2,
+  Briefcase,
+  ToggleLeft,
+  ToggleRight,
+  Pencil,
+  X,
+  GripVertical,
+  ExternalLink,
 } from 'lucide-react'
 import {
   getLeads,
@@ -25,7 +34,16 @@ import {
   addReview,
   getSeoConfig,
   updateSeoConfig,
+  getShowcaseVideos,
+  addShowcaseVideo,
+  removeShowcaseVideo,
+  getJobListings,
+  addJobListing,
+  removeJobListing,
+  toggleJobListing,
   type LeadRecord,
+  type ShowcaseVideo,
+  type JobListing,
 } from '@/app/actions'
 
 function AdminLogin({ onLogin }: { onLogin: () => void }) {
@@ -38,7 +56,7 @@ function AdminLogin({ onLogin }: { onLogin: () => void }) {
     e.preventDefault()
     setLoading(true)
     setError(null)
-    
+
     // Simulate authentication check
     setTimeout(() => {
       if (email === 'admin@targetroofing.com' && password === 'target2026') {
@@ -114,8 +132,10 @@ function AdminLogin({ onLogin }: { onLogin: () => void }) {
   )
 }
 
+type TabId = 'leads' | 'seo' | 'reviews' | 'videos' | 'jobs'
+
 function AdminDashboard({ onLogout }: { onLogout: () => void }) {
-  const [activeTab, setActiveTab] = useState<'leads' | 'seo' | 'reviews'>('leads')
+  const [activeTab, setActiveTab] = useState<TabId>('leads')
   const [leads, setLeads] = useState<LeadRecord[]>([])
   const [loadingLeads, setLoadingLeads] = useState(false)
   const [leadFilter, setLeadFilter] = useState<'all' | 'new' | 'processed' | 'spam'>('all')
@@ -136,6 +156,31 @@ function AdminDashboard({ onLogout }: { onLogout: () => void }) {
   const [newReviewText, setNewReviewText] = useState('')
   const [newReviewSource, setNewReviewSource] = useState('Google')
   const [newReviewSaved, setNewReviewSaved] = useState(false)
+
+  // Video state
+  const [videos, setVideos] = useState<ShowcaseVideo[]>([])
+  const [loadingVideos, setLoadingVideos] = useState(false)
+  const [showAddVideo, setShowAddVideo] = useState(false)
+  const [newVideoId, setNewVideoId] = useState('')
+  const [newVideoTitle, setNewVideoTitle] = useState('')
+  const [newVideoDescription, setNewVideoDescription] = useState('')
+  const [newVideoDuration, setNewVideoDuration] = useState('')
+  const [videoSaved, setVideoSaved] = useState(false)
+  const [videoError, setVideoError] = useState<string | null>(null)
+
+  // Job listings state
+  const [jobs, setJobs] = useState<JobListing[]>([])
+  const [loadingJobs, setLoadingJobs] = useState(false)
+  const [showAddJob, setShowAddJob] = useState(false)
+  const [editingJob, setEditingJob] = useState<JobListing | null>(null)
+  const [jobTitle, setJobTitle] = useState('')
+  const [jobDepartment, setJobDepartment] = useState('')
+  const [jobType, setJobType] = useState('Full-Time')
+  const [jobLocation, setJobLocation] = useState('Fort Myers, FL')
+  const [jobDescription, setJobDescription] = useState('')
+  const [jobRequirements, setJobRequirements] = useState('')
+  const [jobSaved, setJobSaved] = useState(false)
+  const [jobError, setJobError] = useState<string | null>(null)
 
   const fetchLeadsData = async () => {
     setLoadingLeads(true)
@@ -168,11 +213,39 @@ function AdminDashboard({ onLogout }: { onLogout: () => void }) {
     }
   }
 
+  const fetchVideosData = async () => {
+    setLoadingVideos(true)
+    try {
+      const data = await getShowcaseVideos()
+      setVideos(data)
+    } catch (e) {
+      console.error(e)
+    } finally {
+      setLoadingVideos(false)
+    }
+  }
+
+  const fetchJobsData = async () => {
+    setLoadingJobs(true)
+    try {
+      const data = await getJobListings()
+      setJobs(data)
+    } catch (e) {
+      console.error(e)
+    } finally {
+      setLoadingJobs(false)
+    }
+  }
+
   useEffect(() => {
     if (activeTab === 'leads') {
       fetchLeadsData()
     } else if (activeTab === 'seo') {
       fetchSeoData()
+    } else if (activeTab === 'videos') {
+      fetchVideosData()
+    } else if (activeTab === 'jobs') {
+      fetchJobsData()
     }
   }, [activeTab])
 
@@ -250,11 +323,130 @@ function AdminDashboard({ onLogout }: { onLogout: () => void }) {
     }
   }
 
+  // ── Video handlers ──
+  const handleAddVideo = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setVideoError(null)
+    setVideoSaved(false)
+    if (!newVideoId.trim() || !newVideoTitle.trim()) return
+    try {
+      const res = await addShowcaseVideo({
+        id: newVideoId.trim(),
+        title: newVideoTitle.trim(),
+        description: newVideoDescription.trim(),
+        duration: newVideoDuration.trim(),
+      })
+      if (res.success) {
+        setVideoSaved(true)
+        setNewVideoId('')
+        setNewVideoTitle('')
+        setNewVideoDescription('')
+        setNewVideoDuration('')
+        setShowAddVideo(false)
+        fetchVideosData()
+        setTimeout(() => setVideoSaved(false), 3000)
+      } else {
+        setVideoError(res.error || 'Failed to add video.')
+      }
+    } catch (err) {
+      console.error(err)
+      setVideoError('An error occurred while adding the video.')
+    }
+  }
+
+  const handleDeleteVideo = async (videoId: string) => {
+    if (!confirm('Remove this video from the showcase?')) return
+    try {
+      const res = await removeShowcaseVideo(videoId)
+      if (res.success) {
+        setVideos(prev => prev.filter(v => v.id !== videoId))
+      } else {
+        alert(res.error || 'Failed to remove video.')
+      }
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
+  // ── Job handlers ──
+  const resetJobForm = () => {
+    setJobTitle('')
+    setJobDepartment('')
+    setJobType('Full-Time')
+    setJobLocation('Fort Myers, FL')
+    setJobDescription('')
+    setJobRequirements('')
+    setEditingJob(null)
+    setJobError(null)
+  }
+
+  const handleAddJob = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setJobError(null)
+    setJobSaved(false)
+    if (!jobTitle.trim() || !jobDepartment.trim()) return
+    const requirementsArr = jobRequirements
+      .split('\n')
+      .map(r => r.trim())
+      .filter(r => r.length > 0)
+    try {
+      const res = await addJobListing({
+        title: jobTitle.trim(),
+        department: jobDepartment.trim(),
+        type: jobType,
+        location: jobLocation.trim(),
+        description: jobDescription.trim(),
+        requirements: requirementsArr,
+      })
+      if (res.success) {
+        setJobSaved(true)
+        resetJobForm()
+        setShowAddJob(false)
+        fetchJobsData()
+        setTimeout(() => setJobSaved(false), 3000)
+      } else {
+        setJobError(res.error || 'Failed to add job listing.')
+      }
+    } catch (err) {
+      console.error(err)
+      setJobError('An error occurred while adding the job.')
+    }
+  }
+
+  const handleDeleteJob = async (jobId: string) => {
+    if (!confirm('Delete this job listing?')) return
+    try {
+      const res = await removeJobListing(jobId)
+      if (res.success) {
+        setJobs(prev => prev.filter(j => j.id !== jobId))
+      } else {
+        alert(res.error || 'Failed to remove job listing.')
+      }
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
+  const handleToggleJob = async (jobId: string) => {
+    try {
+      const res = await toggleJobListing(jobId)
+      if (res.success) {
+        setJobs(prev =>
+          prev.map(j => (j.id === jobId ? { ...j, active: !j.active } : j))
+        )
+      } else {
+        alert(res.error || 'Failed to toggle job status.')
+      }
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
   // Filtered Leads
   const filteredLeads = leads.filter((lead) => {
     // tab filter
     if (leadFilter !== 'all' && lead.status !== leadFilter) return false
-    
+
     // search query
     if (!leadSearch.trim()) return true
     const q = leadSearch.toLowerCase()
@@ -303,17 +495,19 @@ function AdminDashboard({ onLogout }: { onLogout: () => void }) {
 
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
         {/* Navigation Tabs */}
-        <div className="mb-6 flex border-b border-[var(--gray-200)] bg-white p-2 rounded-xl shadow-sm gap-2">
-          {[
-            { id: 'leads', label: 'Lead Manager', icon: Inbox },
-            { id: 'seo', label: 'SEO Settings', icon: Globe },
-            { id: 'reviews', label: 'Add Review', icon: Star }
-          ].map(tab => {
+        <div className="mb-6 flex flex-wrap border-b border-[var(--gray-200)] bg-white p-2 rounded-xl shadow-sm gap-2">
+          {([
+            { id: 'leads' as TabId, label: 'Lead Manager', icon: Inbox },
+            { id: 'videos' as TabId, label: 'Manage Videos', icon: Video },
+            { id: 'jobs' as TabId, label: 'Job Listings', icon: Briefcase },
+            { id: 'seo' as TabId, label: 'SEO Settings', icon: Globe },
+            { id: 'reviews' as TabId, label: 'Add Review', icon: Star },
+          ]).map(tab => {
             const Icon = tab.icon
             return (
               <button
                 key={tab.id}
-                onClick={() => setActiveTab(tab.id as 'leads' | 'seo' | 'reviews')}
+                onClick={() => setActiveTab(tab.id)}
                 className={`flex items-center gap-2 rounded-lg px-6 py-3.5 text-xs font-bold uppercase tracking-wider transition-all ${
                   activeTab === tab.id
                     ? 'bg-[var(--red)] text-white shadow-md'
@@ -383,7 +577,7 @@ function AdminDashboard({ onLogout }: { onLogout: () => void }) {
                   <Inbox className="h-4 w-4" />
                   Submitted Forms List ({filteredLeads.length})
                 </h3>
-                <button 
+                <button
                   onClick={fetchLeadsData}
                   disabled={loadingLeads}
                   className="p-2.5 px-3 rounded text-[var(--gray-400)] hover:text-[var(--red)] transition-colors hover:bg-white border border-[var(--gray-200)]"
@@ -522,6 +716,542 @@ function AdminDashboard({ onLogout }: { onLogout: () => void }) {
                       ))}
                     </tbody>
                   </table>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* ── VIDEOS TAB ── */}
+        {activeTab === 'videos' && (
+          <div className="space-y-6">
+            {/* Header bar */}
+            <div className="bg-white rounded-xl border border-[var(--gray-200)] p-5 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <h3 className="text-sm font-bold uppercase tracking-wide text-[var(--black)] font-[family-name:var(--font-display)]">
+                  Homepage Showcase Videos
+                </h3>
+                <p className="text-[10px] text-[var(--gray-400)] font-medium mt-0.5">
+                  Manage the YouTube videos displayed on the homepage video showcase section.
+                </p>
+              </div>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={fetchVideosData}
+                  disabled={loadingVideos}
+                  className="p-2.5 px-3 rounded text-[var(--gray-400)] hover:text-[var(--red)] transition-colors hover:bg-[var(--gray-50)] border border-[var(--gray-200)]"
+                  title="Reload Videos"
+                >
+                  <RefreshCw className={`h-4 w-4 ${loadingVideos ? 'animate-spin text-[var(--red)]' : ''}`} />
+                </button>
+                <button
+                  onClick={() => { setShowAddVideo(true); setVideoError(null) }}
+                  className="inline-flex items-center gap-1.5 px-5 py-3.5 bg-[var(--red)] hover:bg-[var(--red-dark)] text-white text-xs font-bold uppercase tracking-wider rounded transition-colors shadow-sm font-[family-name:var(--font-display)]"
+                >
+                  <Plus className="h-4 w-4" />
+                  Add Video
+                </button>
+              </div>
+            </div>
+
+            {/* Success message */}
+            {videoSaved && (
+              <div className="p-4 bg-green-50 border-l-4 border-green-500 rounded text-green-700 text-xs font-semibold flex items-center gap-2">
+                <CheckCircle className="h-4.5 w-4.5" />
+                Video added successfully to the homepage showcase.
+              </div>
+            )}
+
+            {/* Add Video Form (collapsible) */}
+            {showAddVideo && (
+              <div className="bg-white rounded-xl border border-[var(--gray-200)] shadow-sm overflow-hidden">
+                <div className="p-4 border-b border-[var(--gray-200)] bg-[var(--gray-50)] flex justify-between items-center">
+                  <h3 className="text-xs font-bold uppercase tracking-wider text-[var(--gray-500)] flex items-center gap-1.5">
+                    <Video className="h-4 w-4" />
+                    Add New YouTube Video
+                  </h3>
+                  <button
+                    onClick={() => { setShowAddVideo(false); setVideoError(null) }}
+                    className="p-1.5 rounded hover:bg-[var(--gray-200)] text-[var(--gray-400)] hover:text-[var(--black)] transition-colors"
+                  >
+                    <X className="h-4 w-4" />
+                  </button>
+                </div>
+                <form onSubmit={handleAddVideo} className="p-6 space-y-4">
+                  {videoError && (
+                    <div className="p-4 bg-red-50 border-l-4 border-red-500 rounded text-red-700 text-xs font-semibold flex items-center gap-2">
+                      <AlertCircle className="h-4 w-4" />
+                      {videoError}
+                    </div>
+                  )}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-[10px] font-bold uppercase tracking-wider text-[var(--gray-500)] mb-1.5">
+                        YouTube Video ID
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        value={newVideoId}
+                        onChange={(e) => setNewVideoId(e.target.value)}
+                        placeholder="e.g., yz5H6FkrWhs"
+                        className="w-full px-4 py-3 rounded-lg border border-[var(--gray-300)] bg-white text-base text-[var(--black)] focus:outline-none focus:ring-2 focus:ring-[var(--red)] transition-all font-medium font-mono"
+                      />
+                      <p className="text-[10px] text-[var(--gray-400)] mt-1">The ID from the YouTube URL (after v=)</p>
+                    </div>
+                    <div>
+                      <label className="block text-[10px] font-bold uppercase tracking-wider text-[var(--gray-500)] mb-1.5">
+                        Duration
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        value={newVideoDuration}
+                        onChange={(e) => setNewVideoDuration(e.target.value)}
+                        placeholder="e.g., 3:42"
+                        className="w-full px-4 py-3 rounded-lg border border-[var(--gray-300)] bg-white text-base text-[var(--black)] focus:outline-none focus:ring-2 focus:ring-[var(--red)] transition-all font-medium"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <label className="block text-[10px] font-bold uppercase tracking-wider text-[var(--gray-500)] mb-1.5">
+                      Video Title
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={newVideoTitle}
+                      onChange={(e) => setNewVideoTitle(e.target.value)}
+                      placeholder="e.g., Target Roofing Overview"
+                      className="w-full px-4 py-3 rounded-lg border border-[var(--gray-300)] bg-white text-base text-[var(--black)] focus:outline-none focus:ring-2 focus:ring-[var(--red)] transition-all font-medium"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] font-bold uppercase tracking-wider text-[var(--gray-500)] mb-1.5">
+                      Description
+                    </label>
+                    <textarea
+                      rows={2}
+                      value={newVideoDescription}
+                      onChange={(e) => setNewVideoDescription(e.target.value)}
+                      placeholder="Brief description of the video content..."
+                      className="w-full px-4 py-3 rounded-lg border border-[var(--gray-300)] bg-white text-base text-[var(--black)] focus:outline-none focus:ring-2 focus:ring-[var(--red)] transition-all font-medium resize-none"
+                    />
+                  </div>
+
+                  {/* Live thumbnail preview */}
+                  {newVideoId.trim() && (
+                    <div className="flex items-center gap-3 p-3 bg-[var(--gray-50)] rounded-lg border border-[var(--gray-150)]">
+                      <img
+                        src={`https://img.youtube.com/vi/${newVideoId.trim()}/mqdefault.jpg`}
+                        alt="Thumbnail preview"
+                        className="w-32 h-18 object-cover rounded border border-[var(--gray-200)]"
+                      />
+                      <div className="text-[10px] text-[var(--gray-500)]">
+                        <p className="font-bold uppercase tracking-wider">Thumbnail Preview</p>
+                        <p className="mt-0.5">ID: <span className="font-mono text-[var(--black)]">{newVideoId.trim()}</span></p>
+                      </div>
+                    </div>
+                  )}
+
+                  <div className="flex gap-3">
+                    <button
+                      type="submit"
+                      className="inline-flex items-center gap-1.5 px-6 py-3.5 bg-[var(--red)] hover:bg-[var(--red-dark)] text-white text-xs font-bold uppercase tracking-wider rounded transition-colors shadow-sm font-[family-name:var(--font-display)]"
+                    >
+                      <Plus className="h-4 w-4" />
+                      Add to Showcase
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => { setShowAddVideo(false); setVideoError(null) }}
+                      className="inline-flex items-center gap-1.5 px-6 py-3.5 border border-[var(--gray-300)] text-[var(--gray-600)] text-xs font-bold uppercase tracking-wider rounded hover:bg-[var(--gray-50)] transition-colors"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </form>
+              </div>
+            )}
+
+            {/* Video list */}
+            <div className="bg-white rounded-xl border border-[var(--gray-200)] shadow-sm overflow-hidden">
+              <div className="p-4 border-b border-[var(--gray-200)] bg-[var(--gray-50)]">
+                <h3 className="text-xs font-bold uppercase tracking-wider text-[var(--gray-500)] flex items-center gap-1.5">
+                  <Video className="h-4 w-4" />
+                  Current Showcase Videos ({videos.length})
+                </h3>
+              </div>
+
+              {loadingVideos ? (
+                <div className="p-16 text-center text-xs text-[var(--gray-400)] font-semibold space-y-2">
+                  <RefreshCw className="h-8 w-8 text-[var(--red)] mx-auto animate-spin" />
+                  <p>Loading showcase videos...</p>
+                </div>
+              ) : videos.length === 0 ? (
+                <div className="p-16 text-center text-xs text-[var(--gray-400)] font-semibold space-y-1">
+                  <Video className="h-10 w-10 text-[var(--gray-200)] mx-auto mb-2" />
+                  <p>No showcase videos configured.</p>
+                  <p className="font-light">Click "Add Video" to add YouTube videos to the homepage.</p>
+                </div>
+              ) : (
+                <div className="divide-y divide-[var(--gray-200)]">
+                  {videos.map((video, idx) => (
+                    <div key={video.id} className="flex items-center gap-4 p-4 hover:bg-[var(--gray-50)] transition-colors group">
+                      {/* Order number */}
+                      <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[var(--gray-100)] flex items-center justify-center text-xs font-bold text-[var(--gray-500)] font-[family-name:var(--font-display)]">
+                        {idx + 1}
+                      </div>
+
+                      {/* Thumbnail */}
+                      <div className="flex-shrink-0 relative">
+                        <img
+                          src={`https://img.youtube.com/vi/${video.id}/mqdefault.jpg`}
+                          alt={video.title}
+                          className="w-36 h-20 object-cover rounded-lg border border-[var(--gray-200)] shadow-sm"
+                        />
+                        <div className="absolute bottom-1 right-1 bg-black/80 text-white text-[9px] font-bold font-mono px-1.5 py-0.5 rounded">
+                          {video.duration}
+                        </div>
+                      </div>
+
+                      {/* Info */}
+                      <div className="flex-1 min-w-0">
+                        <h4 className="text-sm font-bold text-[var(--black)] font-[family-name:var(--font-display)] uppercase tracking-wide truncate">
+                          {video.title}
+                        </h4>
+                        <p className="text-[11px] text-[var(--gray-500)] mt-0.5 line-clamp-2 leading-relaxed">
+                          {video.description}
+                        </p>
+                        <p className="text-[9px] font-mono text-[var(--gray-400)] mt-1.5 bg-[var(--gray-50)] inline-block px-1.5 py-0.5 rounded">
+                          ID: {video.id}
+                        </p>
+                      </div>
+
+                      {/* Actions */}
+                      <div className="flex-shrink-0 flex items-center gap-2">
+                        <a
+                          href={`https://www.youtube.com/watch?v=${video.id}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="p-2.5 rounded text-[var(--gray-400)] hover:text-blue-600 hover:bg-blue-50 border border-[var(--gray-200)] transition-colors opacity-0 group-hover:opacity-100"
+                          title="Open on YouTube"
+                        >
+                          <ExternalLink className="h-4 w-4" />
+                        </a>
+                        <button
+                          onClick={() => handleDeleteVideo(video.id)}
+                          className="p-2.5 rounded text-[var(--gray-400)] hover:text-red-600 hover:bg-red-50 border border-[var(--gray-200)] transition-colors opacity-0 group-hover:opacity-100"
+                          title="Remove from showcase"
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* ── JOBS TAB ── */}
+        {activeTab === 'jobs' && (
+          <div className="space-y-6">
+            {/* Header bar */}
+            <div className="bg-white rounded-xl border border-[var(--gray-200)] p-5 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <h3 className="text-sm font-bold uppercase tracking-wide text-[var(--black)] font-[family-name:var(--font-display)]">
+                  Job Listings Manager
+                </h3>
+                <p className="text-[10px] text-[var(--gray-400)] font-medium mt-0.5">
+                  Manage career openings displayed on the Careers page. Toggle listings active or inactive.
+                </p>
+              </div>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={fetchJobsData}
+                  disabled={loadingJobs}
+                  className="p-2.5 px-3 rounded text-[var(--gray-400)] hover:text-[var(--red)] transition-colors hover:bg-[var(--gray-50)] border border-[var(--gray-200)]"
+                  title="Reload Jobs"
+                >
+                  <RefreshCw className={`h-4 w-4 ${loadingJobs ? 'animate-spin text-[var(--red)]' : ''}`} />
+                </button>
+                <button
+                  onClick={() => { resetJobForm(); setShowAddJob(true) }}
+                  className="inline-flex items-center gap-1.5 px-5 py-3.5 bg-[var(--red)] hover:bg-[var(--red-dark)] text-white text-xs font-bold uppercase tracking-wider rounded transition-colors shadow-sm font-[family-name:var(--font-display)]"
+                >
+                  <Plus className="h-4 w-4" />
+                  Add Job
+                </button>
+              </div>
+            </div>
+
+            {/* Job stats */}
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="bg-white rounded-xl border border-[var(--gray-200)] border-l-4 border-l-blue-500 p-5 shadow-sm">
+                <p className="text-[10px] font-bold uppercase tracking-wider text-[var(--gray-400)]">Total Listings</p>
+                <p className="text-3xl font-bold font-[family-name:var(--font-display)] text-[var(--black)] mt-1">{jobs.length}</p>
+              </div>
+              <div className="bg-white rounded-xl border border-[var(--gray-200)] border-l-4 border-l-green-500 p-5 shadow-sm">
+                <p className="text-[10px] font-bold uppercase tracking-wider text-[var(--gray-400)]">Active Openings</p>
+                <p className="text-3xl font-bold font-[family-name:var(--font-display)] text-green-600 mt-1">{jobs.filter(j => j.active).length}</p>
+              </div>
+              <div className="bg-white rounded-xl border border-[var(--gray-200)] border-l-4 border-l-amber-500 p-5 shadow-sm">
+                <p className="text-[10px] font-bold uppercase tracking-wider text-[var(--gray-400)]">Inactive / Paused</p>
+                <p className="text-3xl font-bold font-[family-name:var(--font-display)] text-amber-600 mt-1">{jobs.filter(j => !j.active).length}</p>
+              </div>
+            </div>
+
+            {/* Success message */}
+            {jobSaved && (
+              <div className="p-4 bg-green-50 border-l-4 border-green-500 rounded text-green-700 text-xs font-semibold flex items-center gap-2">
+                <CheckCircle className="h-4.5 w-4.5" />
+                Job listing saved successfully.
+              </div>
+            )}
+
+            {/* Add Job Form (collapsible) */}
+            {showAddJob && (
+              <div className="bg-white rounded-xl border border-[var(--gray-200)] shadow-sm overflow-hidden">
+                <div className="p-4 border-b border-[var(--gray-200)] bg-[var(--gray-50)] flex justify-between items-center">
+                  <h3 className="text-xs font-bold uppercase tracking-wider text-[var(--gray-500)] flex items-center gap-1.5">
+                    <Briefcase className="h-4 w-4" />
+                    Add New Job Listing
+                  </h3>
+                  <button
+                    onClick={() => { setShowAddJob(false); resetJobForm() }}
+                    className="p-1.5 rounded hover:bg-[var(--gray-200)] text-[var(--gray-400)] hover:text-[var(--black)] transition-colors"
+                  >
+                    <X className="h-4 w-4" />
+                  </button>
+                </div>
+                <form onSubmit={handleAddJob} className="p-6 space-y-4">
+                  {jobError && (
+                    <div className="p-4 bg-red-50 border-l-4 border-red-500 rounded text-red-700 text-xs font-semibold flex items-center gap-2">
+                      <AlertCircle className="h-4 w-4" />
+                      {jobError}
+                    </div>
+                  )}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-[10px] font-bold uppercase tracking-wider text-[var(--gray-500)] mb-1.5">
+                        Job Title
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        value={jobTitle}
+                        onChange={(e) => setJobTitle(e.target.value)}
+                        placeholder="e.g., Commercial Roofing Foreman"
+                        className="w-full px-4 py-3 rounded-lg border border-[var(--gray-300)] bg-white text-base text-[var(--black)] focus:outline-none focus:ring-2 focus:ring-[var(--red)] transition-all font-medium"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-[10px] font-bold uppercase tracking-wider text-[var(--gray-500)] mb-1.5">
+                        Department
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        value={jobDepartment}
+                        onChange={(e) => setJobDepartment(e.target.value)}
+                        placeholder="e.g., Operations, Service, Admin"
+                        className="w-full px-4 py-3 rounded-lg border border-[var(--gray-300)] bg-white text-base text-[var(--black)] focus:outline-none focus:ring-2 focus:ring-[var(--red)] transition-all font-medium"
+                      />
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-[10px] font-bold uppercase tracking-wider text-[var(--gray-500)] mb-1.5">
+                        Employment Type
+                      </label>
+                      <select
+                        value={jobType}
+                        onChange={(e) => setJobType(e.target.value)}
+                        className="w-full px-4 py-3 rounded-lg border border-[var(--gray-300)] bg-white text-base text-[var(--black)] focus:outline-none focus:ring-2 focus:ring-[var(--red)] transition-all font-medium"
+                      >
+                        <option value="Full-Time">Full-Time</option>
+                        <option value="Part-Time">Part-Time</option>
+                        <option value="Contract">Contract</option>
+                        <option value="Seasonal">Seasonal</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block text-[10px] font-bold uppercase tracking-wider text-[var(--gray-500)] mb-1.5">
+                        Location
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        value={jobLocation}
+                        onChange={(e) => setJobLocation(e.target.value)}
+                        placeholder="e.g., Fort Myers, FL"
+                        className="w-full px-4 py-3 rounded-lg border border-[var(--gray-300)] bg-white text-base text-[var(--black)] focus:outline-none focus:ring-2 focus:ring-[var(--red)] transition-all font-medium"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <label className="block text-[10px] font-bold uppercase tracking-wider text-[var(--gray-500)] mb-1.5">
+                      Job Description
+                    </label>
+                    <textarea
+                      required
+                      rows={3}
+                      value={jobDescription}
+                      onChange={(e) => setJobDescription(e.target.value)}
+                      placeholder="Brief description of the role and responsibilities..."
+                      className="w-full px-4 py-3 rounded-lg border border-[var(--gray-300)] bg-white text-base text-[var(--black)] focus:outline-none focus:ring-2 focus:ring-[var(--red)] transition-all font-medium resize-none"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] font-bold uppercase tracking-wider text-[var(--gray-500)] mb-1.5">
+                      Requirements (one per line)
+                    </label>
+                    <textarea
+                      rows={4}
+                      value={jobRequirements}
+                      onChange={(e) => setJobRequirements(e.target.value)}
+                      placeholder={"5+ years commercial roofing experience\nForeman or supervisor experience\nValid Florida driver's license\nOSHA 30 certification preferred"}
+                      className="w-full px-4 py-3 rounded-lg border border-[var(--gray-300)] bg-white text-base text-[var(--black)] focus:outline-none focus:ring-2 focus:ring-[var(--red)] transition-all font-medium font-mono text-sm resize-none"
+                    />
+                    <p className="text-[10px] text-[var(--gray-400)] mt-1">Enter each requirement on a separate line.</p>
+                  </div>
+                  <div className="flex gap-3">
+                    <button
+                      type="submit"
+                      className="inline-flex items-center gap-1.5 px-6 py-3.5 bg-[var(--red)] hover:bg-[var(--red-dark)] text-white text-xs font-bold uppercase tracking-wider rounded transition-colors shadow-sm font-[family-name:var(--font-display)]"
+                    >
+                      <Plus className="h-4 w-4" />
+                      Publish Listing
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => { setShowAddJob(false); resetJobForm() }}
+                      className="inline-flex items-center gap-1.5 px-6 py-3.5 border border-[var(--gray-300)] text-[var(--gray-600)] text-xs font-bold uppercase tracking-wider rounded hover:bg-[var(--gray-50)] transition-colors"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </form>
+              </div>
+            )}
+
+            {/* Job listings */}
+            <div className="bg-white rounded-xl border border-[var(--gray-200)] shadow-sm overflow-hidden">
+              <div className="p-4 border-b border-[var(--gray-200)] bg-[var(--gray-50)]">
+                <h3 className="text-xs font-bold uppercase tracking-wider text-[var(--gray-500)] flex items-center gap-1.5">
+                  <Briefcase className="h-4 w-4" />
+                  All Job Listings ({jobs.length})
+                </h3>
+              </div>
+
+              {loadingJobs ? (
+                <div className="p-16 text-center text-xs text-[var(--gray-400)] font-semibold space-y-2">
+                  <RefreshCw className="h-8 w-8 text-[var(--red)] mx-auto animate-spin" />
+                  <p>Loading job listings...</p>
+                </div>
+              ) : jobs.length === 0 ? (
+                <div className="p-16 text-center text-xs text-[var(--gray-400)] font-semibold space-y-1">
+                  <Briefcase className="h-10 w-10 text-[var(--gray-200)] mx-auto mb-2" />
+                  <p>No job listings configured.</p>
+                  <p className="font-light">Click "Add Job" to create a new career opening.</p>
+                </div>
+              ) : (
+                <div className="divide-y divide-[var(--gray-200)]">
+                  {jobs.map((job) => (
+                    <div key={job.id} className="p-5 hover:bg-[var(--gray-50)] transition-colors group">
+                      <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
+                        {/* Job info */}
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-2 flex-wrap">
+                            <h4 className="text-sm font-bold text-[var(--black)] font-[family-name:var(--font-display)] uppercase tracking-wide">
+                              {job.title}
+                            </h4>
+                            <span
+                              className={`rounded-full px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider ${
+                                job.active
+                                  ? 'bg-green-50 text-green-700 border border-green-200'
+                                  : 'bg-amber-50 text-amber-700 border border-amber-200'
+                              }`}
+                            >
+                              {job.active ? 'Active' : 'Inactive'}
+                            </span>
+                          </div>
+
+                          <div className="flex flex-wrap items-center gap-3 mt-2">
+                            <span className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider text-[var(--gray-500)] bg-[var(--gray-50)] border border-[var(--gray-150)] rounded px-2 py-1">
+                              <Briefcase className="h-3 w-3" />
+                              {job.department}
+                            </span>
+                            <span className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider text-[var(--gray-500)] bg-[var(--gray-50)] border border-[var(--gray-150)] rounded px-2 py-1">
+                              <Clock className="h-3 w-3" />
+                              {job.type}
+                            </span>
+                            <span className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider text-[var(--gray-500)] bg-[var(--gray-50)] border border-[var(--gray-150)] rounded px-2 py-1">
+                              <MapPin className="h-3 w-3" />
+                              {job.location}
+                            </span>
+                          </div>
+
+                          <p className="text-[11px] text-[var(--gray-600)] mt-2.5 leading-relaxed">
+                            {job.description}
+                          </p>
+
+                          {job.requirements && job.requirements.length > 0 && (
+                            <div className="mt-3">
+                              <p className="text-[9px] font-bold uppercase tracking-widest text-[var(--gray-400)] mb-1.5">Requirements</p>
+                              <ul className="space-y-1">
+                                {job.requirements.map((req, idx) => (
+                                  <li key={idx} className="text-[10px] text-[var(--gray-500)] flex items-start gap-1.5">
+                                    <span className="text-[var(--red)] mt-0.5 flex-shrink-0">&#8226;</span>
+                                    {req}
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          )}
+
+                          <p className="text-[9px] font-mono text-[var(--gray-400)] mt-3">
+                            Posted: {new Date(job.createdAt).toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' })}
+                          </p>
+                        </div>
+
+                        {/* Actions */}
+                        <div className="flex sm:flex-col items-center gap-2 flex-shrink-0">
+                          <button
+                            onClick={() => handleToggleJob(job.id)}
+                            className={`inline-flex items-center gap-1.5 px-3 py-2.5 rounded border text-[10px] font-bold uppercase tracking-wider transition-all ${
+                              job.active
+                                ? 'border-amber-200 text-amber-700 hover:bg-amber-50 bg-white'
+                                : 'border-green-200 text-green-700 hover:bg-green-50 bg-white'
+                            }`}
+                            title={job.active ? 'Deactivate listing' : 'Activate listing'}
+                          >
+                            {job.active ? (
+                              <>
+                                <ToggleRight className="h-4 w-4" />
+                                <span className="hidden sm:inline">Deactivate</span>
+                              </>
+                            ) : (
+                              <>
+                                <ToggleLeft className="h-4 w-4" />
+                                <span className="hidden sm:inline">Activate</span>
+                              </>
+                            )}
+                          </button>
+                          <button
+                            onClick={() => handleDeleteJob(job.id)}
+                            className="inline-flex items-center gap-1.5 px-3 py-2.5 rounded border border-red-200 text-red-600 hover:bg-red-50 bg-white text-[10px] font-bold uppercase tracking-wider transition-all"
+                            title="Delete listing"
+                          >
+                            <Trash2 className="h-4 w-4" />
+                            <span className="hidden sm:inline">Delete</span>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               )}
             </div>
@@ -697,7 +1427,7 @@ function AdminDashboard({ onLogout }: { onLogout: () => void }) {
             <div className="lg:col-span-6 border border-[var(--gray-200)] rounded-xl bg-white p-5 shadow-sm">
               <h3 className="text-xs font-bold uppercase tracking-wider text-[var(--gray-400)] mb-3">Live Reviews Stream Preview</h3>
               <p className="text-[10px] text-[var(--gray-400)] mb-5">These reviews populate the review templates and site testimonials grid.</p>
-              
+
               <div className="space-y-4 max-h-[400px] overflow-y-auto pr-1">
                 {[
                   { name: "John H.", text: "Target Roofing repaired our facility in Fort Myers in under 24 hours. The crew in red polos was tidy and thorough. Highly recommended for commercial property managers.", source: "Google", date: "May 25, 2026" },
