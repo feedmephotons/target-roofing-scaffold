@@ -6,7 +6,7 @@ import AnimateIn from '@/components/AnimateIn'
 export const metadata: Metadata = {
   title: 'Our Team',
   description:
-    'Meet the dedicated team behind Target Roofing & Sheet Metal. Our experienced professionals are committed to serving Southwest Florida with excellence.',
+    'Meet the dedicated team behind Target Roofing. Our experienced professionals are committed to serving Southwest Florida with excellence.',
 }
 
 const teamMembers = [
