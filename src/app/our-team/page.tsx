@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import { Mail } from 'lucide-react'
+import AnimateIn from '@/components/AnimateIn'
 
 export const metadata: Metadata = {
   title: 'Our Team',
@@ -92,20 +93,34 @@ export default function OurTeamPage() {
       <section className="relative bg-[var(--black)] py-28 text-white">
         <div className="noise-overlay absolute inset-0" />
         <div className="relative z-10 mx-auto max-w-5xl px-6 text-center">
-          <div className="mb-4 inline-block bg-[var(--red)] px-4 py-1">
-            <span className="font-[family-name:var(--font-display)] text-sm font-semibold tracking-widest uppercase">
-              Our People
-            </span>
-          </div>
-          <h1 className="font-[family-name:var(--font-display)] text-5xl font-bold tracking-tight md:text-7xl">
-            Meet Our Team
-          </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-gray-300">
-            Target Roofing is a roofing company local to Southwest Florida.
-            We&apos;re proud of their commitment to serving our customers with
-            excellence.
-          </p>
+          <AnimateIn animation="fade-up">
+            <div className="mb-4 inline-block bg-[var(--red)] px-4 py-1">
+              <span className="font-[family-name:var(--font-display)] text-sm font-semibold tracking-widest uppercase">
+                Our People
+              </span>
+            </div>
+            <h1 className="font-[family-name:var(--font-display)] text-5xl font-bold tracking-tight md:text-7xl">
+              Meet Our Team
+            </h1>
+            <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-gray-300">
+              Target Roofing is a roofing company local to Southwest Florida.
+              We&apos;re proud of their commitment to serving our customers with
+              excellence.
+            </p>
+          </AnimateIn>
         </div>
+      </section>
+
+      {/* Crew Team Photo Banner */}
+      <section className="relative h-48 md:h-64 overflow-hidden">
+        <Image
+          src="/images/crew/crew-team-photo.jpg"
+          alt="Target Roofing crew team"
+          fill
+          className="object-cover"
+          priority
+        />
+        <div className="absolute inset-0 bg-[var(--black)]/40" />
       </section>
 
       {/* Team Grid */}
@@ -113,10 +128,9 @@ export default function OurTeamPage() {
         <div className="mx-auto max-w-6xl px-6">
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {teamMembers.map((member, index) => (
+              <AnimateIn key={member.email} animation="fade-up" delay={index * 80}>
               <div
-                key={member.email}
                 className="group relative overflow-hidden rounded-sm border border-[var(--gray-200)] bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
-                style={{ animationDelay: `${index * 80}ms` }}
               >
                 {/* Red top accent bar */}
                 <div className="h-1 w-full bg-[var(--red)] transition-all duration-300 group-hover:h-1.5" />
@@ -156,6 +170,7 @@ export default function OurTeamPage() {
                   </a>
                 </div>
               </div>
+              </AnimateIn>
             ))}
           </div>
         </div>
@@ -164,6 +179,7 @@ export default function OurTeamPage() {
       {/* Bottom CTA */}
       <section className="relative bg-[var(--red)] py-20 text-white">
         <div className="noise-overlay absolute inset-0" />
+        <AnimateIn animation="fade-up">
         <div className="relative z-10 mx-auto max-w-3xl px-6 text-center">
           <h2 className="font-[family-name:var(--font-display)] text-3xl font-bold md:text-4xl">
             Want to Join the Team?
@@ -179,6 +195,7 @@ export default function OurTeamPage() {
             View Careers
           </a>
         </div>
+        </AnimateIn>
       </section>
     </>
   )

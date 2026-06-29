@@ -1,7 +1,9 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import { ExternalLink, Phone, ChevronRight } from 'lucide-react'
 import VideoCard from '@/components/VideoCard'
+import AnimateIn from '@/components/AnimateIn'
 
 export const metadata: Metadata = {
   title: 'Video Gallery',
@@ -29,19 +31,25 @@ export default function VideoGalleryPage() {
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-28 md:py-36 lg:py-44">
           <div className="max-w-3xl">
             {/* Eyebrow */}
-            <p className="inline-flex items-center gap-2 text-[var(--red-light)] text-sm font-bold uppercase tracking-[0.2em] mb-6 font-[family-name:var(--font-display)]">
-              <span className="w-8 h-[2px] bg-[var(--red)]" />
-              See Us in Action
-            </p>
+            <AnimateIn animation="fade-up">
+              <p className="inline-flex items-center gap-2 text-[var(--red-light)] text-sm font-bold uppercase tracking-[0.2em] mb-6 font-[family-name:var(--font-display)]">
+                <span className="w-8 h-[2px] bg-[var(--red)]" />
+                See Us in Action
+              </p>
+            </AnimateIn>
 
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[0.95] mb-6 font-[family-name:var(--font-display)]">
-              Video <span className="text-[var(--red)]">Gallery</span>
-            </h1>
+            <AnimateIn animation="fade-up" delay={100}>
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[0.95] mb-6 font-[family-name:var(--font-display)]">
+                Video <span className="text-[var(--red)]">Gallery</span>
+              </h1>
+            </AnimateIn>
 
-            <p className="text-lg md:text-xl text-[var(--gray-300)] leading-relaxed max-w-2xl">
-              See Target Roofing in action. Watch our project showcases,
-              customer testimonials, and community involvement.
-            </p>
+            <AnimateIn animation="fade-up" delay={200}>
+              <p className="text-lg md:text-xl text-[var(--gray-300)] leading-relaxed max-w-2xl">
+                See Target Roofing in action. Watch our project showcases,
+                customer testimonials, and community involvement.
+              </p>
+            </AnimateIn>
           </div>
         </div>
       </section>
@@ -63,10 +71,31 @@ export default function VideoGalleryPage() {
 
           {/* Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {videos.map((video) => (
-              <VideoCard key={video.url} video={video} />
+            {videos.map((video, index) => (
+              <AnimateIn key={video.url} animation="scale" delay={Math.min(index * 150, 600)}>
+                <VideoCard video={video} />
+              </AnimateIn>
             ))}
           </div>
+
+          {/* Crew welding closeup visual accent */}
+          <AnimateIn animation="fade-up" delay={200} className="mt-16">
+            <div className="relative w-full h-64 md:h-80 rounded-lg overflow-hidden shadow-lg">
+              <Image
+                src="/images/crew/crew-welding-closeup.jpg"
+                alt="Target Roofing crew welding closeup"
+                fill
+                sizes="(max-width: 768px) 100vw, 1200px"
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+              <div className="absolute bottom-6 left-6">
+                <p className="text-white text-sm font-bold uppercase tracking-wider font-[family-name:var(--font-display)]">
+                  Precision craftsmanship on every job
+                </p>
+              </div>
+            </div>
+          </AnimateIn>
         </div>
       </section>
 

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { Star, Quote, ArrowRight, Phone } from 'lucide-react'
+import AnimateIn from '@/components/AnimateIn'
 
 export const metadata: Metadata = {
   title: 'Reviews',
@@ -88,6 +89,7 @@ export default function ReviewsPage() {
         </div>
 
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-24 md:py-32 lg:py-36">
+          <AnimateIn animation="fade-up">
           <div className="max-w-3xl">
             {/* Eyebrow */}
             <div className="flex items-center gap-3 mb-6">
@@ -108,6 +110,7 @@ export default function ReviewsPage() {
               property owners throughout Southwest Florida have to say about Target Roofing.
             </p>
           </div>
+          </AnimateIn>
         </div>
       </section>
 
@@ -137,15 +140,17 @@ export default function ReviewsPage() {
                 label: 'Most Common Rating',
                 sub: null,
               },
-            ].map((stat) => (
+            ].map((stat, index) => (
               <div key={stat.label} className="py-8 sm:py-10 text-center px-4">
-                <div className="text-4xl md:text-5xl font-bold font-[family-name:var(--font-display)] tracking-tight">
-                  {stat.value}
-                </div>
-                <div className="text-sm uppercase tracking-[0.15em] text-white/80 mt-1 font-semibold">
-                  {stat.label}
-                </div>
-                {stat.sub}
+                <AnimateIn animation="scale" delay={index * 150}>
+                  <div className="text-4xl md:text-5xl font-bold font-[family-name:var(--font-display)] tracking-tight">
+                    {stat.value}
+                  </div>
+                  <div className="text-sm uppercase tracking-[0.15em] text-white/80 mt-1 font-semibold">
+                    {stat.label}
+                  </div>
+                  {stat.sub}
+                </AnimateIn>
               </div>
             ))}
           </div>
@@ -170,7 +175,9 @@ export default function ReviewsPage() {
           <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
             {reviews.map((review, index) => (
               <div key={index} className="break-inside-avoid">
-                <ReviewCard review={review} index={index} />
+                <AnimateIn animation="fade-up" delay={index * 80}>
+                  <ReviewCard review={review} index={index} />
+                </AnimateIn>
               </div>
             ))}
           </div>

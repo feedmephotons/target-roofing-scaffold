@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import {
   DollarSign,
   Heart,
@@ -10,6 +11,7 @@ import {
   Phone,
   Briefcase,
 } from 'lucide-react'
+import AnimateIn from '@/components/AnimateIn'
 
 export const metadata: Metadata = {
   title: 'Careers',
@@ -57,18 +59,20 @@ export default function CareersPage() {
       <section className="relative bg-[var(--black)] py-28 text-white">
         <div className="noise-overlay absolute inset-0" />
         <div className="relative z-10 mx-auto max-w-5xl px-6 text-center">
-          <div className="mb-4 inline-block bg-[var(--red)] px-4 py-1">
-            <span className="font-[family-name:var(--font-display)] text-sm font-semibold tracking-widest uppercase">
-              Careers
-            </span>
-          </div>
-          <h1 className="font-[family-name:var(--font-display)] text-5xl font-bold tracking-tight md:text-7xl">
-            Join the Target Roofing Team
-          </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-gray-300">
-            Build your career with one of Florida&apos;s fastest-growing
-            companies.
-          </p>
+          <AnimateIn animation="fade-up">
+            <div className="mb-4 inline-block bg-[var(--red)] px-4 py-1">
+              <span className="font-[family-name:var(--font-display)] text-sm font-semibold tracking-widest uppercase">
+                Careers
+              </span>
+            </div>
+            <h1 className="font-[family-name:var(--font-display)] text-5xl font-bold tracking-tight md:text-7xl">
+              Join the Target Roofing Team
+            </h1>
+            <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-gray-300">
+              Build your career with one of Florida&apos;s fastest-growing
+              companies.
+            </p>
+          </AnimateIn>
         </div>
       </section>
 
@@ -89,24 +93,52 @@ export default function CareersPage() {
         </div>
       </section>
 
+      {/* Crew Team Photo */}
+      <section className="relative h-56 md:h-72 overflow-hidden">
+        <Image
+          src="/images/crew/crew-team-photo.jpg"
+          alt="Target Roofing crew team"
+          fill
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-[var(--black)]/30" />
+        <div className="absolute inset-0 flex items-center justify-center">
+          <AnimateIn animation="fade-up">
+            <p className="font-[family-name:var(--font-display)] text-2xl md:text-3xl font-bold text-white tracking-wide uppercase drop-shadow-lg">
+              Our Culture. Our Crew.
+            </p>
+          </AnimateIn>
+        </div>
+      </section>
+
       {/* Benefits */}
-      <section className="relative bg-[var(--gray-50)] py-20">
-        <div className="mx-auto max-w-6xl px-6">
-          <div className="mb-12 text-center">
-            <h2 className="font-[family-name:var(--font-display)] text-3xl font-bold text-[var(--black)] md:text-4xl">
-              What We Offer
-            </h2>
-            <div className="mx-auto mt-3 h-1 w-16 bg-[var(--red)]" />
-          </div>
+      <section className="relative bg-[var(--gray-50)] py-20 overflow-hidden">
+        {/* Monochrome background */}
+        <div className="absolute inset-0">
+          <Image
+            src="/images/backgrounds/bg-crane-mono.jpg"
+            alt=""
+            fill
+            className="object-cover opacity-[0.04]"
+          />
+        </div>
+        <div className="relative z-10 mx-auto max-w-6xl px-6">
+          <AnimateIn animation="fade-up">
+            <div className="mb-12 text-center">
+              <h2 className="font-[family-name:var(--font-display)] text-3xl font-bold text-[var(--black)] md:text-4xl">
+                What We Offer
+              </h2>
+              <div className="mx-auto mt-3 h-1 w-16 bg-[var(--red)]" />
+            </div>
+          </AnimateIn>
 
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {benefits.map((benefit, index) => {
               const Icon = benefit.icon
               return (
+                <AnimateIn key={benefit.title} animation="fade-up" delay={index * 100}>
                 <div
-                  key={benefit.title}
                   className="group relative overflow-hidden rounded-sm border border-[var(--gray-200)] bg-white p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
-                  style={{ animationDelay: `${index * 100}ms` }}
                 >
                   {/* Icon */}
                   <div className="mb-5 flex h-14 w-14 items-center justify-center bg-[var(--black)] transition-all duration-300 group-hover:bg-[var(--red)]">
@@ -126,6 +158,7 @@ export default function CareersPage() {
                   {/* Bottom accent bar on hover */}
                   <div className="absolute bottom-0 left-0 h-1 w-0 bg-[var(--red)] transition-all duration-300 group-hover:w-full" />
                 </div>
+                </AnimateIn>
               )
             })}
           </div>

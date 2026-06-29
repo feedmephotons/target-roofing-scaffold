@@ -1,8 +1,10 @@
 'use client'
 
 import { useState, type FormEvent } from 'react'
+import Image from 'next/image'
 import { Phone, Mail, MapPin, Clock, Send } from 'lucide-react'
 import { submitContactLead } from '@/app/actions'
+import AnimateIn from '@/components/AnimateIn'
 
 export default function ContactPage() {
   const [form, setForm] = useState({
@@ -84,34 +86,53 @@ export default function ContactPage() {
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-28 md:py-36 lg:py-44">
           <div className="max-w-3xl">
             {/* Eyebrow */}
-            <p className="inline-flex items-center gap-2 text-[var(--red-light)] text-sm font-bold uppercase tracking-[0.2em] mb-6 font-[family-name:var(--font-display)]">
-              <span className="w-8 h-[2px] bg-[var(--red)]" />
-              Get In Touch
-            </p>
+            <AnimateIn animation="fade-up">
+              <p className="inline-flex items-center gap-2 text-[var(--red-light)] text-sm font-bold uppercase tracking-[0.2em] mb-6 font-[family-name:var(--font-display)]">
+                <span className="w-8 h-[2px] bg-[var(--red)]" />
+                Get In Touch
+              </p>
+            </AnimateIn>
 
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[0.95] mb-6 font-[family-name:var(--font-display)]">
-              Contact <span className="text-[var(--red)]">Us</span>
-            </h1>
+            <AnimateIn animation="fade-up" delay={100}>
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[0.95] mb-6 font-[family-name:var(--font-display)]">
+                Contact <span className="text-[var(--red)]">Us</span>
+              </h1>
+            </AnimateIn>
 
-            <p className="text-xl md:text-2xl font-semibold text-white mb-4 font-[family-name:var(--font-display)]">
-              You Call. We Respond. It&apos;s That Simple.
-            </p>
+            <AnimateIn animation="fade-up" delay={200}>
+              <p className="text-xl md:text-2xl font-semibold text-white mb-4 font-[family-name:var(--font-display)]">
+                You Call. We Respond. It&apos;s That Simple.
+              </p>
+            </AnimateIn>
 
-            <p className="text-lg md:text-xl text-[var(--gray-300)] leading-relaxed max-w-2xl">
-              Hiring a roofer shouldn&apos;t be difficult. Target Roofing is
-              ready to respond to your call 24 hours a day, seven days a week,
-              365 days a year.
-            </p>
+            <AnimateIn animation="fade-up" delay={300}>
+              <p className="text-lg md:text-xl text-[var(--gray-300)] leading-relaxed max-w-2xl">
+                Hiring a roofer shouldn&apos;t be difficult. Target Roofing is
+                ready to respond to your call 24 hours a day, seven days a week,
+                365 days a year.
+              </p>
+            </AnimateIn>
           </div>
         </div>
       </section>
 
       {/* ─── FORM + CONTACT INFO ─── */}
-      <section className="bg-[var(--gray-50)] py-20 md:py-28">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <section className="relative bg-[var(--gray-50)] py-20 md:py-28 overflow-hidden">
+        {/* Monochrome aerial background */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/backgrounds/bg-aerial-mono.jpg"
+            alt=""
+            fill
+            className="object-cover opacity-[0.04]"
+            sizes="100vw"
+          />
+        </div>
+
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16">
             {/* ── Left: Contact Form ── */}
-            <div className="lg:col-span-3">
+            <AnimateIn animation="fade-up" className="lg:col-span-3">
               <div className="bg-white rounded-sm shadow-xl p-4 xs:p-8 md:p-10">
                 <h2 className="text-2xl md:text-3xl font-bold text-[var(--black)] mb-2 font-[family-name:var(--font-display)]">
                   Request a Free Estimate
@@ -421,11 +442,12 @@ export default function ContactPage() {
                   </p>
                 </form>
               </div>
-            </div>
+            </AnimateIn>
 
             {/* ── Right: Contact Info Cards ── */}
             <div className="lg:col-span-2 space-y-5">
               {/* Headquarters */}
+              <AnimateIn animation="fade-up" delay={100}>
               <div className="group bg-white rounded-sm shadow-md p-4 sm:p-6 border-l-4 border-[var(--red)] hover:shadow-lg transition-shadow">
                 <div className="flex items-start gap-3 sm:gap-4">
                   <div className="flex-shrink-0 w-12 h-12 bg-[var(--red)]/10 rounded-sm flex items-center justify-center group-hover:bg-[var(--red)] transition-colors">
@@ -451,8 +473,10 @@ export default function ContactPage() {
                   </div>
                 </div>
               </div>
+              </AnimateIn>
 
               {/* Phone */}
+              <AnimateIn animation="fade-up" delay={200}>
               <div className="group bg-white rounded-sm shadow-md p-4 sm:p-6 border-l-4 border-[var(--red)] hover:shadow-lg transition-shadow">
                 <div className="flex items-start gap-3 sm:gap-4">
                   <div className="flex-shrink-0 w-12 h-12 bg-[var(--red)]/10 rounded-sm flex items-center justify-center group-hover:bg-[var(--red)] transition-colors">
@@ -471,8 +495,10 @@ export default function ContactPage() {
                   </div>
                 </div>
               </div>
+              </AnimateIn>
 
               {/* Email */}
+              <AnimateIn animation="fade-up" delay={300}>
               <div className="group bg-white rounded-sm shadow-md p-4 sm:p-6 border-l-4 border-[var(--red)] hover:shadow-lg transition-shadow">
                 <div className="flex items-start gap-3 sm:gap-4">
                   <div className="flex-shrink-0 w-12 h-12 bg-[var(--red)]/10 rounded-sm flex items-center justify-center group-hover:bg-[var(--red)] transition-colors">
@@ -491,8 +517,10 @@ export default function ContactPage() {
                   </div>
                 </div>
               </div>
+              </AnimateIn>
 
               {/* Hours */}
+              <AnimateIn animation="fade-up" delay={400}>
               <div className="group bg-white rounded-sm shadow-md p-4 sm:p-6 border-l-4 border-[var(--red)] hover:shadow-lg transition-shadow">
                 <div className="flex items-start gap-3 sm:gap-4">
                   <div className="flex-shrink-0 w-12 h-12 bg-[var(--red)]/10 rounded-sm flex items-center justify-center group-hover:bg-[var(--red)] transition-colors">
@@ -510,8 +538,10 @@ export default function ContactPage() {
                   </div>
                 </div>
               </div>
+              </AnimateIn>
 
               {/* Emergency Service */}
+              <AnimateIn animation="fade-up" delay={500}>
               <div className="bg-[var(--black)] rounded-sm shadow-md p-4 sm:p-6 text-white">
                 <div className="noise-overlay absolute inset-0 pointer-events-none" />
                 <div className="relative">
@@ -533,6 +563,7 @@ export default function ContactPage() {
                   </a>
                 </div>
               </div>
+              </AnimateIn>
             </div>
           </div>
         </div>
