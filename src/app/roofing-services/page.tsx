@@ -21,6 +21,7 @@ import {
 } from 'lucide-react'
 import InlineLeadForm from '@/components/InlineLeadForm'
 import AnimateIn from '@/components/AnimateIn'
+import RoofSchematic from '@/components/RoofSchematic'
 
 export const metadata: Metadata = {
   title: 'Our Roofing Services',
@@ -81,7 +82,8 @@ export default function RoofingServicesPage() {
   return (
     <>
       {/* ==================== HERO ==================== */}
-      <section className="relative bg-blueprint-dark text-white noise-overlay">
+      <section className="relative bg-blueprint-dark text-white noise-overlay overflow-hidden">
+        <RoofSchematic className="text-white/[0.04] z-0" />
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-24 md:py-32">
           <div className="grid lg:grid-cols-12 gap-12 items-center">
             {/* Left Column: Text & CTAs */}

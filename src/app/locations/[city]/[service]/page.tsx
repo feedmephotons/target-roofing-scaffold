@@ -4,6 +4,7 @@ import { Star, Quote, CheckCircle, Wrench, RotateCcw, Building2, ShieldCheck, Us
 import InlineLeadForm from '@/components/InlineLeadForm'
 import { getReviews } from '@/app/actions'
 import projectsData from '@/data/projects.json'
+import RoofSchematic from '@/components/RoofSchematic'
 
 export const dynamicParams = false
 
@@ -246,6 +247,7 @@ export default async function LocationPage({ params }: PageProps) {
     <>
       {/* Hero Section */}
       <section className="relative bg-[var(--black)] text-white overflow-hidden noise-overlay py-20 md:py-28">
+        <RoofSchematic className="text-white/[0.04] z-0" />
         <div className="absolute inset-0 opacity-[0.04]">
           <div className="absolute top-0 right-0 w-[600px] h-[600px] border-r-2 border-white/20 transform rotate-12 translate-x-1/2 -translate-y-1/4" />
           <div className="absolute bottom-0 left-0 w-[400px] h-[400px] border-l-2 border-white/20 transform -rotate-12 -translate-x-1/2 translate-y-1/4" />
