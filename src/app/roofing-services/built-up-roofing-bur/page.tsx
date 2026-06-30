@@ -208,7 +208,7 @@ export default function BuiltUpRoofingPage() {
             <AnimateIn animation="fade-up" delay={200}>
               <div className="relative aspect-[4/3] rounded-lg overflow-hidden shadow-2xl">
                 <Image
-                  src="/images/crew/crew-team-photo.jpg"
+                  src="/images/crew/crew-team-photo.png"
                   alt="Target Roofing crew on a completed commercial roofing project"
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"

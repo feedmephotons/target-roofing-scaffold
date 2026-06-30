@@ -114,7 +114,7 @@ export default function OurTeamPage() {
       {/* Crew Team Photo Banner */}
       <section className="relative h-48 md:h-64 overflow-hidden">
         <Image
-          src="/images/crew/crew-team-photo.jpg"
+          src="/images/crew/crew-team-photo.png"
           alt="Target Roofing crew team"
           fill
           className="object-cover"

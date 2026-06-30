@@ -524,7 +524,7 @@ function CommunitySection() {
         <AnimateIn animation="fade-up" delay={100} className="mb-12">
           <div className="relative h-72 lg:h-96 rounded-lg overflow-hidden">
             <Image
-              src="/images/crew/crew-team-photo.jpg"
+              src="/images/crew/crew-team-photo.png"
               alt="Target Roofing team photo at golden hour"
               fill
               className="object-cover"

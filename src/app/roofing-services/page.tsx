@@ -184,7 +184,7 @@ export default function RoofingServicesPage() {
             <AnimateIn animation="fade-up" delay={200}>
               <div className="relative aspect-[4/3] rounded-lg overflow-hidden shadow-2xl">
                 <Image
-                  src="/images/crew/crew-team-photo.jpg"
+                  src="/images/crew/crew-team-photo.png"
                   alt="Target Roofing crew standing confidently on a completed commercial roof"
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
@@ -493,7 +493,7 @@ export default function RoofingServicesPage() {
               <AnimateIn animation="fade-up" delay={300}>
                 <div className="relative aspect-[16/9] rounded-lg overflow-hidden shadow-lg mt-8">
                   <Image
-                    src="/images/crew/crew-crane-lift.jpg"
+                    src="/images/crew/crew-crane-lift.png"
                     alt="Crane lifting roofing materials to a commercial building for a new roof installation"
                     fill
                     sizes="(max-width: 1024px) 100vw, 50vw"

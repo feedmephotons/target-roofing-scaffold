@@ -116,7 +116,7 @@ export default function TpoPvcMembraneRoofingPage() {
         {/* Background image */}
         <div className="absolute inset-0">
           <Image
-            src="/images/crew/crew-working-tpo.jpg"
+            src="/images/crew/crew-working-tpo.png"
             alt="Target Roofing crew installing TPO membrane on a commercial flat roof in Southwest Florida"
             fill
             priority

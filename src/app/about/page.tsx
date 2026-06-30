@@ -72,14 +72,14 @@ const valueProps = [
     title: 'Dedication to Customer Service Excellence',
     body: 'Target Roofing sets a high bar for customer service, taking the steps necessary to achieve excellence. First, our well-trained team is committed to professionalism. Second, they hold the technology to provide fast, accurate estimates in the field, and to track projects from start to completion. Finally, our experienced foremen have the longevity and expertise necessary to lead with precision. We\'re proud to say we promote from within and never use subs.',
     icon: Users,
-    image: '/images/crew/crew-roof-inspection.jpg',
+    image: '/images/crew/crew-roof-inspection.png',
     imageAlt: 'Target Roofing crew member performing a thorough commercial roof inspection',
   },
   {
     title: 'Investment in Roofing Technology and Equipment',
     body: 'Target Roofing goes above and beyond by investing in state-of-the-art technology and equipment. These assets empower us to deliver roofing products and services with speed and efficiency. In fact, we create products most companies must outsource, and we own equipment others rent. This speeds production and delivery immensely! As a result, we can pass the cost savings on to you, and you benefit from the resulting quality control.',
     icon: Cpu,
-    image: '/images/crew/crew-working-tpo.jpg',
+    image: '/images/crew/crew-working-tpo.png',
     imageAlt: 'Target Roofing crew installing TPO membrane with state-of-the-art equipment',
   },
   {
@@ -99,7 +99,7 @@ export default function AboutPage() {
         {/* Background image */}
         <div className="absolute inset-0">
           <Image
-            src="/images/crew/crew-team-photo.jpg"
+            src="/images/crew/crew-team-photo.png"
             alt=""
             fill
             sizes="100vw"
