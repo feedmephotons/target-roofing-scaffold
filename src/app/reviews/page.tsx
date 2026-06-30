@@ -9,8 +9,7 @@ export const metadata: Metadata = {
     'Read what property managers, contractors, and property owners throughout Southwest Florida say about Target Roofing. 4.9 average rating with 100+ Google reviews.',
 }
 
-import reviewsData from '@/data/reviews.json'
-const reviews = reviewsData
+import { getReviews } from '@/app/actions'
 
 function StarRating() {
   return (
@@ -77,7 +76,8 @@ function ReviewCard({ review, index }: { review: (typeof reviews)[number]; index
   )
 }
 
-export default function ReviewsPage() {
+export default async function ReviewsPage() {
+  const reviews = await getReviews()
   return (
     <>
       {/* ── Hero ── */}

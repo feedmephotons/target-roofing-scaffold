@@ -45,6 +45,20 @@ export const metadata: Metadata = {
     url: 'https://targetroofers.com',
     siteName: 'Target Roofing',
     type: 'website',
+    images: [
+      {
+        url: 'https://targetroofers.com/images/logos/target-roofing-logo-2x.png',
+        width: 800,
+        height: 400,
+        alt: 'Target Roofing',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Target Roofing | Commercial Roof Repair',
+    description: 'Southwest Florida\'s trusted commercial roof repair and maintenance specialist.',
+    images: ['https://targetroofers.com/images/logos/target-roofing-logo-2x.png'],
   },
 }
 

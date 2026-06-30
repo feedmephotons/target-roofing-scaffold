@@ -22,6 +22,7 @@ import {
 } from 'lucide-react'
 import InlineLeadForm from '@/components/InlineLeadForm'
 import AnimateIn from '@/components/AnimateIn'
+import { getShowcaseVideos } from '@/app/actions'
 
 /* ------------------------------------------------------------------ */
 /*  Animated Counter Hook                                              */
@@ -187,11 +188,11 @@ function HeroSection() {
               Timely, professional repairs prevent minor leaks from turning into catastrophic failures. We specialize in extending the service life of commercial and residential roofs in Southwest Florida, transitioning seamlessly to replacement only when repairs are no longer cost-effective.
             </p>
 
-            <h3 className="animate-fade-in-up mb-6 text-sm sm:text-base font-semibold tracking-wide text-white/80 uppercase font-[family-name:var(--font-display)]"
+            <p className="animate-fade-in-up mb-6 text-sm sm:text-base font-semibold tracking-wide text-white/80 uppercase font-[family-name:var(--font-display)]"
               style={{ animationDelay: '0.2s' }}
             >
               Serving Sarasota, Tampa, Fort Myers, Naples
-            </h3>
+            </p>
 
             {/* Audience pills */}
             <div
@@ -910,41 +911,24 @@ function NewsSection() {
 /* ------------------------------------------------------------------ */
 /*  8b. VIDEO SHOWCASE                                                 */
 /* ------------------------------------------------------------------ */
-const showcaseVideos = [
-  {
-    id: 'yz5H6FkrWhs',
-    title: 'Target Roofing Overview',
-    description: 'See what makes Target Roofing Southwest Florida\'s trusted commercial roofing partner.',
-    duration: '3:42',
-  },
-  {
-    id: 'A7Qz9tz8nNU',
-    title: 'Colonial Country Club',
-    description: 'Full roof replacement at Colonial Country Club in Fort Myers.',
-    duration: '2:18',
-  },
-  {
-    id: 'Ywio4IhCQPI',
-    title: 'Water Test Inspection',
-    description: 'Our thorough water test procedure to detect and diagnose roof leaks.',
-    duration: '2:57',
-  },
-  {
-    id: '-o8JhirAPR8',
-    title: 'Service Department',
-    description: 'Behind the scenes with the Target Roofing service team on repairs and maintenance.',
-    duration: '3:05',
-  },
-  {
-    id: 'cGLaC7x9btw',
-    title: 'Our Process',
-    description: 'How we approach every project with precision, accountability, and cutting-edge technology.',
-    duration: '2:31',
-  },
+const FALLBACK_VIDEOS = [
+  { id: 'yz5H6FkrWhs', title: 'Target Roofing Overview', description: 'See what makes Target Roofing Southwest Florida\'s trusted commercial roofing partner.', duration: '3:42' },
+  { id: 'A7Qz9tz8nNU', title: 'Colonial Country Club', description: 'Full roof replacement at Colonial Country Club in Fort Myers.', duration: '2:18' },
+  { id: 'Ywio4IhCQPI', title: 'Water Test Inspection', description: 'Our thorough water test procedure to detect and diagnose roof leaks.', duration: '2:57' },
+  { id: '-o8JhirAPR8', title: 'Service Department', description: 'Behind the scenes with the Target Roofing service team on repairs and maintenance.', duration: '3:05' },
+  { id: 'cGLaC7x9btw', title: 'Our Process', description: 'How we approach every project with precision, accountability, and cutting-edge technology.', duration: '2:31' },
 ]
 
 function VideoShowcaseSection() {
   const [activeIdx, setActiveIdx] = useState(0)
+  const [showcaseVideos, setShowcaseVideos] = useState(FALLBACK_VIDEOS)
+
+  useEffect(() => {
+    getShowcaseVideos().then(videos => {
+      if (videos.length > 0) setShowcaseVideos(videos)
+    })
+  }, [])
+
   const active = showcaseVideos[activeIdx]
 
   return (

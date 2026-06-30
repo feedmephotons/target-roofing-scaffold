@@ -12,6 +12,7 @@ import {
   Briefcase,
 } from 'lucide-react'
 import AnimateIn from '@/components/AnimateIn'
+import { getJobListings } from '@/app/actions'
 
 export const metadata: Metadata = {
   title: 'Careers',
@@ -52,7 +53,9 @@ const benefits = [
   },
 ]
 
-export default function CareersPage() {
+export default async function CareersPage() {
+  const jobListings = await getJobListings()
+  const activeJobs = jobListings.filter(j => j.active)
   return (
     <>
       {/* Hero */}
@@ -175,13 +178,48 @@ export default function CareersPage() {
             <div className="mx-auto mt-3 h-1 w-16 bg-[var(--red)]" />
           </div>
 
-          <div className="mx-auto max-w-lg rounded-sm border border-dashed border-[var(--gray-300)] bg-[var(--gray-50)] px-8 py-12">
-            <Briefcase className="mx-auto mb-4 h-12 w-12 text-[var(--gray-300)]" />
-            <p className="text-lg text-[var(--gray-500)]">
-              We do not have any job openings at the moment. Please come back
-              again later.
-            </p>
-          </div>
+          {activeJobs.length === 0 ? (
+            <div className="mx-auto max-w-lg rounded-sm border border-dashed border-[var(--gray-300)] bg-[var(--gray-50)] px-8 py-12">
+              <Briefcase className="mx-auto mb-4 h-12 w-12 text-[var(--gray-300)]" />
+              <p className="text-lg text-[var(--gray-500)]">
+                We do not have any job openings at the moment. Please come back
+                again later.
+              </p>
+            </div>
+          ) : (
+            <div className="space-y-4 text-left">
+              {activeJobs.map((job) => (
+                <div key={job.id} className="rounded-lg border border-[var(--gray-200)] bg-white p-6 shadow-sm hover:shadow-md transition-shadow">
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                    <div>
+                      <h3 className="text-xl font-bold text-[var(--black)] font-[family-name:var(--font-display)]">{job.title}</h3>
+                      <div className="mt-1 flex flex-wrap items-center gap-3 text-sm text-[var(--gray-500)]">
+                        <span className="inline-flex items-center gap-1"><Briefcase className="h-3.5 w-3.5" />{job.department}</span>
+                        <span className="inline-flex items-center gap-1"><MapPin className="h-3.5 w-3.5" />{job.location}</span>
+                        <span className="rounded-full bg-[var(--red)]/10 px-3 py-0.5 text-xs font-bold text-[var(--red)] uppercase">{job.type}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <p className="mt-3 text-[var(--gray-600)]">{job.description}</p>
+                  {job.requirements.length > 0 && (
+                    <ul className="mt-3 space-y-1">
+                      {job.requirements.map((req, i) => (
+                        <li key={i} className="flex items-start gap-2 text-sm text-[var(--gray-500)]">
+                          <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-[var(--red)] shrink-0" />
+                          {req}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                  <div className="mt-4">
+                    <a href={`mailto:info@targetroofers.com?subject=Application: ${encodeURIComponent(job.title)}`} className="inline-flex items-center gap-2 rounded bg-[var(--red)] px-5 py-2.5 text-sm font-bold uppercase tracking-wider text-white hover:bg-[var(--red-dark)] transition-colors">
+                      <Mail className="h-4 w-4" /> Apply Now
+                    </a>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
