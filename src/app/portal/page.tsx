@@ -333,6 +333,13 @@ function PortalDashboard({ onLogout }: { onLogout: () => void }) {
 
   return (
     <div className="min-h-screen bg-[var(--gray-50)]">
+      {/* Demo banner */}
+      <div className="bg-gradient-to-r from-[var(--red-dark)] to-[var(--red)] text-white text-center py-2.5 px-4 text-sm font-semibold tracking-wide">
+        <span className="inline-flex items-center gap-2">
+          <span className="rounded bg-white/20 px-2 py-0.5 text-xs font-bold uppercase tracking-widest">Demo</span>
+          This is a preview of the Target Roofing customer portal experience
+        </span>
+      </div>
       {/* Portal top bar */}
       <div className="border-b border-[var(--gray-200)] bg-white shadow-sm">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3.5 sm:px-6 lg:px-8">
