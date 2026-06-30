@@ -264,25 +264,25 @@ function HeroSection() {
 /* ------------------------------------------------------------------ */
 const services = [
   {
-    icon: Wrench,
+    iconSrc: '/images/icons/roof-repair.png',
     title: 'Roof Repair',
     desc: 'Extend your roof\'s life. We resolve leaks and structural wear early to prevent costly deterioration.',
     href: '/roofing-services#repairs',
   },
   {
-    icon: Building,
+    iconSrc: '/images/icons/replacement-transition.png',
     title: 'Replacement Transition',
     desc: 'When repairs are no longer cost-effective, we guide you through a seamless transition to a new roof.',
     href: '/roofing-services#reroofing',
   },
   {
-    icon: Shield,
+    iconSrc: '/images/icons/proactive-maintenance.png',
     title: 'Proactive Maintenance',
     desc: 'Preventative checkups and minor repairs designed to maximize roof service life and satisfy warranties.',
     href: '/roofing-services#maintenance-plans',
   },
   {
-    icon: Home,
+    iconSrc: '/images/icons/new-construction.png',
     title: 'New Construction',
     desc: 'Delivering top-tier new roof installations on-time and on-budget, built to withstand harsh weather.',
     href: '/roofing-services#new-roofs',
@@ -294,7 +294,7 @@ function ServicesSection() {
     <section className="bg-blueprint-light py-24 lg:py-32 relative">
       {/* Subtle monochrome background texture */}
       <div className="absolute inset-0">
-        <Image src="/images/backgrounds/bg-tpo-mono.jpg" alt="" fill className="object-cover opacity-[0.04]" />
+        <Image src="/images/backgrounds/bg-tpo-mono.jpg" alt="" fill className="object-cover opacity-[0.12]" />
       </div>
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -311,7 +311,6 @@ function ServicesSection() {
         {/* Service cards */}
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {services.map((service, i) => {
-            const Icon = service.icon
             return (
               <AnimateIn key={service.title} animation="fade-up" delay={i * 100}>
                 <Link
@@ -321,8 +320,8 @@ function ServicesSection() {
                   {/* Red top accent */}
                   <div className="absolute inset-x-0 top-0 h-1 rounded-t-lg bg-[var(--red)] scale-x-0 transition-transform duration-300 group-hover:scale-x-100" />
 
-                  <div className="mb-5 inline-flex h-16 w-16 items-center justify-center rounded-full bg-[var(--red)]/10 text-[var(--red)] transition-colors group-hover:bg-[var(--red)] group-hover:text-white">
-                    <Icon className="h-7 w-7" />
+                  <div className="mb-5 inline-flex h-20 w-20 items-center justify-center rounded-full bg-[var(--red)]/10 transition-colors group-hover:bg-[var(--red)]/15 overflow-hidden">
+                    <Image src={service.iconSrc} alt={service.title} width={56} height={56} className="w-14 h-14 object-contain" />
                   </div>
                   <h3 className="mb-3 text-xl font-bold uppercase text-[var(--black)] font-[family-name:var(--font-display)]">
                     {service.title}
