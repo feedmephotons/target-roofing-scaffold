@@ -11,10 +11,10 @@ export const metadata: Metadata = {
     'See Target Roofing in action. Watch our project showcases, customer testimonials, and community involvement videos.',
 }
 
-import videosData from '@/data/videos.json'
-const videos = videosData
+import { getGalleryVideos } from '@/app/actions'
 
-export default function VideoGalleryPage() {
+export default async function VideoGalleryPage() {
+  const videos = await getGalleryVideos()
   return (
     <>
       {/* ─── HERO ─── */}

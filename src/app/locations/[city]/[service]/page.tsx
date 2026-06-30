@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import { Star, Quote, CheckCircle, Wrench, RotateCcw, Building2, ShieldCheck, Users, Clock, HardHat } from 'lucide-react'
 import InlineLeadForm from '@/components/InlineLeadForm'
-import reviewsData from '@/data/reviews.json'
+import { getReviews } from '@/app/actions'
 import projectsData from '@/data/projects.json'
 
 export const dynamicParams = false
@@ -186,6 +186,8 @@ export default async function LocationPage({ params }: PageProps) {
   if (!cityData || !serviceData || !content) {
     notFound()
   }
+
+  const reviewsData = await getReviews()
 
   // Filter reviews dynamically by city name
   const localReviews = reviewsData.filter((r) => {
