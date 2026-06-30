@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Oswald, Source_Sans_3, Poppins } from 'next/font/google'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import ChatWidget from '@/components/ChatWidget'
 import './globals.css'
 
 const oswald = Oswald({
@@ -73,6 +74,7 @@ export default function RootLayout({
         <Header />
         <main className="pt-[7.5rem]">{children}</main>
         <Footer />
+        <ChatWidget />
       </body>
     </html>
   )

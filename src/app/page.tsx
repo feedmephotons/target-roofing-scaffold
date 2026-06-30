@@ -8,6 +8,7 @@ import {
   Wrench,
   Building,
   ChevronRight,
+  ChevronLeft,
   Star,
   Award,
   ArrowRight,
@@ -919,8 +920,11 @@ const FALLBACK_VIDEOS = [
   { id: 'cGLaC7x9btw', title: 'Our Process', description: 'How we approach every project with precision, accountability, and cutting-edge technology.', duration: '2:31' },
 ]
 
+const PAGE_SIZE = 5
+
 function VideoShowcaseSection() {
   const [activeIdx, setActiveIdx] = useState(0)
+  const [page, setPage] = useState(0)
   const [showcaseVideos, setShowcaseVideos] = useState(FALLBACK_VIDEOS)
 
   useEffect(() => {
@@ -929,6 +933,8 @@ function VideoShowcaseSection() {
     })
   }, [])
 
+  const totalPages = Math.ceil(showcaseVideos.length / PAGE_SIZE)
+  const pageVideos = showcaseVideos.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE)
   const active = showcaseVideos[activeIdx]
 
   return (
@@ -990,47 +996,75 @@ function VideoShowcaseSection() {
               </div>
             </div>
 
-            {/* Sidebar playlist */}
-            <div className="lg:w-80 xl:w-96 flex flex-row lg:flex-col gap-3 overflow-x-auto lg:overflow-x-visible pb-2 lg:pb-0">
-              {showcaseVideos.map((video, idx) => (
-                <button
-                  key={video.id}
-                  onClick={() => setActiveIdx(idx)}
-                  className={`group flex-shrink-0 w-64 lg:w-full flex items-start gap-3 p-3 rounded-lg transition-all text-left ${
-                    idx === activeIdx
-                      ? 'bg-[var(--red)] text-white shadow-lg'
-                      : 'bg-white/80 hover:bg-white shadow-md hover:shadow-lg'
-                  }`}
-                >
-                  {/* Thumbnail */}
-                  <div className="relative flex-shrink-0 w-28 aspect-video rounded overflow-hidden">
-                    <Image
-                      src={`https://img.youtube.com/vi/${video.id}/mqdefault.jpg`}
-                      alt={video.title}
-                      fill
-                      className="object-cover"
-                      sizes="112px"
-                    />
-                    <div className={`absolute inset-0 flex items-center justify-center ${idx === activeIdx ? 'bg-black/20' : 'bg-black/30'}`}>
-                      <div className={`w-8 h-8 rounded-full flex items-center justify-center ${idx === activeIdx ? 'bg-white/90' : 'bg-white/80'}`}>
-                        <Play className={`w-3.5 h-3.5 fill-current ${idx === activeIdx ? 'text-[var(--red)]' : 'text-[var(--black)]'}`} />
+            {/* Sidebar playlist - matches video aspect ratio height */}
+            <div className="lg:w-80 xl:w-96 flex flex-col">
+              <div className="flex flex-row lg:flex-col gap-2 overflow-x-auto lg:overflow-x-visible pb-2 lg:pb-0 flex-1">
+                {pageVideos.map((video) => {
+                  const globalIdx = showcaseVideos.findIndex(v => v.id === video.id)
+                  return (
+                    <button
+                      key={video.id}
+                      onClick={() => setActiveIdx(globalIdx)}
+                      className={`group flex-shrink-0 w-64 lg:w-full flex items-start gap-3 p-2.5 rounded-lg transition-all text-left ${
+                        globalIdx === activeIdx
+                          ? 'bg-[var(--red)] text-white shadow-lg'
+                          : 'bg-white/80 hover:bg-white shadow-md hover:shadow-lg'
+                      }`}
+                    >
+                      <div className="relative flex-shrink-0 w-24 aspect-video rounded overflow-hidden">
+                        <Image
+                          src={`https://img.youtube.com/vi/${video.id}/mqdefault.jpg`}
+                          alt={video.title}
+                          fill
+                          className="object-cover"
+                          sizes="96px"
+                        />
+                        <div className={`absolute inset-0 flex items-center justify-center ${globalIdx === activeIdx ? 'bg-black/20' : 'bg-black/30'}`}>
+                          <div className={`w-7 h-7 rounded-full flex items-center justify-center ${globalIdx === activeIdx ? 'bg-white/90' : 'bg-white/80'}`}>
+                            <Play className={`w-3 h-3 fill-current ${globalIdx === activeIdx ? 'text-[var(--red)]' : 'text-[var(--black)]'}`} />
+                          </div>
+                        </div>
+                        <span className={`absolute bottom-0.5 right-0.5 text-[9px] font-bold px-1 py-0.5 rounded ${globalIdx === activeIdx ? 'bg-white text-[var(--red)]' : 'bg-black/70 text-white'}`}>
+                          {video.duration}
+                        </span>
                       </div>
-                    </div>
-                    <span className={`absolute bottom-1 right-1 text-[10px] font-bold px-1.5 py-0.5 rounded ${idx === activeIdx ? 'bg-white text-[var(--red)]' : 'bg-black/70 text-white'}`}>
-                      {video.duration}
-                    </span>
-                  </div>
-                  {/* Info */}
-                  <div className="min-w-0 flex-1">
-                    <h4 className={`text-sm font-bold font-[family-name:var(--font-display)] uppercase leading-tight ${idx === activeIdx ? 'text-white' : 'text-[var(--black)]'}`}>
-                      {video.title}
-                    </h4>
-                    <p className={`text-xs mt-1 leading-snug line-clamp-2 ${idx === activeIdx ? 'text-white/80' : 'text-[var(--gray-500)]'}`}>
-                      {video.description}
-                    </p>
-                  </div>
-                </button>
-              ))}
+                      <div className="min-w-0 flex-1">
+                        <h4 className={`text-xs font-bold font-[family-name:var(--font-display)] uppercase leading-tight ${globalIdx === activeIdx ? 'text-white' : 'text-[var(--black)]'}`}>
+                          {video.title}
+                        </h4>
+                        <p className={`text-[11px] mt-0.5 leading-snug line-clamp-2 ${globalIdx === activeIdx ? 'text-white/80' : 'text-[var(--gray-500)]'}`}>
+                          {video.description}
+                        </p>
+                      </div>
+                    </button>
+                  )
+                })}
+              </div>
+
+              {/* Pagination */}
+              {totalPages > 1 && (
+                <div className="flex items-center justify-between mt-3 px-1">
+                  <button
+                    onClick={() => setPage(p => Math.max(0, p - 1))}
+                    disabled={page === 0}
+                    className="flex items-center gap-1 text-xs font-bold uppercase tracking-wide text-[var(--gray-600)] hover:text-[var(--red)] disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                  >
+                    <ChevronLeft className="w-4 h-4" />
+                    Prev
+                  </button>
+                  <span className="text-xs text-[var(--gray-500)] font-semibold">
+                    {page + 1} / {totalPages}
+                  </span>
+                  <button
+                    onClick={() => setPage(p => Math.min(totalPages - 1, p + 1))}
+                    disabled={page === totalPages - 1}
+                    className="flex items-center gap-1 text-xs font-bold uppercase tracking-wide text-[var(--gray-600)] hover:text-[var(--red)] disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                  >
+                    Next
+                    <ChevronRight className="w-4 h-4" />
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </AnimateIn>
@@ -1070,7 +1104,6 @@ function VideoShowcaseSection() {
               <p className="text-sm font-bold text-[var(--red)] uppercase tracking-wide font-[family-name:var(--font-display)]">
                 Learn More. Protect More. Worry Less.
               </p>
-              {/* Diagonal accent stripes */}
               <div className="hidden md:flex gap-1 ml-2">
                 {[...Array(4)].map((_, i) => (
                   <div key={i} className="w-2 h-8 bg-[var(--red)] -skew-x-12" />
@@ -1088,13 +1121,13 @@ function VideoShowcaseSection() {
 /*  9. PARTNERS                                                        */
 /* ------------------------------------------------------------------ */
 const partners = [
-  { img: '/images/partners/englert.jpg', name: 'Englert' },
-  { img: '/images/partners/genflex.jpg', name: 'GenFlex' },
-  { img: '/images/partners/soprema.jpg', name: 'Soprema' },
-  { img: '/images/partners/tropical-roofing.jpg', name: 'Tropical Roofing Products' },
-  { img: '/images/partners/polyglass.png', name: 'Polyglass' },
-  { img: '/images/partners/gaf.png', name: 'GAF' },
-  { img: '/images/partners/carlisle.png', name: 'Carlisle' },
+  { img: '/images/partners/englert.jpg', name: 'Englert', sizeClass: 'max-h-32' },
+  { img: '/images/partners/genflex.jpg', name: 'GenFlex', sizeClass: 'max-h-24' },
+  { img: '/images/partners/soprema.jpg', name: 'Soprema', sizeClass: 'max-h-24' },
+  { img: '/images/partners/tropical-roofing.jpg', name: 'Tropical Roofing Products', sizeClass: 'max-h-24' },
+  { img: '/images/partners/polyglass.png', name: 'Polyglass', sizeClass: 'max-h-24' },
+  { img: '/images/partners/gaf.png', name: 'GAF', sizeClass: 'max-h-20' },
+  { img: '/images/partners/carlisle.png', name: 'Carlisle', sizeClass: 'max-h-24' },
 ]
 
 function PartnersSection() {
@@ -1124,7 +1157,7 @@ function PartnersSection() {
                   alt={partner.name}
                   width={180}
                   height={90}
-                  className="max-h-24 w-auto object-contain opacity-60 grayscale transition-all duration-300 group-hover:opacity-100 group-hover:grayscale-0"
+                  className={`${partner.sizeClass} w-auto object-contain opacity-60 grayscale transition-all duration-300 group-hover:opacity-100 group-hover:grayscale-0`}
                 />
               </div>
             ))}

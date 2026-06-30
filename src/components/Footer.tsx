@@ -28,7 +28,7 @@ const footerLinks = {
 
 export default function Footer() {
   return (
-    <footer className="bg-blueprint-dark text-white relative">
+    <footer className="bg-black text-white relative">
       {/* CTA Banner */}
       <div className="bg-brand-gradient">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 text-center">
