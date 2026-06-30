@@ -85,7 +85,7 @@ export default function InlineLeadForm({
 
   const textClass = darkTheme ? 'text-white' : 'text-[var(--black)]'
   const subtextClass = darkTheme ? 'text-white/80' : 'text-[var(--gray-600)]'
-  const bgClass = darkTheme ? 'bg-black/40 border border-white/10 backdrop-blur-md shadow-2xl' : 'bg-white shadow-xl border border-[var(--gray-200)]'
+  const bgClass = darkTheme ? 'bg-black/50 border border-white/15 backdrop-blur-xl shadow-2xl' : 'bg-white shadow-xl border border-[var(--gray-200)]'
   const labelClass = darkTheme ? 'text-white/95' : 'text-[var(--gray-700)]'
   const inputClass = (fieldName: string) => `w-full px-4 py-2.5 border rounded bg-white text-base text-[var(--black)] placeholder-[var(--gray-400)] focus:outline-none focus:ring-2 transition-colors ${
     errors[fieldName]
