@@ -77,7 +77,7 @@ const servicesMega: MegaPanel = {
         { name: 'Roof Repairs', href: '/roofing-services#repairs', description: 'Expert leak detection & repair', icon: Wrench },
         { name: 'Reroofing', href: '/roofing-services#reroofing', description: 'Complete roof replacement', icon: Home },
         { name: 'New Roofs', href: '/roofing-services#new-roofs', description: 'New construction roofing', icon: HardHat },
-        { name: 'Maintenance Plans', href: '/roofing-services#maintenance-plans', description: 'Proactive roof care programs', icon: ShieldCheck },
+        { name: 'Maintenance Plans', href: '/commercial-hoa-roof-maintenance', description: 'Proactive roof care programs', icon: ShieldCheck },
       ],
     },
     {
