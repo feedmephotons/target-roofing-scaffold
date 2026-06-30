@@ -883,8 +883,8 @@ function NewsSection() {
             </div>
             <div className="relative h-48 lg:h-64 rounded-lg overflow-hidden">
               <Image
-                src="/images/crew/crew-repairing-roof.png"
-                alt="Worker applying sealant on flat roof"
+                src="/images/crew/crew-tpo-welding.png"
+                alt="Target Roofing crew welding TPO membrane"
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 50vw"
