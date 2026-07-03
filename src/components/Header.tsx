@@ -77,9 +77,10 @@ const servicesMega: MegaPanel = {
       heading: 'Core Services',
       links: [
         { name: 'Roof Repairs', href: '/roofing-services#repairs', description: 'Expert leak detection & repair', icon: Wrench },
+        { name: 'Emergency Storm Repair', href: '/roofing-services/emergency-storm-repair', description: '24/7 storm damage response', icon: CloudLightning },
+        { name: 'Maintenance Plans', href: '/commercial-hoa-roof-maintenance', description: 'Proactive roof care programs', icon: ShieldCheck },
         { name: 'Reroofing', href: '/roofing-services#reroofing', description: 'Complete roof replacement', icon: Home },
         { name: 'New Roofs', href: '/roofing-services#new-roofs', description: 'New construction roofing', icon: HardHat },
-        { name: 'Maintenance Plans', href: '/commercial-hoa-roof-maintenance', description: 'Proactive roof care programs', icon: ShieldCheck },
       ],
     },
     {
@@ -97,7 +98,6 @@ const servicesMega: MegaPanel = {
       heading: 'Additional Services',
       links: [
         { name: 'Softwash Cleaning', href: '/softwash', description: 'Safe, thorough roof cleaning', icon: SprayCan },
-        { name: 'Emergency Storm Repair', href: '/roofing-services/emergency-storm-repair', description: '24/7 storm damage response', icon: CloudLightning },
         { name: 'Roof Inspections & Surveys', href: '/roofing-services/roof-inspections-surveys', description: 'Comprehensive condition reports', icon: ClipboardCheck },
       ],
     },
@@ -453,15 +453,25 @@ export default function Header() {
             <div className="flex items-center justify-between h-12 text-sm">
               <div className="flex items-center gap-6">
                 <span className="hidden sm:inline">License #CCC1334168</span>
-                <span className="hidden md:inline">Serving Sarasota, Tampa, Fort Myers, Naples</span>
+                <span className="hidden lg:inline">Serving Sarasota, Tampa, Fort Myers, Naples</span>
               </div>
-              <a
-                href="tel:239-332-5707"
-                className="flex items-center gap-2 font-semibold hover:text-white/90 transition-colors min-h-[48px] px-2"
-              >
-                <Phone className="h-3.5 w-3.5" />
-                239-332-5707
-              </a>
+              <div className="flex items-center gap-2 sm:gap-4">
+                <Link
+                  href="/roofing-services/emergency-storm-repair"
+                  className="flex items-center gap-1.5 font-bold uppercase tracking-wide hover:text-white/90 transition-colors min-h-[48px] px-2"
+                >
+                  <CloudLightning className="h-4 w-4" />
+                  <span className="whitespace-nowrap">24/7 Emergency</span>
+                </Link>
+                <span className="hidden sm:inline h-4 w-px bg-white/30" aria-hidden="true" />
+                <a
+                  href="tel:239-332-5707"
+                  className="flex items-center gap-2 font-semibold hover:text-white/90 transition-colors min-h-[48px] px-2"
+                >
+                  <Phone className="h-3.5 w-3.5" />
+                  239-332-5707
+                </a>
+              </div>
             </div>
           </div>
         </div>

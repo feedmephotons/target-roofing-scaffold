@@ -4,10 +4,11 @@ import { Phone, Mail, MapPin, Clock } from 'lucide-react'
 
 const footerLinks = {
   services: [
-    { name: 'New Roofs', href: '/roofing-services#new-roofs' },
-    { name: 'Reroofing', href: '/roofing-services#reroofing' },
     { name: 'Roof Repairs', href: '/roofing-services#repairs' },
+    { name: '24/7 Emergency Storm Repair', href: '/roofing-services/emergency-storm-repair' },
     { name: 'Maintenance Plans', href: '/roofing-services#maintenance-plans' },
+    { name: 'Reroofing', href: '/roofing-services#reroofing' },
+    { name: 'New Roofs', href: '/roofing-services#new-roofs' },
     { name: 'Softwash', href: '/softwash' },
   ],
   company: [
@@ -78,11 +79,15 @@ export default function Footer() {
               </div>
               <div className="flex items-center gap-3">
                 <Phone className="h-5 w-5 text-[var(--red)] flex-shrink-0" />
-                <a href="tel:+12398231483" className="hover:text-white transition-colors inline-block py-3.5 px-3">(239) 823-1483</a>
+                <a href="tel:239-332-5707" className="hover:text-white transition-colors inline-block py-3.5 px-3">
+                  239-332-5707 <span className="text-[var(--gray-500)]">· 24/7 Emergency</span>
+                </a>
               </div>
               <div className="flex items-center gap-3">
                 <Phone className="h-5 w-5 text-[var(--red)] flex-shrink-0" />
-                <a href="tel:239-332-5707" className="hover:text-white transition-colors inline-block py-3.5 px-3">239-332-5707</a>
+                <a href="tel:+12398231483" className="hover:text-white transition-colors inline-block py-3.5 px-3">
+                  (239) 823-1483 <span className="text-[var(--gray-500)]">· Office</span>
+                </a>
               </div>
               <div className="flex items-center gap-3">
                 <Mail className="h-5 w-5 text-[var(--red)] flex-shrink-0" />
@@ -90,7 +95,7 @@ export default function Footer() {
               </div>
               <div className="flex items-start gap-3">
                 <Clock className="h-5 w-5 text-[var(--red)] flex-shrink-0 mt-0.5" />
-                <span>Mon - Fri: 8:00 AM - 5:00 PM<br />Saturday: 8:00 AM - 5:00 PM</span>
+                <span>Mon - Sat: 8:00 AM - 5:00 PM<br /><span className="font-semibold text-white">24/7 Emergency Response</span></span>
               </div>
             </div>
           </div>

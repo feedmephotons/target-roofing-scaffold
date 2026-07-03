@@ -125,7 +125,7 @@ export default function MetalRoofingSystemsPage() {
         <div className="absolute inset-0">
           <Image
             src="/images/crew/crew-repairing-roof.png"
-            alt="Target Roofing crew installing a commercial metal roofing system in Southwest Florida"
+            alt="Target Roofing representative meeting a commercial client in Southwest Florida"
             fill
             priority
             sizes="100vw"
@@ -230,8 +230,8 @@ export default function MetalRoofingSystemsPage() {
             <AnimateIn animation="fade-up" delay={200}>
               <div className="relative aspect-[4/3] rounded-lg overflow-hidden shadow-2xl">
                 <Image
-                  src="/images/crew/crew-aerial-worksite.png"
-                  alt="Aerial view of Target Roofing crew working on a commercial metal roofing installation"
+                  src="/images/crew/generated/07-roof-aerial-crew.png"
+                  alt="Aerial view of a Target Roofing crew on a commercial roof project"
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   className="object-cover"

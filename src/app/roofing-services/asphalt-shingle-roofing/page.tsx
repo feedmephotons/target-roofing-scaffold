@@ -125,7 +125,7 @@ export default function AsphaltShingleRoofingPage() {
         {/* Background image */}
         <div className="absolute inset-0">
           <Image
-            src="/images/crew/crew-repairing-roof.png"
+            src="/images/backgrounds/hero-fallback.jpg"
             alt="Target Roofing crew installing asphalt shingles on a residential roof in Southwest Florida"
             fill
             priority

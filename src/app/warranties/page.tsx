@@ -368,7 +368,7 @@ export default function WarrantiesPage() {
 
                 <div className="red-accent-left">
                   <p className="text-lg text-[var(--gray-600)] leading-relaxed mb-6">
-                    Only the top 1-3% of roofing contractors in the country earn
+                    Only the top 1-2% of roofing contractors in the country earn
                     Platinum Preferred and Master Elite designations. These are
                     not pay-to-play programs. Manufacturers require documented
                     proof of proper licensing, insurance, training, and a
@@ -396,10 +396,10 @@ export default function WarrantiesPage() {
                         'Fewer than 1% of contractors nationwide hold this designation',
                     },
                     {
-                      stat: 'Top 3%',
+                      stat: 'Top 2%',
                       label: 'GAF Master Elite',
                       description:
-                        'Only 3% of roofing contractors qualify for Master Elite status',
+                        'Only 2% of roofing contractors qualify for Master Elite status',
                     },
                     {
                       stat: '30+',

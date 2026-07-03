@@ -306,6 +306,7 @@ export default function InlineLeadForm({
             >
               <option value="">Select service...</option>
               <option value="repairs">Roof Repair</option>
+              <option value="emergency-storm-repair">Emergency / Storm Damage</option>
               <option value="maintenance-plans">Maintenance Plan</option>
               <option value="reroofing">Reroofing</option>
               <option value="new-roofs">New Roof</option>
@@ -347,7 +348,7 @@ export default function InlineLeadForm({
         </button>
 
         <p className="text-[10px] text-[var(--gray-400)] leading-relaxed text-center">
-          By submitting, you authorize Target Roofing to text/call/email you regarding repairs.
+          By submitting, you authorize Target Roofing to text/call/email you regarding your request.
         </p>
       </form>
     </div>

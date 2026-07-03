@@ -133,7 +133,7 @@ export default function EmergencyStormRepairPage() {
         {/* Hero background image */}
         <div className="absolute inset-0">
           <Image
-            src="/images/crew/crew-emergency-tarp.png"
+            src="/images/crew/generated/18-emergency-tarp-install.png"
             alt="Target Roofing crew performing emergency tarping on a commercial roof after storm damage"
             fill
             priority

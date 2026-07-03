@@ -386,10 +386,11 @@ export default function ContactPage() {
                       }}
                     >
                       <option value="">Select a service...</option>
-                      <option value="new-roofs">New Roofs</option>
-                      <option value="reroofing">Reroofing</option>
-                      <option value="repairs">Repairs</option>
+                      <option value="repairs">Roof Repair</option>
+                      <option value="emergency-storm-repair">Emergency / Storm Damage</option>
                       <option value="maintenance-plans">Maintenance Plans</option>
+                      <option value="reroofing">Reroofing</option>
+                      <option value="new-roofs">New Roofs</option>
                       <option value="free-estimate">Free Estimate</option>
                     </select>
                     {errors.service && (

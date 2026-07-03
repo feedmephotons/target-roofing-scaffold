@@ -187,7 +187,7 @@ export default function RoofingServicesPage() {
               <div className="relative aspect-[4/3] rounded-lg overflow-hidden shadow-2xl">
                 <Image
                   src="/images/crew/crew-team-photo.png"
-                  alt="Target Roofing crew standing confidently on a completed commercial roof"
+                  alt="Target Roofing crew installing a TPO membrane roof"
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   className="object-cover"
@@ -299,8 +299,8 @@ export default function RoofingServicesPage() {
               <AnimateIn animation="fade-up" delay={200}>
                 <div className="relative aspect-[16/9] rounded-lg overflow-hidden shadow-lg">
                   <Image
-                    src="/images/crew/crew-repairing-roof.png"
-                    alt="Target Roofing worker applying sealant during a commercial roof repair"
+                    src="/images/crew/crew-coating-application.png"
+                    alt="Target Roofing technician applying a protective roof coating during a repair"
                     fill
                     sizes="(max-width: 1024px) 100vw, 50vw"
                     className="object-cover"
@@ -418,8 +418,8 @@ export default function RoofingServicesPage() {
           <AnimateIn animation="fade-up" delay={150}>
             <div className="relative aspect-[21/9] rounded-lg overflow-hidden shadow-lg mb-12 max-w-4xl mx-auto">
               <Image
-                src="/images/crew/crew-aerial-worksite.png"
-                alt="Aerial view of Target Roofing crew working on a commercial reroofing project"
+                src="/images/crew/generated/07-roof-aerial-crew.png"
+                alt="Aerial view of a Target Roofing crew on a commercial reroofing project"
                 fill
                 sizes="(max-width: 1024px) 100vw, 60vw"
                 className="object-cover"
@@ -495,8 +495,8 @@ export default function RoofingServicesPage() {
               <AnimateIn animation="fade-up" delay={300}>
                 <div className="relative aspect-[16/9] rounded-lg overflow-hidden shadow-lg mt-8">
                   <Image
-                    src="/images/crew/crew-crane-lift.png"
-                    alt="Crane lifting roofing materials to a commercial building for a new roof installation"
+                    src="/images/crew/crew-overhead-worksite.png"
+                    alt="Target Roofing flatbed truck staged with materials at a commercial jobsite"
                     fill
                     sizes="(max-width: 1024px) 100vw, 50vw"
                     className="object-cover"

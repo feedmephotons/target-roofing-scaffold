@@ -20,6 +20,8 @@ import {
   Play,
   Crosshair,
   ShieldCheck,
+  Phone,
+  CloudLightning,
 } from 'lucide-react'
 import InlineLeadForm from '@/components/InlineLeadForm'
 import AnimateIn from '@/components/AnimateIn'
@@ -123,7 +125,7 @@ function TrustSignalsSection() {
             </div>
             <div className="text-center sm:text-left">
               <div className="font-bold text-sm tracking-wider uppercase font-[family-name:var(--font-display)]">5-Star Rated</div>
-              <div className="text-xs text-[var(--gray-400)]">500+ Google Reviews</div>
+              <div className="text-xs text-[var(--gray-400)]">Verified Google Reviews</div>
             </div>
           </div>
           <div className="flex flex-col sm:flex-row items-center gap-3">
@@ -229,13 +231,13 @@ function HeroSection() {
                 <Wrench className="h-4.5 w-4.5" />
                 Schedule Repair
               </a>
-              <Link
-                href="/contact?service=free-estimate"
-                className="inline-flex items-center justify-center gap-2 rounded border-2 border-white px-8 py-3.5 text-sm font-bold uppercase tracking-wider text-white transition-all hover:bg-white hover:text-[var(--black)]"
+              <a
+                href="tel:239-332-5707"
+                className="group inline-flex items-center justify-center gap-2 rounded border-2 border-white px-8 py-3.5 text-sm font-bold uppercase tracking-wider text-white transition-all hover:bg-white hover:text-[var(--black)]"
               >
-                <CalendarCheck className="h-4.5 w-4.5" />
-                Request a Survey
-              </Link>
+                <CloudLightning className="h-4.5 w-4.5 transition-transform group-hover:scale-110" />
+                24/7 Emergency? Call Now
+              </a>
             </div>
           </div>
 
@@ -436,7 +438,7 @@ function RepairFormSection() {
 /* ------------------------------------------------------------------ */
 function StatsSection() {
   const { ref, inView } = useInView(0.3)
-  const projects = useCountUp(2500, 2200, inView)
+  const projects = useCountUp(10000, 2200, inView)
   const professionals = useCountUp(75, 1800, inView)
   const response = useCountUp(24, 1400, inView)
 
@@ -533,7 +535,7 @@ function CommunitySection() {
           <div className="relative h-72 lg:h-96 rounded-lg overflow-hidden">
             <Image
               src="/images/crew/crew-team-photo.png"
-              alt="Target Roofing team photo at golden hour"
+              alt="Target Roofing crew installing a TPO membrane roof"
               fill
               className="object-cover"
               sizes="(max-width: 1280px) 100vw, 1280px"
@@ -580,9 +582,9 @@ function CommunitySection() {
 /*  5. PORTFOLIO SHOWCASE                                              */
 /* ------------------------------------------------------------------ */
 const projects = [
-  { img: '/images/portfolio/regatta-naples.jpg', title: 'Regatta at Naples' },
-  { img: '/images/portfolio/tpo-retrofit.jpg', title: 'TPO Retrofit' },
-  { img: '/images/portfolio/site-safety.jpg', title: 'Site Safety Excellence' },
+  { img: '/images/portfolio/bay-colony-beach-club.jpg', title: 'Bay Colony Beach Club' },
+  { img: '/images/portfolio/barron-collier-high-school.jpg', title: 'Barron Collier High School' },
+  { img: '/images/portfolio/admiralty-house.jpg', title: 'Admiralty House' },
 ]
 
 function PortfolioSection() {
@@ -634,8 +636,8 @@ function PortfolioSection() {
           <AnimateIn animation="fade-up" delay={0}>
             <div className="relative aspect-[4/3] rounded-lg overflow-hidden">
               <Image
-                src="/images/crew/crew-emergency-tarp.png"
-                alt="Target Roofing crew installing emergency tarp after storm damage"
+                src="/images/crew/generated/18-emergency-tarp-install.png"
+                alt="Target Roofing crew installing an emergency tarp after storm damage"
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 33vw"
@@ -668,8 +670,8 @@ function PortfolioSection() {
           <AnimateIn animation="fade-up" delay={300}>
             <div className="relative aspect-[4/3] rounded-lg overflow-hidden">
               <Image
-                src="/images/crew/crew-aerial-worksite.png"
-                alt="Aerial drone shot of roofing crew on worksite"
+                src="/images/crew/generated/07-roof-aerial-crew.png"
+                alt="Aerial view of a Target Roofing crew working on a commercial roof"
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 33vw"
@@ -880,7 +882,7 @@ function NewsSection() {
             <div className="relative h-48 lg:h-64 rounded-lg overflow-hidden">
               <Image
                 src="/images/crew/crew-repairing-roof.png"
-                alt="Target Roofing crew repairing a commercial roof"
+                alt="Target Roofing project manager greeting a commercial client on site"
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 50vw"

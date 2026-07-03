@@ -391,8 +391,8 @@ function ProjectGrid({
         <AnimateIn animation="fade-up" delay={200} className="mt-16">
           <div className="relative w-full h-64 md:h-80 rounded-lg overflow-hidden shadow-lg">
             <Image
-              src="/images/crew/crew-crane-lift.png"
-              alt="Target Roofing crane lift in action"
+              src="/images/crew/crew-overhead-worksite.png"
+              alt="Target Roofing crew arriving at a commercial jobsite"
               fill
               sizes="(max-width: 768px) 100vw, 1200px"
               className="object-cover"

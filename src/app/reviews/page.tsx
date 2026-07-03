@@ -7,7 +7,7 @@ import RoofSchematic from '@/components/RoofSchematic'
 export const metadata: Metadata = {
   title: 'Reviews',
   description:
-    'Read what property managers, contractors, and property owners throughout Southwest Florida say about Target Roofing. 4.9 average rating with 100+ Google reviews.',
+    'Read what property managers, contractors, and property owners throughout Southwest Florida say about Target Roofing. 5.0 average rating from verified Google reviews.',
 }
 
 import { getReviews } from '@/app/actions'

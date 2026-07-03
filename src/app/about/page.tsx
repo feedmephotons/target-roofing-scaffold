@@ -27,7 +27,7 @@ export const metadata: Metadata = {
 const certifications = [
   {
     name: 'GAF Master Elite Contractor',
-    description: 'Top 3% of all roofing contractors nationwide',
+    description: 'Top 2% of all roofing contractors nationwide',
     icon: Award,
   },
   {
@@ -86,7 +86,7 @@ const valueProps = [
     title: 'A Commitment to Structure and Accountability',
     body: 'Finally, the processes we\'ve put into place ensure we\'re consistently delivering roofing solutions on-time and on budget. You will know our schedule from the beginning, and we\'ll stay accountable to it. No job is too big for Target Roofing. We have an exceptional reputation for coming through and getting the job done on projects of all sizes. In fact, we are insured to work on high liability projects such as high rises and schools.',
     icon: ClipboardCheck,
-    image: '/images/crew/crew-aerial-worksite.png',
+    image: '/images/crew/generated/07-roof-aerial-crew.png',
     imageAlt: 'Aerial view of Target Roofing crew working on a large commercial roof project',
   },
 ]

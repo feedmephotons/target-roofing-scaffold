@@ -84,7 +84,7 @@ const whyTargetReasons = [
   {
     label: 'GAF Master Elite Certified',
     description:
-      'Fewer than 3% of roofing contractors in the U.S. hold this certification. It reflects our installation quality, training standards, and financial stability.',
+      'Fewer than 2% of roofing contractors in the U.S. hold this certification. It reflects our installation quality, training standards, and financial stability.',
     icon: ShieldCheck,
   },
   {
