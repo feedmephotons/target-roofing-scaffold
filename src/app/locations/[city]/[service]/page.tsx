@@ -105,6 +105,49 @@ const SERVICE_MAP: Record<string, { title: string; defaultService: string }> = {
   }
 }
 
+const CITY_CONTENT: Record<string, { description: string; highlights: string[] }> = {
+  'southwest-florida': {
+    description: 'Southwest Florida stretches from Sarasota to Naples, encompassing some of the most hurricane-vulnerable coastline in the United States. With a subtropical climate that delivers intense UV radiation, heavy seasonal rains, and the ever-present threat of tropical storms, roofing systems across the region must be built to withstand extreme conditions year-round.',
+    highlights: ['Multi-county service area covering Lee, Collier, Charlotte, Sarasota, and DeSoto counties', 'Region heavily impacted by Hurricane Ian (2022) and Hurricane Charley (2004)', 'Subtropical climate with extreme UV, humidity, and wind exposure']
+  },
+  'fort-myers': {
+    description: 'As the county seat of Lee County, Fort Myers faces unique roofing challenges from hurricane exposure, heavy summer rains, and salt air. From downtown commercial buildings to Cape Coral-adjacent neighborhoods, Target Roofing has been the trusted local contractor for decades.',
+    highlights: ['Hurricane-prone coastal area', 'Mix of residential and commercial properties', 'Historic downtown district with preservation needs']
+  },
+  'cape-coral': {
+    description: 'Cape Coral, known as the Waterfront Wonderland with over 400 miles of canals, presents unique roofing considerations. The salt water environment accelerates roof wear, making regular maintenance and quality materials essential for long-lasting protection.',
+    highlights: ['Canal city with high salt exposure', 'Rapidly growing residential community', 'Newer construction with modern building codes']
+  },
+  'bonita-springs': {
+    description: 'Bonita Springs sits between Fort Myers and Naples, combining coastal living with inland communities. Flood-prone areas and proximity to the Gulf make waterproof, wind-rated roofing systems essential for property protection.',
+    highlights: ['Coastal and flood-prone areas', 'Mix of condos and single-family homes', 'Active retirement community']
+  },
+  'sanibel': {
+    description: 'Sanibel Island was devastated by Hurricane Ian in September 2022, with the storm destroying the causeway and damaging the vast majority of structures on the island. The ongoing rebuilding effort demands roofing contractors who understand coastal construction codes, wind-rated systems, and the unique environmental protections that govern barrier island development.',
+    highlights: ['Barrier island with maximum hurricane exposure', 'Ongoing Hurricane Ian rebuilding efforts', 'Strict environmental and coastal construction codes']
+  },
+  'naples': {
+    description: 'Naples and its surrounding communities feature some of Southwest Florida\'s most prestigious properties. From luxury estates in Port Royal to commercial centers along US-41, property owners demand the highest quality roofing craftsmanship and materials.',
+    highlights: ['High-end residential properties', 'Premium materials and finishes expected', 'Strict HOA and community standards']
+  },
+  'punta-gorda': {
+    description: 'Punta Gorda was devastated by Hurricane Charley in 2004 and hit hard again by Hurricane Ian in 2022. The community understands the critical importance of hurricane-rated roofing. Target Roofing has been a trusted partner in the ongoing rebuilding and strengthening of this resilient city.',
+    highlights: ['Hurricane Charley and Ian recovery', 'Strong community resilience', 'High demand for hurricane-rated roofing']
+  },
+  'port-charlotte': {
+    description: 'Port Charlotte is the largest unincorporated community in Charlotte County, home to a diverse mix of residential neighborhoods and growing commercial areas. Direct hits from Hurricane Charley and Hurricane Ian demonstrated the critical need for properly engineered roofing systems built to withstand extreme wind events.',
+    highlights: ['Largest community in Charlotte County', 'Direct hurricane impact history', 'Growing commercial and residential development']
+  },
+  'sarasota': {
+    description: 'Sarasota\'s blend of historic architecture and modern development creates diverse roofing needs. From the cultural district\'s commercial properties to barrier island residences on Siesta Key and Longboat Key, each project requires specialized expertise.',
+    highlights: ['Historic and modern architecture mix', 'Barrier island coastal exposure', 'Active arts and commercial district']
+  },
+  'arcadia': {
+    description: 'Arcadia, the seat of DeSoto County, is an inland community with a distinctive mix of historic Florida architecture, agricultural properties, and rural residential homes. While further from the coast, Arcadia still faces significant wind damage from hurricanes and tropical storms that maintain strength as they move inland.',
+    highlights: ['Inland community with rural and agricultural properties', 'Historic Florida architecture', 'Significant inland wind exposure from tropical storms']
+  }
+}
+
 function getLocalizedContent(city: string, service: string) {
   const cityData = CITY_MAP[city]
   const serviceData = SERVICE_MAP[service]
@@ -124,9 +167,13 @@ function getLocalizedContent(city: string, service: string) {
     text = `Commercial properties in ${cityName}, FL require specialized roofing solutions that can handle the unique challenges of the Florida climate. The combination of intense heat, high humidity, constant UV exposure, and potential wind speeds from hurricanes like Ian or Charley means that commercial roofs must be built to the highest standards. Target Roofing is a trusted commercial roofing partner in ${county}. We provide expert services including new roof installations, preventative maintenance plans, and rapid-response repairs. All of our commercial roof installations comply with ${regulations}, offering exceptional wind resistance and energy efficiency. We work closely with property managers, condo associations, and business owners in ${cityName} to deliver projects on time and on budget with minimal disruption.`
   }
 
+  const cityContent = CITY_CONTENT[city]
+
   return {
     heading: `${serviceTitle} in ${cityName}, FL`,
     description: text,
+    cityDescription: cityContent?.description || '',
+    highlights: cityContent?.highlights || [],
     county,
     regulations
   }
@@ -160,15 +207,21 @@ export async function generateMetadata({ params }: PageProps) {
   const cityTitle = cityData.name
   const serviceTitle = serviceData.title
 
+  const cityContent = CITY_CONTENT[city]
+  const metaDescription = cityContent
+    ? `${cityContent.description.split('.').slice(0, 2).join('.')}. Target Roofing provides professional ${serviceTitle.toLowerCase()} in ${cityTitle}, FL.`
+    : `Looking for professional ${serviceTitle.toLowerCase()} in ${cityTitle}, FL? Target Roofing serves ${cityData.county} with storm-ready solutions built for extreme wind resistance.`
+
   return {
     title: `${serviceTitle} in ${cityTitle}, FL | Target Roofing`,
-    description: `Looking for professional ${serviceTitle.toLowerCase()} in ${cityTitle}, FL? Target Roofing serves ${cityData.county} with storm-ready solutions built for extreme wind resistance.`,
+    description: metaDescription,
     keywords: [
       `${serviceTitle.toLowerCase()} ${cityTitle}`,
       `${cityTitle} roofing`,
       `roofing contractor ${cityTitle}`,
       `Target Roofing`,
       `Florida roofing`,
+      `${cityData.county} roofing`,
     ]
   }
 }
@@ -243,8 +296,50 @@ export default async function LocationPage({ params }: PageProps) {
     ServiceIcon = Building2
   }
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    name: 'Target Roofing',
+    description: `Professional ${serviceData.title.toLowerCase()} services in ${cityData.name}, FL. ${content.cityDescription}`,
+    url: `https://targetroofers.com/locations/${city}/${service}`,
+    telephone: '(239) 823-1483',
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: cityData.name,
+      addressRegion: 'FL',
+      addressCountry: 'US'
+    },
+    areaServed: {
+      '@type': 'City',
+      name: cityData.name,
+      containedInPlace: {
+        '@type': 'AdministrativeArea',
+        name: cityData.county
+      }
+    },
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: serviceData.title,
+      itemListElement: [{
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: `${serviceData.title} in ${cityData.name}, FL`
+        }
+      }]
+    },
+    priceRange: '$$',
+    image: 'https://targetroofers.com/og-image.jpg',
+    sameAs: ['https://www.facebook.com/targetroofing', 'https://www.google.com/maps/place/Target+Roofing']
+  }
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       {/* Hero Section */}
       <section className="relative bg-[var(--black)] text-white overflow-hidden noise-overlay py-20 md:py-28">
         <RoofSchematic className="text-white/[0.04] z-0" />
@@ -268,7 +363,9 @@ export default async function LocationPage({ params }: PageProps) {
             </h1>
 
             <p className="text-lg md:text-xl text-[var(--gray-300)] leading-relaxed max-w-2xl">
-              Professional {serviceData.title.toLowerCase()} services tailored to the building codes and weather challenges of {cityData.name} and the surrounding {cityData.county}.
+              {content.cityDescription
+                ? content.cityDescription
+                : `Professional ${serviceData.title.toLowerCase()} services tailored to the building codes and weather challenges of ${cityData.name} and the surrounding ${cityData.county}.`}
             </p>
           </div>
         </div>
@@ -287,7 +384,7 @@ export default async function LocationPage({ params }: PageProps) {
                 </span>
               </div>
               <h2 className="text-3xl sm:text-4xl font-bold text-[var(--black)] leading-tight uppercase font-[family-name:var(--font-display)]">
-                Expert Solutions for {cityData.name} Properties
+                Expert {serviceData.title} Solutions for {cityData.name}, {cityData.county}
               </h2>
               <div className="red-accent-left">
                 <p className="text-lg text-[var(--gray-700)] leading-relaxed">
@@ -313,6 +410,21 @@ export default async function LocationPage({ params }: PageProps) {
                   </p>
                 </div>
               </div>
+              {content.highlights.length > 0 && (
+                <div className="pt-2">
+                  <h4 className="font-bold text-[var(--black)] font-[family-name:var(--font-display)] uppercase mb-3">
+                    Why {cityData.name} Properties Need Expert Roofing
+                  </h4>
+                  <ul className="space-y-2">
+                    {content.highlights.map((highlight, idx) => (
+                      <li key={idx} className="flex items-center gap-3">
+                        <CheckCircle className="h-4 w-4 text-[var(--red)] flex-shrink-0" />
+                        <span className="text-sm text-[var(--gray-700)]">{highlight}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
 
             {/* Right Column: SWFL Standards Card */}

@@ -100,6 +100,25 @@ const whyTargetPoints = [
 export default function MetalRoofingSystemsPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Service',
+            name: 'Metal Roofing Systems',
+            description:
+              'Durable standing seam, corrugated, and R-panel metal roofing systems engineered for Southwest Florida hurricane conditions. Wind ratings up to 180 mph. 40-60 year lifespans. Installed by Target Roofing.',
+            provider: {
+              '@type': 'RoofingContractor',
+              name: 'Target Roofing',
+              url: 'https://targetroofers.com',
+            },
+            areaServed: { '@type': 'State', name: 'Florida' },
+            serviceType: 'Roofing',
+          }),
+        }}
+      />
       {/* ==================== HERO ==================== */}
       <section className="relative bg-blueprint-dark text-white noise-overlay min-h-[60vh] flex items-center">
         {/* Background image */}

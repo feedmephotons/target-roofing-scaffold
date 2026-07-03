@@ -13,12 +13,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '', '/about', '/careers', '/contact', '/our-process', '/our-projects',
     '/our-team', '/reviews', '/roofing-services', '/softwash', '/target-news',
     '/video-gallery',
+    '/roofing-services/tile-roofing',
+    '/roofing-services/asphalt-shingle-roofing',
     '/roofing-services/tpo-pvc-membrane-roofing',
     '/roofing-services/metal-roofing-systems',
     '/roofing-services/built-up-roofing-bur',
     '/roofing-services/waterproofing-coating-systems',
     '/roofing-services/emergency-storm-repair',
     '/roofing-services/roof-inspections-surveys',
+    '/financing',
+    '/warranties',
     '/commercial-hoa-roof-maintenance',
   ]
 

@@ -50,6 +50,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title: `${post.title} | Target News`,
     description: post.excerpt,
+    robots: { index: false, follow: true },
   }
 }
 

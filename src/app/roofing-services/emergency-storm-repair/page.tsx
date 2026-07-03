@@ -109,6 +109,25 @@ const stormTimeline = [
 export default function EmergencyStormRepairPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Service',
+            name: 'Emergency Storm Repair',
+            description:
+              'When storms hit Southwest Florida, Target Roofing responds with 24/7 emergency tarping, leak mitigation, and permanent storm damage repair. Insurance claim assistance and adjuster coordination included.',
+            provider: {
+              '@type': 'RoofingContractor',
+              name: 'Target Roofing',
+              url: 'https://targetroofers.com',
+            },
+            areaServed: { '@type': 'State', name: 'Florida' },
+            serviceType: 'Roofing',
+          }),
+        }}
+      />
       {/* ==================== HERO ==================== */}
       <section className="relative bg-blueprint-dark text-white noise-overlay min-h-[60vh] flex items-center">
         {/* Hero background image */}

@@ -52,3 +52,17 @@ run_build_and_tests.sh
 run_build_only.sh
 run_start_server.sh
 small_targets.json
+.remix/
+
+# Local scratch: image-gen scripts, test output, one-off tooling
+gen_*.mjs
+fix_branding.mjs
+run_*.sh
+debug-test.js
+test_require.js
+test_results.json
+*_output.txt
+line_results.txt
+tsc_output.txt
+eslint_output.txt
+/video-walkthrough/

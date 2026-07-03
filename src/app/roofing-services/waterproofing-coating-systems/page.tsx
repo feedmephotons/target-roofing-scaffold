@@ -104,6 +104,25 @@ const whyTargetReasons = [
 export default function WaterproofingCoatingSystemsPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Service',
+            name: 'Waterproofing & Coating Systems',
+            description:
+              'Extend your commercial roof life by 10-15 years with professional silicone and elastomeric coating systems from Target Roofing. Restore reflectivity, seal cracks, and eliminate tear-off costs across Southwest Florida.',
+            provider: {
+              '@type': 'RoofingContractor',
+              name: 'Target Roofing',
+              url: 'https://targetroofers.com',
+            },
+            areaServed: { '@type': 'State', name: 'Florida' },
+            serviceType: 'Roofing',
+          }),
+        }}
+      />
       {/* ==================== HERO ==================== */}
       <section className="relative bg-blueprint-dark text-white noise-overlay min-h-[60vh] flex items-center">
         {/* Background image */}

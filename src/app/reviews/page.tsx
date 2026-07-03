@@ -81,6 +81,24 @@ export default async function ReviewsPage() {
   const reviews = await getReviews()
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "RoofingContractor",
+            "name": "Target Roofing",
+            "url": "https://targetroofers.com",
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "5.0",
+              "reviewCount": "34",
+              "bestRating": "5",
+              "worstRating": "1"
+            }
+          })
+        }}
+      />
       {/* ── Hero ── */}
       <section className="relative bg-[var(--black)] text-white overflow-hidden noise-overlay">
         {/* Roof schematic background */}

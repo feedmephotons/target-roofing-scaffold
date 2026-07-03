@@ -149,8 +149,13 @@ function HeroSection() {
 
   return (
     <section className="relative -mt-[7.5rem] min-h-screen lg:h-screen overflow-hidden flex items-center pt-36 pb-12 lg:pt-[7.5rem] lg:pb-0 bg-[var(--black)]">
-      {/* YouTube video background */}
-      <div className="absolute inset-0 z-0">
+      {/* YouTube video background
+          - bg-black prevents flash of white while iframe loads
+          - YouTube params handle autoplay, muted, loop, playsInline
+          - preload="metadata" not applicable to iframes
+          - TODO: Add a WebP poster image for the video container to improve
+            perceived load time (show static frame while YouTube iframe loads) */}
+      <div className="absolute inset-0 z-0 bg-black">
         <iframe
           className="hidden md:block absolute top-1/2 left-1/2 h-[120%] w-[120%] -translate-x-1/2 -translate-y-1/2 pointer-events-none"
           style={{ minWidth: '100vw', minHeight: '100vh' }}
@@ -158,15 +163,17 @@ function HeroSection() {
           title="Target Roofing Background Video"
           allow="autoplay; encrypted-media"
           allowFullScreen
+          loading="lazy"
         />
-        <div className="md:hidden absolute inset-0">
+        {/* Mobile fallback: no iframe/video load on small screens for performance */}
+        <div className="md:hidden absolute inset-0 bg-gradient-to-b from-black via-gray-900 to-black">
           <Image
             src="/images/backgrounds/hero-fallback.jpg"
             alt="Target Roofing Background Fallback"
             fill
             priority
             sizes="100vw"
-            className="object-cover opacity-60"
+            className="object-cover opacity-50"
           />
         </div>
       </div>
@@ -179,7 +186,7 @@ function HeroSection() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           {/* Left Text Column */}
           <div className="col-span-1 lg:col-span-7 text-left text-white flex flex-col justify-center">
-            <h1 className="animate-fade-in-up mb-4 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl font-[family-name:var(--font-display)] uppercase leading-[0.95]">
+            <h1 className="animate-fade-in-up mb-4 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl font-[family-name:var(--font-display)] uppercase leading-[0.82]">
               Extend Your Roof&apos;s Life<br />
               <span className="text-[var(--red)]">With Expert Repairs</span>
             </h1>

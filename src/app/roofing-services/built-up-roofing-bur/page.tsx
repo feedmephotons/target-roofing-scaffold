@@ -98,6 +98,25 @@ const whyTargetReasons = [
 export default function BuiltUpRoofingPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Service',
+            name: 'Built-Up Roofing (BUR)',
+            description:
+              'Traditional multi-ply built-up roofing (BUR) systems for commercial properties in Southwest Florida. Hot-applied and cold-applied BUR with gravel or cap sheet surfacing. 30+ years of experience. GAF Master Elite certified.',
+            provider: {
+              '@type': 'RoofingContractor',
+              name: 'Target Roofing',
+              url: 'https://targetroofers.com',
+            },
+            areaServed: { '@type': 'State', name: 'Florida' },
+            serviceType: 'Roofing',
+          }),
+        }}
+      />
       {/* ==================== HERO ==================== */}
       <section className="relative bg-blueprint-dark text-white noise-overlay overflow-hidden">
         {/* Background image */}

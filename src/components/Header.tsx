@@ -3,13 +3,13 @@
 import { useState, useRef, useEffect, useCallback } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import PortalButton from './PortalButton'
 import {
   Phone,
   Menu,
   X,
   ChevronDown,
   ChevronRight,
-  LogIn,
   Wrench,
   Home,
   HardHat,
@@ -20,6 +20,7 @@ import {
   SprayCan,
   CloudLightning,
   ClipboardCheck,
+  DollarSign,
   Building2,
   Users,
   Star,
@@ -29,6 +30,7 @@ import {
   Newspaper,
   Video,
   ArrowRight,
+  CalendarCheck,
 } from 'lucide-react'
 
 // ─── Mega menu data ──────────────────────────────────────────────
@@ -85,8 +87,10 @@ const servicesMega: MegaPanel = {
       links: [
         { name: 'TPO & PVC Membranes', href: '/roofing-services/tpo-pvc-membrane-roofing', description: 'Single-ply commercial roofing', icon: Layers },
         { name: 'Metal Roofing', href: '/roofing-services/metal-roofing-systems', description: 'Standing seam & corrugated', icon: Factory },
+        { name: 'Tile Roofing', href: '/roofing-services/tile-roofing', description: 'Clay & concrete tile roof systems', icon: Layers },
+        { name: 'Asphalt Shingles', href: '/roofing-services/asphalt-shingle-roofing', description: 'Popular residential roofing solutions', icon: Home },
         { name: 'Built-Up Roofing (BUR)', href: '/roofing-services/built-up-roofing-bur', description: 'Multi-layer asphalt systems', icon: Layers },
-        { name: 'Waterproofing & Coatings', href: '/roofing-services/waterproofing-coating-systems', description: 'Silicone & elastomeric systems', icon: Layers },
+        { name: 'Waterproofing & Coatings', href: '/roofing-services/waterproofing-coating-systems', description: 'Silicone & elastomeric systems', icon: Droplets },
       ],
     },
     {
@@ -123,7 +127,8 @@ const aboutMega: MegaPanel = {
       links: [
         { name: 'Reviews', href: '/reviews', description: 'What our clients say', icon: Star },
         { name: 'Certifications', href: '/about#certifications', description: 'Industry-recognized credentials', icon: Award },
-        { name: 'Warranty Info', href: '/about#warranty', description: 'Our commitment to you', icon: FileCheck },
+        { name: 'Warranties', href: '/warranties', description: 'Our commitment to you', icon: FileCheck },
+        { name: 'Financing', href: '/financing', description: 'Flexible payment options', icon: DollarSign },
       ],
     },
   ],
@@ -181,6 +186,164 @@ const navigation: NavItem[] = [
   },
   { name: 'Contact', href: '/contact' },
 ]
+
+// ─── Services mega panel (promo + columns + service bar) ────────
+
+function SlashMark() {
+  return (
+    <span className="flex gap-[3px]" aria-hidden="true">
+      <span className="block h-3.5 w-[5px] -skew-x-[20deg] bg-[var(--red)]" />
+      <span className="block h-3.5 w-[5px] -skew-x-[20deg] bg-[var(--red)]" />
+    </span>
+  )
+}
+
+function ServicesMegaPanel({ mega, onNavigate }: { mega: MegaPanel; onNavigate: () => void }) {
+  return (
+    <div className="flex items-stretch">
+      {/* ── Left promo panel ── */}
+      <div className="relative hidden w-[400px] shrink-0 xl:block 2xl:w-[440px]">
+        {/* Red diagonal backdrop */}
+        <div
+          className="absolute inset-0 bg-gradient-to-br from-[var(--red-light)] via-[var(--red)] to-[var(--red-dark)]"
+          style={{ clipPath: 'polygon(0 0, 100% 0, calc(100% - 7rem) 100%, 0 100%)' }}
+        >
+          <div
+            className="absolute inset-0 opacity-15"
+            style={{ backgroundImage: 'repeating-linear-gradient(135deg, rgba(0,0,0,0.5) 0 2px, transparent 2px 12px)' }}
+          />
+          {/* Oversized reticle watermark, bleeding off the bottom-left */}
+          <Image
+            src="/images/brand/reticle.png"
+            alt=""
+            aria-hidden="true"
+            width={508}
+            height={509}
+            className="pointer-events-none absolute -bottom-24 -left-24 h-[460px] w-[460px] max-w-none -rotate-12 opacity-[0.18] brightness-0 invert"
+          />
+        </div>
+
+        <div className="relative flex h-full flex-col py-9 pl-10 pr-28 pb-32">
+          <div className="inline-flex self-start bg-[#0b0b0b] px-4 py-1.5 -skew-x-[14deg]">
+            <span className="block skew-x-[14deg] text-[11px] font-bold italic uppercase tracking-[0.2em] text-white font-[family-name:var(--font-display)]">
+              Roofing & Exterior Experts
+            </span>
+          </div>
+          <p className="mt-5 text-[2.5rem] font-extrabold italic uppercase leading-[1.05] text-white font-[family-name:var(--font-display)]">
+            Built to Protect.
+            <br />
+            Built to Last.
+          </p>
+          <div className="mt-5 h-px w-44 bg-white/50" />
+          <p className="mt-4 max-w-[17rem] text-sm leading-relaxed text-white/90">
+            From roof repairs to complete replacements, we deliver high-performance solutions backed by experience and integrity.
+          </p>
+        </div>
+
+        {/* Estimate banner - overlaps the diagonal edge */}
+        <Link
+          href="/contact"
+          onClick={onNavigate}
+          className="group/cta absolute bottom-9 left-0 right-4 flex items-center gap-4 bg-[#0b0b0b] py-4 pl-10 pr-8 transition-colors hover:bg-black"
+          style={{ clipPath: 'polygon(0 0, 100% 0, calc(100% - 2rem) 100%, 0 100%)' }}
+        >
+          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-[var(--red)] text-white">
+            <CalendarCheck className="h-5 w-5" />
+          </span>
+          <span className="min-w-0 flex-1">
+            <span className="block text-sm font-bold uppercase tracking-wide text-white font-[family-name:var(--font-display)]">
+              Need a Free Estimate?
+            </span>
+            <span className="block text-xs text-white/70">Fast response. No obligation.</span>
+          </span>
+          <ArrowRight className="mr-4 h-5 w-5 shrink-0 text-white transition-transform group-hover/cta:translate-x-1" />
+        </Link>
+      </div>
+
+      {/* ── Service columns + bottom bar ── */}
+      <div className="min-w-0 flex-1 px-6 py-8 lg:px-10 xl:pl-12">
+        <div className="grid grid-cols-3 divide-x divide-gray-200">
+          {mega.columns.map((col, i) => (
+            <div key={col.heading} className={i === 0 ? 'pr-6' : i === mega.columns.length - 1 ? 'pl-6' : 'px-6'}>
+              <div className="mb-3">
+                <div className="flex items-center gap-2.5">
+                  <SlashMark />
+                  <h3 className="text-sm font-bold italic uppercase tracking-wider text-[var(--black)] font-[family-name:var(--font-display)]">
+                    {col.heading}
+                  </h3>
+                </div>
+                <div className="mt-2.5 h-px bg-gray-300" />
+              </div>
+              <ul>
+                {col.links.map((link) => {
+                  const Icon = link.icon
+                  return (
+                    <li key={link.name}>
+                      <Link
+                        href={link.href}
+                        className="group flex items-center gap-3.5 rounded-lg px-2 py-3 transition-colors hover:bg-gray-50"
+                        onClick={onNavigate}
+                      >
+                        {Icon && (
+                          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-[var(--red)]/10 bg-[var(--red)]/[0.07] text-[var(--red)] transition-colors group-hover:bg-[var(--red)] group-hover:text-white">
+                            <Icon className="h-5 w-5" />
+                          </span>
+                        )}
+                        <span className="min-w-0 flex-1">
+                          <span className="block text-[13px] font-bold uppercase tracking-wide text-[var(--black)] transition-colors group-hover:text-[var(--red)] font-[family-name:var(--font-display)]">
+                            {link.name}
+                          </span>
+                          {link.description && (
+                            <span className="mt-0.5 block text-xs leading-snug text-gray-500">{link.description}</span>
+                          )}
+                        </span>
+                        <ChevronRight className="h-4 w-4 shrink-0 text-[var(--red)]/70 transition-transform group-hover:translate-x-0.5" />
+                      </Link>
+                    </li>
+                  )
+                })}
+              </ul>
+            </div>
+          ))}
+        </div>
+
+        {/* ── Same-day service bar ── */}
+        <div
+          className="mt-6 flex items-center gap-5 bg-gradient-to-r from-gray-200/70 via-gray-100 to-gray-100 py-3.5 pl-9 pr-8"
+          style={{ clipPath: 'polygon(1.75rem 0, 100% 0, calc(100% - 1.75rem) 100%, 0 100%)' }}
+        >
+          <span
+            className="flex h-12 w-12 shrink-0 items-center justify-center bg-[var(--red)] text-white"
+            style={{ clipPath: 'polygon(25% 3%, 75% 3%, 98% 50%, 75% 97%, 25% 97%, 2% 50%)' }}
+          >
+            <Phone className="h-5 w-5" />
+          </span>
+          <span className="min-w-0">
+            <span className="block text-sm font-bold italic uppercase tracking-wide text-[var(--black)] font-[family-name:var(--font-display)]">
+              Same-Day Service Available
+            </span>
+            <span className="block text-xs text-gray-600">We respond to most requests within 24 hours.</span>
+          </span>
+          <span className="mx-3 hidden h-10 w-px -skew-x-[18deg] bg-gray-300 lg:block" aria-hidden="true" />
+          <Link
+            href="/contact"
+            onClick={onNavigate}
+            className="ml-auto shrink-0 -skew-x-[14deg] bg-gradient-to-r from-[var(--red-light)] to-[var(--red)] px-9 py-3 shadow-md transition-all hover:from-[var(--red)] hover:to-[var(--red-dark)] hover:shadow-lg"
+          >
+            <span className="flex skew-x-[14deg] items-center gap-2.5 text-sm font-bold uppercase tracking-wider text-white font-[family-name:var(--font-display)]">
+              Request Free Estimate
+              <ArrowRight className="h-4 w-4" />
+            </span>
+          </Link>
+          <span className="hidden items-center gap-1.5 2xl:flex" aria-hidden="true">
+            <span className="h-10 w-3 -skew-x-[14deg] bg-[var(--red)]" />
+            <span className="h-10 w-1.5 -skew-x-[14deg] bg-[var(--red)]/70" />
+          </span>
+        </div>
+      </div>
+    </div>
+  )
+}
 
 // ─── Component ───────────────────────────────────────────────────
 
@@ -358,14 +521,8 @@ export default function Header() {
                   </div>
                 ))}
 
-                {/* CTA Button */}
-                <Link
-                  href="/portal"
-                  className="ml-4 inline-flex items-center gap-2 px-6 py-2.5 bg-[var(--red)] text-white text-sm font-bold uppercase tracking-wide rounded hover:bg-[var(--red-dark)] transition-colors shadow-md"
-                >
-                  <LogIn className="h-4 w-4" />
-                  Customer Login
-                </Link>
+                {/* CTA Button (press-and-hold reveals the admin entrance) */}
+                <PortalButton />
               </div>
 
               {/* Mobile menu button */}
@@ -401,8 +558,11 @@ export default function Header() {
                 onMouseEnter={() => handleMouseEnter(item.name)}
                 onMouseLeave={handleMouseLeave}
               >
+                {item.name === 'Services' && item.mega ? (
+                  <ServicesMegaPanel mega={item.mega} onNavigate={() => setActiveMega(null)} />
+                ) : (
                 <div className="mx-auto max-w-7xl px-6 lg:px-8 py-8">
-                  {/* Services / About mega panels */}
+                  {/* About mega panel */}
                   {item.mega && (
                     <div className="grid grid-cols-4 gap-8">
                       {item.mega.columns.map((col) => (
@@ -584,6 +744,7 @@ export default function Header() {
                     </div>
                   )}
                 </div>
+                )}
               </div>
             )
           })}
@@ -718,15 +879,10 @@ export default function Header() {
               )
             })}
 
-            {/* Mobile CTA */}
-            <Link
-              href="/portal"
-              className="flex items-center justify-center gap-2 mx-4 mt-4 px-6 py-3.5 bg-[var(--red)] text-white text-sm font-bold uppercase rounded hover:bg-[var(--red-dark)] transition-colors"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              <LogIn className="h-4 w-4" />
-              Customer Login
-            </Link>
+            {/* Mobile CTA (press-and-hold reveals the admin entrance) */}
+            <div className="mx-4">
+              <PortalButton fullWidth onNavigate={() => setMobileMenuOpen(false)} />
+            </div>
           </div>
         </div>
       </header>

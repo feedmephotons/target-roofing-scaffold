@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { Oswald, Source_Sans_3, Poppins } from 'next/font/google'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
-import ChatWidget from '@/components/ChatWidget'
+import DelayedChatWidget from '@/components/DelayedChatWidget'
 import './globals.css'
 
 const oswald = Oswald({
@@ -24,6 +24,8 @@ const sourceSans = Source_Sans_3({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://targetroofers.com'),
+  alternates: { canonical: './' },
   title: {
     default: 'Target Roofing | Southwest Florida Commercial Roof Repair',
     template: '%s | Target Roofing',
@@ -71,10 +73,46 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${oswald.variable} ${sourceSans.variable} ${poppins.variable} antialiased`}>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'RoofingContractor',
+              'name': 'Target Roofing',
+              'image': 'https://targetroofers.com/images/logos/target-roofing-logo-2x.png',
+              '@id': 'https://targetroofers.com',
+              'url': 'https://targetroofers.com',
+              'telephone': '+1-239-823-1483',
+              'priceRange': '$$',
+              'license': 'CCC1334168',
+              'founder': { '@type': 'Person', 'name': 'Casey Crowther' },
+              'address': {
+                '@type': 'PostalAddress',
+                'addressLocality': 'Fort Myers',
+                'addressRegion': 'FL',
+                'addressCountry': 'US',
+              },
+              'areaServed': [
+                'Fort Myers',
+                'Cape Coral',
+                'Naples',
+                'Sarasota',
+                'Bradenton',
+                'Lehigh Acres',
+                'Bonita Springs',
+                'Estero',
+                'Marco Island',
+                'Punta Gorda',
+              ],
+              'sameAs': [],
+            }),
+          }}
+        />
         <Header />
         <main className="pt-[7.5rem]">{children}</main>
         <Footer />
-        <ChatWidget />
+        <DelayedChatWidget />
       </body>
     </html>
   )

@@ -21,6 +21,8 @@ const footerLinks = {
   resources: [
     { name: 'Target News', href: '/target-news' },
     { name: 'Video Gallery', href: '/video-gallery' },
+    { name: 'Financing', href: '/financing' },
+    { name: 'Warranties', href: '/warranties' },
     { name: 'Contact Us', href: '/contact' },
     { name: 'Free Estimate', href: '/contact' },
   ],
@@ -68,10 +70,15 @@ export default function Footer() {
               height={46}
               className="h-10 w-auto mb-6"
             />
+            <p className="text-sm font-semibold text-white mb-4">Licensed & Insured | FL License: CCC1334168</p>
             <div className="space-y-4 text-sm text-[var(--gray-400)]">
               <div className="flex items-start gap-3">
                 <MapPin className="h-5 w-5 text-[var(--red)] flex-shrink-0 mt-0.5" />
                 <span>7011 Nalle Grade Rd<br />North Fort Myers, Florida 33917</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <Phone className="h-5 w-5 text-[var(--red)] flex-shrink-0" />
+                <a href="tel:+12398231483" className="hover:text-white transition-colors inline-block py-3.5 px-3">(239) 823-1483</a>
               </div>
               <div className="flex items-center gap-3">
                 <Phone className="h-5 w-5 text-[var(--red)] flex-shrink-0" />

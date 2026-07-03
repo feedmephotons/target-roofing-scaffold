@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, type FormEvent } from 'react'
+import Image from 'next/image'
 import { Send, CheckCircle, Phone, ArrowRight } from 'lucide-react'
 import { submitContactLead } from '@/app/actions'
 
@@ -85,7 +86,7 @@ export default function InlineLeadForm({
 
   const textClass = darkTheme ? 'text-white' : 'text-[var(--black)]'
   const subtextClass = darkTheme ? 'text-white/80' : 'text-[var(--gray-600)]'
-  const bgClass = darkTheme ? 'bg-black/50 border border-white/15 backdrop-blur-xl shadow-2xl' : 'bg-white shadow-xl border border-[var(--gray-200)]'
+  const bgClass = darkTheme ? 'bg-black/45 border border-white/15 backdrop-blur-3xl shadow-2xl' : 'bg-white shadow-xl border border-[var(--gray-200)]'
   const labelClass = darkTheme ? 'text-white/95' : 'text-[var(--gray-700)]'
   const inputClass = (fieldName: string) => `w-full px-4 py-2.5 border rounded bg-white text-base text-[var(--black)] placeholder-[var(--gray-400)] focus:outline-none focus:ring-2 transition-colors ${
     errors[fieldName]
@@ -108,8 +109,19 @@ export default function InlineLeadForm({
   }
 
   return (
-    <div className={`rounded-lg p-6 sm:p-8 border-t-4 border-[var(--red)] ${bgClass}`}>
-      <div className="mb-6">
+    <div className={`relative overflow-hidden rounded-lg p-6 sm:p-8 border-t-4 border-[var(--red)] ${bgClass}`}>
+      {/* Oversized reticle watermark, bleeding off the upper-right */}
+      {darkTheme && (
+        <Image
+          src="/images/brand/reticle.png"
+          alt=""
+          aria-hidden="true"
+          width={508}
+          height={509}
+          className="pointer-events-none absolute -top-24 -right-24 z-0 h-72 w-72 max-w-none rotate-12 opacity-[0.12] brightness-0 invert"
+        />
+      )}
+      <div className="relative z-10 mb-6">
         <h3 className={`text-2xl sm:text-3xl font-bold uppercase tracking-wide font-[family-name:var(--font-display)] ${textClass}`}>
           {title}
         </h3>
@@ -118,7 +130,7 @@ export default function InlineLeadForm({
         </p>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+      <form onSubmit={handleSubmit} className="relative z-10 space-y-4" noValidate>
         {error && (
           <div className="p-3.5 bg-red-50 border-l-4 border-red-500 rounded text-red-700 text-xs font-semibold">
             {error}

@@ -101,6 +101,25 @@ const whyTargetReasons = [
 export default function RoofInspectionsSurveysPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Service',
+            name: 'Roof Inspections & Surveys',
+            description:
+              'Comprehensive commercial roof inspections using infrared moisture detection, core sampling, and visual survey methods. Detailed reports identify issues before they become expensive problems. Serving Southwest Florida.',
+            provider: {
+              '@type': 'RoofingContractor',
+              name: 'Target Roofing',
+              url: 'https://targetroofers.com',
+            },
+            areaServed: { '@type': 'State', name: 'Florida' },
+            serviceType: 'Roofing',
+          }),
+        }}
+      />
       {/* ==================== HERO ==================== */}
       <section className="relative bg-blueprint-dark text-white noise-overlay min-h-[60vh] flex items-center">
         {/* Background image */}

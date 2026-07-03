@@ -1261,36 +1261,72 @@ function AdminDashboard({ onLogout }: { onLogout: () => void }) {
         {activeTab === 'seo' && (
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
             {/* Left Page Routes Select */}
-            <div className="lg:col-span-4 border border-[var(--gray-200)] rounded-xl bg-white p-5 shadow-sm space-y-3">
-              <h3 className="text-xs font-bold uppercase tracking-wider text-[var(--gray-400)] mb-4">Select Page Route</h3>
-              {[
-                { id: 'home', label: 'Homepage (/)', path: '/' },
-                { id: 'services', label: 'Services (/roofing-services)', path: '/roofing-services' },
-                { id: 'about', label: 'About Us (/about)', path: '/about' },
-                { id: 'softwash', label: 'Softwash (/softwash)', path: '/softwash' }
-              ].map((route) => (
-                <button
-                  key={route.id}
-                  onClick={() => setSelectedSeoRoute(route.id)}
-                  className={`w-full text-left rounded-lg py-3.5 px-3 border transition-all text-xs font-bold uppercase tracking-wider flex justify-between items-center ${
-                    selectedSeoRoute === route.id
-                      ? 'border-[var(--red)] bg-[var(--red)]/5 text-[var(--red)]'
-                      : 'border-[var(--gray-200)] hover:border-[var(--red)] bg-white text-[var(--gray-600)]'
-                  }`}
-                >
-                  <div>
-                    <p>{route.label}</p>
-                    <span className="text-[10px] font-mono text-[var(--gray-400)] lowercase font-normal">{route.path}</span>
+            <div className="lg:col-span-4 border border-[var(--gray-200)] rounded-xl bg-white p-5 shadow-sm space-y-1 max-h-[calc(100vh-200px)] overflow-y-auto">
+              <h3 className="text-xs font-bold uppercase tracking-wider text-[var(--gray-400)] mb-3">Select Page Route</h3>
+              {([
+                { group: 'Core Pages', routes: [
+                  { id: 'home', label: 'Homepage', path: '/' },
+                  { id: 'about', label: 'About Us', path: '/about' },
+                  { id: 'contact', label: 'Contact', path: '/contact' },
+                  { id: 'careers', label: 'Careers', path: '/careers' },
+                  { id: 'reviews', label: 'Reviews', path: '/reviews' },
+                ]},
+                { group: 'Services', routes: [
+                  { id: 'services', label: 'All Services', path: '/roofing-services' },
+                  { id: 'services-tpo', label: 'TPO / PVC Membrane', path: '/roofing-services/tpo-pvc-membrane-roofing' },
+                  { id: 'services-metal', label: 'Metal Roofing', path: '/roofing-services/metal-roofing-systems' },
+                  { id: 'services-bur', label: 'Built-Up (BUR)', path: '/roofing-services/built-up-roofing-bur' },
+                  { id: 'services-waterproofing', label: 'Waterproofing / Coatings', path: '/roofing-services/waterproofing-coating-systems' },
+                  { id: 'services-emergency', label: 'Emergency Storm Repair', path: '/roofing-services/emergency-storm-repair' },
+                  { id: 'services-inspections', label: 'Inspections / Surveys', path: '/roofing-services/roof-inspections-surveys' },
+                  { id: 'services-tile', label: 'Tile Roofing', path: '/roofing-services/tile-roofing' },
+                  { id: 'services-shingle', label: 'Asphalt Shingle', path: '/roofing-services/asphalt-shingle-roofing' },
+                  { id: 'maintenance', label: 'HOA / Commercial Maintenance', path: '/commercial-hoa-roof-maintenance' },
+                  { id: 'softwash', label: 'Softwash', path: '/softwash' },
+                ]},
+                { group: 'Content', routes: [
+                  { id: 'news', label: 'Target News', path: '/target-news' },
+                  { id: 'video-gallery', label: 'Video Gallery', path: '/video-gallery' },
+                  { id: 'our-projects', label: 'Our Projects', path: '/our-projects' },
+                  { id: 'our-team', label: 'Our Team', path: '/our-team' },
+                  { id: 'our-process', label: 'Our Process', path: '/our-process' },
+                ]},
+                { group: 'New Pages', routes: [
+                  { id: 'financing', label: 'Financing', path: '/financing' },
+                  { id: 'warranties', label: 'Warranties', path: '/warranties' },
+                ]},
+              ] as { group: string; routes: { id: string; label: string; path: string }[] }[]).map((section) => (
+                <div key={section.group} className="mb-3">
+                  <p className="text-[9px] font-bold uppercase tracking-widest text-[var(--gray-400)] mb-1.5 px-1 pt-2 border-t border-[var(--gray-100)] first:border-t-0 first:pt-0">
+                    {section.group}
+                  </p>
+                  <div className="space-y-1">
+                    {section.routes.map((route) => (
+                      <button
+                        key={route.id}
+                        onClick={() => setSelectedSeoRoute(route.id)}
+                        className={`w-full text-left rounded-lg py-2.5 px-3 border transition-all text-[11px] font-bold uppercase tracking-wider flex justify-between items-center gap-2 ${
+                          selectedSeoRoute === route.id
+                            ? 'border-[var(--red)] bg-[var(--red)]/5 text-[var(--red)]'
+                            : 'border-[var(--gray-200)] hover:border-[var(--red)] bg-white text-[var(--gray-600)]'
+                        }`}
+                      >
+                        <div className="min-w-0">
+                          <p className="truncate">{route.label}</p>
+                          <span className="text-[9px] font-mono text-[var(--gray-400)] lowercase font-normal truncate block">{route.path}</span>
+                        </div>
+                        <Globe className="h-3.5 w-3.5 opacity-55 flex-shrink-0" />
+                      </button>
+                    ))}
                   </div>
-                  <Globe className="h-4 w-4 opacity-55" />
-                </button>
+                </div>
               ))}
             </div>
 
             {/* Right Form Editor */}
             <div className="lg:col-span-8 border border-[var(--gray-200)] rounded-xl bg-white p-6 shadow-sm">
               <h3 className="text-sm font-bold uppercase tracking-wide text-[var(--black)] font-[family-name:var(--font-display)] mb-4 border-b border-[var(--gray-100)] pb-3">
-                SEO Metadata Configurator &bull; {selectedSeoRoute.toUpperCase()}
+                SEO Metadata Configurator &bull; {selectedSeoRoute.replace(/-/g, ' ').toUpperCase()}
               </h3>
 
               {loadingSeo ? (

@@ -111,6 +111,25 @@ const whyTargetPoints = [
 export default function TpoPvcMembraneRoofingPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Service',
+            name: 'TPO & PVC Membrane Roofing',
+            description:
+              'TPO and PVC single-ply membrane roofing for Southwest Florida commercial buildings. Heat-welded seams, Energy Star rated, and built for Florida hurricane zones. 30+ years of experience. Call Target Roofing at 239-332-5707.',
+            provider: {
+              '@type': 'RoofingContractor',
+              name: 'Target Roofing',
+              url: 'https://targetroofers.com',
+            },
+            areaServed: { '@type': 'State', name: 'Florida' },
+            serviceType: 'Roofing',
+          }),
+        }}
+      />
       {/* ==================== HERO ==================== */}
       <section className="relative bg-blueprint-dark text-white noise-overlay min-h-[60vh] flex items-center">
         {/* Background image */}
