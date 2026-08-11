@@ -20,9 +20,11 @@ import {
 } from 'lucide-react'
 import InlineLeadForm from '@/components/InlineLeadForm'
 import AnimateIn from '@/components/AnimateIn'
+import Breadcrumbs from '@/components/Breadcrumbs'
+import { CITIES, CITY_MAP } from '@/lib/locations'
 
 export const metadata: Metadata = {
-  title: 'Emergency Storm & Hurricane Repair | Target Roofing',
+  title: 'Emergency Storm & Hurricane Repair',
   description:
     'When storms hit Southwest Florida, Target Roofing responds with 24/7 emergency tarping, leak mitigation, and permanent storm damage repair. Insurance claim assistance and adjuster coordination included.',
   keywords: [
@@ -106,6 +108,29 @@ const stormTimeline = [
   },
 ]
 
+const stormFaqs = [
+  {
+    q: 'How fast can Target Roofing respond after a storm?',
+    a: 'Our emergency crews are on standby 24/7/365 across Lee, Collier, Charlotte, and Sarasota counties. During active emergencies we average a response of under two hours to tarp and stabilize your roof, then schedule the permanent repair once the property is secured.',
+  },
+  {
+    q: 'Should I file an insurance claim before or after calling you?',
+    a: 'Call us first. Emergency tarping and water-intrusion mitigation are almost always covered, and most policies actually require you to prevent further damage. We document conditions before we touch the roof so your claim reflects the full scope of storm damage, then coordinate directly with your adjuster.',
+  },
+  {
+    q: 'Do you provide temporary tarping, or only permanent repairs?',
+    a: 'Both. We deploy industrial-grade tarps and waterproofing barriers immediately to stop active leaks and protect your interior, then return to complete the permanent repair or full replacement after the claim is scoped and approved.',
+  },
+  {
+    q: 'Will you work directly with my insurance adjuster?',
+    a: 'Yes. We meet the adjuster on site, supply photo documentation, measurements, and an itemized scope of work, and file supplements when hidden damage is uncovered. Decades of claims across Southwest Florida mean we know exactly what carriers require to approve a fair settlement.',
+  },
+  {
+    q: 'How do I avoid storm-chaser scams after a hurricane?',
+    a: 'Verify a Florida license number (ours is CCC1334168), a permanent local address, and proof of insurance before you sign anything. Never pay in full up front, and never hand your insurance check to an out-of-state crew that shows up uninvited at your door.',
+  },
+]
+
 export default function EmergencyStormRepairPage() {
   return (
     <>
@@ -120,14 +145,43 @@ export default function EmergencyStormRepairPage() {
               'When storms hit Southwest Florida, Target Roofing responds with 24/7 emergency tarping, leak mitigation, and permanent storm damage repair. Insurance claim assistance and adjuster coordination included.',
             provider: {
               '@type': 'RoofingContractor',
+              '@id': 'https://targetroofers.com',
               name: 'Target Roofing',
-              url: 'https://targetroofers.com',
             },
-            areaServed: { '@type': 'State', name: 'Florida' },
-            serviceType: 'Roofing',
+            areaServed: CITIES.filter((c) => c !== 'southwest-florida').map((c) => ({
+              '@type': 'City',
+              name: CITY_MAP[c].name,
+            })),
+            serviceType: 'Emergency Roof Repair',
           }),
         }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'FAQPage',
+            mainEntity: stormFaqs.map((faq) => ({
+              '@type': 'Question',
+              name: faq.q,
+              acceptedAnswer: { '@type': 'Answer', text: faq.a },
+            })),
+          }),
+        }}
+      />
+      {/* ==================== BREADCRUMBS ==================== */}
+      <section className="bg-[var(--gray-50)] border-b border-[var(--gray-200)]">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-3">
+          <Breadcrumbs
+            items={[
+              { name: 'Roofing Services', href: '/roofing-services' },
+              { name: 'Emergency Storm Repair' },
+            ]}
+          />
+        </div>
+      </section>
+
       {/* ==================== HERO ==================== */}
       <section className="relative bg-blueprint-dark text-white noise-overlay min-h-[60vh] flex items-center">
         {/* Hero background image */}
@@ -537,6 +591,45 @@ export default function EmergencyStormRepairPage() {
               </Link>
             </div>
           </AnimateIn>
+        </div>
+      </section>
+
+      {/* ==================== FAQ ==================== */}
+      <section className="bg-white py-20 md:py-28">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-14">
+            <AnimateIn animation="fade-up">
+              <div className="inline-flex items-center gap-2 mb-4 px-3 py-1.5 bg-[var(--red)]/10 rounded">
+                <Shield className="h-5 w-5 text-[var(--red)]" />
+                <span className="text-sm font-semibold text-[var(--red)] uppercase tracking-wider font-[family-name:var(--font-display)]">
+                  Storm Repair FAQ
+                </span>
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold text-[var(--black)] mb-6">
+                Common Storm Damage Questions
+              </h2>
+            </AnimateIn>
+            <AnimateIn animation="fade-up" delay={100}>
+              <p className="text-[var(--gray-600)] leading-relaxed text-lg max-w-2xl mx-auto">
+                Straight answers on tarping, insurance claims, and getting your Southwest Florida property secured fast.
+              </p>
+            </AnimateIn>
+          </div>
+
+          <div className="space-y-4">
+            {stormFaqs.map((faq, idx) => (
+              <AnimateIn key={faq.q} animation="fade-up" delay={idx * 60}>
+                <div className="bg-[var(--gray-50)] rounded-lg border border-[var(--gray-200)] p-6 md:p-8">
+                  <h3 className="font-bold text-[var(--black)] text-lg font-[family-name:var(--font-display)] mb-3">
+                    {faq.q}
+                  </h3>
+                  <p className="text-[var(--gray-600)] leading-relaxed">
+                    {faq.a}
+                  </p>
+                </div>
+              </AnimateIn>
+            ))}
+          </div>
         </div>
       </section>
 

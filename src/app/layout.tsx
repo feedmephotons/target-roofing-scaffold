@@ -1,9 +1,14 @@
 import type { Metadata } from 'next'
+import Script from 'next/script'
 import { Oswald, Source_Sans_3, Poppins } from 'next/font/google'
+import { Analytics } from '@vercel/analytics/react'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import DelayedChatWidget from '@/components/DelayedChatWidget'
 import './globals.css'
+
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID
 
 const oswald = Oswald({
   variable: '--font-oswald',
@@ -27,41 +32,43 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://targetroofers.com'),
   alternates: { canonical: './' },
   title: {
-    default: 'Target Roofing | Southwest Florida Commercial Roof Repair',
+    default: 'Roof Repair & Replacement in SW Florida | Target Roofing',
     template: '%s | Target Roofing',
   },
   description:
-    'Southwest Florida\'s trusted commercial roof repair and maintenance specialist. We extend your roof\'s lifespan with expert repairs and manage replacement transitions when needed. Serving Fort Myers, Naples, Sarasota & Tampa. License #CCC1334168.',
+    'Fast, reliable roof repair and leak fixes for homes and businesses across Fort Myers, Cape Coral, Naples & Sarasota. 24/7 storm-damage response and free roof surveys. FL Lic #CCC1334168. Call 239-332-5707.',
   keywords: [
-    'commercial roof repair',
-    'roofing contractor',
-    'Fort Myers roofing',
+    'roof repair',
+    'roof leak repair',
+    'emergency roof repair',
+    'roofing contractor Fort Myers',
     'Southwest Florida roofing',
-    'leak repair',
-    'roof maintenance plans',
-    'reroofing',
+    'storm damage roof repair',
+    'roof replacement',
     'Target Roofing',
   ],
   openGraph: {
-    title: 'Target Roofing | Commercial Roof Repair',
-    description: 'Southwest Florida\'s trusted commercial roof repair and maintenance specialist.',
+    title: 'Roof Repair & Replacement in Southwest Florida | Target Roofing',
+    description:
+      'Fast roof repair, leak fixes, and 24/7 storm response for homes and businesses across SW Florida. Free surveys. Lic #CCC1334168.',
     url: 'https://targetroofers.com',
     siteName: 'Target Roofing',
     type: 'website',
     images: [
       {
-        url: 'https://targetroofers.com/images/logos/target-roofing-logo-2x.png',
-        width: 800,
-        height: 400,
-        alt: 'Target Roofing',
+        url: 'https://targetroofers.com/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Target Roofing crew performing emergency roof repair in Southwest Florida',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Target Roofing | Commercial Roof Repair',
-    description: 'Southwest Florida\'s trusted commercial roof repair and maintenance specialist.',
-    images: ['https://targetroofers.com/images/logos/target-roofing-logo-2x.png'],
+    title: 'Roof Repair & Replacement in Southwest Florida | Target Roofing',
+    description:
+      'Fast roof repair, leak fixes, and 24/7 storm response for homes and businesses across SW Florida.',
+    images: ['https://targetroofers.com/og-image.jpg'],
   },
 }
 
@@ -73,6 +80,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${oswald.variable} ${sourceSans.variable} ${poppins.variable} antialiased`}>
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded focus:bg-[var(--red)] focus:px-4 focus:py-2 focus:text-white focus:shadow-lg"
+        >
+          Skip to main content
+        </a>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -80,39 +93,78 @@ export default function RootLayout({
               '@context': 'https://schema.org',
               '@type': 'RoofingContractor',
               'name': 'Target Roofing',
-              'image': 'https://targetroofers.com/images/logos/target-roofing-logo-2x.png',
+              'image': 'https://targetroofers.com/og-image.jpg',
+              'logo': 'https://targetroofers.com/images/logos/target-roofing-logo-2x.png',
               '@id': 'https://targetroofers.com',
               'url': 'https://targetroofers.com',
-              'telephone': '+1-239-823-1483',
+              'telephone': '+1-239-332-5707',
+              'email': 'projects@targetroofers.com',
               'priceRange': '$$',
-              'license': 'CCC1334168',
-              'founder': { '@type': 'Person', 'name': 'Casey Crowther' },
+              'identifier': {
+                '@type': 'PropertyValue',
+                'propertyID': 'FL Roofing Contractor License',
+                'value': 'CCC1334168',
+              },
               'address': {
                 '@type': 'PostalAddress',
-                'addressLocality': 'Fort Myers',
+                'streetAddress': '7011 Nalle Grade Rd',
+                'addressLocality': 'North Fort Myers',
                 'addressRegion': 'FL',
+                'postalCode': '33917',
                 'addressCountry': 'US',
+              },
+              'geo': {
+                '@type': 'GeoCoordinates',
+                'latitude': 26.7128,
+                'longitude': -81.8998,
+              },
+              'openingHoursSpecification': [
+                {
+                  '@type': 'OpeningHoursSpecification',
+                  'dayOfWeek': ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+                  'opens': '08:00',
+                  'closes': '17:00',
+                },
+              ],
+              'aggregateRating': {
+                '@type': 'AggregateRating',
+                'ratingValue': '5.0',
+                'reviewCount': '34',
               },
               'areaServed': [
                 'Fort Myers',
                 'Cape Coral',
-                'Naples',
-                'Sarasota',
-                'Bradenton',
-                'Lehigh Acres',
                 'Bonita Springs',
-                'Estero',
-                'Marco Island',
+                'Sanibel',
+                'Naples',
                 'Punta Gorda',
-              ],
-              'sameAs': [],
+                'Port Charlotte',
+                'Sarasota',
+                'Arcadia',
+              ].map((name) => ({ '@type': 'City', name })),
             }),
           }}
         />
         <Header />
-        <main className="pt-[7.5rem]">{children}</main>
+        <main id="main-content" className="pt-[7.5rem]">{children}</main>
         <Footer />
         <DelayedChatWidget />
+        <Analytics />
+        <SpeedInsights />
+        {GA_ID && (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+              strategy="afterInteractive"
+            />
+            <Script id="ga4-init" strategy="afterInteractive">
+              {`window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '${GA_ID}');`}
+            </Script>
+          </>
+        )}
       </body>
     </html>
   )

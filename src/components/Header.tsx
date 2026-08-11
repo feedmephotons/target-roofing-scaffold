@@ -76,7 +76,7 @@ const servicesMega: MegaPanel = {
     {
       heading: 'Core Services',
       links: [
-        { name: 'Roof Repairs', href: '/roofing-services#repairs', description: 'Expert leak detection & repair', icon: Wrench },
+        { name: 'Roof Repairs', href: '/roofing-services/roof-repair', description: 'Expert leak detection & repair', icon: Wrench },
         { name: 'Emergency Storm Repair', href: '/roofing-services/emergency-storm-repair', description: '24/7 storm damage response', icon: CloudLightning },
         { name: 'Maintenance Plans', href: '/commercial-hoa-roof-maintenance', description: 'Proactive roof care programs', icon: ShieldCheck },
         { name: 'Reroofing', href: '/roofing-services#reroofing', description: 'Complete roof replacement', icon: Home },
@@ -173,7 +173,7 @@ const navigation: NavItem[] = [
   { name: 'Portfolio', href: '/our-projects' },
   {
     name: 'Locations',
-    href: '/locations/fort-myers/roof-repair',
+    href: '/locations',
     locationGrid: locationCities,
   },
   {
@@ -435,7 +435,7 @@ export default function Header() {
     if (item.locationGrid) {
       return item.locationGrid.map((c) => ({
         name: c.name,
-        href: `/locations/${c.slug}/roof-repair`,
+        href: `/locations/${c.slug}`,
       }))
     }
     if (item.children) {
@@ -453,7 +453,7 @@ export default function Header() {
             <div className="flex items-center justify-between h-12 text-sm">
               <div className="flex items-center gap-6">
                 <span className="hidden sm:inline">License #CCC1334168</span>
-                <span className="hidden lg:inline">Serving Sarasota, Tampa, Fort Myers, Naples</span>
+                <span className="hidden lg:inline">Serving Fort Myers, Cape Coral, Naples &amp; Sarasota</span>
               </div>
               <div className="flex items-center gap-2 sm:gap-4">
                 <Link
@@ -687,7 +687,7 @@ export default function Header() {
                           </p>
                         </div>
                         <Link
-                          href="/locations/fort-myers/roof-repair"
+                          href="/locations"
                           className="text-sm font-semibold text-[var(--red)] hover:text-[var(--red-dark)] transition-colors flex items-center gap-1"
                           onClick={() => setActiveMega(null)}
                         >
@@ -699,7 +699,7 @@ export default function Header() {
                         {item.locationGrid.map((city) => (
                           <Link
                             key={city.slug}
-                            href={`/locations/${city.slug}/roof-repair`}
+                            href={`/locations/${city.slug}`}
                             className="group flex items-center gap-2.5 rounded-lg border border-gray-100 px-4 py-3 hover:border-[var(--red)]/30 hover:bg-[var(--red)]/5 transition-all"
                             onClick={() => setActiveMega(null)}
                           >
@@ -842,7 +842,7 @@ export default function Header() {
                           {item.locationGrid.map((city) => (
                             <Link
                               key={city.slug}
-                              href={`/locations/${city.slug}/roof-repair`}
+                              href={`/locations/${city.slug}`}
                               className="flex items-center gap-2 px-4 py-2.5 min-h-[44px] text-sm text-[var(--gray-600)] hover:text-[var(--red)] transition-colors"
                               onClick={() => setMobileMenuOpen(false)}
                             >

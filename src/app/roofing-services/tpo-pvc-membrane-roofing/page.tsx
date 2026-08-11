@@ -17,9 +17,11 @@ import {
 } from 'lucide-react'
 import InlineLeadForm from '@/components/InlineLeadForm'
 import AnimateIn from '@/components/AnimateIn'
+import Breadcrumbs from '@/components/Breadcrumbs'
+import { CITIES, CITY_MAP } from '@/lib/locations'
 
 export const metadata: Metadata = {
-  title: 'TPO & PVC Membrane Roofing | Commercial Single-Ply Systems',
+  title: 'TPO & PVC Membrane Roofing',
   description:
     'TPO and PVC single-ply membrane roofing for Southwest Florida commercial buildings. Heat-welded seams, Energy Star rated, and built for Florida hurricane zones. 30+ years of experience. Call Target Roofing at 239-332-5707.',
   keywords: [
@@ -122,14 +124,29 @@ export default function TpoPvcMembraneRoofingPage() {
               'TPO and PVC single-ply membrane roofing for Southwest Florida commercial buildings. Heat-welded seams, Energy Star rated, and built for Florida hurricane zones. 30+ years of experience. Call Target Roofing at 239-332-5707.',
             provider: {
               '@type': 'RoofingContractor',
+              '@id': 'https://targetroofers.com',
               name: 'Target Roofing',
-              url: 'https://targetroofers.com',
             },
-            areaServed: { '@type': 'State', name: 'Florida' },
-            serviceType: 'Roofing',
+            areaServed: CITIES.filter((c) => c !== 'southwest-florida').map((c) => ({
+              '@type': 'City',
+              name: CITY_MAP[c].name,
+            })),
+            serviceType: 'TPO & PVC Membrane Roofing',
           }),
         }}
       />
+      {/* ==================== BREADCRUMBS ==================== */}
+      <section className="bg-[var(--gray-50)] border-b border-[var(--gray-200)]">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-3">
+          <Breadcrumbs
+            items={[
+              { name: 'Roofing Services', href: '/roofing-services' },
+              { name: 'TPO & PVC Membrane Roofing' },
+            ]}
+          />
+        </div>
+      </section>
+
       {/* ==================== HERO ==================== */}
       <section className="relative bg-blueprint-dark text-white noise-overlay min-h-[60vh] flex items-center">
         {/* Background image */}

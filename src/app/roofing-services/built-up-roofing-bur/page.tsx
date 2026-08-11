@@ -16,9 +16,11 @@ import {
 } from 'lucide-react'
 import InlineLeadForm from '@/components/InlineLeadForm'
 import AnimateIn from '@/components/AnimateIn'
+import Breadcrumbs from '@/components/Breadcrumbs'
+import { CITIES, CITY_MAP } from '@/lib/locations'
 
 export const metadata: Metadata = {
-  title: 'Built-Up Roofing (BUR) Systems | Target Roofing',
+  title: 'Built-Up Roofing (BUR) Systems',
   description:
     'Traditional multi-ply built-up roofing (BUR) systems for commercial properties in Southwest Florida. Hot-applied and cold-applied BUR with gravel or cap sheet surfacing. 30+ years of experience. GAF Master Elite certified.',
   openGraph: {
@@ -109,14 +111,29 @@ export default function BuiltUpRoofingPage() {
               'Traditional multi-ply built-up roofing (BUR) systems for commercial properties in Southwest Florida. Hot-applied and cold-applied BUR with gravel or cap sheet surfacing. 30+ years of experience. GAF Master Elite certified.',
             provider: {
               '@type': 'RoofingContractor',
+              '@id': 'https://targetroofers.com',
               name: 'Target Roofing',
-              url: 'https://targetroofers.com',
             },
-            areaServed: { '@type': 'State', name: 'Florida' },
-            serviceType: 'Roofing',
+            areaServed: CITIES.filter((c) => c !== 'southwest-florida').map((c) => ({
+              '@type': 'City',
+              name: CITY_MAP[c].name,
+            })),
+            serviceType: 'Built-Up Roofing (BUR)',
           }),
         }}
       />
+      {/* ==================== BREADCRUMBS ==================== */}
+      <section className="bg-[var(--gray-50)] border-b border-[var(--gray-200)]">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-3">
+          <Breadcrumbs
+            items={[
+              { name: 'Roofing Services', href: '/roofing-services' },
+              { name: 'Built-Up Roofing (BUR)' },
+            ]}
+          />
+        </div>
+      </section>
+
       {/* ==================== HERO ==================== */}
       <section className="relative bg-blueprint-dark text-white noise-overlay overflow-hidden">
         {/* Background image */}

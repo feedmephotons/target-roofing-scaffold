@@ -47,10 +47,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       title: 'Post Not Found',
     }
   }
+  const description =
+    post.excerpt.length > 160 ? `${post.excerpt.slice(0, 157).trimEnd()}…` : post.excerpt
   return {
-    title: `${post.title} | Target News`,
-    description: post.excerpt,
-    robots: { index: false, follow: true },
+    title: post.title,
+    description,
   }
 }
 

@@ -7,10 +7,12 @@ import RoofSchematic from '@/components/RoofSchematic'
 export const metadata: Metadata = {
   title: 'Reviews',
   description:
-    'Read what property managers, contractors, and property owners throughout Southwest Florida say about Target Roofing. 5.0 average rating from verified Google reviews.',
+    'Read what property managers, contractors, and property owners throughout Southwest Florida say about Target Roofing. 5.0 average rating from 34 verified reviews.',
 }
 
 import { getReviews } from '@/app/actions'
+
+type Review = Awaited<ReturnType<typeof getReviews>>[number]
 
 function StarRating() {
   return (
@@ -22,7 +24,7 @@ function StarRating() {
   )
 }
 
-function ReviewCard({ review, index }: { review: (typeof reviews)[number]; index: number }) {
+function ReviewCard({ review, index }: { review: Review; index: number }) {
   return (
     <div
       className="group relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 p-6 sm:p-8 border border-[var(--gray-100)]"
@@ -87,6 +89,7 @@ export default async function ReviewsPage() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "RoofingContractor",
+            "@id": "https://targetroofers.com",
             "name": "Target Roofing",
             "url": "https://targetroofers.com",
             "aggregateRating": {
@@ -142,7 +145,7 @@ export default async function ReviewsPage() {
           <div className="grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-white/20">
             {[
               {
-                value: '4.9',
+                value: '5.0',
                 label: 'Average Rating',
                 sub: (
                   <div className="flex items-center justify-center gap-0.5 mt-1">
@@ -153,8 +156,8 @@ export default async function ReviewsPage() {
                 ),
               },
               {
-                value: '100+',
-                label: 'Google Reviews',
+                value: '34',
+                label: 'Verified Reviews',
                 sub: null,
               },
               {
@@ -188,8 +191,8 @@ export default async function ReviewsPage() {
               Trusted by Southwest Florida
             </h2>
             <p className="text-[var(--gray-500)] max-w-2xl mx-auto">
-              From emergency repairs to full reroofs, our customers consistently rate us
-              5 stars across Google and Facebook.
+              From emergency repairs to full reroofs, our customers rate us a perfect
+              5.0 across 34 verified reviews.
             </p>
           </div>
 
@@ -219,7 +222,7 @@ export default async function ReviewsPage() {
               Difference?
             </h2>
             <p className="text-lg text-[var(--gray-300)] mb-10 max-w-xl mx-auto">
-              Join hundreds of satisfied property owners and managers across Southwest Florida.
+              Join the homeowners, property managers, and businesses across Southwest Florida who trust Target Roofing.
               Get your free estimate today.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

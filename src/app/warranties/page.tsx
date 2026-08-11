@@ -118,11 +118,11 @@ export default function WarrantiesPage() {
                   Learn About Your Options
                 </a>
                 <a
-                  href="tel:+12398231483"
+                  href="tel:+12393325707"
                   className="inline-flex items-center justify-center gap-2 px-8 py-3.5 border-2 border-white text-white font-bold uppercase tracking-wide rounded hover:bg-white/10 transition-colors text-sm"
                 >
                   <Phone className="w-4 h-4" />
-                  (239) 823-1483
+                  239-332-5707
                 </a>
               </div>
             </div>
@@ -337,7 +337,7 @@ export default function WarrantiesPage() {
           <div className="flex justify-center mt-12">
             <Image
               src="/images/badges/gaf-master-silverstar.png"
-              alt="GAF Master Elite and Silver Star Certified"
+              alt="GAF Master Elite and CertainTeed Silver Star Certified"
               width={300}
               height={120}
               className="h-20 w-auto opacity-80 hover:opacity-100 transition-opacity"

@@ -24,9 +24,9 @@ import AnimateIn from '@/components/AnimateIn'
 import RoofSchematic from '@/components/RoofSchematic'
 
 export const metadata: Metadata = {
-  title: 'Our Roofing Services',
+  title: 'Roof Repair & Replacement Services in SW Florida',
   description:
-    'Target Roofing specializes in commercial roof repairs and preventative maintenance plans to extend roof life, with seamless transitions to roof replacements when needed in Southwest Florida.',
+    'Roof repair, leak fixes, maintenance, and replacement for homes and businesses across Fort Myers, Cape Coral, Naples & Sarasota. 24/7 storm response and free surveys. Call 239-332-5707.',
 }
 
 const commitments = [
@@ -225,7 +225,7 @@ export default function RoofingServicesPage() {
 
               <AnimateIn animation="fade-up" delay={200}>
                 <p className="text-[var(--gray-600)] leading-relaxed mb-8">
-                  By investing in high-quality professional repairs early, you postpone the need for costly replacements. When a roof does reach the end of its useful lifespan, we provide clear diagnostics and support a seamless transition.
+                  By investing in high-quality professional repairs early, you postpone the need for costly replacements. When a roof does reach the end of its useful lifespan, we give you clear diagnostics and a straight recommendation &mdash; then manage the replacement ourselves.
                 </p>
               </AnimateIn>
 
@@ -409,7 +409,7 @@ export default function RoofingServicesPage() {
             </AnimateIn>
             <AnimateIn animation="fade-up" delay={100}>
               <p className="text-[var(--gray-600)] leading-relaxed text-lg max-w-3xl mx-auto">
-                When repair is no longer a viable or cost-effective option, our team transitions you seamlessly to a full roof replacement. We handle all logistics, schedules, and safety protocols to ensure a smooth, worry-free process with zero disruption to your daily operations.
+                When repair is no longer a viable or cost-effective option, our team manages the full roof replacement start to finish. We handle the logistics, scheduling, and safety protocols so the job stays on track with minimal disruption to your home or operations.
               </p>
             </AnimateIn>
           </div>

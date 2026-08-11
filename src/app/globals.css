@@ -154,3 +154,42 @@ html {
   background: linear-gradient(135deg, var(--red) 0%, var(--red-dark) 100%) !important;
 }
 
+/* -------------------------------------------------------------------------
+   Accessibility
+   ------------------------------------------------------------------------- */
+
+/* Keyboard focus ring. Tailwind v4 already ships the `sr-only` /
+   `focus:not-sr-only` utilities used by the skip-link in the layout, so we
+   only supplement a visible focus indicator for keyboard users. The skip-link
+   paints its own red background on focus; this gives every other interactive
+   element a clear outline without affecting mouse/touch users. */
+:focus-visible {
+  outline: 2px solid var(--red);
+  outline-offset: 2px;
+}
+
+/* Respect users who prefer reduced motion: neutralize the scroll/fade
+   animations and transitions site-wide, and stop smooth scrolling. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .animate-fade-in-up,
+  .animate-slide-in-left,
+  .animate-scale-in {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+

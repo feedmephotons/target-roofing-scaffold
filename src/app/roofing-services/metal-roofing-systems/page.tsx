@@ -18,9 +18,11 @@ import {
 } from 'lucide-react'
 import InlineLeadForm from '@/components/InlineLeadForm'
 import AnimateIn from '@/components/AnimateIn'
+import Breadcrumbs from '@/components/Breadcrumbs'
+import { CITIES, CITY_MAP } from '@/lib/locations'
 
 export const metadata: Metadata = {
-  title: 'Metal Roofing Systems | Commercial Standing Seam & R-Panel',
+  title: 'Metal Roofing Systems',
   description:
     'Durable standing seam, corrugated, and R-panel metal roofing systems engineered for Southwest Florida hurricane conditions. Wind ratings up to 180 mph. 40-60 year lifespans. Installed by Target Roofing.',
   openGraph: {
@@ -111,14 +113,29 @@ export default function MetalRoofingSystemsPage() {
               'Durable standing seam, corrugated, and R-panel metal roofing systems engineered for Southwest Florida hurricane conditions. Wind ratings up to 180 mph. 40-60 year lifespans. Installed by Target Roofing.',
             provider: {
               '@type': 'RoofingContractor',
+              '@id': 'https://targetroofers.com',
               name: 'Target Roofing',
-              url: 'https://targetroofers.com',
             },
-            areaServed: { '@type': 'State', name: 'Florida' },
-            serviceType: 'Roofing',
+            areaServed: CITIES.filter((c) => c !== 'southwest-florida').map((c) => ({
+              '@type': 'City',
+              name: CITY_MAP[c].name,
+            })),
+            serviceType: 'Metal Roofing',
           }),
         }}
       />
+      {/* ==================== BREADCRUMBS ==================== */}
+      <section className="bg-[var(--gray-50)] border-b border-[var(--gray-200)]">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-3">
+          <Breadcrumbs
+            items={[
+              { name: 'Roofing Services', href: '/roofing-services' },
+              { name: 'Metal Roofing Systems' },
+            ]}
+          />
+        </div>
+      </section>
+
       {/* ==================== HERO ==================== */}
       <section className="relative bg-blueprint-dark text-white noise-overlay min-h-[60vh] flex items-center">
         {/* Background image */}

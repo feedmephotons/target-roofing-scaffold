@@ -2,8 +2,22 @@
 
 import { useState, type FormEvent } from 'react'
 import Image from 'next/image'
-import { Send, CheckCircle, Phone, ArrowRight } from 'lucide-react'
+import { Send, CheckCircle, Phone } from 'lucide-react'
 import { submitContactLead } from '@/app/actions'
+
+// Google Analytics event helper. Gated on NEXT_PUBLIC_GA_ID in the root layout,
+// so gtag may be absent — this is a safe no-op that never throws when GA isn't
+// loaded, and is only ever called from event handlers (never during SSR).
+declare global {
+  interface Window {
+    gtag?: (command: string, eventName: string, params?: Record<string, unknown>) => void
+  }
+}
+
+function trackEvent(name: string, params?: Record<string, unknown>) {
+  if (typeof window === 'undefined') return
+  window.gtag?.('event', name, params)
+}
 
 interface InlineLeadFormProps {
   defaultService?: string
@@ -51,6 +65,10 @@ export default function InlineLeadForm({
     }
   }
 
+  function handlePhoneClick() {
+    trackEvent('phone_call_click', { form_id: formId })
+  }
+
   async function handleSubmit(e: FormEvent) {
     e.preventDefault()
     setLoading(true)
@@ -61,6 +79,7 @@ export default function InlineLeadForm({
     try {
       const res = await submitContactLead(form)
       if (res.success) {
+        trackEvent('generate_lead', { form_id: formId, service: form.service })
         setSuccess(true)
         setForm({
           firstName: '',
@@ -88,15 +107,26 @@ export default function InlineLeadForm({
   const subtextClass = darkTheme ? 'text-white/80' : 'text-[var(--gray-600)]'
   const bgClass = darkTheme ? 'bg-black/45 border border-white/15 backdrop-blur-3xl shadow-2xl' : 'bg-white shadow-xl border border-[var(--gray-200)]'
   const labelClass = darkTheme ? 'text-white/95' : 'text-[var(--gray-700)]'
+  const optionalClass = darkTheme ? 'text-white/50' : 'text-[var(--gray-400)]'
   const inputClass = (fieldName: string) => `w-full px-4 py-2.5 border rounded bg-white text-base text-[var(--black)] placeholder-[var(--gray-400)] focus:outline-none focus:ring-2 transition-colors ${
     errors[fieldName]
       ? 'border-red-500 focus:ring-red-200 focus:border-red-500'
       : 'border-[var(--gray-300)] focus:ring-[var(--red)] focus:border-[var(--red)]'
   }`
+  // aria props shared by every input that can surface an inline error
+  const ariaProps = (fieldName: string, required = false) => ({
+    'aria-invalid': errors[fieldName] ? true : undefined,
+    'aria-describedby': errors[fieldName] ? `${formId}-${fieldName}-error` : undefined,
+    'aria-required': required || undefined,
+  })
 
   if (success) {
     return (
-      <div className={`rounded-lg p-8 text-center border-t-4 border-[var(--red)] ${bgClass}`}>
+      <div
+        role="status"
+        aria-live="polite"
+        className={`rounded-lg p-8 text-center border-t-4 border-[var(--red)] ${bgClass}`}
+      >
         <CheckCircle className="h-12 w-12 text-[var(--red)] mx-auto mb-4 animate-bounce" />
         <h3 className={`text-2xl font-bold uppercase mb-2 font-[family-name:var(--font-display)] ${textClass}`}>
           Thank You!
@@ -132,7 +162,7 @@ export default function InlineLeadForm({
 
       <form onSubmit={handleSubmit} className="relative z-10 space-y-4" noValidate>
         {error && (
-          <div className="p-3.5 bg-red-50 border-l-4 border-red-500 rounded text-red-700 text-xs font-semibold">
+          <div role="alert" className="p-3.5 bg-red-50 border-l-4 border-red-500 rounded text-red-700 text-xs font-semibold">
             {error}
           </div>
         )}
@@ -151,9 +181,10 @@ export default function InlineLeadForm({
               className={inputClass('firstName')}
               placeholder="First Name"
               autoComplete="given-name"
+              {...ariaProps('firstName', true)}
             />
             {errors.firstName && (
-              <p className="mt-0.5 text-[10px] font-semibold text-red-600">
+              <p id={`${formId}-firstName-error`} className="mt-0.5 text-[10px] font-semibold text-red-600">
                 {errors.firstName}
               </p>
             )}
@@ -171,9 +202,10 @@ export default function InlineLeadForm({
               className={inputClass('lastName')}
               placeholder="Last Name"
               autoComplete="family-name"
+              {...ariaProps('lastName', true)}
             />
             {errors.lastName && (
-              <p className="mt-0.5 text-[10px] font-semibold text-red-600">
+              <p id={`${formId}-lastName-error`} className="mt-0.5 text-[10px] font-semibold text-red-600">
                 {errors.lastName}
               </p>
             )}
@@ -194,16 +226,17 @@ export default function InlineLeadForm({
               className={inputClass('phone')}
               placeholder="(239) 332-5707"
               autoComplete="tel"
+              {...ariaProps('phone', true)}
             />
             {errors.phone && (
-              <p className="mt-0.5 text-[10px] font-semibold text-red-600">
+              <p id={`${formId}-phone-error`} className="mt-0.5 text-[10px] font-semibold text-red-600">
                 {errors.phone}
               </p>
             )}
           </div>
           <div>
             <label htmlFor={`${formId}-email`} className={`block text-xs font-semibold mb-1 uppercase tracking-wider font-[family-name:var(--font-display)] ${labelClass}`}>
-              Email <span className="text-[var(--red)]">*</span>
+              Email <span className={`normal-case font-normal tracking-normal ${optionalClass}`}>(optional)</span>
             </label>
             <input
               type="email"
@@ -214,9 +247,10 @@ export default function InlineLeadForm({
               className={inputClass('email')}
               placeholder="email@example.com"
               autoComplete="email"
+              {...ariaProps('email')}
             />
             {errors.email && (
-              <p className="mt-0.5 text-[10px] font-semibold text-red-600">
+              <p id={`${formId}-email-error`} className="mt-0.5 text-[10px] font-semibold text-red-600">
                 {errors.email}
               </p>
             )}
@@ -225,7 +259,7 @@ export default function InlineLeadForm({
 
         <div>
           <label htmlFor={`${formId}-streetAddress`} className={`block text-xs font-semibold mb-1 uppercase tracking-wider font-[family-name:var(--font-display)] ${labelClass}`}>
-            Street Address <span className="text-[var(--red)]">*</span>
+            Street Address <span className={`normal-case font-normal tracking-normal ${optionalClass}`}>(optional)</span>
           </label>
           <input
             type="text"
@@ -236,9 +270,10 @@ export default function InlineLeadForm({
             className={inputClass('streetAddress')}
             placeholder="Property Address"
             autoComplete="street-address"
+            {...ariaProps('streetAddress')}
           />
           {errors.streetAddress && (
-            <p className="mt-0.5 text-[10px] font-semibold text-red-600">
+            <p id={`${formId}-streetAddress-error`} className="mt-0.5 text-[10px] font-semibold text-red-600">
               {errors.streetAddress}
             </p>
           )}
@@ -258,16 +293,17 @@ export default function InlineLeadForm({
               className={inputClass('city')}
               placeholder="City"
               autoComplete="address-level2"
+              {...ariaProps('city', true)}
             />
             {errors.city && (
-              <p className="mt-0.5 text-[10px] font-semibold text-red-600">
+              <p id={`${formId}-city-error`} className="mt-0.5 text-[10px] font-semibold text-red-600">
                 {errors.city}
               </p>
             )}
           </div>
           <div>
             <label htmlFor={`${formId}-zip`} className={`block text-xs font-semibold mb-1 uppercase tracking-wider font-[family-name:var(--font-display)] ${labelClass}`}>
-              ZIP Code <span className="text-[var(--red)]">*</span>
+              ZIP Code <span className={`normal-case font-normal tracking-normal ${optionalClass}`}>(optional)</span>
             </label>
             <input
               type="text"
@@ -278,9 +314,11 @@ export default function InlineLeadForm({
               className={inputClass('zip')}
               placeholder="ZIP"
               autoComplete="postal-code"
+              inputMode="numeric"
+              {...ariaProps('zip')}
             />
             {errors.zip && (
-              <p className="mt-0.5 text-[10px] font-semibold text-red-600">
+              <p id={`${formId}-zip-error`} className="mt-0.5 text-[10px] font-semibold text-red-600">
                 {errors.zip}
               </p>
             )}
@@ -303,6 +341,7 @@ export default function InlineLeadForm({
                 backgroundRepeat: 'no-repeat',
                 backgroundPosition: 'right 1rem center',
               }}
+              {...ariaProps('service', true)}
             >
               <option value="">Select service...</option>
               <option value="repairs">Roof Repair</option>
@@ -312,7 +351,7 @@ export default function InlineLeadForm({
               <option value="new-roofs">New Roof</option>
             </select>
             {errors.service && (
-              <p className="mt-0.5 text-[10px] font-semibold text-red-600">
+              <p id={`${formId}-service-error`} className="mt-0.5 text-[10px] font-semibold text-red-600">
                 {errors.service}
               </p>
             )}
@@ -329,9 +368,10 @@ export default function InlineLeadForm({
               onChange={handleChange}
               className={inputClass('message')}
               placeholder="e.g. Active leak in main office ceiling"
+              {...ariaProps('message', true)}
             />
             {errors.message && (
-              <p className="mt-0.5 text-[10px] font-semibold text-red-600">
+              <p id={`${formId}-message-error`} className="mt-0.5 text-[10px] font-semibold text-red-600">
                 {errors.message}
               </p>
             )}
@@ -346,6 +386,19 @@ export default function InlineLeadForm({
           <Send className="w-4.5 h-4.5" />
           {loading ? 'Submitting Request...' : buttonText}
         </button>
+
+        {/* Emergency? Skip the form and call the 24/7 line directly. */}
+        <p className={`flex items-center justify-center gap-1.5 text-xs ${subtextClass}`}>
+          <Phone className="w-3.5 h-3.5 text-[var(--red)]" aria-hidden="true" />
+          Roof emergency?
+          <a
+            href="tel:+12393325707"
+            onClick={handlePhoneClick}
+            className="font-bold text-[var(--red)] hover:underline"
+          >
+            Call (239) 332-5707
+          </a>
+        </p>
 
         <p className="text-[10px] text-[var(--gray-400)] leading-relaxed text-center">
           By submitting, you authorize Target Roofing to text/call/email you regarding your request.

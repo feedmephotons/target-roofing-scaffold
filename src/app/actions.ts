@@ -89,25 +89,29 @@ export async function submitContactLead(formData: {
     errors.lastName = 'Last Name is required and must be at least 2 characters.'
   }
 
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-  if (!formData.email || !emailRegex.test(formData.email.trim())) {
-    errors.email = 'A valid email address is required.'
-  }
-
   const phoneRegex = /^\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}$/
   if (!formData.phone || !phoneRegex.test(formData.phone.trim())) {
     errors.phone = 'A valid phone number is required (e.g., 239-332-5707).'
   }
 
-  if (!formData.streetAddress || !formData.streetAddress.trim()) {
-    errors.streetAddress = 'Street Address is required.'
-  }
   if (!formData.city || !formData.city.trim()) {
     errors.city = 'City is required.'
   }
-  if (!formData.zip || !formData.zip.trim()) {
-    errors.zip = 'ZIP Code is required.'
+
+  // Email is optional now, but validate the format when one is provided.
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  if (formData.email && formData.email.trim() && !emailRegex.test(formData.email.trim())) {
+    errors.email = 'Please enter a valid email address.'
   }
+
+  // ZIP is optional now, but validate the format when one is provided.
+  const zipRegex = /^\d{5}(-\d{4})?$/
+  if (formData.zip && formData.zip.trim() && !zipRegex.test(formData.zip.trim())) {
+    errors.zip = 'Please enter a valid ZIP code (e.g., 33917).'
+  }
+
+  // Street address is optional now — no format validation.
+
   if (!formData.service || !formData.service.trim()) {
     errors.service = 'Service of Interest is required.'
   }

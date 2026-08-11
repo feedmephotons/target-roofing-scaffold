@@ -124,8 +124,8 @@ function TrustSignalsSection() {
               <Star className="h-6 w-6 fill-current text-[var(--red)]" />
             </div>
             <div className="text-center sm:text-left">
-              <div className="font-bold text-sm tracking-wider uppercase font-[family-name:var(--font-display)]">5-Star Rated</div>
-              <div className="text-xs text-[var(--gray-400)]">Verified Google Reviews</div>
+              <div className="font-bold text-sm tracking-wider uppercase font-[family-name:var(--font-display)]">5.0 Stars</div>
+              <div className="text-xs text-[var(--gray-400)]">34 Verified Reviews</div>
             </div>
           </div>
           <div className="flex flex-col sm:flex-row items-center gap-3">
@@ -147,7 +147,7 @@ function TrustSignalsSection() {
 /*  1. HERO                                                            */
 /* ------------------------------------------------------------------ */
 function HeroSection() {
-  const audiences = ['Property Managers', 'Contractors', 'Property Owners', 'Condos/HOAs']
+  const audiences = ['Homeowners', 'Property Managers', 'Property Owners', 'Condos/HOAs', 'Contractors']
 
   return (
     <section className="relative -mt-[7.5rem] min-h-screen lg:h-screen overflow-hidden flex items-center pt-36 pb-12 lg:pt-[7.5rem] lg:pb-0 bg-[var(--black)]">
@@ -195,13 +195,13 @@ function HeroSection() {
 
             <p className="animate-fade-in-up mb-6 text-base sm:text-lg text-white/90 leading-relaxed font-light font-[family-name:var(--font-body)]"
                style={{ animationDelay: '0.15s' }}>
-              Timely, professional repairs prevent minor leaks from turning into catastrophic failures. We specialize in extending the service life of commercial and residential roofs in Southwest Florida, transitioning seamlessly to replacement only when repairs are no longer cost-effective.
+              A small leak fixed today is a re-roof you don&apos;t pay for next year. We repair and maintain residential and commercial roofs across Southwest Florida &mdash; and when a roof truly is done, we&apos;ll show you the photos and manage the replacement ourselves.
             </p>
 
             <p className="animate-fade-in-up mb-6 text-sm sm:text-base font-semibold tracking-wide text-white/80 uppercase font-[family-name:var(--font-display)]"
               style={{ animationDelay: '0.2s' }}
             >
-              Serving Sarasota, Tampa, Fort Myers, Naples
+              Serving Fort Myers, Cape Coral, Naples &amp; Sarasota
             </p>
 
             {/* Audience pills */}
@@ -275,13 +275,13 @@ const services = [
   {
     iconSrc: '/images/icons/roof-repair.png',
     title: 'Roof Repair',
-    desc: 'Extend your roof\'s life. We resolve leaks and structural wear early to prevent costly deterioration.',
-    href: '/roofing-services#repairs',
+    desc: 'Leak tracing, storm damage, and worn flashing fixed fast — before a small problem becomes a new roof.',
+    href: '/roofing-services/roof-repair',
   },
   {
     iconSrc: '/images/icons/replacement-transition.png',
-    title: 'Replacement Transition',
-    desc: 'When repairs are no longer cost-effective, we guide you through a seamless transition to a new roof.',
+    title: 'Roof Replacement',
+    desc: 'When a repair no longer makes financial sense, we tell you straight and manage the re-roof start to finish.',
     href: '/roofing-services#reroofing',
   },
   {
@@ -310,10 +310,10 @@ function ServicesSection() {
         {/* Header */}
         <AnimateIn animation="fade-up" className="mx-auto max-w-3xl text-center mb-16">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[var(--black)] font-[family-name:var(--font-display)] uppercase mb-6">
-            Commercial Roof Repair & Lifecycle Management
+            Roof Repair for Homes &amp; Commercial Buildings
           </h2>
           <p className="text-lg text-[var(--gray-600)] leading-relaxed">
-            Maximize your roofing investment. We specialize in expert commercial roof repairs and proactive maintenance that extend your roof&apos;s lifespan. When replacement eventually becomes necessary, we leverage our deep property expertise to execute a seamless, stress-free transition.
+            We fix leaks fast and keep your roof going for years. You&apos;ll get photo reports, itemized pricing, and a straight answer on whether you need a repair or a replacement &mdash; and when it&apos;s time to replace, we plan it around your home or operations.
           </p>
         </AnimateIn>
 
@@ -599,10 +599,10 @@ function PortfolioSection() {
         {/* Header */}
         <AnimateIn animation="fade-up" className="mx-auto max-w-3xl text-center mb-16">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[var(--black)] font-[family-name:var(--font-display)] uppercase mb-6">
-            Examples of Peak Performance<br className="hidden sm:block" /> in Commercial Roofing
+            Roofs We&apos;ve Repaired &amp; Replaced<br className="hidden sm:block" /> Across Southwest Florida
           </h2>
           <p className="text-lg text-[var(--gray-600)] leading-relaxed">
-            Like these businesses, you can trust Target Roofing with your commercial roofing needs. The quality of our work shows in every project.
+            From single-leak repairs to full retrofits &mdash; see the commercial and residential roofs we&apos;ve kept watertight across SWFL.
           </p>
         </AnimateIn>
 

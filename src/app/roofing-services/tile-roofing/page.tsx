@@ -17,6 +17,8 @@ import {
 } from 'lucide-react'
 import InlineLeadForm from '@/components/InlineLeadForm'
 import AnimateIn from '@/components/AnimateIn'
+import Breadcrumbs from '@/components/Breadcrumbs'
+import { CITIES, CITY_MAP } from '@/lib/locations'
 
 export const metadata: Metadata = {
   title: 'Tile Roofing Services',
@@ -145,14 +147,29 @@ export default function TileRoofingPage() {
               'Expert tile roof repair, maintenance, and replacement in Southwest Florida. Target Roofing serves Fort Myers, Naples, Cape Coral and surrounding areas. License CCC1334168.',
             provider: {
               '@type': 'RoofingContractor',
+              '@id': 'https://targetroofers.com',
               name: 'Target Roofing',
-              url: 'https://targetroofers.com',
             },
-            areaServed: { '@type': 'State', name: 'Florida' },
-            serviceType: 'Roofing',
+            areaServed: CITIES.filter((c) => c !== 'southwest-florida').map((c) => ({
+              '@type': 'City',
+              name: CITY_MAP[c].name,
+            })),
+            serviceType: 'Tile Roofing',
           }),
         }}
       />
+      {/* ==================== BREADCRUMBS ==================== */}
+      <section className="bg-[var(--gray-50)] border-b border-[var(--gray-200)]">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-3">
+          <Breadcrumbs
+            items={[
+              { name: 'Roofing Services', href: '/roofing-services' },
+              { name: 'Tile Roofing' },
+            ]}
+          />
+        </div>
+      </section>
+
       {/* ==================== HERO ==================== */}
       <section className="relative bg-blueprint-dark text-white noise-overlay min-h-[60vh] flex items-center">
         {/* Background image */}
@@ -187,11 +204,11 @@ export default function TileRoofingPage() {
                 Schedule a Tile Roof Inspection
               </a>
               <a
-                href="tel:239-823-1483"
+                href="tel:+12393325707"
                 className="inline-flex items-center justify-center gap-2 px-8 py-3.5 border-2 border-white text-white font-bold uppercase tracking-wide rounded hover:bg-white/10 transition-colors text-sm"
               >
                 <Phone className="h-4 w-4" />
-                Call (239) 823-1483
+                Call (239) 332-5707
               </a>
             </div>
           </div>

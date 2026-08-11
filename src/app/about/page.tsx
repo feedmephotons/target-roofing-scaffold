@@ -320,7 +320,7 @@ export default function AboutPage() {
           <div className="flex justify-center mt-12">
             <Image
               src="/images/badges/gaf-master-silverstar.png"
-              alt="GAF Master Elite and Silver Star Certified"
+              alt="GAF Master Elite and CertainTeed Silver Star Certified"
               width={300}
               height={120}
               className="h-20 w-auto opacity-80 hover:opacity-100 transition-opacity"

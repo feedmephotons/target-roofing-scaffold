@@ -4,7 +4,7 @@ import { Phone, Mail, MapPin, Clock } from 'lucide-react'
 
 const footerLinks = {
   services: [
-    { name: 'Roof Repairs', href: '/roofing-services#repairs' },
+    { name: 'Roof Repairs', href: '/roofing-services/roof-repair' },
     { name: '24/7 Emergency Storm Repair', href: '/roofing-services/emergency-storm-repair' },
     { name: 'Maintenance Plans', href: '/roofing-services#maintenance-plans' },
     { name: 'Reroofing', href: '/roofing-services#reroofing' },
@@ -39,7 +39,7 @@ export default function Footer() {
             Ready to Get Started?
           </h2>
           <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
-            All property owners, property managers and condo/HOA boards need a reliable, local commercial roofing company. Turn to Target Roofing for all your roofing needs in Southwest Florida.
+            One leak or a whole re-roof, home or business &mdash; Target Roofing is the local crew Southwest Florida homeowners, property managers, and condo/HOA boards have trusted for decades. We answer 24/7.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
@@ -79,14 +79,8 @@ export default function Footer() {
               </div>
               <div className="flex items-center gap-3">
                 <Phone className="h-5 w-5 text-[var(--red)] flex-shrink-0" />
-                <a href="tel:239-332-5707" className="hover:text-white transition-colors inline-block py-3.5 px-3">
+                <a href="tel:+12393325707" className="hover:text-white transition-colors inline-block py-3.5 px-3">
                   239-332-5707 <span className="text-[var(--gray-500)]">· 24/7 Emergency</span>
-                </a>
-              </div>
-              <div className="flex items-center gap-3">
-                <Phone className="h-5 w-5 text-[var(--red)] flex-shrink-0" />
-                <a href="tel:+12398231483" className="hover:text-white transition-colors inline-block py-3.5 px-3">
-                  (239) 823-1483 <span className="text-[var(--gray-500)]">· Office</span>
                 </a>
               </div>
               <div className="flex items-center gap-3">
@@ -142,7 +136,7 @@ export default function Footer() {
             </ul>
             <Image
               src="/images/badges/gaf-master-silverstar.png"
-              alt="GAF Master Elite & Silver Star Certified"
+              alt="GAF Master Elite and CertainTeed Silver Star Certified"
               width={200}
               height={80}
               className="h-16 w-auto"

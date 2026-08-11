@@ -1,186 +1,325 @@
 import { notFound } from 'next/navigation'
-import Image from 'next/image'
-import { Star, Quote, CheckCircle, Wrench, RotateCcw, Building2, ShieldCheck, Users, Clock, HardHat } from 'lucide-react'
+import Link from 'next/link'
+import {
+  Star,
+  Quote,
+  CheckCircle,
+  Wrench,
+  RotateCcw,
+  Building2,
+  ShieldCheck,
+  Clock,
+  HardHat,
+  Phone,
+  ArrowRight,
+  MapPin,
+} from 'lucide-react'
 import InlineLeadForm from '@/components/InlineLeadForm'
+import Breadcrumbs from '@/components/Breadcrumbs'
 import { getReviews } from '@/app/actions'
 import projectsData from '@/data/projects.json'
 import RoofSchematic from '@/components/RoofSchematic'
+import {
+  CITIES,
+  SERVICES,
+  CITY_MAP,
+  SERVICE_MAP,
+  type CitySlug,
+  type ServiceSlug,
+  isCity,
+  isService,
+} from '@/lib/locations'
 
 export const dynamicParams = false
 
-const CITIES = [
-  'southwest-florida',
-  'fort-myers',
-  'cape-coral',
-  'bonita-springs',
-  'sanibel',
-  'naples',
-  'punta-gorda',
-  'port-charlotte',
-  'sarasota',
-  'arcadia'
-]
+const PHONE_DISPLAY = '239-332-5707'
+const PHONE_HREF = 'tel:+12393325707'
 
-const SERVICES = [
-  'roof-repair',
-  'roof-replacement',
-  'commercial-roofing'
-]
+/**
+ * Curated geographic adjacency for the "nearby cities" internal-link block.
+ * Keeps the interlinking locally sensible instead of alphabetical.
+ */
+const NEARBY: Record<CitySlug, CitySlug[]> = {
+  'southwest-florida': ['fort-myers', 'cape-coral', 'naples', 'punta-gorda', 'sarasota'],
+  'fort-myers': ['cape-coral', 'bonita-springs', 'sanibel', 'naples', 'punta-gorda'],
+  'cape-coral': ['fort-myers', 'bonita-springs', 'sanibel', 'punta-gorda', 'port-charlotte'],
+  'bonita-springs': ['naples', 'fort-myers', 'cape-coral', 'sanibel'],
+  'sanibel': ['fort-myers', 'cape-coral', 'bonita-springs', 'naples'],
+  'naples': ['bonita-springs', 'fort-myers', 'cape-coral', 'sanibel'],
+  'punta-gorda': ['port-charlotte', 'arcadia', 'sarasota', 'fort-myers', 'cape-coral'],
+  'port-charlotte': ['punta-gorda', 'arcadia', 'sarasota', 'cape-coral', 'fort-myers'],
+  'sarasota': ['port-charlotte', 'punta-gorda', 'arcadia', 'fort-myers', 'cape-coral'],
+  'arcadia': ['port-charlotte', 'punta-gorda', 'sarasota', 'fort-myers'],
+}
 
-const CITY_MAP: Record<string, { name: string; county: string; reg: string; zipRange: string }> = {
+interface CityContent {
+  description: string
+  highlights: string[]
+  /** Repair-specific, locally concrete detail: named storms, neighborhoods, failure modes. */
+  repairDetail: string
+}
+
+const CITY_CONTENT: Record<CitySlug, CityContent> = {
   'southwest-florida': {
-    name: 'Southwest Florida',
-    county: 'Lee, Collier, Charlotte, Sarasota, and DeSoto counties',
-    reg: 'Florida Building Code (FBC) regulations and High Velocity Hurricane Zone (HVHZ) requirements',
-    zipRange: '33901 - 34293'
+    description:
+      'Southwest Florida stretches from Sarasota to Naples, encompassing some of the most hurricane-vulnerable coastline in the United States. With a subtropical climate that delivers intense UV radiation, heavy seasonal rains, and the ever-present threat of tropical storms, roofing systems across the region must be built to withstand extreme conditions year-round.',
+    highlights: [
+      'Multi-county service area covering Lee, Collier, Charlotte, Sarasota, and DeSoto counties',
+      'Region heavily impacted by Hurricane Ian (2022) and Hurricane Charley (2004)',
+      'Subtropical climate with extreme UV, humidity, and wind exposure',
+    ],
+    repairDetail:
+      'From the barrier islands to the inland ag belt, our crews trace leaks on every roof type in the region: concrete and clay tile, asphalt shingle, standing-seam metal, and low-slope commercial membrane. After Hurricane Ian in 2022, and Hurricane Charley before it in 2004, we have repaired everything from wind-lifted tile and torn underlayment to failed pipe-boot flashing and ponding water on flat commercial roofs.',
   },
   'fort-myers': {
-    name: 'Fort Myers',
-    county: 'Lee County',
-    reg: 'City of Fort Myers and Lee County building department standards, ensuring compliance with local permitting rules',
-    zipRange: '33901, 33905, 33907, 33908, 33912, 33913, 33916, 33919, 33966'
+    description:
+      'As the county seat of Lee County, Fort Myers faces unique roofing challenges from hurricane exposure, heavy summer rains, and salt air. From downtown commercial buildings to Cape Coral-adjacent neighborhoods, Target Roofing has been the trusted local contractor for decades.',
+    highlights: [
+      'Hurricane-prone coastal area',
+      'Mix of residential and commercial properties',
+      'Historic downtown district with preservation needs',
+    ],
+    repairDetail:
+      'Fort Myers took a direct hit from Hurricane Ian in 2022, and we have been repairing its aftermath ever since. The most common calls we get here are wind-lifted shingles in San Carlos Park, cracked barrel tile along McGregor Boulevard, failed pipe-boot and valley flashing, and ponding water on the flat commercial roofs of the downtown River District. Our technicians trace each leak to its true source across ZIP codes 33901 to 33966 before a single repair begins.',
   },
   'cape-coral': {
-    name: 'Cape Coral',
-    county: 'Lee County',
-    reg: 'City of Cape Coral structural engineering codes, wind-load guidelines, and local permit regulations',
-    zipRange: '33904, 33909, 33914, 33990, 33991, 33993'
+    description:
+      'Cape Coral, known as the Waterfront Wonderland with over 400 miles of canals, presents unique roofing considerations. The salt water environment accelerates roof wear, making regular maintenance and quality materials essential for long-lasting protection.',
+    highlights: [
+      'Canal city with high salt exposure',
+      'Rapidly growing residential community',
+      'Newer construction with modern building codes',
+    ],
+    repairDetail:
+      'With more than 400 miles of saltwater canals, Cape Coral roofs corrode from the fasteners up. The leaks we chase most here are rusted-through nail heads, dried and cracked sealant at penetrations, salt-driven corrosion on metal roofs, and slipped tile after summer squall lines. Hurricane Ian punished exposed roofs across the SW and SE Cape in 2022. We work every corner of the city, from Pelican to Palmetto-Pine, across ZIP codes 33904 through 33993.',
   },
   'bonita-springs': {
-    name: 'Bonita Springs',
-    county: 'Lee County',
-    reg: 'City of Bonita Springs building division rules, focusing on wind mitigation and structural elevation guidelines',
-    zipRange: '34134, 34135'
+    description:
+      'Bonita Springs sits between Fort Myers and Naples, combining coastal living with inland communities. Flood-prone areas and proximity to the Gulf make waterproof, wind-rated roofing systems essential for property protection.',
+    highlights: [
+      'Coastal and flood-prone areas',
+      'Mix of condos and single-family homes',
+      'Active retirement community',
+    ],
+    repairDetail:
+      'Wedged between Fort Myers and Naples, Bonita Springs mixes low-slope condo roofs with tile-roofed single-family homes. The repairs we see most are ponding water and split seams on flat condo roofs near the Imperial River, wind-lifted tile in Pelican Landing and Spanish Wells, and flashing failures exposed by Hurricane Ian storm surge in 2022. Our crews cover the 34134 and 34135 ZIP codes from Bonita Beach inland.',
   },
   'sanibel': {
-    name: 'Sanibel',
-    county: 'Lee County',
-    reg: 'Sanibel Island coastal construction code and environmental protection guidelines, built for wind resistance in coastal zones',
-    zipRange: '33957'
+    description:
+      'Sanibel Island was devastated by Hurricane Ian in September 2022, with the storm destroying the causeway and damaging the vast majority of structures on the island. The ongoing rebuilding effort demands roofing contractors who understand coastal construction codes, wind-rated systems, and the unique environmental protections that govern barrier island development.',
+    highlights: [
+      'Barrier island with maximum hurricane exposure',
+      'Ongoing Hurricane Ian rebuilding efforts',
+      'Strict environmental and coastal construction codes',
+    ],
+    repairDetail:
+      'Hurricane Ian tore across Sanibel in September 2022 and severed the causeway, leaving nearly every roof on the island compromised. As the barrier community rebuilds, the repairs we handle here center on salt-driven corrosion, wind-uplift damage on fully exposed roofs, and failed underlayment beneath tile and metal. Every fix in ZIP 33957 is built to the island coastal construction code for maximum wind resistance.',
   },
   'naples': {
-    name: 'Naples',
-    county: 'Collier County',
-    reg: 'City of Naples and Collier County high wind load specifications, meeting strict structural wind resistance requirements',
-    zipRange: '34102, 34103, 34104, 34105, 34108, 34109, 34110, 34112, 34119'
+    description:
+      "Naples and its surrounding communities feature some of Southwest Florida's most prestigious properties. From luxury estates in Port Royal to commercial centers along US-41, property owners demand the highest quality roofing craftsmanship and materials.",
+    highlights: [
+      'High-end residential properties',
+      'Premium materials and finishes expected',
+      'Strict HOA and community standards',
+    ],
+    repairDetail:
+      'Naples estates run to intricate tile and metal roofs where a single cracked barrel tile or failed valley can stain a coffered ceiling below. Our repair calls in Port Royal, Old Naples, Aqualane Shores, and Pelican Bay most often involve cracked and slipped tile, leaking skylight and chimney flashing, and hairline valley leaks. Hurricane Ian tested the whole coastline in 2022. We match materials and finishes exactly across ZIP codes 34102 through 34119.',
   },
   'punta-gorda': {
-    name: 'Punta Gorda',
-    county: 'Charlotte County',
-    reg: 'City of Punta Gorda structural codes and wind-mitigation guidelines for coastal Charlotte Harbor projects',
-    zipRange: '33950, 33982'
+    description:
+      'Punta Gorda was devastated by Hurricane Charley in 2004 and hit hard again by Hurricane Ian in 2022. The community understands the critical importance of hurricane-rated roofing. Target Roofing has been a trusted partner in the ongoing rebuilding and strengthening of this resilient city.',
+    highlights: [
+      'Hurricane Charley and Ian recovery',
+      'Strong community resilience',
+      'High demand for hurricane-rated roofing',
+    ],
+    repairDetail:
+      'Few places know roof damage like Punta Gorda: Hurricane Charley leveled it in 2004, and Hurricane Ian struck again in 2022. Along the Charlotte Harbor waterfront and through Punta Gorda Isles and Burnt Store, the failures we repair most are wind-lifted metal panels, cracked tile, and flashing driven loose by wind and salt. Our crews trace and stop leaks across ZIP codes 33950 and 33982.',
   },
   'port-charlotte': {
-    name: 'Port Charlotte',
-    county: 'Charlotte County',
-    reg: 'Charlotte County building department codes and local structural requirements for high wind speeds',
-    zipRange: '33948, 33952, 33953, 33954, 33980, 33981'
+    description:
+      'Port Charlotte is the largest unincorporated community in Charlotte County, home to a diverse mix of residential neighborhoods and growing commercial areas. Direct hits from Hurricane Charley and Hurricane Ian demonstrated the critical need for properly engineered roofing systems built to withstand extreme wind events.',
+    highlights: [
+      'Largest community in Charlotte County',
+      'Direct hurricane impact history',
+      'Growing commercial and residential development',
+    ],
+    repairDetail:
+      'Port Charlotte took direct hits from both Hurricane Charley in 2004 and Hurricane Ian in 2022. Across Deep Creek, Murdock, and El Jobean, the leaks we chase most are blown-off shingle courses, water intrusion at soffit and fascia, and ponding on aging low-slope roofs. Our technicians pinpoint the entry point before repairing, working every ZIP from 33948 to 33981.',
   },
   'sarasota': {
-    name: 'Sarasota',
-    county: 'Sarasota County',
-    reg: 'City of Sarasota and Sarasota County building standards, enforcing high wind load design protocols',
-    zipRange: '34231, 34232, 34233, 34234, 34236, 34237, 34238, 34239, 34240, 34241'
+    description:
+      "Sarasota's blend of historic architecture and modern development creates diverse roofing needs. From the cultural district's commercial properties to barrier island residences on Siesta Key and Longboat Key, each project requires specialized expertise.",
+    highlights: [
+      'Historic and modern architecture mix',
+      'Barrier island coastal exposure',
+      'Active arts and commercial district',
+    ],
+    repairDetail:
+      'Sarasota spans historic downtown blocks and barrier-island homes on Siesta Key and Longboat Key. The repairs we handle most here are slipped and cracked tile on island properties, split membrane seams on flat downtown commercial roofs, and skylight leaks in Gulf Gate. Our crews trace each leak precisely across ZIP codes 34231 through 34241.',
   },
   'arcadia': {
-    name: 'Arcadia',
-    county: 'DeSoto County',
-    reg: 'DeSoto County building codes and inland wind load guidelines for agricultural and residential properties',
-    zipRange: '34266, 34269'
+    description:
+      'Arcadia, the seat of DeSoto County, is an inland community with a distinctive mix of historic Florida architecture, agricultural properties, and rural residential homes. While further from the coast, Arcadia still faces significant wind damage from hurricanes and tropical storms that maintain strength as they move inland.',
+    highlights: [
+      'Inland community with rural and agricultural properties',
+      'Historic Florida architecture',
+      'Significant inland wind exposure from tropical storms',
+    ],
+    repairDetail:
+      'Arcadia sits inland in DeSoto County, but storms like Hurricane Charley in 2004 and Hurricane Ian in 2022 still arrived with damaging wind. On the metal roofs common to its barns, homes, and historic downtown, our most frequent repairs are backed-out panel fasteners, leaking ridge caps, and wind-torn edges. We serve ZIP codes 34266 and 34269 with same-week dispatch across the rural county.',
+  },
+}
+
+interface ServiceCopy {
+  /** Service-first, keyword-bearing opening line for the hero. */
+  heroLead: string
+  /** Distinct section H2 for the localized-details block. */
+  h2: string
+  /** Distinct body paragraph. */
+  body: string
+}
+
+function getServiceCopy(service: ServiceSlug, cityName: string, county: string, reg: string, repairDetail: string): ServiceCopy {
+  if (service === 'roof-repair') {
+    return {
+      heroLead: `Fast, professional roof repair in ${cityName}, FL — leak tracing, storm-damage response, and 24/7 emergency dispatch.`,
+      h2: `Roof Leak & Storm Damage Repair in ${cityName}`,
+      body: `${repairDetail} We do not caulk over a problem and hope it holds. Our repair crews find the true source of the leak, stop the water, and protect the decking and structure underneath so a small fix does not become a full re-roof. For active leaks we run 24/7 emergency dispatch with same-week service across most of ${county}, and every repair meets or exceeds ${reg} for wind resistance.`,
+    }
+  }
+  if (service === 'roof-replacement') {
+    return {
+      heroLead: `Full roof replacement in ${cityName}, FL — tear-off, dry-in, and hurricane-rated re-roofs built to outlast the next storm season.`,
+      h2: `When It Is Time to Replace Your Roof in ${cityName}`,
+      body: `When leaks are widespread, the underlayment has failed, or a roof is simply at the end of its service life, a targeted repair only buys a little time. A full roof replacement in ${cityName}, FL starts with a complete tear-off down to the decking, so we can replace any rotted sheathing, install a secondary water barrier, and re-fasten to current uplift standards. Every re-roof is fully permitted and built to meet or exceed ${reg}, using architectural shingle, tile, or standing-seam metal rated for Southwest Florida wind and sun, and backed by GAF Master Elite manufacturer warranties.`,
+    }
+  }
+  return {
+    heroLead: `Commercial roofing in ${cityName}, FL — TPO, PVC, and built-up systems for flat and low-slope buildings, installed with minimal disruption.`,
+    h2: `Commercial & Flat-Roof Systems in ${cityName}`,
+    body: `Flat and low-slope commercial roofs across ${cityName} live and die by their seams, flashings, and drainage. Ponding water, split laps, and failed edge metal are the leaks we chase most for property managers and boards here. Target Roofing installs and services TPO, PVC, and built-up (BUR) membranes, metal systems, and reflective coatings, plus scheduled maintenance plans that catch small problems before they reach the tenants below. We work directly with property managers, condo and HOA associations, and business owners across ${county}, phasing the work to keep your building operational and every installation compliant with ${reg}.`,
   }
 }
 
-const SERVICE_MAP: Record<string, { title: string; defaultService: string }> = {
-  'roof-repair': {
-    title: 'Roof Repair',
-    defaultService: 'repairs'
-  },
-  'roof-replacement': {
-    title: 'Roof Replacement',
-    defaultService: 'reroofing'
-  },
-  'commercial-roofing': {
-    title: 'Commercial Roofing',
-    defaultService: 'new-roofs'
-  }
+interface Faq {
+  q: string
+  a: string
 }
 
-const CITY_CONTENT: Record<string, { description: string; highlights: string[] }> = {
-  'southwest-florida': {
-    description: 'Southwest Florida stretches from Sarasota to Naples, encompassing some of the most hurricane-vulnerable coastline in the United States. With a subtropical climate that delivers intense UV radiation, heavy seasonal rains, and the ever-present threat of tropical storms, roofing systems across the region must be built to withstand extreme conditions year-round.',
-    highlights: ['Multi-county service area covering Lee, Collier, Charlotte, Sarasota, and DeSoto counties', 'Region heavily impacted by Hurricane Ian (2022) and Hurricane Charley (2004)', 'Subtropical climate with extreme UV, humidity, and wind exposure']
-  },
-  'fort-myers': {
-    description: 'As the county seat of Lee County, Fort Myers faces unique roofing challenges from hurricane exposure, heavy summer rains, and salt air. From downtown commercial buildings to Cape Coral-adjacent neighborhoods, Target Roofing has been the trusted local contractor for decades.',
-    highlights: ['Hurricane-prone coastal area', 'Mix of residential and commercial properties', 'Historic downtown district with preservation needs']
-  },
-  'cape-coral': {
-    description: 'Cape Coral, known as the Waterfront Wonderland with over 400 miles of canals, presents unique roofing considerations. The salt water environment accelerates roof wear, making regular maintenance and quality materials essential for long-lasting protection.',
-    highlights: ['Canal city with high salt exposure', 'Rapidly growing residential community', 'Newer construction with modern building codes']
-  },
-  'bonita-springs': {
-    description: 'Bonita Springs sits between Fort Myers and Naples, combining coastal living with inland communities. Flood-prone areas and proximity to the Gulf make waterproof, wind-rated roofing systems essential for property protection.',
-    highlights: ['Coastal and flood-prone areas', 'Mix of condos and single-family homes', 'Active retirement community']
-  },
-  'sanibel': {
-    description: 'Sanibel Island was devastated by Hurricane Ian in September 2022, with the storm destroying the causeway and damaging the vast majority of structures on the island. The ongoing rebuilding effort demands roofing contractors who understand coastal construction codes, wind-rated systems, and the unique environmental protections that govern barrier island development.',
-    highlights: ['Barrier island with maximum hurricane exposure', 'Ongoing Hurricane Ian rebuilding efforts', 'Strict environmental and coastal construction codes']
-  },
-  'naples': {
-    description: 'Naples and its surrounding communities feature some of Southwest Florida\'s most prestigious properties. From luxury estates in Port Royal to commercial centers along US-41, property owners demand the highest quality roofing craftsmanship and materials.',
-    highlights: ['High-end residential properties', 'Premium materials and finishes expected', 'Strict HOA and community standards']
-  },
-  'punta-gorda': {
-    description: 'Punta Gorda was devastated by Hurricane Charley in 2004 and hit hard again by Hurricane Ian in 2022. The community understands the critical importance of hurricane-rated roofing. Target Roofing has been a trusted partner in the ongoing rebuilding and strengthening of this resilient city.',
-    highlights: ['Hurricane Charley and Ian recovery', 'Strong community resilience', 'High demand for hurricane-rated roofing']
-  },
-  'port-charlotte': {
-    description: 'Port Charlotte is the largest unincorporated community in Charlotte County, home to a diverse mix of residential neighborhoods and growing commercial areas. Direct hits from Hurricane Charley and Hurricane Ian demonstrated the critical need for properly engineered roofing systems built to withstand extreme wind events.',
-    highlights: ['Largest community in Charlotte County', 'Direct hurricane impact history', 'Growing commercial and residential development']
-  },
-  'sarasota': {
-    description: 'Sarasota\'s blend of historic architecture and modern development creates diverse roofing needs. From the cultural district\'s commercial properties to barrier island residences on Siesta Key and Longboat Key, each project requires specialized expertise.',
-    highlights: ['Historic and modern architecture mix', 'Barrier island coastal exposure', 'Active arts and commercial district']
-  },
-  'arcadia': {
-    description: 'Arcadia, the seat of DeSoto County, is an inland community with a distinctive mix of historic Florida architecture, agricultural properties, and rural residential homes. While further from the coast, Arcadia still faces significant wind damage from hurricanes and tropical storms that maintain strength as they move inland.',
-    highlights: ['Inland community with rural and agricultural properties', 'Historic Florida architecture', 'Significant inland wind exposure from tropical storms']
+function getServiceFaqs(service: ServiceSlug, cityName: string, county: string, reg: string): Faq[] {
+  if (service === 'roof-repair') {
+    return [
+      {
+        q: `How much does roof repair cost in ${cityName}, FL?`,
+        a: `Repair cost depends on the extent of the damage, your roof type (tile, shingle, metal, or flat membrane), how accessible the roof is, and whether the decking or underlayment is also affected. Minor leak repairs are often a few hundred dollars, while larger storm or structural repairs cost more. We give you a written, itemized estimate after a free survey, with no guesswork.`,
+      },
+      {
+        q: `How fast can you respond to a roof leak in ${cityName}?`,
+        a: `For active leaks we offer 24/7 emergency dispatch and same-week service across most of ${county}. Call ${PHONE_DISPLAY} and we will get a technician on your roof to stop the water fast, then follow up with a permanent repair.`,
+      },
+      {
+        q: `Will my homeowner's insurance cover the roof repair?`,
+        a: `Storm and wind damage is frequently covered by your homeowner's policy. We document the damage with photos, provide a detailed repair scope, and work directly with your adjuster so your claim reflects the true cost of a proper repair.`,
+      },
+      {
+        q: `Should I repair or replace my roof?`,
+        a: `If the damage is localized and your roof still has years of service life left, a targeted repair is the smart, cost-effective choice. If leaks are widespread, the underlayment has failed, or the roof is near the end of its life, replacement usually costs less over time. Our free survey tells you honestly which one you actually need.`,
+      },
+      {
+        q: `Do your roof repairs come with a warranty?`,
+        a: `Yes. Our workmanship is warrantied, and as a GAF Master Elite contractor, in the top 2% of U.S. roofers, we can back qualifying repairs and replacements with manufacturer warranties that most roofers cannot offer.`,
+      },
+      {
+        q: `Can you repair tile, metal, and flat roofs in ${cityName}?`,
+        a: `Yes. Our crews repair every common Southwest Florida roof system: concrete and clay tile, asphalt shingle, standing-seam and screw-down metal, and low-slope TPO, PVC, and built-up membranes.`,
+      },
+    ]
   }
+  if (service === 'roof-replacement') {
+    return [
+      {
+        q: `How long does a roof replacement take in ${cityName}, FL?`,
+        a: `Most residential re-roofs are completed in a few days, weather permitting, while larger or tile roofs take longer. We give you a firm schedule up front and keep the job site clean every single day.`,
+      },
+      {
+        q: `How much does a new roof cost in ${cityName}?`,
+        a: `Cost depends on the roof's size and pitch, the material you choose (shingle, tile, or metal), and the condition of the decking underneath. After a free survey we provide a written, itemized estimate with clear material and warranty options.`,
+      },
+      {
+        q: `Will my new roof meet Florida hurricane codes?`,
+        a: `Yes. Every re-roof is fully permitted and built to meet or exceed ${reg}, including a secondary water barrier and wind-rated fastening for uplift resistance.`,
+      },
+      {
+        q: `Can I get a new roof through an insurance claim?`,
+        a: `If your roof was damaged by a covered storm, a full replacement may be covered. We document the damage thoroughly and work directly with your adjuster to support your claim.`,
+      },
+      {
+        q: `What roofing materials do you install?`,
+        a: `We install architectural asphalt shingles, concrete and clay tile, and standing-seam metal, plus flat-roof membranes, all rated for Southwest Florida's wind and sun.`,
+      },
+      {
+        q: `Do you offer a warranty on new roofs?`,
+        a: `Yes. As a GAF Master Elite contractor, in the top 2% of U.S. roofers, we offer manufacturer system warranties on qualifying roofs, backed by our own workmanship guarantee.`,
+      },
+    ]
+  }
+  return [
+    {
+      q: `What commercial roofing systems do you install in ${cityName}, FL?`,
+      a: `We install and service TPO, PVC, and built-up (BUR) membranes, metal roof systems, and reflective roof coatings for flat and low-slope commercial buildings.`,
+    },
+    {
+      q: `Can you re-roof our building without disrupting operations?`,
+      a: `Yes. We schedule around your business hours, phase the work to keep areas of the building operational, and keep the site clean and secure from start to finish.`,
+    },
+    {
+      q: `Do you offer commercial roof maintenance plans?`,
+      a: `Yes. Scheduled inspections and preventative maintenance catch ponding water, seam failures, and flashing issues before they become costly leaks, and they extend the usable life of your roof.`,
+    },
+    {
+      q: `How do you handle commercial roof leaks and emergencies?`,
+      a: `Our 24/7 dispatch responds quickly to commercial leaks. We trace the source, make the building watertight, and provide a documented repair scope for your records. Call ${PHONE_DISPLAY} any time.`,
+    },
+    {
+      q: `Do you work with property managers and condo associations?`,
+      a: `Yes. We work directly with property managers, condo and HOA boards, and business owners across ${county}, delivering projects on time and on budget with clear documentation.`,
+    },
+    {
+      q: `Are your commercial roofs code-compliant and warrantied?`,
+      a: `All of our installations comply with ${reg} and are backed by both manufacturer and workmanship warranties.`,
+    },
+  ]
 }
 
-function getLocalizedContent(city: string, service: string) {
+function getLocalizedContent(city: CitySlug, service: ServiceSlug) {
   const cityData = CITY_MAP[city]
   const serviceData = SERVICE_MAP[service]
-  if (!cityData || !serviceData) return null
 
   const cityName = cityData.name
   const serviceTitle = serviceData.title
   const county = cityData.county
   const regulations = cityData.reg
-
-  let text = ''
-  if (service === 'roof-repair') {
-    text = `Roofs in ${cityName}, FL face continuous weathering from Southwest Florida's severe environmental conditions. High humidity, intense heat, and constant UV exposure degrade roof materials over time, while major weather events like Hurricane Ian and Hurricane Charley have historically tested the limits of local structures. When leaks or damage occur, our professional roof repair services in ${cityName} provide an immediate, reliable solution. We service properties throughout ${county}, strictly adhering to ${regulations} to ensure all repairs provide superior wind resistance and structural durability. Our repair teams focus on identifying the source of leaks, preventing internal water damage, and extending the overall lifespan of your existing roof system.`
-  } else if (service === 'roof-replacement') {
-    text = `When repair is no longer a viable option, a full roof replacement is necessary to protect your property investment. Years of exposure to intense Florida heat, high humidity, and UV rays can break down even the most durable roofing systems, leaving them vulnerable to severe storms. In ${cityName}, FL, having a roof engineered for maximum wind resistance is essential, especially given the history of powerful storms like Hurricane Ian and Hurricane Charley. Target Roofing specializes in comprehensive roof replacement services throughout ${county}. Every reroofing project we undertake is fully permitted and built to meet or exceed ${regulations}, utilizing top-tier materials and our dedicated crew to ensure a secure, storm-ready installation that will protect your property for decades to come.`
-  } else {
-    text = `Commercial properties in ${cityName}, FL require specialized roofing solutions that can handle the unique challenges of the Florida climate. The combination of intense heat, high humidity, constant UV exposure, and potential wind speeds from hurricanes like Ian or Charley means that commercial roofs must be built to the highest standards. Target Roofing is a trusted commercial roofing partner in ${county}. We provide expert services including new roof installations, preventative maintenance plans, and rapid-response repairs. All of our commercial roof installations comply with ${regulations}, offering exceptional wind resistance and energy efficiency. We work closely with property managers, condo associations, and business owners in ${cityName} to deliver projects on time and on budget with minimal disruption.`
-  }
-
   const cityContent = CITY_CONTENT[city]
+
+  const copy = getServiceCopy(service, cityName, county, regulations, cityContent.repairDetail)
 
   return {
     heading: `${serviceTitle} in ${cityName}, FL`,
-    description: text,
-    cityDescription: cityContent?.description || '',
-    highlights: cityContent?.highlights || [],
+    heroLead: copy.heroLead,
+    h2: copy.h2,
+    description: copy.body,
+    cityDescription: cityContent.description,
+    highlights: cityContent.highlights,
     county,
-    regulations
+    regulations,
+    faqs: getServiceFaqs(service, cityName, county, regulations),
   }
 }
 
 export function generateStaticParams() {
-  const paramsList = []
+  const paramsList: { city: CitySlug; service: ServiceSlug }[] = []
   for (const city of CITIES) {
     for (const service of SERVICES) {
       paramsList.push({ city, service })
@@ -196,50 +335,84 @@ interface PageProps {
   }>
 }
 
+function metaDescriptionFor(service: ServiceSlug, cityTitle: string): string {
+  if (service === 'roof-repair') {
+    return `Roof repair in ${cityTitle}, FL. Fast leak tracing, storm-damage & 24/7 emergency dispatch from Target Roofing. Free surveys. Call ${PHONE_DISPLAY}.`
+  }
+  if (service === 'roof-replacement') {
+    return `Roof replacement in ${cityTitle}, FL. Hurricane-rated re-roofs, full tear-off & free surveys from Target Roofing, GAF Master Elite. Call ${PHONE_DISPLAY}.`
+  }
+  return `Commercial roofing in ${cityTitle}, FL. TPO, PVC & flat-roof repair, re-roofs & maintenance from Target Roofing. Free surveys. Call ${PHONE_DISPLAY}.`
+}
+
 export async function generateMetadata({ params }: PageProps) {
   const { city, service } = await params
-  if (!CITIES.includes(city) || !SERVICES.includes(service)) {
+  if (!isCity(city) || !isService(service)) {
     return {}
   }
-  
+
   const cityData = CITY_MAP[city]
   const serviceData = SERVICE_MAP[service]
   const cityTitle = cityData.name
   const serviceTitle = serviceData.title
 
-  const cityContent = CITY_CONTENT[city]
-  const metaDescription = cityContent
-    ? `${cityContent.description.split('.').slice(0, 2).join('.')}. Target Roofing provides professional ${serviceTitle.toLowerCase()} in ${cityTitle}, FL.`
-    : `Looking for professional ${serviceTitle.toLowerCase()} in ${cityTitle}, FL? Target Roofing serves ${cityData.county} with storm-ready solutions built for extreme wind resistance.`
+  const canonical = `https://targetroofers.com/locations/${city}/${service}`
+  const metaDescription = metaDescriptionFor(service, cityTitle)
+  const ogTitle = `${serviceTitle} in ${cityTitle}, FL | Target Roofing`
 
   return {
-    title: `${serviceTitle} in ${cityTitle}, FL | Target Roofing`,
+    // Root layout appends "| Target Roofing" to the page title template.
+    title: `${serviceTitle} in ${cityTitle}, FL`,
     description: metaDescription,
+    alternates: {
+      canonical,
+    },
     keywords: [
       `${serviceTitle.toLowerCase()} ${cityTitle}`,
+      `${serviceTitle.toLowerCase()} in ${cityTitle} FL`,
       `${cityTitle} roofing`,
       `roofing contractor ${cityTitle}`,
       `Target Roofing`,
-      `Florida roofing`,
       `${cityData.county} roofing`,
-    ]
+    ],
+    openGraph: {
+      title: ogTitle,
+      description: metaDescription,
+      url: canonical,
+      siteName: 'Target Roofing',
+      locale: 'en_US',
+      type: 'website',
+      images: [
+        {
+          url: 'https://targetroofers.com/og-image.jpg',
+          width: 1200,
+          height: 630,
+          alt: `${serviceTitle} in ${cityTitle}, FL by Target Roofing`,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: ogTitle,
+      description: metaDescription,
+      images: ['https://targetroofers.com/og-image.jpg'],
+    },
   }
 }
 
 export default async function LocationPage({ params }: PageProps) {
   const { city, service } = await params
 
-  if (!CITIES.includes(city) || !SERVICES.includes(service)) {
+  if (!isCity(city) || !isService(service)) {
     notFound()
   }
 
-  const cityData = CITY_MAP[city]
-  const serviceData = SERVICE_MAP[service]
-  const content = getLocalizedContent(city, service)
+  const citySlug = city as CitySlug
+  const serviceSlug = service as ServiceSlug
 
-  if (!cityData || !serviceData || !content) {
-    notFound()
-  }
+  const cityData = CITY_MAP[citySlug]
+  const serviceData = SERVICE_MAP[serviceSlug]
+  const content = getLocalizedContent(citySlug, serviceSlug)
 
   const reviewsData = await getReviews()
 
@@ -269,7 +442,7 @@ export default async function LocationPage({ params }: PageProps) {
     return name.includes(cleanCity)
   })
 
-  // Fallback to general list of projects matching the service category if fewer than 4 are found
+  // Fallback to a service-appropriate list of projects if fewer than 4 local ones are found.
   let displayProjects = localProjects
   let isFallbackProjects = false
   if (localProjects.length < 4) {
@@ -280,7 +453,8 @@ export default async function LocationPage({ params }: PageProps) {
     } else if (service === 'roof-replacement') {
       serviceCategories = ['Condos/HOA', 'Country Clubs', 'RV Parks', 'Churches']
     } else {
-      serviceCategories = ['Office', 'Retail', 'Condos/HOA', 'Government', 'Healthcare']
+      // Roof repair leans residential / community rather than commercial.
+      serviceCategories = ['Condos/HOA', 'Country Clubs', 'RV Parks', 'Churches', 'Schools']
     }
 
     const categoryMatchedProjects = projectsData.filter((project) =>
@@ -296,26 +470,38 @@ export default async function LocationPage({ params }: PageProps) {
     ServiceIcon = Building2
   }
 
+  const isRepair = service === 'roof-repair'
+
+  // Sibling services within the SAME city (repair <-> replacement <-> commercial).
+  const siblingServices = SERVICES.filter((s) => s !== service)
+  // Nearby cities for the SAME service.
+  const nearbyCities = NEARBY[citySlug]
+  // Cross-sell target: repair pages push replacement; everything else pushes repair
+  // (keeps the href aligned with the label rendered below).
+  const crossSellService: ServiceSlug = isRepair ? 'roof-replacement' : 'roof-repair'
+
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
     name: 'Target Roofing',
-    description: `Professional ${serviceData.title.toLowerCase()} services in ${cityData.name}, FL. ${content.cityDescription}`,
+    description: `Professional ${serviceData.title.toLowerCase()} in ${cityData.name}, FL from Target Roofing, serving ${cityData.county}.`,
     url: `https://targetroofers.com/locations/${city}/${service}`,
-    telephone: '(239) 823-1483',
+    telephone: '+1-239-332-5707',
     address: {
       '@type': 'PostalAddress',
-      addressLocality: cityData.name,
+      streetAddress: '7011 Nalle Grade Rd',
+      addressLocality: 'North Fort Myers',
       addressRegion: 'FL',
-      addressCountry: 'US'
+      postalCode: '33917',
+      addressCountry: 'US',
     },
     areaServed: {
       '@type': 'City',
       name: cityData.name,
       containedInPlace: {
         '@type': 'AdministrativeArea',
-        name: cityData.county
-      }
+        name: cityData.county,
+      },
     },
     hasOfferCatalog: {
       '@type': 'OfferCatalog',
@@ -324,13 +510,30 @@ export default async function LocationPage({ params }: PageProps) {
         '@type': 'Offer',
         itemOffered: {
           '@type': 'Service',
-          name: `${serviceData.title} in ${cityData.name}, FL`
-        }
-      }]
+          name: `${serviceData.title} in ${cityData.name}, FL`,
+        },
+      }],
+    },
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: '5.0',
+      reviewCount: '34',
     },
     priceRange: '$$',
     image: 'https://targetroofers.com/og-image.jpg',
-    sameAs: ['https://www.facebook.com/targetroofing', 'https://www.google.com/maps/place/Target+Roofing']
+  }
+
+  const faqJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: content.faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: f.a,
+      },
+    })),
   }
 
   return (
@@ -338,6 +541,10 @@ export default async function LocationPage({ params }: PageProps) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
 
       {/* Hero Section */}
@@ -349,6 +556,15 @@ export default async function LocationPage({ params }: PageProps) {
         </div>
 
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <Breadcrumbs
+            items={[
+              { name: 'Locations', href: '/locations' },
+              { name: cityData.name, href: `/locations/${city}` },
+              { name: serviceData.title },
+            ]}
+            className="mb-8 [&_*]:text-white/75 [&_a:hover]:text-[var(--red)]"
+          />
+
           <div className="max-w-3xl">
             <div className="flex items-center gap-3 mb-6">
               <div className="h-px w-12 bg-[var(--red)]" />
@@ -362,11 +578,37 @@ export default async function LocationPage({ params }: PageProps) {
               <span className="text-[var(--red)]">{cityData.name}, FL</span>
             </h1>
 
-            <p className="text-lg md:text-xl text-[var(--gray-300)] leading-relaxed max-w-2xl">
-              {content.cityDescription
-                ? content.cityDescription
-                : `Professional ${serviceData.title.toLowerCase()} services tailored to the building codes and weather challenges of ${cityData.name} and the surrounding ${cityData.county}.`}
+            <p className="text-lg md:text-xl text-white font-semibold leading-relaxed max-w-2xl mb-4">
+              {content.heroLead}
             </p>
+
+            <p className="text-base md:text-lg text-[var(--gray-300)] leading-relaxed max-w-2xl">
+              {content.cityDescription}
+            </p>
+
+            {isRepair && (
+              <p className="mt-6 text-lg font-bold text-white bg-[var(--red)]/90 inline-block px-4 py-2 rounded">
+                Roof leaking? Call {PHONE_DISPLAY} — 24/7 emergency repair in {cityData.name}.
+              </p>
+            )}
+
+            {/* Above-the-fold click-to-call + survey CTAs */}
+            <div className="mt-8 flex flex-col sm:flex-row gap-4">
+              <a
+                href={PHONE_HREF}
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[var(--red)] text-white text-base font-bold uppercase tracking-wider rounded hover:bg-[var(--red-dark)] transition-colors shadow-lg font-[family-name:var(--font-display)]"
+              >
+                <Phone className="h-5 w-5" />
+                Call {PHONE_DISPLAY}
+              </a>
+              <a
+                href="#free-survey"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white/10 border border-white/25 text-white text-base font-bold uppercase tracking-wider rounded hover:bg-white/20 transition-colors font-[family-name:var(--font-display)]"
+              >
+                Get a Free Survey
+                <ArrowRight className="h-5 w-5" />
+              </a>
+            </div>
           </div>
         </div>
       </section>
@@ -384,7 +626,7 @@ export default async function LocationPage({ params }: PageProps) {
                 </span>
               </div>
               <h2 className="text-3xl sm:text-4xl font-bold text-[var(--black)] leading-tight uppercase font-[family-name:var(--font-display)]">
-                Expert {serviceData.title} Solutions for {cityData.name}, {cityData.county}
+                {content.h2}
               </h2>
               <div className="red-accent-left">
                 <p className="text-lg text-[var(--gray-700)] leading-relaxed">
@@ -437,9 +679,9 @@ export default async function LocationPage({ params }: PageProps) {
                 <ul className="space-y-4">
                   {[
                     { title: "Florida Building Code", desc: "All projects strictly adhere to local county regulations and FBC compliance." },
-                    { title: "High-Velocity Hurricane Zone", desc: "Materials and fastings rated for wind resistance up to 160+ MPH." },
+                    { title: "High-Velocity Hurricane Zone", desc: "Materials and fastenings rated for wind resistance up to 160+ MPH." },
                     { title: "Licensed & State Certified", desc: "Registered under license CCC1334168. Fully bonded and insured." },
-                    { title: "GAF Master Silver Star", desc: "Certified installers eligible for premium manufacturer warranties." }
+                    { title: "GAF Master Elite", desc: "Top 2% of U.S. roofers, eligible to offer premium manufacturer warranties." }
                   ].map((item, idx) => (
                     <li key={idx} className="flex items-start gap-3">
                       <CheckCircle className="h-5 w-5 text-[var(--red)] flex-shrink-0 mt-0.5" />
@@ -455,6 +697,33 @@ export default async function LocationPage({ params }: PageProps) {
                 Target Roofing Trust Guarantee
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Emergency / Click-to-Call Band */}
+      <section className="bg-[var(--red)] text-white noise-overlay">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 md:py-12">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
+            <div>
+              <h2 className="text-2xl sm:text-3xl font-bold uppercase font-[family-name:var(--font-display)] leading-tight">
+                {isRepair
+                  ? `Roof leaking in ${cityData.name}? We answer 24/7.`
+                  : `Talk to a ${cityData.name} roofing expert today.`}
+              </h2>
+              <p className="mt-2 text-white/90 max-w-xl">
+                {isRepair
+                  ? `Same-week dispatch for active leaks and storm damage across ${cityData.county}. No subcontractors, no runaround.`
+                  : `Free surveys, honest recommendations, and hurricane-rated work across ${cityData.county}.`}
+              </p>
+            </div>
+            <a
+              href={PHONE_HREF}
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-[var(--red)] text-base font-bold uppercase tracking-wider rounded hover:bg-[var(--gray-100)] transition-colors shadow-lg font-[family-name:var(--font-display)] whitespace-nowrap"
+            >
+              <Phone className="h-5 w-5" />
+              Call {PHONE_DISPLAY}
+            </a>
           </div>
         </div>
       </section>
@@ -490,14 +759,14 @@ export default async function LocationPage({ params }: PageProps) {
                 Our Technicians Make the Difference
               </h2>
               <p className="text-lg text-[var(--gray-600)] leading-relaxed">
-                At Target Roofing, we do not rely on subcontractors. Every member of our team is a highly trained, dedicated Target Roofing employee. Spot our technicians on your roof wearing their signature red Target Roofing polos—a symbol of our commitment to safety, professionalism, and quality craftsmanship.
+                At Target Roofing, we do not rely on subcontractors. Every member of our team is a highly trained, dedicated Target Roofing employee. Spot our technicians on your roof wearing their signature red Target Roofing polos, a symbol of our commitment to safety, professionalism, and quality craftsmanship.
               </p>
               <ul className="space-y-3">
                 {[
                   'Fully licensed, bonded, and insured team',
                   'Extensively trained on wind-resistance and UV-protection standards',
                   'Equipped with state-of-the-art diagnostic and repair equipment',
-                  'Dedicated to keeping your job site clean and clean-up completed daily'
+                  'Dedicated to keeping your job site clean, with clean-up completed daily'
                 ].map((item) => (
                   <li key={item} className="flex items-center gap-3">
                     <CheckCircle className="h-5 w-5 text-[var(--red)] flex-shrink-0" />
@@ -560,7 +829,7 @@ export default async function LocationPage({ params }: PageProps) {
             </h2>
             <div className="mt-2 h-1 w-16 bg-[var(--red)] mx-auto" />
             <p className="mt-4 text-[var(--gray-500)] max-w-xl mx-auto">
-              Hear what our clients say about our professionalism, quality of work, and quick response times.
+              Rated 5.0 across 34 verified reviews. Hear what clients say about our professionalism, quality of work, and quick response times.
             </p>
           </div>
 
@@ -598,13 +867,183 @@ export default async function LocationPage({ params }: PageProps) {
         </div>
       </section>
 
+      {/* FAQ Section */}
+      <section className="bg-white py-16 md:py-24 border-t border-[var(--gray-200)]">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+          <div className="mb-12 text-center">
+            <h2 className="text-3xl font-bold text-[var(--black)] uppercase font-[family-name:var(--font-display)]">
+              {serviceData.title} in {cityData.name}: FAQs
+            </h2>
+            <div className="mt-2 h-1 w-16 bg-[var(--red)] mx-auto" />
+            <p className="mt-4 text-[var(--gray-500)] max-w-xl mx-auto">
+              Straight answers to the questions we hear most from {cityData.name} property owners.
+            </p>
+          </div>
+
+          <div className="space-y-4">
+            {content.faqs.map((faq, idx) => (
+              <details
+                key={idx}
+                className="group bg-[var(--gray-50)] border border-[var(--gray-200)] rounded-lg p-5 open:border-[var(--red)] transition-colors"
+              >
+                <summary className="flex cursor-pointer items-center justify-between gap-4 list-none">
+                  <h3 className="font-bold text-base text-[var(--black)] font-[family-name:var(--font-display)]">
+                    {faq.q}
+                  </h3>
+                  <span className="text-[var(--red)] text-2xl leading-none font-light transition-transform group-open:rotate-45 flex-shrink-0">
+                    +
+                  </span>
+                </summary>
+                <p className="mt-3 text-[var(--gray-700)] leading-relaxed text-[15px]">
+                  {faq.a}
+                </p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Related / Internal Links Section */}
+      <section className="bg-[var(--gray-50)] py-16 md:py-24 border-t border-[var(--gray-200)]">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mb-10">
+            <h2 className="text-3xl font-bold text-[var(--black)] uppercase font-[family-name:var(--font-display)]">
+              Explore More Roofing in {cityData.name}
+            </h2>
+            <div className="mt-2 h-1 w-16 bg-[var(--red)]" />
+          </div>
+
+          {/* Repair-first cross-sell / pillar callout */}
+          <div className="mb-10 grid gap-4 md:grid-cols-2">
+            <Link
+              href={`/locations/${city}/${crossSellService}`}
+              className="group flex items-center justify-between gap-4 bg-white border border-[var(--gray-200)] rounded-lg p-6 hover:border-[var(--red)] transition-colors shadow-sm"
+            >
+              <div>
+                <span className="text-xs font-bold uppercase tracking-wider text-[var(--red)] font-[family-name:var(--font-display)]">
+                  {isRepair ? 'Beyond Repair?' : 'Just Need a Fix?'}
+                </span>
+                <p className="mt-1 font-bold text-[var(--black)] font-[family-name:var(--font-display)]">
+                  {isRepair
+                    ? `Roof beyond repair? See roof replacement in ${cityData.name}.`
+                    : `See roof repair in ${cityData.name}.`}
+                </p>
+              </div>
+              <ArrowRight className="h-5 w-5 text-[var(--red)] flex-shrink-0 group-hover:translate-x-1 transition-transform" />
+            </Link>
+
+            <Link
+              href="/roofing-services/emergency-storm-repair"
+              className="group flex items-center justify-between gap-4 bg-white border border-[var(--gray-200)] rounded-lg p-6 hover:border-[var(--red)] transition-colors shadow-sm"
+            >
+              <div>
+                <span className="text-xs font-bold uppercase tracking-wider text-[var(--red)] font-[family-name:var(--font-display)]">
+                  Storm Damage?
+                </span>
+                <p className="mt-1 font-bold text-[var(--black)] font-[family-name:var(--font-display)]">
+                  24/7 Emergency &amp; Storm Repair
+                </p>
+              </div>
+              <ArrowRight className="h-5 w-5 text-[var(--red)] flex-shrink-0 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </div>
+
+          <div className="grid gap-8 md:grid-cols-3">
+            {/* Sibling services in this city */}
+            <div>
+              <h3 className="text-sm font-bold uppercase tracking-wider text-[var(--gray-500)] font-[family-name:var(--font-display)] mb-4">
+                Other Services in {cityData.name}
+              </h3>
+              <ul className="space-y-2">
+                {siblingServices.map((s) => (
+                  <li key={s}>
+                    <Link
+                      href={`/locations/${city}/${s}`}
+                      className="inline-flex items-center gap-2 text-[var(--gray-700)] hover:text-[var(--red)] font-semibold transition-colors"
+                    >
+                      <CheckCircle className="h-4 w-4 text-[var(--red)] flex-shrink-0" />
+                      {SERVICE_MAP[s].title} in {cityData.name}
+                    </Link>
+                  </li>
+                ))}
+                <li>
+                  <Link
+                    href="/roofing-services/roof-repair"
+                    className="inline-flex items-center gap-2 text-[var(--gray-700)] hover:text-[var(--red)] font-semibold transition-colors"
+                  >
+                    <CheckCircle className="h-4 w-4 text-[var(--red)] flex-shrink-0" />
+                    All Roof Repair Services
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            {/* Nearby cities, same service */}
+            <div>
+              <h3 className="text-sm font-bold uppercase tracking-wider text-[var(--gray-500)] font-[family-name:var(--font-display)] mb-4">
+                {serviceData.title} Nearby
+              </h3>
+              <ul className="space-y-2">
+                {nearbyCities.map((c) => (
+                  <li key={c}>
+                    <Link
+                      href={`/locations/${c}/${service}`}
+                      className="inline-flex items-center gap-2 text-[var(--gray-700)] hover:text-[var(--red)] font-semibold transition-colors"
+                    >
+                      <MapPin className="h-4 w-4 text-[var(--red)] flex-shrink-0" />
+                      {serviceData.title} in {CITY_MAP[c].name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Talk to us */}
+            <div>
+              <h3 className="text-sm font-bold uppercase tracking-wider text-[var(--gray-500)] font-[family-name:var(--font-display)] mb-4">
+                Talk to Target Roofing
+              </h3>
+              <ul className="space-y-3">
+                <li>
+                  <a
+                    href={PHONE_HREF}
+                    className="inline-flex items-center gap-2 text-[var(--gray-700)] hover:text-[var(--red)] font-semibold transition-colors"
+                  >
+                    <Phone className="h-4 w-4 text-[var(--red)] flex-shrink-0" />
+                    Call {PHONE_DISPLAY}
+                  </a>
+                </li>
+                <li>
+                  <Link
+                    href="/contact"
+                    className="inline-flex items-center gap-2 text-[var(--gray-700)] hover:text-[var(--red)] font-semibold transition-colors"
+                  >
+                    <ArrowRight className="h-4 w-4 text-[var(--red)] flex-shrink-0" />
+                    Contact us for a free survey
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/locations"
+                    className="inline-flex items-center gap-2 text-[var(--gray-700)] hover:text-[var(--red)] font-semibold transition-colors"
+                  >
+                    <MapPin className="h-4 w-4 text-[var(--red)] flex-shrink-0" />
+                    All Service Areas
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Inline Lead Capture Form */}
-      <section className="bg-[var(--red)] text-white noise-overlay py-20 md:py-28">
+      <section id="free-survey" className="bg-[var(--red)] text-white noise-overlay py-20 md:py-28 scroll-mt-24">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <InlineLeadForm
             defaultService={serviceData.defaultService}
-            title={`Get a Professional ${serviceData.title} Survey`}
-            subtitle={`Fill out the form below to schedule a detailed roof survey for your property in ${cityData.name}, FL. Our technicians in red Target Roofing polos will inspect your roof and provide a comprehensive report.`}
+            title={`Get a Free ${serviceData.title} Survey`}
+            subtitle={`Fill out the form below to schedule a detailed roof survey for your property in ${cityData.name}, FL. Our technicians in red Target Roofing polos will inspect your roof and provide a comprehensive report. Prefer to talk? Call ${PHONE_DISPLAY}.`}
             buttonText={`Submit Estimate Request`}
             darkTheme={true}
           />

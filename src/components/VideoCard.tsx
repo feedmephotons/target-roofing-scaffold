@@ -24,7 +24,7 @@ export default function VideoCard({ video }: VideoCardProps) {
       {/* Title bar */}
       <div className="flex items-center gap-3 px-6 py-4 border-b border-[var(--gray-200)]">
         <span className="flex items-center justify-center w-8 h-8 bg-[var(--red)] rounded-sm">
-          <Play className="w-4 h-4 text-white fill-white" />
+          <Play className="w-4 h-4 text-white fill-white" aria-hidden="true" />
         </span>
         <h3 className="text-lg font-bold text-[var(--black)] font-[family-name:var(--font-display)] leading-tight">
           {video.title}
@@ -42,9 +42,10 @@ export default function VideoCard({ video }: VideoCardProps) {
           />
         ) : (
           <button
+            type="button"
             onClick={() => setIsPlaying(true)}
-            className="absolute inset-0 w-full h-full block focus:outline-none cursor-pointer"
-            aria-label={`Play ${video.title}`}
+            className="absolute inset-0 w-full h-full block cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-white"
+            aria-label={`Play video: ${video.title}`}
           >
             {/* YouTube Thumbnail */}
             <div className="relative w-full h-full">
@@ -62,7 +63,7 @@ export default function VideoCard({ video }: VideoCardProps) {
               {/* Play Button Icon Overlay */}
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="w-16 h-16 bg-[var(--red)] text-white rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
-                  <Play className="w-8 h-8 text-white fill-white translate-x-0.5" />
+                  <Play className="w-8 h-8 text-white fill-white translate-x-0.5" aria-hidden="true" />
                 </div>
               </div>
             </div>
