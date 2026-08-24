@@ -88,21 +88,68 @@ export function attributionSummary(): string {
 }
 
 /**
- * Fire a conversion to GA4 and the OpenAI pixel. Attribution is attached
- * automatically. Both tags are optional — this never throws if they're absent.
+ * Conversion firing. Two sinks with different rules:
+ *  - GA4 (gtag): accepts arbitrary params, so we attach the full UTM attribution.
+ *  - OpenAI pixel (oaiq): validates event props against a strict allowlist, so we
+ *    send only its supported shape (never raw utm_* keys, which it would reject).
+ *
+ * OpenAI event taxonomy (from the oaiq SDK):
+ *   lead_created  -> standard customer_action  (form / estimate submissions)
+ *   custom + custom_event_name                 (call clicks — no standard "call" event)
+ *   page_viewed   -> auto-fired by the pixel on init; re-fired on SPA route change
  */
-export function fireConversion(event: string, params: Record<string, unknown> = {}): void {
+
+function fireGa(event: string, params: Record<string, unknown>): void {
+  try {
+    window.gtag?.('event', event, { ...params, ...(getAttribution() || {}) })
+  } catch {
+    /* no-op */
+  }
+}
+
+/** A unique event id per conversion (used by the OpenAI pixel for de-duplication). */
+function eventId(): string {
+  try {
+    if (typeof crypto !== 'undefined' && crypto.randomUUID) return crypto.randomUUID()
+  } catch {
+    /* fall through */
+  }
+  return `${Date.now()}-${Math.random().toString(16).slice(2)}`
+}
+
+/**
+ * Fire an OpenAI pixel conversion via the SDK's measure() API. Verified shape:
+ *   oaiq("measure", eventName, eventData, options)
+ * eventData carries the required `type`; custom_event_name and event_id go in options.
+ */
+function fireOaiqMeasure(
+  eventName: string,
+  data: Record<string, unknown>,
+  options: Record<string, unknown> = {}
+): void {
+  try {
+    window.oaiq?.('measure', eventName, data, { event_id: eventId(), ...options })
+  } catch {
+    /* no-op */
+  }
+}
+
+/** Successful contact/estimate form submission. */
+export function trackLead(params: Record<string, unknown> = {}): void {
   if (typeof window === 'undefined') return
-  const payload = { ...params, ...(getAttribution() || {}) }
-  try {
-    window.gtag?.('event', event, payload)
-  } catch {
-    /* no-op */
-  }
-  try {
-    // OpenAI (oaiq) pixel — event-name mapping finalized against Casey's setup code.
-    window.oaiq?.('track', event, payload)
-  } catch {
-    /* no-op */
-  }
+  fireGa('generate_lead', params)
+  fireOaiqMeasure('lead_created', { type: 'customer_action' })
+}
+
+/** Click on a phone-number link. */
+export function trackCallClick(phone: string): void {
+  if (typeof window === 'undefined') return
+  fireGa('phone_call_click', { phone_number: phone })
+  fireOaiqMeasure('custom', { type: 'custom' }, { custom_event_name: 'call_click' })
+}
+
+/** Landing / page view for OpenAI attribution (the init snippet does not auto-fire it). */
+export function trackPageView(): void {
+  if (typeof window === 'undefined') return
+  fireOaiqMeasure('page_viewed', { type: 'contents' })
 }

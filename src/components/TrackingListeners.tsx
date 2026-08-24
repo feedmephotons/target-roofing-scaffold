@@ -1,13 +1,14 @@
 'use client'
 
 import { useEffect } from 'react'
-import { captureAttribution, fireConversion } from '@/lib/tracking'
+import { captureAttribution, trackCallClick } from '@/lib/tracking'
 
 /**
  * Mounted once in the root layout. On load it captures the ad attribution
  * (UTMs + OpenAI click id) for the session, then listens site-wide for clicks
  * on any phone-number link and fires a call-click conversion — so every tel:
  * link on every page is tracked without touching each one individually.
+ * (The OpenAI pixel auto-fires the landing page_viewed on init.)
  */
 export default function TrackingListeners() {
   useEffect(() => {
@@ -18,7 +19,7 @@ export default function TrackingListeners() {
       const link = el?.closest?.('a[href^="tel:"]') as HTMLAnchorElement | null
       if (!link) return
       const phone = link.getAttribute('href')?.replace('tel:', '') ?? ''
-      fireConversion('phone_call_click', { phone_number: phone })
+      trackCallClick(phone)
     }
 
     // Capture phase so it still fires if an inner handler stops propagation.

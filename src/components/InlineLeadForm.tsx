@@ -4,7 +4,7 @@ import { useState, type FormEvent } from 'react'
 import Image from 'next/image'
 import { Send, CheckCircle, Phone } from 'lucide-react'
 import { submitContactLead } from '@/app/actions'
-import { fireConversion, attributionSummary } from '@/lib/tracking'
+import { trackLead, attributionSummary } from '@/lib/tracking'
 
 interface InlineLeadFormProps {
   defaultService?: string
@@ -62,7 +62,7 @@ export default function InlineLeadForm({
     try {
       const res = await submitContactLead({ ...form, attribution: attributionSummary() })
       if (res.success) {
-        fireConversion('generate_lead', { form_id: formId, service: form.service })
+        trackLead({ form_id: formId, service: form.service })
         setSuccess(true)
         setForm({
           firstName: '',
