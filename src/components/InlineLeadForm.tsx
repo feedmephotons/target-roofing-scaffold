@@ -4,20 +4,7 @@ import { useState, type FormEvent } from 'react'
 import Image from 'next/image'
 import { Send, CheckCircle, Phone } from 'lucide-react'
 import { submitContactLead } from '@/app/actions'
-
-// Google Analytics event helper. Gated on NEXT_PUBLIC_GA_ID in the root layout,
-// so gtag may be absent — this is a safe no-op that never throws when GA isn't
-// loaded, and is only ever called from event handlers (never during SSR).
-declare global {
-  interface Window {
-    gtag?: (command: string, eventName: string, params?: Record<string, unknown>) => void
-  }
-}
-
-function trackEvent(name: string, params?: Record<string, unknown>) {
-  if (typeof window === 'undefined') return
-  window.gtag?.('event', name, params)
-}
+import { fireConversion, attributionSummary } from '@/lib/tracking'
 
 interface InlineLeadFormProps {
   defaultService?: string
@@ -65,10 +52,6 @@ export default function InlineLeadForm({
     }
   }
 
-  function handlePhoneClick() {
-    trackEvent('phone_call_click', { form_id: formId })
-  }
-
   async function handleSubmit(e: FormEvent) {
     e.preventDefault()
     setLoading(true)
@@ -77,9 +60,9 @@ export default function InlineLeadForm({
     setSuccess(false)
 
     try {
-      const res = await submitContactLead(form)
+      const res = await submitContactLead({ ...form, attribution: attributionSummary() })
       if (res.success) {
-        trackEvent('generate_lead', { form_id: formId, service: form.service })
+        fireConversion('generate_lead', { form_id: formId, service: form.service })
         setSuccess(true)
         setForm({
           firstName: '',
@@ -393,7 +376,6 @@ export default function InlineLeadForm({
           Roof emergency?
           <a
             href="tel:+12393325707"
-            onClick={handlePhoneClick}
             className="font-bold text-[var(--red)] hover:underline"
           >
             Call (239) 332-5707

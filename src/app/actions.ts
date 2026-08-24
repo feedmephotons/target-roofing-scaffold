@@ -79,6 +79,8 @@ export async function submitContactLead(formData: {
   zip: string
   service: string
   message: string
+  /** Ad attribution (UTMs + OpenAI click id), captured client-side. Stored with the lead. */
+  attribution?: string
 }) {
   const errors: Record<string, string> = {}
 
@@ -123,7 +125,12 @@ export async function submitContactLead(formData: {
     return { success: false, errors, error: 'Please correct the highlighted fields.' }
   }
 
-  return await saveLead('contact', formData)
+  // Fold ad attribution into the stored message so it surfaces in the admin Lead Manager.
+  const message = formData.attribution
+    ? `${formData.message}\n\n— — —\nLead source: ${formData.attribution}`
+    : formData.message
+
+  return await saveLead('contact', { ...formData, message })
 }
 
 export async function submitSoftwashLead(formData: {

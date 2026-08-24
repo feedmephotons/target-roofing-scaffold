@@ -6,9 +6,11 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import DelayedChatWidget from '@/components/DelayedChatWidget'
+import TrackingListeners from '@/components/TrackingListeners'
 import './globals.css'
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID
+const OPENAI_PIXEL_ID = process.env.NEXT_PUBLIC_OPENAI_PIXEL_ID
 
 const oswald = Oswald({
   variable: '--font-oswald',
@@ -149,8 +151,20 @@ export default function RootLayout({
         <main id="main-content" className="pt-[7.5rem]">{children}</main>
         <Footer />
         <DelayedChatWidget />
+        <TrackingListeners />
         <Analytics />
         <SpeedInsights />
+        {/* OpenAI (ChatGPT Ads) conversion pixel — dormant until NEXT_PUBLIC_OPENAI_PIXEL_ID is set.
+            NOTE: replace the loader below with the exact snippet from OpenAI Ads Manager
+            (Conversions > Data source > Web) before enabling; it auto-fires page_viewed,
+            and conversions fire via fireConversion() in src/lib/tracking.ts. */}
+        {OPENAI_PIXEL_ID && (
+          <Script id="openai-ads-pixel" strategy="afterInteractive">
+            {`!function(w,d){w.oaiq=w.oaiq||function(){(w.oaiq.q=w.oaiq.q||[]).push(arguments)};
+var s=d.createElement('script');s.async=1;s.src='https://cdn.oaistatic.com/ads/pixel.js';
+d.head.appendChild(s);w.oaiq('init','${OPENAI_PIXEL_ID}');w.oaiq('track','page_viewed');}(window,document);`}
+          </Script>
+        )}
         {GA_ID && (
           <>
             <Script
