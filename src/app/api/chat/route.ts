@@ -45,8 +45,8 @@ export async function POST(request: NextRequest) {
 
     const result = await ai.models.generateContent({
       model: 'gemini-2.5-flash',
-      systemInstruction: SYSTEM_PROMPT,
       contents,
+      config: { systemInstruction: SYSTEM_PROMPT },
     })
 
     const text = result.text || ''

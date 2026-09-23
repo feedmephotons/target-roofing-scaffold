@@ -35,7 +35,18 @@ export type ToolContext = { channel: 'telegram' | 'voice' | 'admin'; actorName?:
 
 const brief = (t: Task) => ({ id: t.id, title: t.title, owner: t.assignee?.name || 'Unassigned', status: t.status, due: t.due_date, priority: t.priority, tags: t.tags })
 
+// Reject due dates in the past (a model guessing the wrong year is the common failure).
+function checkDue(v: unknown): string | null {
+  if (!v || v === 'none') return null
+  const s = String(v)
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(s)) return `Due date must be YYYY-MM-DD, got "${s}"`
+  const today = new Date().toLocaleDateString('en-CA', { timeZone: 'America/New_York' })
+  if (s < today) return `That due date (${s}) is in the past. Today is ${today}. Use a date on or after today.`
+  return null
+}
+
 export async function runTool(name: string, args: Record<string, unknown>, ctx: ToolContext): Promise<unknown> {
+  if ((name === 'create_task' || name === 'update_task') && checkDue(args.due_date)) return { error: checkDue(args.due_date) }
   const members = await listMembers()
   const who = (p: unknown) => {
     const s = typeof p === 'string' ? p.trim() : ''
