@@ -1,26 +1,6 @@
 [
   {
     "rank": 1,
-    "name": "Kitchen Table AI",
-    "slug": "kitchen-table-ai",
-    "tagline": "AI for the kitchen table and the conference table, from people who run a real company.",
-    "why": "Matches the launch plan exactly: AI for normal people at the kitchen table first, then the conference table. It is warm and practical, which takes the scary out of AI, and people who run a real company are the ones saying it.",
-    "audit": {
-      "cheesiness": 7,
-      "stretch": 8,
-      "memorability": 7,
-      "sayability": 8,
-      "fit": 7,
-      "auditor_note": "Leans heavily domestic, making the commercial fleet side feel secondary unless constantly explained. Final ranking: It risks sounding slightly soft or folksy when the show eventually transitions into heavy commercial roofing operations and fleet logistics."
-    },
-    "logo": "/podcast/name-options/01-kitchen-table-ai.webp",
-    "logo_full": "/podcast/name-options/01-kitchen-table-ai.png",
-    "collision_check": "No podcast with this exact title found. Closest: 'The Kitchen Table Podcast' (Ken Baden, trades business talk that touches AI). Not the same name, but same neighborhood; worth knowing.",
-    "covers_everyday_ai": true,
-    "logo_status": "rendered with Ideogram 4 (Codex was at its usage limit)"
-  },
-  {
-    "rank": 2,
     "name": "Everyday Operators",
     "slug": "everyday-operators",
     "tagline": "AI for people who run a household, a crew or a company.",
@@ -31,7 +11,7 @@
       "memorability": 7,
       "sayability": 8,
       "fit": 7,
-      "auditor_note": "Strong identity for the hosts, but omits AI so the subtitle must carry search discoverability. Final ranking: It lacks the word AI, which means Casey must work harder in the tagline to explain what the podcast covers."
+      "auditor_note": "Strong identity for the hosts, but omits AI so the subtitle must carry search discoverability. Final ranking: Leaving AI out of the title means the show must rely heavily on packaging and artwork for discoverability."
     },
     "logo": "/podcast/name-options/02-everyday-operators.webp",
     "logo_full": "/podcast/name-options/02-everyday-operators.png",
@@ -40,7 +20,47 @@
     "logo_status": "rendered with Ideogram 4 (Codex was at its usage limit)"
   },
   {
+    "rank": 2,
+    "name": "Kitchen Table AI",
+    "slug": "kitchen-table-ai",
+    "tagline": "AI for the kitchen table and the conference table, from people who run a real company.",
+    "why": "Matches the launch plan exactly: AI for normal people at the kitchen table first, then the conference table. It is warm and practical, which takes the scary out of AI, and people who run a real company are the ones saying it.",
+    "audit": {
+      "cheesiness": 7,
+      "stretch": 8,
+      "memorability": 7,
+      "sayability": 8,
+      "fit": 7,
+      "auditor_note": "Leans heavily domestic, making the commercial fleet side feel secondary unless constantly explained. Final ranking: It will feel slightly domestic and soft once episodes pivot into enterprise accounting, field dispatch, and fleet mechanics."
+    },
+    "logo": "/podcast/name-options/01-kitchen-table-ai.webp",
+    "logo_full": "/podcast/name-options/01-kitchen-table-ai.png",
+    "collision_check": "No podcast with this exact title found. Closest: 'The Kitchen Table Podcast' (Ken Baden, trades business talk that touches AI). Not the same name, but same neighborhood; worth knowing.",
+    "covers_everyday_ai": true,
+    "logo_status": "rendered with Ideogram 4 (Codex was at its usage limit)"
+  },
+  {
     "rank": 3,
+    "name": "Working AI",
+    "slug": "working-ai",
+    "tagline": "AI that actually works, for working people and working companies.",
+    "why": "Double duty in two words: AI that actually works, for working people and working companies. It carries from everyday episodes to business ones without changing the name.",
+    "audit": {
+      "cheesiness": 7,
+      "stretch": 8,
+      "memorability": 6,
+      "sayability": 9,
+      "fit": 7,
+      "auditor_note": "Leans on a tired double meaning and the generic formula of adjective plus AI. Final ranking: It is uncomfortably close to Day Job AI and borders on feeling like a generic software utility directory."
+    },
+    "logo": "/podcast/name-options/11-working-ai.webp",
+    "logo_full": "/podcast/name-options/11-working-ai.png",
+    "collision_check": "No podcast with this exact title found. Nearby: 'AI at Work', 'AI That Works', 'Using AI at Work', 'Working Smarter' (Dropbox).",
+    "covers_everyday_ai": true,
+    "logo_status": "rendered with Ideogram 4 (Codex was at its usage limit)"
+  },
+  {
+    "rank": 4,
     "name": "Day Job AI",
     "slug": "day-job-ai",
     "tagline": "AI that helps with your day job and your life after it.",
@@ -51,7 +71,7 @@
       "memorability": 6,
       "sayability": 9,
       "fit": 7,
-      "auditor_note": "Biased toward the workplace despite the everyday pitch, but short, sayable, and avoids embarrassing tech clichés. Final ranking: It implies the advice stops at five o'clock, which fights your goal of covering home life and personal routines."
+      "auditor_note": "Biased toward the workplace despite the everyday pitch, but short, sayable, and avoids embarrassing tech clichés. Final ranking: It is overly similar to Working AI and carries a dreary connotation of daily grind and clock punching."
     },
     "logo": "/podcast/name-options/03-day-job-ai.webp",
     "logo_full": "/podcast/name-options/03-day-job-ai.png",
@@ -60,42 +80,22 @@
     "logo_status": "rendered with Ideogram 4 (Codex was at its usage limit)"
   },
   {
-    "rank": 4,
-    "name": "After the Demo",
-    "slug": "after-the-demo",
-    "tagline": "What happens when AI leaves the sales demo and hits real life and a real company.",
-    "why": "Everyone has seen a slick AI demo; this show is about what happens next in real life and inside a real company. It sets the skeptical, practical tone the hosts want.",
-    "audit": {
-      "cheesiness": 9,
-      "stretch": 7,
-      "memorability": 8,
-      "sayability": 9,
-      "fit": 8,
-      "auditor_note": "Strong and cynical about hype, though dropping AI from the title risks blending into generic B2B sales. Final ranking: It assumes the average listener understands enterprise software sales demos, which alienates regular people looking for quick life hacks."
-    },
-    "logo": "/podcast/name-options/04-after-the-demo.webp",
-    "logo_full": "/podcast/name-options/04-after-the-demo.png",
-    "collision_check": "No exact match found. Closest is 'Beyond the Demo: The Ground Truth' (security industry, launched Aug 2026).",
-    "covers_everyday_ai": true,
-    "logo_status": "rendered with Ideogram 4 (Codex was at its usage limit)"
-  },
-  {
     "rank": 5,
-    "name": "Everyday Company",
-    "slug": "everyday-company",
-    "tagline": "How an everyday company and the people in it actually use AI.",
-    "why": "Frames Target as a normal, everyday company figuring out AI in public, which is the relevance Casey wants. It stays credible when the show moves into operations.",
+    "name": "Ordinary AI",
+    "slug": "ordinary-ai",
+    "tagline": "AI for ordinary days, ordinary people and real companies.",
+    "why": "The plainest possible answer to making AI not a scary monster: this is ordinary stuff for ordinary days, explained by people who run a real company. Short and easy to say.",
     "audit": {
-      "cheesiness": 9,
-      "stretch": 7,
-      "memorability": 6,
+      "cheesiness": 8,
+      "stretch": 8,
+      "memorability": 7,
       "sayability": 8,
-      "fit": 7,
-      "auditor_note": "Drops AI from the title, hurting immediate search discoverability in podcast directories. Final ranking: It is too similar to Everyday Operators and completely sidelines individual listeners who do not run or own a business."
+      "fit": 8,
+      "auditor_note": "Refreshingly unpretentious antidote to tech hype, though branding your content as ordinary carries minor risk. Final ranking: Calling your own product ordinary sounds flat, uninspired, and inherently boring on a podcast directory shelf."
     },
-    "logo": "/podcast/name-options/05-everyday-company.webp",
-    "logo_full": "/podcast/name-options/05-everyday-company.png",
-    "collision_check": "No podcast with this title found. Nearby: 'Everyday Business Podcast', 'The Everyday Podcast', 'The Everyday Founder'.",
+    "logo": "/podcast/name-options/12-ordinary-ai.webp",
+    "logo_full": "/podcast/name-options/12-ordinary-ai.png",
+    "collision_check": "No podcast with this exact title found. Nearby: 'AI for Ordinary People' (Joe Foley), same consumer audience, so worth knowing; also 'Everyday AI'.",
     "covers_everyday_ai": true,
     "logo_status": "rendered with Ideogram 4 (Codex was at its usage limit)"
   },
@@ -111,7 +111,7 @@
       "memorability": 8,
       "sayability": 9,
       "fit": 7,
-      "auditor_note": "Sharp contrast to solo hype, but misses the physical roofing and blue-collar trades connection. Final ranking: It is too corporate for the launch episodes about grocery shopping, family schedules, and personal life hacks. Scored under the business-only brief; re-audited against the everyday-plus-business brief it failed (forced, fit 4), so it is a business-side option only."
+      "auditor_note": "Sharp contrast to solo hype, but misses the physical roofing and blue-collar trades connection. Final ranking: It completely locks out household listeners who are trying to organize family life during the critical launch phase. Scored under the business-only brief; re-audited against the everyday-plus-business brief it failed (forced, fit 4), so it is a business-side option only."
     },
     "logo": "/podcast/name-options/06-ai-with-a-payroll.webp",
     "logo_full": "/podcast/name-options/06-ai-with-a-payroll.png",
@@ -121,26 +121,6 @@
   },
   {
     "rank": 7,
-    "name": "Fleet and Payroll",
-    "slug": "fleet-and-payroll",
-    "tagline": "AI for businesses that run trucks and make payroll.",
-    "why": "Fleets and payroll are the two things one-man AI channels never deal with and Target deals with every week. It sounds like a real operator's show.",
-    "audit": {
-      "cheesiness": 9,
-      "stretch": 8,
-      "memorability": 8,
-      "sayability": 8,
-      "fit": 8,
-      "auditor_note": "Grounded operational identity that resonates with contractors, though it leans heavily on the tagline to introduce AI. Final ranking: It is too similar to AI With a Payroll, drops technology entirely, and locks out non-business listeners from day one. Scored under the business-only brief; re-audited against the everyday-plus-business brief it failed (forced, fit 3), so it is a business-side option only."
-    },
-    "logo": "/podcast/name-options/07-fleet-and-payroll.webp",
-    "logo_full": "/podcast/name-options/07-fleet-and-payroll.png",
-    "collision_check": "No podcast with this title found. Nearby: 'The Fleet' (Mission.org) and a trucking payroll show.",
-    "covers_everyday_ai": false,
-    "logo_status": "rendered with Ideogram 4 (Codex was at its usage limit)"
-  },
-  {
-    "rank": 8,
     "name": "More Than Two Trucks",
     "slug": "more-than-two-trucks",
     "tagline": "AI for companies bigger than a YouTube channel.",
@@ -151,7 +131,7 @@
       "memorability": 8,
       "sayability": 6,
       "fit": 8,
-      "auditor_note": "Distinct point of view, but a bit long to say comfortably during conversation. Final ranking: It is niche contractor jargon that confuses normal consumers and sounds like a trades podcast instead of an AI show. Scored under the business-only brief; re-audited against the everyday-plus-business brief it failed (forced, fit 3), so it is a business-side option only."
+      "auditor_note": "Distinct point of view, but a bit long to say comfortably during conversation. Final ranking: It is a trade contractor inside joke that confuses non-trade listeners tuning in for everyday life hacks. Scored under the business-only brief; re-audited against the everyday-plus-business brief it failed (forced, fit 3), so it is a business-side option only."
     },
     "logo": "/podcast/name-options/08-more-than-two-trucks.webp",
     "logo_full": "/podcast/name-options/08-more-than-two-trucks.png",
@@ -160,27 +140,27 @@
     "logo_status": "rendered with Ideogram 4 (Codex was at its usage limit)"
   },
   {
-    "rank": 9,
-    "name": "Blue Collar Compute",
-    "slug": "blue-collar-compute",
-    "tagline": "Computing power for companies that work with their hands.",
-    "why": "Puts the trades and the technology side by side in one phrase: a roofing president, an AI lead and a software builder.",
+    "rank": 8,
+    "name": "After the Demo",
+    "slug": "after-the-demo",
+    "tagline": "What happens when AI leaves the sales demo and hits real life and a real company.",
+    "why": "Everyone has seen a slick AI demo; this show is about what happens next in real life and inside a real company. It sets the skeptical, practical tone the hosts want.",
     "audit": {
-      "cheesiness": 7,
-      "stretch": 9,
+      "cheesiness": 9,
+      "stretch": 7,
       "memorability": 8,
-      "sayability": 7,
+      "sayability": 9,
       "fit": 8,
-      "auditor_note": "Directly bridges industrial reality and software, though compute feels slightly abstract for property managers. Final ranking: The word compute is tech nerd jargon that feels forced and unnatural coming from a Florida roofing contractor. Scored under the business-only brief; re-audited against the everyday-plus-business brief it failed (forced, fit 4), so it is a business-side option only."
+      "auditor_note": "Strong and cynical about hype, though dropping AI from the title risks blending into generic B2B sales. Final ranking: It relies on enterprise software jargon that means nothing to normal people managing grocery runs and schedules."
     },
-    "logo": "/podcast/name-options/09-blue-collar-compute.webp",
-    "logo_full": "/podcast/name-options/09-blue-collar-compute.png",
-    "collision_check": "No podcast with this title found. Many 'Blue Collar' shows exist, so search is crowded on the first two words.",
-    "covers_everyday_ai": false,
+    "logo": "/podcast/name-options/04-after-the-demo.webp",
+    "logo_full": "/podcast/name-options/04-after-the-demo.png",
+    "collision_check": "No exact match found. Closest is 'Beyond the Demo: The Ground Truth' (security industry, launched Aug 2026).",
+    "covers_everyday_ai": true,
     "logo_status": "rendered with Ideogram 4 (Codex was at its usage limit)"
   },
   {
-    "rank": 10,
+    "rank": 9,
     "name": "The Automation Yard",
     "slug": "the-automation-yard",
     "tagline": "Where a real trades company parks its automation and puts it to work.",
@@ -191,11 +171,31 @@
       "memorability": 8,
       "sayability": 8,
       "fit": 8,
-      "auditor_note": "Anchors software in contractor culture, though treating digital automations like parked equipment is a slight stretch. Final ranking: It sounds like an industrial salvage business and will completely scare away normal people wanting simple life organization tips. Scored under the business-only brief; re-audited against the everyday-plus-business brief it failed (forced, fit 4), so it is a business-side option only."
+      "auditor_note": "Anchors software in contractor culture, though treating digital automations like parked equipment is a slight stretch. Final ranking: It forces an industrial metaphor that sounds clunky and has zero relevance to everyday personal use cases. Scored under the business-only brief; re-audited against the everyday-plus-business brief it failed (forced, fit 4), so it is a business-side option only."
     },
     "logo": "/podcast/name-options/10-the-automation-yard.webp",
     "logo_full": "/podcast/name-options/10-the-automation-yard.png",
     "collision_check": "No podcast with this title found. 'The Automation Podcast' (industrial automation) exists under a different name.",
+    "covers_everyday_ai": false,
+    "logo_status": "rendered with Ideogram 4 (Codex was at its usage limit)"
+  },
+  {
+    "rank": 10,
+    "name": "Blue Collar Compute",
+    "slug": "blue-collar-compute",
+    "tagline": "Computing power for companies that work with their hands.",
+    "why": "Puts the trades and the technology side by side in one phrase: a roofing president, an AI lead and a software builder.",
+    "audit": {
+      "cheesiness": 7,
+      "stretch": 9,
+      "memorability": 8,
+      "sayability": 7,
+      "fit": 8,
+      "auditor_note": "Directly bridges industrial reality and software, though compute feels slightly abstract for property managers. Final ranking: Compute is awkward tech jargon that sounds completely unnatural when spoken aloud by a Southwest Florida roofer. Scored under the business-only brief; re-audited against the everyday-plus-business brief it failed (forced, fit 4), so it is a business-side option only."
+    },
+    "logo": "/podcast/name-options/09-blue-collar-compute.webp",
+    "logo_full": "/podcast/name-options/09-blue-collar-compute.png",
+    "collision_check": "No podcast with this title found. Many 'Blue Collar' shows exist, so search is crowded on the first two words.",
     "covers_everyday_ai": false,
     "logo_status": "rendered with Ideogram 4 (Codex was at its usage limit)"
   }
