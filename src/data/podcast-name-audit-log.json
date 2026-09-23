@@ -1,0 +1,4830 @@
+{
+  "method": {
+    "generator": "Claude (Opus 5.5) brainstorm, 24 rounds",
+    "auditor": "Antigravity CLI (agy), model 'Gemini 3.8 Flash (High)', prompted as a harsh brand strategist",
+    "briefs": {
+      "business": "Rounds 1-14: show pitched as AI inside a real operating business (departments, fleets, payroll) vs one-man YouTube channels.",
+      "everyday_plus_business": "Rounds 15-24: updated after the 2026-09-22 Google Meet (01:00-01:04). Early episodes cover AI for normal people in everyday life ('make AI not a scary monster for normal people', quick use cases, 'Does AI make you a hermit?'), business later, told by people who run a real company. Fit score measures both."
+    },
+    "pass_rule": "cheesiness >= 7 AND stretch >= 7 AND auditor flag = ok (pun, cliche, forced or generic = reject)",
+    "collision_rule": "WebSearch '\"<name>\" podcast' for every audit survivor; exact-name collisions with existing shows or AI brands dropped",
+    "diversity_rule": "Revision 2 (lead request): at most 2 payroll/employee names, at most 2 truck/fleet names, at least 4 names that work for everyday AI as well as business, drop Hundred Truck Company (unverifiable fleet size)",
+    "final_pass": "Final 10 re-sent to the auditor under the everyday-plus-business brief for a head-to-head ranking; ranking in podcast-name-options.json follows it",
+    "banned": "roof/shingle/top/overhead puns, AI jammed into words, 'The X Podcast', buzzwords (Unleashed, Disrupt, Future of, Revolution, 2.0, Hacks)"
+  },
+  "rounds": [
+    {
+      "round": 1,
+      "brief": "business",
+      "generated": 48,
+      "passed_audit": [
+        "Ground Truth",
+        "More Than Two Trucks",
+        "Real Payroll",
+        "Load Bearing",
+        "Company Truck"
+      ],
+      "rejected_count": 43,
+      "rejected_by_reason": {
+        "cliche": 19,
+        "generic": 14,
+        "forced": 8,
+        "pun": 2
+      }
+    },
+    {
+      "round": 2,
+      "brief": "business",
+      "generated": 32,
+      "passed_audit": [
+        "After the Demo",
+        "Fleet and Payroll"
+      ],
+      "rejected_count": 30,
+      "rejected_by_reason": {
+        "generic": 15,
+        "cliche": 10,
+        "forced": 4,
+        "pun": 1
+      }
+    },
+    {
+      "round": 3,
+      "brief": "business",
+      "generated": 26,
+      "passed_audit": [
+        "Blue Collar Compute"
+      ],
+      "rejected_count": 25,
+      "rejected_by_reason": {
+        "generic": 11,
+        "forced": 5,
+        "cliche": 6,
+        "stretch below 7": 1,
+        "pun": 2
+      }
+    },
+    {
+      "round": 4,
+      "brief": "business",
+      "generated": 20,
+      "passed_audit": [
+        "Hundred Truck Company"
+      ],
+      "rejected_count": 19,
+      "rejected_by_reason": {
+        "generic": 12,
+        "forced": 3,
+        "cliche": 4
+      }
+    },
+    {
+      "round": 5,
+      "brief": "business",
+      "generated": 15,
+      "passed_audit": [
+        "Contractor Compute"
+      ],
+      "rejected_count": 14,
+      "rejected_by_reason": {
+        "forced": 4,
+        "generic": 5,
+        "cheesiness below 7": 1,
+        "cliche": 4
+      }
+    },
+    {
+      "round": 6,
+      "brief": "business",
+      "generated": 12,
+      "passed_audit": [],
+      "rejected_count": 12,
+      "rejected_by_reason": {
+        "generic": 6,
+        "cliche": 2,
+        "stretch below 7": 1,
+        "forced": 3
+      }
+    },
+    {
+      "round": 7,
+      "brief": "business",
+      "generated": 12,
+      "passed_audit": [
+        "The Automation Yard"
+      ],
+      "rejected_count": 11,
+      "rejected_by_reason": {
+        "cliche": 1,
+        "forced": 6,
+        "pun": 1,
+        "generic": 3
+      }
+    },
+    {
+      "round": 8,
+      "brief": "business",
+      "generated": 9,
+      "passed_audit": [],
+      "rejected_count": 9,
+      "rejected_by_reason": {
+        "forced": 2,
+        "cliche": 3,
+        "generic": 4
+      }
+    },
+    {
+      "round": 9,
+      "brief": "business",
+      "generated": 10,
+      "passed_audit": [
+        "AI With a Payroll"
+      ],
+      "rejected_count": 9,
+      "rejected_by_reason": {
+        "generic": 5,
+        "cliche": 1,
+        "stretch below 7": 1,
+        "forced": 2
+      }
+    },
+    {
+      "round": 10,
+      "brief": "business",
+      "generated": 8,
+      "passed_audit": [
+        "AI With a Fleet"
+      ],
+      "rejected_count": 7,
+      "rejected_by_reason": {
+        "generic": 3,
+        "forced": 2,
+        "cliche": 2
+      }
+    },
+    {
+      "round": 11,
+      "brief": "business",
+      "generated": 10,
+      "passed_audit": [],
+      "rejected_count": 10,
+      "rejected_by_reason": {
+        "generic": 4,
+        "cliche": 2,
+        "forced": 3,
+        "stretch below 7": 1
+      }
+    },
+    {
+      "round": 12,
+      "brief": "business",
+      "generated": 10,
+      "passed_audit": [
+        "AI With Employees"
+      ],
+      "rejected_count": 9,
+      "rejected_by_reason": {
+        "cliche": 2,
+        "generic": 3,
+        "forced": 4
+      }
+    },
+    {
+      "round": 13,
+      "brief": "business",
+      "generated": 8,
+      "passed_audit": [],
+      "rejected_count": 8,
+      "rejected_by_reason": {
+        "cliche": 2,
+        "forced": 2,
+        "generic": 3,
+        "stretch below 7": 1
+      }
+    },
+    {
+      "round": 14,
+      "brief": "business",
+      "generated": 8,
+      "passed_audit": [],
+      "rejected_count": 8,
+      "rejected_by_reason": {
+        "forced": 2,
+        "cliche": 2,
+        "cheesiness below 7": 1,
+        "generic": 2,
+        "pun": 1
+      }
+    },
+    {
+      "round": 15,
+      "brief": "everyday_plus_business",
+      "generated": 20,
+      "passed_audit": [
+        "Kitchen Table AI"
+      ],
+      "rejected_count": 19,
+      "rejected_by_reason": {
+        "generic": 6,
+        "cliche": 7,
+        "forced": 5,
+        "stretch below 7": 1
+      }
+    },
+    {
+      "round": 16,
+      "brief": "everyday_plus_business",
+      "generated": 12,
+      "passed_audit": [
+        "Everyday Operators"
+      ],
+      "rejected_count": 11,
+      "rejected_by_reason": {
+        "cliche": 5,
+        "forced": 4,
+        "generic": 2
+      }
+    },
+    {
+      "round": 17,
+      "brief": "everyday_plus_business",
+      "generated": 10,
+      "passed_audit": [
+        "Plainspoken AI"
+      ],
+      "rejected_count": 9,
+      "rejected_by_reason": {
+        "cliche": 4,
+        "forced": 3,
+        "generic": 2
+      }
+    },
+    {
+      "round": 18,
+      "brief": "everyday_plus_business",
+      "generated": 8,
+      "passed_audit": [
+        "Grounded AI"
+      ],
+      "rejected_count": 7,
+      "rejected_by_reason": {
+        "generic": 4,
+        "cliche": 1,
+        "forced": 2
+      }
+    },
+    {
+      "round": 19,
+      "brief": "everyday_plus_business",
+      "generated": 10,
+      "passed_audit": [
+        "Day Job AI"
+      ],
+      "rejected_count": 9,
+      "rejected_by_reason": {
+        "generic": 4,
+        "forced": 2,
+        "cliche": 3
+      }
+    },
+    {
+      "round": 20,
+      "brief": "everyday_plus_business",
+      "generated": 8,
+      "passed_audit": [],
+      "rejected_count": 8,
+      "rejected_by_reason": {
+        "generic": 5,
+        "forced": 2,
+        "cliche": 1
+      }
+    },
+    {
+      "round": 21,
+      "brief": "everyday_plus_business",
+      "generated": 8,
+      "passed_audit": [
+        "Real Life AI"
+      ],
+      "rejected_count": 7,
+      "rejected_by_reason": {
+        "pun": 1,
+        "cliche": 2,
+        "forced": 4
+      }
+    },
+    {
+      "round": 22,
+      "brief": "everyday_plus_business",
+      "generated": 4,
+      "passed_audit": [],
+      "rejected_count": 4,
+      "rejected_by_reason": {
+        "generic": 1,
+        "cliche": 2,
+        "pun": 1
+      },
+      "reaudit_of_kept_names": [
+        {
+          "name": "AI With a Payroll",
+          "passed": false,
+          "cheesiness": 6,
+          "stretch": 5,
+          "memorability": 6,
+          "sayability": 8,
+          "fit": 4,
+          "flag": "forced",
+          "note": "Ignores everyday personal use cases completely and frames AI unnaturally as an entity with employees."
+        },
+        {
+          "name": "Fleet and Payroll",
+          "passed": false,
+          "cheesiness": 7,
+          "stretch": 3,
+          "memorability": 5,
+          "sayability": 8,
+          "fit": 3,
+          "flag": "forced",
+          "note": "Sounds like back-office bookkeeping and fleet management while completely hiding the AI premise from listeners."
+        },
+        {
+          "name": "After the Demo",
+          "passed": true,
+          "cheesiness": 9,
+          "stretch": 7,
+          "memorability": 8,
+          "sayability": 9,
+          "fit": 8,
+          "flag": "ok",
+          "note": "Strong and cynical about hype, though dropping AI from the title risks blending into generic B2B sales."
+        },
+        {
+          "name": "Blue Collar Compute",
+          "passed": false,
+          "cheesiness": 5,
+          "stretch": 4,
+          "memorability": 6,
+          "sayability": 6,
+          "fit": 4,
+          "flag": "forced",
+          "note": "Using Silicon Valley infrastructure jargon like compute directly contradicts the grounded blue-collar premise."
+        },
+        {
+          "name": "More Than Two Trucks",
+          "passed": false,
+          "cheesiness": 6,
+          "stretch": 3,
+          "memorability": 5,
+          "sayability": 7,
+          "fit": 3,
+          "flag": "forced",
+          "note": "Inside contractor joke that conceals the AI focus and completely excludes everyday household listeners."
+        },
+        {
+          "name": "The Automation Yard",
+          "passed": false,
+          "cheesiness": 6,
+          "stretch": 5,
+          "memorability": 6,
+          "sayability": 8,
+          "fit": 4,
+          "flag": "forced",
+          "note": "Heavy industrial metaphor makes everyday topics like personal shopping and home organization feel out of place."
+        }
+      ]
+    },
+    {
+      "round": 23,
+      "brief": "everyday_plus_business",
+      "generated": 8,
+      "passed_audit": [
+        "Everyday Company"
+      ],
+      "rejected_count": 7,
+      "rejected_by_reason": {
+        "generic": 3,
+        "forced": 4
+      }
+    },
+    {
+      "round": 24,
+      "brief": "everyday_plus_business",
+      "generated": 6,
+      "passed_audit": [],
+      "rejected_count": 6,
+      "rejected_by_reason": {
+        "generic": 3,
+        "forced": 2,
+        "cliche": 1
+      }
+    }
+  ],
+  "rejected": [
+    {
+      "name": "Punch List",
+      "round": 1,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 8,
+        "stretch": 4,
+        "memorability": 5,
+        "sayability": 9,
+        "fit": 4
+      },
+      "auditor_note": "Standard construction term hijacked for an ongoing podcast. Punch lists finish jobs, not run ongoing AI experiments."
+    },
+    {
+      "name": "Put to Work",
+      "round": 1,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 7,
+        "stretch": 7,
+        "memorability": 4,
+        "sayability": 8,
+        "fit": 6
+      },
+      "auditor_note": "Completely invisible in search results. Sounds like a state labor agency workforce development brochure."
+    },
+    {
+      "name": "Scope of Work",
+      "round": 1,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 8,
+        "stretch": 5,
+        "memorability": 4,
+        "sayability": 7,
+        "fit": 5
+      },
+      "auditor_note": "Dry contract jargon. Gives listeners the impression they are about to read a legal specification document."
+    },
+    {
+      "name": "Run Through Walls",
+      "round": 1,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 4,
+        "stretch": 4,
+        "memorability": 6,
+        "sayability": 7,
+        "fit": 4
+      },
+      "auditor_note": "Tired hustle culture idiom. It describes Casey's personal stamina, not an AI software podcast."
+    },
+    {
+      "name": "Job Walk",
+      "round": 1,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 8,
+        "stretch": 6,
+        "memorability": 5,
+        "sayability": 8,
+        "fit": 5
+      },
+      "auditor_note": "Bland trades routine. A job walk inspects physical job sites, not software architectures."
+    },
+    {
+      "name": "Tailgate Meeting",
+      "round": 1,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 5,
+        "stretch": 4,
+        "memorability": 5,
+        "sayability": 7,
+        "fit": 4
+      },
+      "auditor_note": "Field safety meetings are five minute OSHA check-ins, not strategic technology discussions between executives."
+    },
+    {
+      "name": "Field Tested",
+      "round": 1,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 7,
+        "stretch": 8,
+        "memorability": 5,
+        "sayability": 8,
+        "fit": 7
+      },
+      "auditor_note": "Used on a thousand hardware products and podcasts already. Utterly forgettable search keyword collision."
+    },
+    {
+      "name": "Operator Hours",
+      "round": 1,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 8,
+        "stretch": 6,
+        "memorability": 6,
+        "sayability": 7,
+        "fit": 6
+      },
+      "auditor_note": "Clunky riff on office hours. Confuses heavy equipment operators with general business executives."
+    },
+    {
+      "name": "The Walkthrough",
+      "round": 1,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 7,
+        "stretch": 5,
+        "memorability": 3,
+        "sayability": 8,
+        "fit": 4
+      },
+      "auditor_note": "Generic real estate term. Disappears immediately into millions of video game and software walkthroughs."
+    },
+    {
+      "name": "Change Order",
+      "round": 1,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 7,
+        "stretch": 5,
+        "memorability": 6,
+        "sayability": 8,
+        "fit": 5
+      },
+      "auditor_note": "Change orders represent mistakes, delays, and budget creep. Negative association for any construction client."
+    },
+    {
+      "name": "Daily Report",
+      "round": 1,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 8,
+        "stretch": 4,
+        "memorability": 3,
+        "sayability": 8,
+        "fit": 4
+      },
+      "auditor_note": "Painfully boring. Sounds like an internal admin log nobody wants to fill out or hear."
+    },
+    {
+      "name": "The Takeoff",
+      "round": 1,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 8,
+        "stretch": 6,
+        "memorability": 5,
+        "sayability": 8,
+        "fit": 6
+      },
+      "auditor_note": "Sounds like an aviation show or generic startup pitch, not an operational construction podcast."
+    },
+    {
+      "name": "Zeroed In",
+      "round": 1,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 6,
+        "stretch": 5,
+        "memorability": 4,
+        "sayability": 8,
+        "fit": 5
+      },
+      "auditor_note": "Fits the rifle logo metaphor, but every corporate consultant has used this exact phrase to death."
+    },
+    {
+      "name": "Line of Sight",
+      "round": 1,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 7,
+        "stretch": 5,
+        "memorability": 5,
+        "sayability": 7,
+        "fit": 5
+      },
+      "auditor_note": "Management speak cliché. It sounds like an enterprise SaaS vendor white paper."
+    },
+    {
+      "name": "Dialed In",
+      "round": 1,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 5,
+        "stretch": 5,
+        "memorability": 4,
+        "sayability": 8,
+        "fit": 5
+      },
+      "auditor_note": "Overused bro-coach idiom. Says nothing about roofing, trades, or artificial intelligence."
+    },
+    {
+      "name": "Working Knowledge",
+      "round": 1,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 8,
+        "stretch": 5,
+        "memorability": 4,
+        "sayability": 7,
+        "fit": 5
+      },
+      "auditor_note": "Textbook title energy. Already claimed by Harvard Business School Publishing for decades."
+    },
+    {
+      "name": "Shop Talk",
+      "round": 1,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 6,
+        "stretch": 5,
+        "memorability": 3,
+        "sayability": 9,
+        "fit": 5
+      },
+      "auditor_note": "The single most overused podcast title in blue collar business history. Impossible to rank for."
+    },
+    {
+      "name": "Built to Run",
+      "round": 1,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 5,
+        "stretch": 5,
+        "memorability": 4,
+        "sayability": 8,
+        "fit": 5
+      },
+      "auditor_note": "Cheap knockoff of Jim Collins book titles. Corporate consulting fluff with zero grit."
+    },
+    {
+      "name": "Every Other Wednesday",
+      "round": 1,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 9,
+        "stretch": 2,
+        "memorability": 5,
+        "sayability": 6,
+        "fit": 2
+      },
+      "auditor_note": "Describes the release cadence, not the show topic. Utterly empty of context or hook."
+    },
+    {
+      "name": "Casey's Office",
+      "round": 1,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 8,
+        "stretch": 3,
+        "memorability": 5,
+        "sayability": 8,
+        "fit": 3
+      },
+      "auditor_note": "Pure vanity project signaling. Irrelevant to prospective listeners who do not know Casey personally."
+    },
+    {
+      "name": "Plumb",
+      "round": 1,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 8,
+        "stretch": 5,
+        "memorability": 6,
+        "sayability": 8,
+        "fit": 5
+      },
+      "auditor_note": "Clever carpentry term, but roofing is about slope and pitch, not vertical alignment."
+    },
+    {
+      "name": "Square and True",
+      "round": 1,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 6,
+        "stretch": 4,
+        "memorability": 5,
+        "sayability": 7,
+        "fit": 4
+      },
+      "auditor_note": "Folksy framing cliché. Sounds like a woodworking hobbyist YouTube channel from 2012."
+    },
+    {
+      "name": "Clock In",
+      "round": 1,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 6,
+        "stretch": 5,
+        "memorability": 5,
+        "sayability": 9,
+        "fit": 5
+      },
+      "auditor_note": "Hourly wage labor framing for a podcast aimed at business owners and executives."
+    },
+    {
+      "name": "Pre-Con",
+      "round": 1,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 8,
+        "stretch": 5,
+        "memorability": 5,
+        "sayability": 7,
+        "fit": 5
+      },
+      "auditor_note": "Industry slang that excludes property managers and implies you are only planning, never executing."
+    },
+    {
+      "name": "Paper Trail",
+      "round": 1,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 7,
+        "stretch": 4,
+        "memorability": 5,
+        "sayability": 8,
+        "fit": 4
+      },
+      "auditor_note": "Associated with fraud investigations and bureaucracy, directly contrary to streamlining with AI."
+    },
+    {
+      "name": "Receipts",
+      "round": 1,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 4,
+        "stretch": 3,
+        "memorability": 5,
+        "sayability": 8,
+        "fit": 3
+      },
+      "auditor_note": "Stale internet and pop culture slang that feels awkward and out of touch coming from contractors."
+    },
+    {
+      "name": "Sweat Equity",
+      "round": 1,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 5,
+        "stretch": 4,
+        "memorability": 4,
+        "sayability": 7,
+        "fit": 4
+      },
+      "auditor_note": "Real estate investing trope. Software automation is the opposite of uncompensated manual physical labor."
+    },
+    {
+      "name": "The Whole Crew",
+      "round": 1,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 6,
+        "stretch": 5,
+        "memorability": 4,
+        "sayability": 8,
+        "fit": 5
+      },
+      "auditor_note": "Generic and corny. Sounds like an after school special or a team building HR seminar."
+    },
+    {
+      "name": "Operators Only",
+      "round": 1,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 7,
+        "stretch": 7,
+        "memorability": 7,
+        "sayability": 8,
+        "fit": 7
+      },
+      "auditor_note": "Elitist and slightly generic, though the positioning against online gurus is directionally correct."
+    },
+    {
+      "name": "Big Company Problems",
+      "round": 1,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 8,
+        "stretch": 6,
+        "memorability": 7,
+        "sayability": 7,
+        "fit": 6
+      },
+      "auditor_note": "Negative emotional hook that makes the subject sound like a corporate bureaucracy drag."
+    },
+    {
+      "name": "Back Office",
+      "round": 1,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 8,
+        "stretch": 5,
+        "memorability": 4,
+        "sayability": 8,
+        "fit": 5
+      },
+      "auditor_note": "Ignores the job site, production, and fleet entirely, reducing the show to bookkeeping automation."
+    },
+    {
+      "name": "Morning Huddle",
+      "round": 1,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 5,
+        "stretch": 5,
+        "memorability": 4,
+        "sayability": 8,
+        "fit": 4
+      },
+      "auditor_note": "Corporate retreat terminology. Promises a five minute daily brief, not a biweekly deep dive."
+    },
+    {
+      "name": "Crosshairs",
+      "round": 1,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 6,
+        "stretch": 6,
+        "memorability": 7,
+        "sayability": 8,
+        "fit": 6
+      },
+      "auditor_note": "Leans too hard into company logo iconography. Sounds like a tactical firearms or hunting podcast."
+    },
+    {
+      "name": "Hard Hat Intelligence",
+      "round": 1,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 3,
+        "stretch": 6,
+        "memorability": 5,
+        "sayability": 6,
+        "fit": 5
+      },
+      "auditor_note": "Blatant alliterative corporate cheese. Cringe factor will turn off serious commercial operators."
+    },
+    {
+      "name": "Boots and Bots",
+      "round": 1,
+      "stage": "audit",
+      "reason": "pun",
+      "scores": {
+        "cheesiness": 2,
+        "stretch": 7,
+        "memorability": 6,
+        "sayability": 8,
+        "fit": 4
+      },
+      "auditor_note": "Embarrassing nursery rhyme phrasing that makes serious builders look like silicon valley cartoonists."
+    },
+    {
+      "name": "Measure Twice",
+      "round": 1,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 4,
+        "stretch": 5,
+        "memorability": 4,
+        "sayability": 8,
+        "fit": 4
+      },
+      "auditor_note": "Half an aphorism. Lazy cliché that sounds cautious and sluggish rather than proactive."
+    },
+    {
+      "name": "The Estimate",
+      "round": 1,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 8,
+        "stretch": 6,
+        "memorability": 4,
+        "sayability": 8,
+        "fit": 5
+      },
+      "auditor_note": "Bland transaction name. Gives the impression the show is only about price quoting and bids."
+    },
+    {
+      "name": "Windage",
+      "round": 1,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 8,
+        "stretch": 3,
+        "memorability": 6,
+        "sayability": 7,
+        "fit": 3
+      },
+      "auditor_note": "Obscure ballistics jargon forcing the reticle logo. Requires an explanation before anyone gets it."
+    },
+    {
+      "name": "Field and Office",
+      "round": 1,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 8,
+        "stretch": 6,
+        "memorability": 3,
+        "sayability": 8,
+        "fit": 6
+      },
+      "auditor_note": "Descriptive but sterile. Sounds like an internal ERP software user group meeting."
+    },
+    {
+      "name": "On Target",
+      "round": 1,
+      "stage": "audit",
+      "reason": "pun",
+      "scores": {
+        "cheesiness": 4,
+        "stretch": 5,
+        "memorability": 4,
+        "sayability": 8,
+        "fit": 5
+      },
+      "auditor_note": "Groan worthy pun on the company name. Broadcasts self-serving corporate marketing immediately."
+    },
+    {
+      "name": "Sharp Pencil",
+      "round": 1,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 6,
+        "stretch": 4,
+        "memorability": 5,
+        "sayability": 7,
+        "fit": 4
+      },
+      "auditor_note": "Estimating cliché from the 1970s. Utterly out of place for modern AI software architecture."
+    },
+    {
+      "name": "Bid Day",
+      "round": 1,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 8,
+        "stretch": 5,
+        "memorability": 6,
+        "sayability": 8,
+        "fit": 5
+      },
+      "auditor_note": "Commercial bid day is high stress estimating panic, not thoughtful technological operations work."
+    },
+    {
+      "name": "Level Set",
+      "round": 1,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 6,
+        "stretch": 6,
+        "memorability": 4,
+        "sayability": 8,
+        "fit": 5
+      },
+      "auditor_note": "Stale corporate consulting idiom. Trades workers cringe at middle management buzzwords like this."
+    },
+    {
+      "name": "Moving Parts",
+      "round": 2,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 8,
+        "stretch": 5,
+        "memorability": 5,
+        "sayability": 9,
+        "fit": 5
+      },
+      "auditor_note": "Overused business idiom that sounds like broad logistics management with zero indication of software or AI."
+    },
+    {
+      "name": "Legacy Systems",
+      "round": 2,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 8,
+        "stretch": 4,
+        "memorability": 5,
+        "sayability": 8,
+        "fit": 4
+      },
+      "auditor_note": "Sounds like an enterprise mainframe maintenance podcast, completely draining the energy of active job sites."
+    },
+    {
+      "name": "Headcount",
+      "round": 2,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 7,
+        "stretch": 4,
+        "memorability": 5,
+        "sayability": 9,
+        "fit": 4
+      },
+      "auditor_note": "Standard HR and recruiting term that leaves out both physical trade operations and artificial intelligence."
+    },
+    {
+      "name": "Ride Along",
+      "round": 2,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 4,
+        "stretch": 4,
+        "memorability": 5,
+        "sayability": 9,
+        "fit": 4
+      },
+      "auditor_note": "Tired police ride along trope suggesting casual field shadows rather than serious systems engineering."
+    },
+    {
+      "name": "All Hands",
+      "round": 2,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 6,
+        "stretch": 3,
+        "memorability": 4,
+        "sayability": 9,
+        "fit": 3
+      },
+      "auditor_note": "Generic corporate meeting jargon that evokes tech startup all-hands rather than field trades."
+    },
+    {
+      "name": "Loaded Cost",
+      "round": 2,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 8,
+        "stretch": 5,
+        "memorability": 5,
+        "sayability": 7,
+        "fit": 5
+      },
+      "auditor_note": "Dry accounting terminology that makes the show sound like a tedious spreadsheet audit."
+    },
+    {
+      "name": "The Org Chart",
+      "round": 2,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 7,
+        "stretch": 3,
+        "memorability": 4,
+        "sayability": 9,
+        "fit": 3
+      },
+      "auditor_note": "Corporate management textbook title that will bore contractors and hides the AI hook completely."
+    },
+    {
+      "name": "Not a Side Hustle",
+      "round": 2,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 3,
+        "stretch": 5,
+        "memorability": 5,
+        "sayability": 8,
+        "fit": 4
+      },
+      "auditor_note": "Whiny, defensive naming that centers the exact YouTube grifter culture you want to ignore."
+    },
+    {
+      "name": "No Gurus",
+      "round": 2,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 3,
+        "stretch": 3,
+        "memorability": 5,
+        "sayability": 9,
+        "fit": 3
+      },
+      "auditor_note": "Reactive internet marketing posture that tells the listener nothing about real company operations."
+    },
+    {
+      "name": "Dispatch Desk",
+      "round": 2,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 8,
+        "stretch": 6,
+        "memorability": 6,
+        "sayability": 8,
+        "fit": 5
+      },
+      "auditor_note": "Artificial bottleneck that shrinks a whole company down to service dispatching, excluding sales and executive operations."
+    },
+    {
+      "name": "Job Cost",
+      "round": 2,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 8,
+        "stretch": 6,
+        "memorability": 5,
+        "sayability": 9,
+        "fit": 5
+      },
+      "auditor_note": "Accurate construction accounting term, but completely devoid of voice, technology, or narrative pull."
+    },
+    {
+      "name": "Work in Progress",
+      "round": 2,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 2,
+        "stretch": 3,
+        "memorability": 2,
+        "sayability": 8,
+        "fit": 3
+      },
+      "auditor_note": "Hopelessly overused title across every creative and business podcast, making discoverability nearly impossible."
+    },
+    {
+      "name": "Shop Rate",
+      "round": 2,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 7,
+        "stretch": 5,
+        "memorability": 6,
+        "sayability": 9,
+        "fit": 5
+      },
+      "auditor_note": "Sounds like an auto mechanic billing breakdown rather than modern software inside an enterprise trade business."
+    },
+    {
+      "name": "Keys to the Truck",
+      "round": 2,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 4,
+        "stretch": 4,
+        "memorability": 5,
+        "sayability": 7,
+        "fit": 4
+      },
+      "auditor_note": "Clunky, sentimental metaphor that sounds like passing down a family vehicle rather than business automation."
+    },
+    {
+      "name": "Chain of Command",
+      "round": 2,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 4,
+        "stretch": 3,
+        "memorability": 5,
+        "sayability": 8,
+        "fit": 3
+      },
+      "auditor_note": "Rigid military cliché projecting top-down authoritarian bureaucracy rather than agile operational innovation."
+    },
+    {
+      "name": "Front Line",
+      "round": 2,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 3,
+        "stretch": 3,
+        "memorability": 3,
+        "sayability": 9,
+        "fit": 3
+      },
+      "auditor_note": "Stale combat metaphor diluted by hundreds of news, healthcare, and retail programs."
+    },
+    {
+      "name": "Standard Operating Procedure",
+      "round": 2,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 8,
+        "stretch": 4,
+        "memorability": 3,
+        "sayability": 3,
+        "fit": 4
+      },
+      "auditor_note": "Painful mouthful to say out loud that screams dusty three-ring binder compliance."
+    },
+    {
+      "name": "Crew Cab",
+      "round": 2,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 5,
+        "stretch": 5,
+        "memorability": 6,
+        "sayability": 9,
+        "fit": 5
+      },
+      "auditor_note": "Strained automotive metaphor that sounds like pickup truck lifestyle radio instead of business technology."
+    },
+    {
+      "name": "The Handoff",
+      "round": 2,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 7,
+        "stretch": 4,
+        "memorability": 4,
+        "sayability": 9,
+        "fit": 4
+      },
+      "auditor_note": "Generic product management lingo with no grounding in the roofing industry or physical reality."
+    },
+    {
+      "name": "Owner's Desk",
+      "round": 2,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 6,
+        "stretch": 5,
+        "memorability": 5,
+        "sayability": 8,
+        "fit": 5
+      },
+      "auditor_note": "Stuffy executive framing that isolates Casey and completely sidelines the hands-on developers and production floor."
+    },
+    {
+      "name": "Heavy Lifting",
+      "round": 2,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 2,
+        "stretch": 3,
+        "memorability": 3,
+        "sayability": 9,
+        "fit": 3
+      },
+      "auditor_note": "Predictable, low-effort gym and labor metaphor that offers zero brand distinction."
+    },
+    {
+      "name": "Guardrails",
+      "round": 2,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 5,
+        "stretch": 4,
+        "memorability": 5,
+        "sayability": 9,
+        "fit": 4
+      },
+      "auditor_note": "Tech conference buzzword that frames AI entirely through fear, limitation, and legal compliance."
+    },
+    {
+      "name": "Real Operations",
+      "round": 2,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 8,
+        "stretch": 6,
+        "memorability": 4,
+        "sayability": 8,
+        "fit": 5
+      },
+      "auditor_note": "Direct but thoroughly forgettable label that reads like an internal company training module."
+    },
+    {
+      "name": "Monday Morning",
+      "round": 2,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 3,
+        "stretch": 3,
+        "memorability": 4,
+        "sayability": 8,
+        "fit": 3
+      },
+      "auditor_note": "Exhausted trope with zero searchability that sounds like a dreadful weekly status call."
+    },
+    {
+      "name": "The Rollout",
+      "round": 2,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 8,
+        "stretch": 6,
+        "memorability": 6,
+        "sayability": 9,
+        "fit": 6
+      },
+      "auditor_note": "Clean operational term, but generic enough to describe any standard enterprise IT software transition."
+    },
+    {
+      "name": "Weekly Numbers",
+      "round": 2,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 7,
+        "stretch": 4,
+        "memorability": 4,
+        "sayability": 8,
+        "fit": 4
+      },
+      "auditor_note": "Sounds like local state lottery results or a tedious bookkeeper balance sheet review."
+    },
+    {
+      "name": "Second Shift",
+      "round": 2,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 5,
+        "stretch": 4,
+        "memorability": 5,
+        "sayability": 9,
+        "fit": 4
+      },
+      "auditor_note": "Confusingly implies night factory shifts or moonlight freelancing instead of background automation."
+    },
+    {
+      "name": "Trade Secrets",
+      "round": 2,
+      "stage": "audit",
+      "reason": "pun",
+      "scores": {
+        "cheesiness": 2,
+        "stretch": 4,
+        "memorability": 4,
+        "sayability": 9,
+        "fit": 3
+      },
+      "auditor_note": "Groan-inducing trade pun that every contractor association has used to death since 1995."
+    },
+    {
+      "name": "Gulf Coast Operators",
+      "round": 2,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 7,
+        "stretch": 5,
+        "memorability": 5,
+        "sayability": 7,
+        "fit": 4
+      },
+      "auditor_note": "Hyper-regionalized chamber of commerce title that limits national reach and hides the AI subject matter."
+    },
+    {
+      "name": "The Bench",
+      "round": 2,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 4,
+        "stretch": 3,
+        "memorability": 4,
+        "sayability": 9,
+        "fit": 3
+      },
+      "auditor_note": "Trite athletic metaphor that sounds like corporate recruiting rather than building technology for physical businesses."
+    },
+    {
+      "name": "Uptime",
+      "round": 3,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 8,
+        "stretch": 4,
+        "memorability": 4,
+        "sayability": 9,
+        "fit": 4
+      },
+      "auditor_note": "Sounds like an AWS server status dashboard, completely masking trades operations and real business context."
+    },
+    {
+      "name": "Workload",
+      "round": 3,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 8,
+        "stretch": 4,
+        "memorability": 3,
+        "sayability": 9,
+        "fit": 4
+      },
+      "auditor_note": "Sterile project management buzzword that gets buried in search and leaves zero distinct impression."
+    },
+    {
+      "name": "Service Call",
+      "round": 3,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 9,
+        "stretch": 6,
+        "memorability": 5,
+        "sayability": 8,
+        "fit": 6
+      },
+      "auditor_note": "Classic trade term that grounds the operational reality but hides software and AI entirely."
+    },
+    {
+      "name": "Job Queue",
+      "round": 3,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 7,
+        "stretch": 5,
+        "memorability": 4,
+        "sayability": 8,
+        "fit": 5
+      },
+      "auditor_note": "Sounds like an operating system print driver or backlog ticket queue, alienating business owners."
+    },
+    {
+      "name": "Clipboard",
+      "round": 3,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 6,
+        "stretch": 5,
+        "memorability": 5,
+        "sayability": 9,
+        "fit": 4
+      },
+      "auditor_note": "A backward looking analog prop celebrating the friction software is supposed to eliminate."
+    },
+    {
+      "name": "Full Stack Contractor",
+      "round": 3,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 4,
+        "stretch": 5,
+        "memorability": 6,
+        "sayability": 6,
+        "fit": 5
+      },
+      "auditor_note": "Forcing Silicon Valley engineering jargon onto blue collar operators feels pretentious and unnatural."
+    },
+    {
+      "name": "Training Data",
+      "round": 3,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 7,
+        "stretch": 5,
+        "memorability": 4,
+        "sayability": 8,
+        "fit": 4
+      },
+      "auditor_note": "Sounds like an academic machine learning lecture, instantly tuning out contractors and property managers."
+    },
+    {
+      "name": "Build Log",
+      "round": 3,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 8,
+        "stretch": 5,
+        "memorability": 4,
+        "sayability": 8,
+        "fit": 4
+      },
+      "auditor_note": "Reads like a hobbyist GitHub changelog rather than an executive discussion in a roofing office."
+    },
+    {
+      "name": "Throughput",
+      "round": 3,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 8,
+        "stretch": 4,
+        "memorability": 3,
+        "sayability": 6,
+        "fit": 4
+      },
+      "auditor_note": "Stiff industrial engineering jargon that strips out all personality and trades identity."
+    },
+    {
+      "name": "Human in the Loop",
+      "round": 3,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 3,
+        "stretch": 5,
+        "memorability": 3,
+        "sayability": 5,
+        "fit": 4
+      },
+      "auditor_note": "The most exhausted, overused cliché in enterprise AI marketing; says nothing original."
+    },
+    {
+      "name": "Trucks and Tokens",
+      "round": 3,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 4,
+        "stretch": 8,
+        "memorability": 7,
+        "sayability": 8,
+        "fit": 7
+      },
+      "auditor_note": "Tokens is insider AI jargon that actual contractors never say, making the alliteration feel forced."
+    },
+    {
+      "name": "Payroll and Prompts",
+      "round": 3,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 3,
+        "stretch": 7,
+        "memorability": 6,
+        "sayability": 7,
+        "fit": 5
+      },
+      "auditor_note": "Cutesy alliteration that reduces applied artificial intelligence to a gimmick about writing chatbot prompts."
+    },
+    {
+      "name": "Field Data",
+      "round": 3,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 8,
+        "stretch": 6,
+        "memorability": 4,
+        "sayability": 8,
+        "fit": 6
+      },
+      "auditor_note": "Reads like an enterprise utility app brochure, completely devoid of energy or point of view."
+    },
+    {
+      "name": "Bottleneck",
+      "round": 3,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 7,
+        "stretch": 4,
+        "memorability": 4,
+        "sayability": 8,
+        "fit": 4
+      },
+      "auditor_note": "Unrelieved negative framing that makes the show sound like a dry theory of constraints seminar."
+    },
+    {
+      "name": "Fifty Trucks",
+      "round": 3,
+      "stage": "audit",
+      "reason": "stretch 6 (below 7)",
+      "scores": {
+        "cheesiness": 9,
+        "stretch": 6,
+        "memorability": 8,
+        "sayability": 9,
+        "fit": 8
+      },
+      "auditor_note": "Visceral and grounds operational scale instantly, though the subtitle must do heavy lifting for AI."
+    },
+    {
+      "name": "Hard Numbers",
+      "round": 3,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 4,
+        "stretch": 3,
+        "memorability": 4,
+        "sayability": 8,
+        "fit": 4
+      },
+      "auditor_note": "Trite corporate idiom that could belong to literally any accounting or bookkeeping podcast on Earth."
+    },
+    {
+      "name": "Lead to Ledger",
+      "round": 3,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 5,
+        "stretch": 6,
+        "memorability": 6,
+        "sayability": 8,
+        "fit": 6
+      },
+      "auditor_note": "Sounds like standard enterprise ERP billing software rather than an engaging operations conversation."
+    },
+    {
+      "name": "Spec Sheet",
+      "round": 3,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 8,
+        "stretch": 4,
+        "memorability": 4,
+        "sayability": 7,
+        "fit": 4
+      },
+      "auditor_note": "Boring technical documentation jargon that suggests reviewing roofing shingles rather than discussing business strategy."
+    },
+    {
+      "name": "Real Stakes",
+      "round": 3,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 4,
+        "stretch": 3,
+        "memorability": 4,
+        "sayability": 8,
+        "fit": 4
+      },
+      "auditor_note": "Vague, melodramatic title that sounds like true crime or investigative reporting instead of operational software."
+    },
+    {
+      "name": "Signal to Noise",
+      "round": 3,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 3,
+        "stretch": 3,
+        "memorability": 3,
+        "sayability": 7,
+        "fit": 3
+      },
+      "auditor_note": "Exhausted audio engineering cliché used by hundreds of newsletters; communicates zero domain context."
+    },
+    {
+      "name": "Batch Job",
+      "round": 3,
+      "stage": "audit",
+      "reason": "pun",
+      "scores": {
+        "cheesiness": 4,
+        "stretch": 5,
+        "memorability": 4,
+        "sayability": 8,
+        "fit": 4
+      },
+      "auditor_note": "A corny pun on jobs that makes the company sound like an old mainframe processing scripts."
+    },
+    {
+      "name": "Operating Model",
+      "round": 3,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 8,
+        "stretch": 4,
+        "memorability": 3,
+        "sayability": 6,
+        "fit": 4
+      },
+      "auditor_note": "Consulting slide deck speak that instantly drains the life and personality out of the company."
+    },
+    {
+      "name": "Crew and Code",
+      "round": 3,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 4,
+        "stretch": 8,
+        "memorability": 6,
+        "sayability": 8,
+        "fit": 7
+      },
+      "auditor_note": "Formulaic alliteration that sounds like a tech conference panel rather than a practical business show."
+    },
+    {
+      "name": "Quote to Cash",
+      "round": 3,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 5,
+        "stretch": 5,
+        "memorability": 5,
+        "sayability": 8,
+        "fit": 5
+      },
+      "auditor_note": "Generic Salesforce ecosystem sales terminology that makes the show sound like a CRM vendor pitch."
+    },
+    {
+      "name": "The Punch Out",
+      "round": 3,
+      "stage": "audit",
+      "reason": "pun",
+      "scores": {
+        "cheesiness": 4,
+        "stretch": 4,
+        "memorability": 5,
+        "sayability": 8,
+        "fit": 4
+      },
+      "auditor_note": "Muddled double pun between punch lists and boxing that confuses the core business focus."
+    },
+    {
+      "name": "Production Ready",
+      "round": 4,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 7,
+        "stretch": 5,
+        "memorability": 4,
+        "sayability": 8,
+        "fit": 5
+      },
+      "auditor_note": "Sounds like an enterprise DevOps show and will get buried by software engineering podcasts in search."
+    },
+    {
+      "name": "Production Grade",
+      "round": 4,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 7,
+        "stretch": 4,
+        "memorability": 4,
+        "sayability": 8,
+        "fit": 5
+      },
+      "auditor_note": "Reads like enterprise cloud infrastructure marketing copy rather than a practical trades business show."
+    },
+    {
+      "name": "The Install",
+      "round": 4,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 5,
+        "stretch": 4,
+        "memorability": 5,
+        "sayability": 9,
+        "fit": 4
+      },
+      "auditor_note": "Equating software implementation to physical roof installation is a strained metaphor that collapses on air."
+    },
+    {
+      "name": "Field Deployed",
+      "round": 4,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 6,
+        "stretch": 5,
+        "memorability": 5,
+        "sayability": 7,
+        "fit": 6
+      },
+      "auditor_note": "Sounds like defense tech or rugged hardware, obscuring the day to day trades business focus."
+    },
+    {
+      "name": "Office, Field, Fleet",
+      "round": 4,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 6,
+        "stretch": 6,
+        "memorability": 4,
+        "sayability": 5,
+        "fit": 6
+      },
+      "auditor_note": "Triplet noun titles are forgettable, tedious to say on air, and read like internal org charts."
+    },
+    {
+      "name": "Service Ticket",
+      "round": 4,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 6,
+        "stretch": 3,
+        "memorability": 4,
+        "sayability": 8,
+        "fit": 4
+      },
+      "auditor_note": "Instantly evokes corporate IT helpdesk support tickets instead of commercial roofing and field operations."
+    },
+    {
+      "name": "The Yard",
+      "round": 4,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 8,
+        "stretch": 3,
+        "memorability": 5,
+        "sayability": 9,
+        "fit": 4
+      },
+      "auditor_note": "Far too broad to own in search and completely omits the technology angle."
+    },
+    {
+      "name": "Morning Dispatch",
+      "round": 4,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 6,
+        "stretch": 4,
+        "memorability": 5,
+        "sayability": 8,
+        "fit": 5
+      },
+      "auditor_note": "Sounds like a daily trucking bulletin or regional news digest rather than an AI business discussion."
+    },
+    {
+      "name": "Operators and Algorithms",
+      "round": 4,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 3,
+        "stretch": 7,
+        "memorability": 5,
+        "sayability": 4,
+        "fit": 5
+      },
+      "auditor_note": "Pretentious MBA alliteration that feels completely disconnected from job sites, trucks, and trades culture."
+    },
+    {
+      "name": "Working Software",
+      "round": 4,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 5,
+        "stretch": 3,
+        "memorability": 3,
+        "sayability": 8,
+        "fit": 4
+      },
+      "auditor_note": "Directly lifts Agile Manifesto phrasing and drowns in thousands of generic software engineering search hits."
+    },
+    {
+      "name": "Payroll Tuesday",
+      "round": 4,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 7,
+        "stretch": 3,
+        "memorability": 6,
+        "sayability": 8,
+        "fit": 4
+      },
+      "auditor_note": "Evokes small business cash flow panic, but completely obscures AI and operations from the premise."
+    },
+    {
+      "name": "Real Crews",
+      "round": 4,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 7,
+        "stretch": 3,
+        "memorability": 5,
+        "sayability": 8,
+        "fit": 4
+      },
+      "auditor_note": "Sounds like a Discovery Channel reality series and completely hides the software and AI thesis."
+    },
+    {
+      "name": "Jobsite Software",
+      "round": 4,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 8,
+        "stretch": 6,
+        "memorability": 4,
+        "sayability": 7,
+        "fit": 6
+      },
+      "auditor_note": "Dry trade journal title that sounds like a sponsored procurement podcast for commercial construction tools."
+    },
+    {
+      "name": "Work Order",
+      "round": 4,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 8,
+        "stretch": 4,
+        "memorability": 4,
+        "sayability": 8,
+        "fit": 5
+      },
+      "auditor_note": "Clean sayability, but so generic it will get lost against every facilities management podcast."
+    },
+    {
+      "name": "Blue Collar Code",
+      "round": 4,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 3,
+        "stretch": 7,
+        "memorability": 6,
+        "sayability": 8,
+        "fit": 6
+      },
+      "auditor_note": "Tired blue collar branding trope that reduces practical business tech to a patronizing aesthetic."
+    },
+    {
+      "name": "Trucks, Tools and AI",
+      "round": 4,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 4,
+        "stretch": 8,
+        "memorability": 4,
+        "sayability": 4,
+        "fit": 7
+      },
+      "auditor_note": "Clunky list title that sounds like an SEO blog post rather than a broadcast brand."
+    },
+    {
+      "name": "Owner Operated",
+      "round": 4,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 8,
+        "stretch": 4,
+        "memorability": 5,
+        "sayability": 7,
+        "fit": 5
+      },
+      "auditor_note": "Strongly associated with solo truck drivers and independent contractors rather than fleet operations and software."
+    },
+    {
+      "name": "The Ops Desk",
+      "round": 4,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 6,
+        "stretch": 4,
+        "memorability": 5,
+        "sayability": 8,
+        "fit": 4
+      },
+      "auditor_note": "Ops desk sounds like Wall Street trading or airline logistics, not commercial roofing production."
+    },
+    {
+      "name": "Built for Crews",
+      "round": 4,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 6,
+        "stretch": 4,
+        "memorability": 4,
+        "sayability": 8,
+        "fit": 5
+      },
+      "auditor_note": "Sounds like marketing copy on the back of a ruggedized tablet box rather than a show."
+    },
+    {
+      "name": "Machines on Payroll",
+      "round": 5,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 6,
+        "stretch": 7,
+        "memorability": 7,
+        "sayability": 8,
+        "fit": 7
+      },
+      "auditor_note": "Personifying software like an employee is a tired corporate trope that cheapens operational reality."
+    },
+    {
+      "name": "New Hire",
+      "round": 5,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 7,
+        "stretch": 3,
+        "memorability": 4,
+        "sayability": 9,
+        "fit": 3
+      },
+      "auditor_note": "Completely indistinguishable from human resources onboarding material. Tells the listener nothing about trades or tech."
+    },
+    {
+      "name": "Twelve Trucks and a Chatbot",
+      "round": 5,
+      "stage": "audit",
+      "reason": "cheesiness 6 (below 7)",
+      "scores": {
+        "cheesiness": 6,
+        "stretch": 8,
+        "memorability": 8,
+        "sayability": 6,
+        "fit": 7
+      },
+      "auditor_note": "Vivid and specific, though chatbot sounds like yesterday's tech and twelve trucks is a mouthful."
+    },
+    {
+      "name": "Trucks and Chatbots",
+      "round": 5,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 5,
+        "stretch": 7,
+        "memorability": 5,
+        "sayability": 7,
+        "fit": 6
+      },
+      "auditor_note": "Lazy pairing that reduces complex enterprise AI down to customer support widgets."
+    },
+    {
+      "name": "Big Iron",
+      "round": 5,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 8,
+        "stretch": 4,
+        "memorability": 7,
+        "sayability": 8,
+        "fit": 4
+      },
+      "auditor_note": "Roofers do not operate Caterpillar earthmovers or vintage IBM mainframes. The borrowed masculine posture fails."
+    },
+    {
+      "name": "Crews and Computers",
+      "round": 5,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 3,
+        "stretch": 8,
+        "memorability": 4,
+        "sayability": 7,
+        "fit": 5
+      },
+      "auditor_note": "Trite alliteration that sounds like a municipal computer literacy workshop from 1998."
+    },
+    {
+      "name": "Nobody's Side Hustle",
+      "round": 5,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 6,
+        "stretch": 4,
+        "memorability": 6,
+        "sayability": 8,
+        "fit": 5
+      },
+      "auditor_note": "Negative framing lets YouTube hustle culture set the agenda instead of establishing your authority."
+    },
+    {
+      "name": "The Dispatch Room",
+      "round": 5,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 9,
+        "stretch": 6,
+        "memorability": 6,
+        "sayability": 8,
+        "fit": 5
+      },
+      "auditor_note": "Sounds like an ordinary service operations broadcast while completely hiding the software focus."
+    },
+    {
+      "name": "Field and Firmware",
+      "round": 5,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 4,
+        "stretch": 3,
+        "memorability": 6,
+        "sayability": 5,
+        "fit": 3
+      },
+      "auditor_note": "Contractors do not write firmware. Forcing technical alliteration exposes a basic misunderstanding of terminology."
+    },
+    {
+      "name": "Server Room, Job Site",
+      "round": 5,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 7,
+        "stretch": 6,
+        "memorability": 5,
+        "sayability": 4,
+        "fit": 6
+      },
+      "auditor_note": "The mid-title comma creates terrible spoken cadence, and modern roofing companies run cloud software."
+    },
+    {
+      "name": "Crew of Three",
+      "round": 5,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 7,
+        "stretch": 2,
+        "memorability": 3,
+        "sayability": 8,
+        "fit": 2
+      },
+      "auditor_note": "Self-indulgent inside baseball that describes the studio table while ignoring the listener completely."
+    },
+    {
+      "name": "Hard Hat Software",
+      "round": 5,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 3,
+        "stretch": 8,
+        "memorability": 6,
+        "sayability": 7,
+        "fit": 6
+      },
+      "auditor_note": "Construction visual cliché that sounds like a bad third-party SaaS vendor peddling inventory forms."
+    },
+    {
+      "name": "Payroll Company",
+      "round": 5,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 8,
+        "stretch": 1,
+        "memorability": 2,
+        "sayability": 8,
+        "fit": 2
+      },
+      "auditor_note": "Painfully misleading. Search algorithms and prospective listeners will assume you sell outsourced bookkeeping."
+    },
+    {
+      "name": "The Robot on Payroll",
+      "round": 5,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 2,
+        "stretch": 7,
+        "memorability": 6,
+        "sayability": 7,
+        "fit": 4
+      },
+      "auditor_note": "Calling software a robot is childish sci-fi shorthand that kills credibility with serious operators."
+    },
+    {
+      "name": "Every Department",
+      "round": 6,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 8,
+        "stretch": 3,
+        "memorability": 3,
+        "sayability": 8,
+        "fit": 4
+      },
+      "auditor_note": "Sounds like an internal HR training module or corporate compliance memo instead of an AI show."
+    },
+    {
+      "name": "Operator Stack",
+      "round": 6,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 6,
+        "stretch": 4,
+        "memorability": 5,
+        "sayability": 7,
+        "fit": 5
+      },
+      "auditor_note": "Smells like venture-backed Silicon Valley buzzwords rather than authentic roofing contractor operations."
+    },
+    {
+      "name": "Fleet Scale",
+      "round": 6,
+      "stage": "audit",
+      "reason": "stretch 6 (below 7)",
+      "scores": {
+        "cheesiness": 8,
+        "stretch": 6,
+        "memorability": 7,
+        "sayability": 8,
+        "fit": 7
+      },
+      "auditor_note": "Solid contrast with laptop solopreneurs, but the AI connection still relies entirely on the subtitle."
+    },
+    {
+      "name": "Payroll Proof",
+      "round": 6,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 5,
+        "stretch": 3,
+        "memorability": 5,
+        "sayability": 6,
+        "fit": 4
+      },
+      "auditor_note": "Trying too hard to sound rugged. Sounds like payroll software or workers comp insurance audits."
+    },
+    {
+      "name": "The Big Shop",
+      "round": 6,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 8,
+        "stretch": 4,
+        "memorability": 6,
+        "sayability": 9,
+        "fit": 5
+      },
+      "auditor_note": "Authentic trades slang, but completely omits the AI angle and sounds like generic contractor radio."
+    },
+    {
+      "name": "Midsize",
+      "round": 6,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 8,
+        "stretch": 2,
+        "memorability": 2,
+        "sayability": 8,
+        "fit": 3
+      },
+      "auditor_note": "Completely unsearchable in podcast apps and sounds like a rental car tier or clothing section."
+    },
+    {
+      "name": "What Survived",
+      "round": 6,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 4,
+        "stretch": 2,
+        "memorability": 6,
+        "sayability": 8,
+        "fit": 3
+      },
+      "auditor_note": "Far too melodramatic. Listeners will expect a true crime or hurricane survival story."
+    },
+    {
+      "name": "Survived the Rollout",
+      "round": 6,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 5,
+        "stretch": 5,
+        "memorability": 5,
+        "sayability": 5,
+        "fit": 5
+      },
+      "auditor_note": "Past tense verb phrase makes for an awkward title anchored in technology fatigue."
+    },
+    {
+      "name": "The Dispatch Board",
+      "round": 6,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 8,
+        "stretch": 4,
+        "memorability": 5,
+        "sayability": 7,
+        "fit": 4
+      },
+      "auditor_note": "Too narrow. Shrinks the whole company down to scheduling service trucks, ignoring production and sales."
+    },
+    {
+      "name": "Real Books",
+      "round": 6,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 6,
+        "stretch": 2,
+        "memorability": 4,
+        "sayability": 8,
+        "fit": 3
+      },
+      "auditor_note": "Misleads listeners into expecting a CPA podcast about tax deductions and QuickBooks cleanup."
+    },
+    {
+      "name": "Beyond One Truck",
+      "round": 6,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 5,
+        "stretch": 5,
+        "memorability": 6,
+        "sayability": 7,
+        "fit": 5
+      },
+      "auditor_note": "The man-in-a-truck framing is exhausted in contractor marketing and says nothing about artificial intelligence."
+    },
+    {
+      "name": "Department Heads",
+      "round": 6,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 7,
+        "stretch": 3,
+        "memorability": 3,
+        "sayability": 7,
+        "fit": 4
+      },
+      "auditor_note": "Dull corporate terminology that promises a boring middle-management meeting rather than practical technology insight."
+    },
+    {
+      "name": "AI on the Job",
+      "round": 7,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 5,
+        "stretch": 9,
+        "memorability": 4,
+        "sayability": 9,
+        "fit": 7
+      },
+      "auditor_note": "Tired blue-collar cliché that sounds like an OSHA compliance video rather than an insightful business show."
+    },
+    {
+      "name": "AI in the Truck",
+      "round": 7,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 5,
+        "stretch": 5,
+        "memorability": 5,
+        "sayability": 8,
+        "fit": 4
+      },
+      "auditor_note": "Arbitrarily narrows the premise to vehicle telematics, ignoring office operations, accounting, and production workflows."
+    },
+    {
+      "name": "Forty People and an AI",
+      "round": 7,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 4,
+        "stretch": 6,
+        "memorability": 6,
+        "sayability": 5,
+        "fit": 5
+      },
+      "auditor_note": "Clunky phrasing that will instantly expire and sound silly the moment company headcount changes."
+    },
+    {
+      "name": "A Fleet and a Chatbot",
+      "round": 7,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 3,
+        "stretch": 5,
+        "memorability": 5,
+        "sayability": 7,
+        "fit": 3
+      },
+      "auditor_note": "Trivializes operational AI into a basic customer service chatbot and reads like a cute fable title."
+    },
+    {
+      "name": "Working Models",
+      "round": 7,
+      "stage": "audit",
+      "reason": "pun",
+      "scores": {
+        "cheesiness": 4,
+        "stretch": 5,
+        "memorability": 6,
+        "sayability": 8,
+        "fit": 5
+      },
+      "auditor_note": "An irritating double meaning on machine learning models that confuses listeners and sounds like fashion."
+    },
+    {
+      "name": "Contractor Software",
+      "round": 7,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 8,
+        "stretch": 8,
+        "memorability": 2,
+        "sayability": 8,
+        "fit": 6
+      },
+      "auditor_note": "Painfully dry B2B directory label that sounds like software patch notes rather than an engaging podcast."
+    },
+    {
+      "name": "Field Automation",
+      "round": 7,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 8,
+        "stretch": 7,
+        "memorability": 3,
+        "sayability": 7,
+        "fit": 6
+      },
+      "auditor_note": "Reads like an enterprise industrial brochure instead of a candid conversation between real operators."
+    },
+    {
+      "name": "Machine Shop",
+      "round": 7,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 5,
+        "stretch": 2,
+        "memorability": 6,
+        "sayability": 8,
+        "fit": 2
+      },
+      "auditor_note": "Confusing physical metaphor that falsely implies metal fabrication or machining rather than roofing and software."
+    },
+    {
+      "name": "Estimates and Algorithms",
+      "round": 7,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 4,
+        "stretch": 6,
+        "memorability": 5,
+        "sayability": 4,
+        "fit": 5
+      },
+      "auditor_note": "Stiff academic alliteration that sounds like an accounting lecture and trips over the tongue."
+    },
+    {
+      "name": "Crew Software",
+      "round": 7,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 8,
+        "stretch": 7,
+        "memorability": 2,
+        "sayability": 8,
+        "fit": 5
+      },
+      "auditor_note": "Indistinguishable from a generic field service management utility app, offering zero brand identity."
+    },
+    {
+      "name": "Gulf Coast Compute",
+      "round": 7,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 6,
+        "stretch": 3,
+        "memorability": 6,
+        "sayability": 6,
+        "fit": 3
+      },
+      "auditor_note": "Compute is high performance infrastructure jargon that completely alienates trades operators and property managers."
+    },
+    {
+      "name": "The Payroll Test",
+      "round": 8,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 8,
+        "stretch": 4,
+        "memorability": 5,
+        "sayability": 9,
+        "fit": 5
+      },
+      "auditor_note": "Sounds like an accounting podcast or HR compliance checklist, missing AI and operations entirely."
+    },
+    {
+      "name": "Hype Meets Payroll",
+      "round": 8,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 4,
+        "stretch": 6,
+        "memorability": 5,
+        "sayability": 6,
+        "fit": 4
+      },
+      "auditor_note": "Tired formula that sounds like a single webinar title rather than a durable multi-year podcast brand."
+    },
+    {
+      "name": "Blue Collar Automation",
+      "round": 8,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 7,
+        "stretch": 8,
+        "memorability": 5,
+        "sayability": 8,
+        "fit": 7
+      },
+      "auditor_note": "Too dry and literal, sounding like a factory robotics report or an enterprise IT newsletter."
+    },
+    {
+      "name": "Demo Day Is Over",
+      "round": 8,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 6,
+        "stretch": 3,
+        "memorability": 7,
+        "sayability": 8,
+        "fit": 3
+      },
+      "auditor_note": "Uses Silicon Valley jargon that means nothing to commercial roofers and property managers."
+    },
+    {
+      "name": "Closed Jobs",
+      "round": 8,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 8,
+        "stretch": 3,
+        "memorability": 4,
+        "sayability": 7,
+        "fit": 4
+      },
+      "auditor_note": "Ambiguous phrase that sounds like a defunct job board or a basic sales pipeline tracker."
+    },
+    {
+      "name": "The Automation Crew",
+      "round": 8,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 3,
+        "stretch": 6,
+        "memorability": 4,
+        "sayability": 8,
+        "fit": 5
+      },
+      "auditor_note": "Sounds like a Saturday morning cartoon or an internal IT committee rather than serious executive talk."
+    },
+    {
+      "name": "Real Company Automation",
+      "round": 8,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 5,
+        "stretch": 7,
+        "memorability": 3,
+        "sayability": 7,
+        "fit": 5
+      },
+      "auditor_note": "Defensive and uninspired SEO slurry that reads like an enterprise SaaS white paper."
+    },
+    {
+      "name": "Operators Desk",
+      "round": 8,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 6,
+        "stretch": 4,
+        "memorability": 4,
+        "sayability": 6,
+        "fit": 4
+      },
+      "auditor_note": "A lazy deskbound trope that ignores field reality and completely omits the technology angle."
+    },
+    {
+      "name": "Signed Invoices",
+      "round": 8,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 7,
+        "stretch": 4,
+        "memorability": 5,
+        "sayability": 7,
+        "fit": 4
+      },
+      "auditor_note": "Evokes collections agencies and accounts receivable rather than practical field operations or artificial intelligence."
+    },
+    {
+      "name": "Operating Company",
+      "round": 9,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 9,
+        "stretch": 4,
+        "memorability": 2,
+        "sayability": 8,
+        "fit": 3
+      },
+      "auditor_note": "Sounds like a private equity shell company or legal entity rather than an engaging podcast."
+    },
+    {
+      "name": "The Working Company",
+      "round": 9,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 8,
+        "stretch": 3,
+        "memorability": 2,
+        "sayability": 8,
+        "fit": 3
+      },
+      "auditor_note": "Empty corporate phrasing that reveals nothing about technology, trades, or field operations."
+    },
+    {
+      "name": "Big Company AI, Small Town Roots",
+      "round": 9,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 2,
+        "stretch": 4,
+        "memorability": 3,
+        "sayability": 3,
+        "fit": 4
+      },
+      "auditor_note": "Bloated country song cliche that sounds like regional bank advertising instead of practical tech talk."
+    },
+    {
+      "name": "Hardworking Software",
+      "round": 9,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 5,
+        "stretch": 4,
+        "memorability": 3,
+        "sayability": 7,
+        "fit": 4
+      },
+      "auditor_note": "Reads like a boring SaaS marketing brochure instead of actual operators implementing tools."
+    },
+    {
+      "name": "Twenty Trucks Deep",
+      "round": 9,
+      "stage": "audit",
+      "reason": "stretch 6 (below 7)",
+      "scores": {
+        "cheesiness": 9,
+        "stretch": 6,
+        "memorability": 8,
+        "sayability": 9,
+        "fit": 7
+      },
+      "auditor_note": "Great authentic cadence, but completely relies on the tagline to introduce technology or AI."
+    },
+    {
+      "name": "Truck Count",
+      "round": 9,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 8,
+        "stretch": 5,
+        "memorability": 4,
+        "sayability": 9,
+        "fit": 5
+      },
+      "auditor_note": "Sterile industry metric that reads like an inventory spreadsheet header rather than a show title."
+    },
+    {
+      "name": "The Fleet Office",
+      "round": 9,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 8,
+        "stretch": 3,
+        "memorability": 3,
+        "sayability": 7,
+        "fit": 3
+      },
+      "auditor_note": "Misleadingly implies a show about vehicle maintenance, dispatch logistics, or trucking dispatchers."
+    },
+    {
+      "name": "Crew Scale",
+      "round": 9,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 6,
+        "stretch": 4,
+        "memorability": 4,
+        "sayability": 8,
+        "fit": 5
+      },
+      "auditor_note": "Unnatural hybrid of Silicon Valley jargon and field vocabulary that pleases neither audience."
+    },
+    {
+      "name": "Property and Process",
+      "round": 9,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 5,
+        "stretch": 2,
+        "memorability": 2,
+        "sayability": 7,
+        "fit": 2
+      },
+      "auditor_note": "Dull alliteration that sounds like a compliance webinar for commercial real estate lawyers."
+    },
+    {
+      "name": "After the Pilot",
+      "round": 10,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 7,
+        "stretch": 3,
+        "memorability": 4,
+        "sayability": 8,
+        "fit": 3
+      },
+      "auditor_note": "Sounds like an aviation show or TV recap. Trades operators will scroll right past it."
+    },
+    {
+      "name": "The Truck and the Terminal",
+      "round": 10,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 5,
+        "stretch": 4,
+        "memorability": 6,
+        "sayability": 6,
+        "fit": 5
+      },
+      "auditor_note": "Terminal reads as airport or shipping freight. The forced tech metaphor sounds pretentious."
+    },
+    {
+      "name": "Trades at Scale",
+      "round": 10,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 6,
+        "stretch": 6,
+        "memorability": 3,
+        "sayability": 8,
+        "fit": 5
+      },
+      "auditor_note": "Tired Silicon Valley buzzword bolted onto trades. Sounds like a snooze-inducing sponsor webinar."
+    },
+    {
+      "name": "Fully Staffed",
+      "round": 10,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 7,
+        "stretch": 2,
+        "memorability": 4,
+        "sayability": 9,
+        "fit": 2
+      },
+      "auditor_note": "Sounds like an HR recruiting podcast about labor shortages. Gives zero indication of technology."
+    },
+    {
+      "name": "Jobsite Compute",
+      "round": 10,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 6,
+        "stretch": 4,
+        "memorability": 5,
+        "sayability": 7,
+        "fit": 4
+      },
+      "auditor_note": "Nobody in construction uses compute as a noun. Tech nerd jargon forced onto blue-collar work."
+    },
+    {
+      "name": "Real Ops",
+      "round": 10,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 5,
+        "stretch": 3,
+        "memorability": 3,
+        "sayability": 8,
+        "fit": 3
+      },
+      "auditor_note": "Vague corporate jargon that sounds like military talk or DevOps. Completely hides the show premise."
+    },
+    {
+      "name": "Two Trucks and Up",
+      "round": 10,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 6,
+        "stretch": 5,
+        "memorability": 6,
+        "sayability": 7,
+        "fit": 4
+      },
+      "auditor_note": "An overused contractor coaching cliché. Leaves out technology entirely, making it sound like basic coaching."
+    },
+    {
+      "name": "Not a Tech Company",
+      "round": 11,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 7,
+        "stretch": 5,
+        "memorability": 6,
+        "sayability": 8,
+        "fit": 6
+      },
+      "auditor_note": "Framing by negation hides the topic; sounds like a timid apology rather than an authoritative business show."
+    },
+    {
+      "name": "Commercial Grade",
+      "round": 11,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 8,
+        "stretch": 4,
+        "memorability": 4,
+        "sayability": 8,
+        "fit": 4
+      },
+      "auditor_note": "Sounds like an industrial supply catalog or tool line, completely burying the AI angle."
+    },
+    {
+      "name": "Diesel and Data",
+      "round": 11,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 3,
+        "stretch": 6,
+        "memorability": 6,
+        "sayability": 8,
+        "fit": 5
+      },
+      "auditor_note": "Tired alliterative marketing trope that sounds like an airport business book."
+    },
+    {
+      "name": "Installed Base",
+      "round": 11,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 8,
+        "stretch": 3,
+        "memorability": 3,
+        "sayability": 6,
+        "fit": 3
+      },
+      "auditor_note": "Enterprise SaaS sales jargon misapplied to field operations; trade contractors will tune out immediately."
+    },
+    {
+      "name": "The Second Estimator",
+      "round": 11,
+      "stage": "audit",
+      "reason": "stretch 6 (below 7)",
+      "scores": {
+        "cheesiness": 8,
+        "stretch": 6,
+        "memorability": 7,
+        "sayability": 8,
+        "fit": 6
+      },
+      "auditor_note": "Strong trade hook, but artificially narrows the show to estimating rather than full operations."
+    },
+    {
+      "name": "Shop Floor AI",
+      "round": 11,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 6,
+        "stretch": 5,
+        "memorability": 4,
+        "sayability": 7,
+        "fit": 4
+      },
+      "auditor_note": "Roofers manage field crews and trucks; shop floor is manufacturing terminology."
+    },
+    {
+      "name": "Board Meeting",
+      "round": 11,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 8,
+        "stretch": 2,
+        "memorability": 2,
+        "sayability": 9,
+        "fit": 2
+      },
+      "auditor_note": "Sounds like dry condo association governance; offers zero indication of technology or operations."
+    },
+    {
+      "name": "Actually Implemented",
+      "round": 11,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 7,
+        "stretch": 4,
+        "memorability": 3,
+        "sayability": 3,
+        "fit": 5
+      },
+      "auditor_note": "Clunky mouthfeel that reads like a defensive LinkedIn comment instead of a show title."
+    },
+    {
+      "name": "Hands-On AI",
+      "round": 11,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 4,
+        "stretch": 6,
+        "memorability": 3,
+        "sayability": 7,
+        "fit": 5
+      },
+      "auditor_note": "Exhausted corporate cliché that gets lost among thousands of generic software tutorials."
+    },
+    {
+      "name": "Grease and GPUs",
+      "round": 11,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 2,
+        "stretch": 4,
+        "memorability": 5,
+        "sayability": 5,
+        "fit": 3
+      },
+      "auditor_note": "Contrived alliteration pairing an irrelevant mechanic trope with hardware roofers never touch."
+    },
+    {
+      "name": "The Tool Crib",
+      "round": 12,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 7,
+        "stretch": 3,
+        "memorability": 4,
+        "sayability": 9,
+        "fit": 4
+      },
+      "auditor_note": "Sounds like a physical tool review show and completely hides the AI premise behind blue-collar wallpaper."
+    },
+    {
+      "name": "AI in the Field Office",
+      "round": 12,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 8,
+        "stretch": 8,
+        "memorability": 5,
+        "sayability": 7,
+        "fit": 7
+      },
+      "auditor_note": "Accurate but dead boring. Reads like an enterprise software white paper rather than a broadcast."
+    },
+    {
+      "name": "Blue Collar Stack",
+      "round": 12,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 5,
+        "stretch": 7,
+        "memorability": 6,
+        "sayability": 8,
+        "fit": 6
+      },
+      "auditor_note": "Tech bro jargon clumsily stapled onto trades work. Sounds like a venture fund pitch deck."
+    },
+    {
+      "name": "The Morning After the Demo",
+      "round": 12,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 6,
+        "stretch": 4,
+        "memorability": 6,
+        "sayability": 5,
+        "fit": 4
+      },
+      "auditor_note": "Way too long and sounds like generic enterprise software procurement with zero trades identity."
+    },
+    {
+      "name": "Field Office",
+      "round": 12,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 9,
+        "stretch": 2,
+        "memorability": 3,
+        "sayability": 9,
+        "fit": 3
+      },
+      "auditor_note": "Total SEO disaster that gives prospective listeners zero clue this show covers applied AI."
+    },
+    {
+      "name": "AI With a Service Department",
+      "round": 12,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 7,
+        "stretch": 7,
+        "memorability": 6,
+        "sayability": 5,
+        "fit": 7
+      },
+      "auditor_note": "Awkward phrasing that reads like an internal slide deck bullet point rather than an audio brand."
+    },
+    {
+      "name": "Working Class Compute",
+      "round": 12,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 4,
+        "stretch": 5,
+        "memorability": 6,
+        "sayability": 6,
+        "fit": 4
+      },
+      "auditor_note": "Roofers and trades operators do not say compute. Pure Silicon Valley cosplay."
+    },
+    {
+      "name": "The Tool Room",
+      "round": 12,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 7,
+        "stretch": 3,
+        "memorability": 3,
+        "sayability": 9,
+        "fit": 3
+      },
+      "auditor_note": "Vague physical metaphor that tells listeners nothing about software and disappears in search."
+    },
+    {
+      "name": "Beyond the Solo Channel",
+      "round": 12,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 6,
+        "stretch": 3,
+        "memorability": 4,
+        "sayability": 6,
+        "fit": 3
+      },
+      "auditor_note": "Defines the show by attacking YouTube creators instead of articulating its own core value."
+    },
+    {
+      "name": "Does It Pencil",
+      "round": 13,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 7,
+        "stretch": 4,
+        "memorability": 5,
+        "sayability": 8,
+        "fit": 5
+      },
+      "auditor_note": "Overused estimator jargon that leaves listeners guessing whether you talk about software or tax write-offs."
+    },
+    {
+      "name": "AI That Shows Up",
+      "round": 13,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 4,
+        "stretch": 6,
+        "memorability": 5,
+        "sayability": 8,
+        "fit": 5
+      },
+      "auditor_note": "Forces an awkward blue-collar labor metaphor onto code, sounding patronizing instead of grounded."
+    },
+    {
+      "name": "Grown-Up AI",
+      "round": 13,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 5,
+        "stretch": 6,
+        "memorability": 5,
+        "sayability": 9,
+        "fit": 4
+      },
+      "auditor_note": "Condescending corporate boardroom fluff that strips away contractor grit and smells like consulting firm marketing."
+    },
+    {
+      "name": "Keep or Cut",
+      "round": 13,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 8,
+        "stretch": 3,
+        "memorability": 6,
+        "sayability": 9,
+        "fit": 4
+      },
+      "auditor_note": "Zero subject context leaves it sounding like a fantasy football podcast or a lawn care show."
+    },
+    {
+      "name": "Before the Truck Rolls",
+      "round": 13,
+      "stage": "audit",
+      "reason": "stretch 6 (below 7)",
+      "scores": {
+        "cheesiness": 8,
+        "stretch": 6,
+        "memorability": 8,
+        "sayability": 7,
+        "fit": 8
+      },
+      "auditor_note": "Omits AI entirely from the title, forcing the cover art and description to do the heavy lifting."
+    },
+    {
+      "name": "Earned Its Keep",
+      "round": 13,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 6,
+        "stretch": 3,
+        "memorability": 4,
+        "sayability": 7,
+        "fit": 3
+      },
+      "auditor_note": "Passive country-store cliche that hides the technology angle behind tired grandfatherly phrasing."
+    },
+    {
+      "name": "AI That Pays",
+      "round": 13,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 3,
+        "stretch": 6,
+        "memorability": 4,
+        "sayability": 9,
+        "fit": 3
+      },
+      "auditor_note": "Sounds like cheap YouTube affiliate clickbait, undermining the professional credibility of real contractors."
+    },
+    {
+      "name": "Street Level AI",
+      "round": 13,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 6,
+        "stretch": 6,
+        "memorability": 6,
+        "sayability": 8,
+        "fit": 5
+      },
+      "auditor_note": "Tries too hard for urban grit, using a sidewalk metaphor that clashes with roofing job sites."
+    },
+    {
+      "name": "Full-Size AI",
+      "round": 14,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 5,
+        "stretch": 5,
+        "memorability": 6,
+        "sayability": 8,
+        "fit": 6
+      },
+      "auditor_note": "Borrowing truck terminology for business software is a strained metaphor that requires immediate explanation."
+    },
+    {
+      "name": "Heavy Duty AI",
+      "round": 14,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 4,
+        "stretch": 6,
+        "memorability": 5,
+        "sayability": 7,
+        "fit": 6
+      },
+      "auditor_note": "Slapping rugged industrial adjectives onto software sounds like lazy agency marketing from 2018."
+    },
+    {
+      "name": "Workhorse AI",
+      "round": 14,
+      "stage": "audit",
+      "reason": "cheesiness 6 (below 7)",
+      "scores": {
+        "cheesiness": 6,
+        "stretch": 8,
+        "memorability": 7,
+        "sayability": 9,
+        "fit": 7
+      },
+      "auditor_note": "Sounds like an existing B2B software product rather than a conversation in a contractor office."
+    },
+    {
+      "name": "More Than a Chatbot",
+      "round": 14,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 6,
+        "stretch": 4,
+        "memorability": 3,
+        "sayability": 8,
+        "fit": 4
+      },
+      "auditor_note": "Purely defensive framing that reads like a beginner webinar title rather than an authoritative brand."
+    },
+    {
+      "name": "Bigger Than a Prompt",
+      "round": 14,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 5,
+        "stretch": 4,
+        "memorability": 4,
+        "sayability": 7,
+        "fit": 4
+      },
+      "auditor_note": "Focuses on ephemeral tech jargon that trades operators neither use nor care about."
+    },
+    {
+      "name": "Automation on the Clock",
+      "round": 14,
+      "stage": "audit",
+      "reason": "pun",
+      "scores": {
+        "cheesiness": 3,
+        "stretch": 5,
+        "memorability": 5,
+        "sayability": 6,
+        "fit": 5
+      },
+      "auditor_note": "Corny timecard pun that collapses because automation runs continuously without shifts or overtime."
+    },
+    {
+      "name": "Company-Sized AI",
+      "round": 14,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 7,
+        "stretch": 7,
+        "memorability": 4,
+        "sayability": 6,
+        "fit": 6
+      },
+      "auditor_note": "Unnatural phrasing that reads like enterprise sales collateral instead of an engaging podcast title."
+    },
+    {
+      "name": "Blue Collar Intelligence",
+      "round": 14,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 4,
+        "stretch": 8,
+        "memorability": 7,
+        "sayability": 5,
+        "fit": 7
+      },
+      "auditor_note": "Seven syllables is a mouthful, and the blue collar phrasing is an exhausted industry trope."
+    },
+    {
+      "name": "Can It Do That",
+      "round": 15,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 8,
+        "stretch": 6,
+        "memorability": 4,
+        "sayability": 9,
+        "fit": 6
+      },
+      "auditor_note": "Sounds like a dozen tech review shows and gets buried in search without AI in the name."
+    },
+    {
+      "name": "Go Ask AI",
+      "round": 15,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 4,
+        "stretch": 8,
+        "memorability": 5,
+        "sayability": 9,
+        "fit": 5
+      },
+      "auditor_note": "Sounds like a tired parenting phrase converted into an instruction manual, lacking business weight."
+    },
+    {
+      "name": "What's It Good For",
+      "round": 15,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 3,
+        "stretch": 6,
+        "memorability": 7,
+        "sayability": 8,
+        "fit": 4
+      },
+      "auditor_note": "Unavoidable song association implies the answer is absolutely nothing, creating needless skepticism."
+    },
+    {
+      "name": "Use Case",
+      "round": 15,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 9,
+        "stretch": 8,
+        "memorability": 4,
+        "sayability": 8,
+        "fit": 5
+      },
+      "auditor_note": "B2B jargon that alienates normal listeners while sounding like an internal slide deck presentation."
+    },
+    {
+      "name": "The Hermit Question",
+      "round": 15,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 6,
+        "stretch": 3,
+        "memorability": 6,
+        "sayability": 7,
+        "fit": 3
+      },
+      "auditor_note": "Anchors the entire podcast to a niche recurring bit that confuses newcomers completely."
+    },
+    {
+      "name": "Hermit Mode",
+      "round": 15,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 5,
+        "stretch": 4,
+        "memorability": 6,
+        "sayability": 8,
+        "fit": 3
+      },
+      "auditor_note": "Internet culture slang that projects antisocial obsession instead of practical everyday leadership."
+    },
+    {
+      "name": "Front Porch AI",
+      "round": 15,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 4,
+        "stretch": 6,
+        "memorability": 5,
+        "sayability": 8,
+        "fit": 4
+      },
+      "auditor_note": "Regional folksiness feels sleepy and dated, clashing with fast production and modern business operations."
+    },
+    {
+      "name": "No Scary Monsters",
+      "round": 15,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 2,
+        "stretch": 4,
+        "memorability": 7,
+        "sayability": 7,
+        "fit": 2
+      },
+      "auditor_note": "Treats the audience like frightened toddlers, instantly destroying credibility with serious business owners."
+    },
+    {
+      "name": "Plain Talk AI",
+      "round": 15,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 8,
+        "stretch": 9,
+        "memorability": 3,
+        "sayability": 8,
+        "fit": 6
+      },
+      "auditor_note": "Completely devoid of personality and impossible to distinguish from a generic corporate training series."
+    },
+    {
+      "name": "Off the Clock",
+      "round": 15,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 6,
+        "stretch": 3,
+        "memorability": 4,
+        "sayability": 8,
+        "fit": 3
+      },
+      "auditor_note": "Generic idiom that suggests recreational banter while omitting both AI and daytime work operations."
+    },
+    {
+      "name": "Before You Panic",
+      "round": 15,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 5,
+        "stretch": 5,
+        "memorability": 6,
+        "sayability": 8,
+        "fit": 4
+      },
+      "auditor_note": "Leads with anxiety and fear rather than utility, sounding like crisis counseling rather than operations."
+    },
+    {
+      "name": "Normal People AI",
+      "round": 15,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 6,
+        "stretch": 9,
+        "memorability": 5,
+        "sayability": 6,
+        "fit": 6
+      },
+      "auditor_note": "Clunky and self-conscious, trying way too hard to insist that the hosts are everyday folks."
+    },
+    {
+      "name": "Home and Office",
+      "round": 15,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 8,
+        "stretch": 4,
+        "memorability": 2,
+        "sayability": 9,
+        "fit": 4
+      },
+      "auditor_note": "Sounds like a defunct office supply catalog, completely missing punch, tech context, and intrigue."
+    },
+    {
+      "name": "The Everyday Operator",
+      "round": 15,
+      "stage": "audit",
+      "reason": "stretch 6 (below 7)",
+      "scores": {
+        "cheesiness": 8,
+        "stretch": 6,
+        "memorability": 7,
+        "sayability": 7,
+        "fit": 8
+      },
+      "auditor_note": "Requires strong subtitle work to establish the AI focus, but captures the authentic operational perspective."
+    },
+    {
+      "name": "Tried It",
+      "round": 15,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 7,
+        "stretch": 4,
+        "memorability": 4,
+        "sayability": 8,
+        "fit": 4
+      },
+      "auditor_note": "Sounds like consumer gadget influencer content rather than experienced business operators implementing systems."
+    },
+    {
+      "name": "Worth Your Time",
+      "round": 15,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 5,
+        "stretch": 4,
+        "memorability": 4,
+        "sayability": 8,
+        "fit": 4
+      },
+      "auditor_note": "A worn-out productivity cliché that gives no hint of AI or practical trade operations."
+    },
+    {
+      "name": "Show Your Work",
+      "round": 15,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 6,
+        "stretch": 6,
+        "memorability": 6,
+        "sayability": 8,
+        "fit": 5
+      },
+      "auditor_note": "Stolen directly from school math classes and popular books, ignoring the conversational host dynamic."
+    },
+    {
+      "name": "Pain in the Neck",
+      "round": 15,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 4,
+        "stretch": 4,
+        "memorability": 5,
+        "sayability": 7,
+        "fit": 4
+      },
+      "auditor_note": "Negative idiom that sounds like a medical advice column rather than practical technology deployment."
+    },
+    {
+      "name": "From the Kitchen to the Company",
+      "round": 15,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 5,
+        "stretch": 8,
+        "memorability": 5,
+        "sayability": 4,
+        "fit": 6
+      },
+      "auditor_note": "Cumbersome mouthful that reads like a chapter heading instead of a punchy show title."
+    },
+    {
+      "name": "Daily Driver",
+      "round": 16,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 7,
+        "stretch": 4,
+        "memorability": 5,
+        "sayability": 9,
+        "fit": 4
+      },
+      "auditor_note": "Tech and car cliché that sounds like an automotive review show without mentioning AI."
+    },
+    {
+      "name": "Daily Driver AI",
+      "round": 16,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 5,
+        "stretch": 6,
+        "memorability": 5,
+        "sayability": 8,
+        "fit": 6
+      },
+      "auditor_note": "Tacks AI onto stale gearhead slang, resulting in an awkward, dated compromise."
+    },
+    {
+      "name": "Honey-Do AI",
+      "round": 16,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 2,
+        "stretch": 4,
+        "memorability": 6,
+        "sayability": 8,
+        "fit": 3
+      },
+      "auditor_note": "Patronizing domestic cliché that completely alienates commercial business owners and property managers."
+    },
+    {
+      "name": "Grocery Lists and Work Orders",
+      "round": 16,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 7,
+        "stretch": 6,
+        "memorability": 4,
+        "sayability": 2,
+        "fit": 5
+      },
+      "auditor_note": "Clunky mouthful that fails on air and leaves zero room for discoverability."
+    },
+    {
+      "name": "AI Around the House",
+      "round": 16,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 4,
+        "stretch": 4,
+        "memorability": 3,
+        "sayability": 7,
+        "fit": 3
+      },
+      "auditor_note": "Sounds like a local weekend radio segment and completely abandons the commercial operating audience."
+    },
+    {
+      "name": "Tuesday Night AI",
+      "round": 16,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 7,
+        "stretch": 3,
+        "memorability": 5,
+        "sayability": 8,
+        "fit": 4
+      },
+      "auditor_note": "Arbitrary day gimmick that forces you to spend airtime explaining why Tuesday matters."
+    },
+    {
+      "name": "Not a Hermit",
+      "round": 16,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 6,
+        "stretch": 2,
+        "memorability": 5,
+        "sayability": 8,
+        "fit": 3
+      },
+      "auditor_note": "Obscure inside joke that sounds like a survivalist or mental health podcast."
+    },
+    {
+      "name": "AI in Your Pocket",
+      "round": 16,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 3,
+        "stretch": 6,
+        "memorability": 3,
+        "sayability": 8,
+        "fit": 5
+      },
+      "auditor_note": "Stale twenty-year-old tech marketing trope that guarantees you blend into background search noise."
+    },
+    {
+      "name": "Life and Business AI",
+      "round": 16,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 6,
+        "stretch": 8,
+        "memorability": 2,
+        "sayability": 7,
+        "fit": 6
+      },
+      "auditor_note": "Soulless corporate sludge that sounds like an enterprise webinar nobody wants to attend."
+    },
+    {
+      "name": "Glovebox AI",
+      "round": 16,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 4,
+        "stretch": 2,
+        "memorability": 5,
+        "sayability": 7,
+        "fit": 3
+      },
+      "auditor_note": "Ridiculously strained metaphor since gloveboxes are where people stash expired insurance cards and trash."
+    },
+    {
+      "name": "Kitchen Table to Conference Table",
+      "round": 16,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 4,
+        "stretch": 6,
+        "memorability": 4,
+        "sayability": 3,
+        "fit": 5
+      },
+      "auditor_note": "Ponderous corporate cliché that is exhausting to say and omits AI entirely."
+    },
+    {
+      "name": "Workbench AI",
+      "round": 17,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 5,
+        "stretch": 5,
+        "memorability": 4,
+        "sayability": 7,
+        "fit": 4
+      },
+      "auditor_note": "Sounds like a woodworking hobby show and excludes non-technical listeners looking for everyday productivity tips."
+    },
+    {
+      "name": "Tailgate AI",
+      "round": 17,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 3,
+        "stretch": 4,
+        "memorability": 6,
+        "sayability": 8,
+        "fit": 3
+      },
+      "auditor_note": "Pandering blue collar imagery that undermines business credibility and alienates property managers and office workers."
+    },
+    {
+      "name": "Breakroom AI",
+      "round": 17,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 6,
+        "stretch": 6,
+        "memorability": 4,
+        "sayability": 8,
+        "fit": 5
+      },
+      "auditor_note": "Boring workplace setting that feels like mandatory HR compliance training instead of a fun, practical talk."
+    },
+    {
+      "name": "Front Seat AI",
+      "round": 17,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 4,
+        "stretch": 3,
+        "memorability": 4,
+        "sayability": 6,
+        "fit": 3
+      },
+      "auditor_note": "Clunky phrasing that requires constant explanation and sounds like a voice assistant feature inside a car."
+    },
+    {
+      "name": "Garage AI",
+      "round": 17,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 4,
+        "stretch": 4,
+        "memorability": 4,
+        "sayability": 8,
+        "fit": 4
+      },
+      "auditor_note": "Overused startup cliché that evokes weekend grease monkeys rather than legitimate commercial operators and everyday consumers."
+    },
+    {
+      "name": "Everyday Builders",
+      "round": 17,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 5,
+        "stretch": 3,
+        "memorability": 4,
+        "sayability": 8,
+        "fit": 3
+      },
+      "auditor_note": "Completely hides the AI topic, killing search discoverability and reading like a residential construction trade podcast."
+    },
+    {
+      "name": "Regular Operators",
+      "round": 17,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 4,
+        "stretch": 4,
+        "memorability": 5,
+        "sayability": 7,
+        "fit": 4
+      },
+      "auditor_note": "Operator is insider business jargon that directly contradicts regular people and confuses everyday listeners."
+    },
+    {
+      "name": "The Doers",
+      "round": 17,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 2,
+        "stretch": 2,
+        "memorability": 2,
+        "sayability": 8,
+        "fit": 2
+      },
+      "auditor_note": "Empty retail slogan with zero search visibility that tells prospective listeners nothing about what you cover."
+    },
+    {
+      "name": "Real People, Real AI",
+      "round": 17,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 2,
+        "stretch": 7,
+        "memorability": 3,
+        "sayability": 8,
+        "fit": 5
+      },
+      "auditor_note": "Lazy ad-agency formula that sounds like a corporate defensive campaign rather than an organic, entertaining podcast."
+    },
+    {
+      "name": "Level-Headed AI",
+      "round": 18,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 7,
+        "stretch": 6,
+        "memorability": 3,
+        "sayability": 6,
+        "fit": 5
+      },
+      "auditor_note": "Sounds like an HR mandatory seminar. Far too sterile for a charismatic local president and builder."
+    },
+    {
+      "name": "Down to Earth AI",
+      "round": 18,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 3,
+        "stretch": 6,
+        "memorability": 3,
+        "sayability": 5,
+        "fit": 5
+      },
+      "auditor_note": "A shopworn idiom that turns invisible. Four words crammed together make for a messy audio signoff."
+    },
+    {
+      "name": "Hometown AI",
+      "round": 18,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 5,
+        "stretch": 4,
+        "memorability": 4,
+        "sayability": 7,
+        "fit": 4
+      },
+      "auditor_note": "Sounds like a small town utility co-op or local government portal. Fails to convey business authority."
+    },
+    {
+      "name": "Sensible AI",
+      "round": 18,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 6,
+        "stretch": 5,
+        "memorability": 2,
+        "sayability": 5,
+        "fit": 4
+      },
+      "auditor_note": "The death of excitement. Sounds like orthotic shoes or an insurance policy, guaranteeing zero clicks."
+    },
+    {
+      "name": "Unscary AI",
+      "round": 18,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 2,
+        "stretch": 4,
+        "memorability": 6,
+        "sayability": 4,
+        "fit": 3
+      },
+      "auditor_note": "Condescending baby talk. Normal adults will feel patronized and commercial property managers will never subscribe."
+    },
+    {
+      "name": "Neighborhood AI",
+      "round": 18,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 5,
+        "stretch": 4,
+        "memorability": 4,
+        "sayability": 7,
+        "fit": 3
+      },
+      "auditor_note": "Evokes lost pet threads on Nextdoor. It completely undercuts the operational business credibility later in the run."
+    },
+    {
+      "name": "Everyday Operators AI",
+      "round": 18,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 7,
+        "stretch": 5,
+        "memorability": 5,
+        "sayability": 3,
+        "fit": 5
+      },
+      "auditor_note": "Eight clumsy syllables that choke on air. Average homeowners do not view themselves as operators."
+    },
+    {
+      "name": "AI for Working People",
+      "round": 19,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 8,
+        "stretch": 8,
+        "memorability": 4,
+        "sayability": 9,
+        "fit": 6
+      },
+      "auditor_note": "Sounds like a dry public radio segment or union newsletter. Lacks any punch or personality."
+    },
+    {
+      "name": "Off-Duty Operators",
+      "round": 19,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 7,
+        "stretch": 3,
+        "memorability": 5,
+        "sayability": 7,
+        "fit": 3
+      },
+      "auditor_note": "Hides the AI premise completely. Sounds like a podcast about ex-military contractors drinking beer on weekends."
+    },
+    {
+      "name": "Clear-Eyed AI",
+      "round": 19,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 7,
+        "stretch": 7,
+        "memorability": 3,
+        "sayability": 5,
+        "fit": 5
+      },
+      "auditor_note": "Sounds like a corporate compliance newsletter. The phrase clear-eyed AI is clumsy to say out loud."
+    },
+    {
+      "name": "Uncomplicated AI",
+      "round": 19,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 8,
+        "stretch": 8,
+        "memorability": 3,
+        "sayability": 4,
+        "fit": 6
+      },
+      "auditor_note": "Too many syllables. Sounds like an enterprise software tutorial series rather than a conversational weekly podcast."
+    },
+    {
+      "name": "AI, Plainly",
+      "round": 19,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 8,
+        "stretch": 7,
+        "memorability": 4,
+        "sayability": 6,
+        "fit": 5
+      },
+      "auditor_note": "Stiff and academic. Punctuation in titles never works on audio, and it lacks authentic contractor grit."
+    },
+    {
+      "name": "Florida Man Uses AI",
+      "round": 19,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 2,
+        "stretch": 5,
+        "memorability": 8,
+        "sayability": 9,
+        "fit": 2
+      },
+      "auditor_note": "Exhausted internet meme. It destroys executive credibility with serious property managers and business owners immediately."
+    },
+    {
+      "name": "Practically Speaking",
+      "round": 19,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 4,
+        "stretch": 2,
+        "memorability": 2,
+        "sayability": 8,
+        "fit": 2
+      },
+      "auditor_note": "Utterly buried in search results. Gives zero hint about AI and sounds like a public speaking workshop."
+    },
+    {
+      "name": "Common Ground AI",
+      "round": 19,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 6,
+        "stretch": 5,
+        "memorability": 3,
+        "sayability": 7,
+        "fit": 4
+      },
+      "auditor_note": "Sounds like a political podcast or ethics think tank panel rather than hands-on tradesmen solving problems."
+    },
+    {
+      "name": "Honest AI",
+      "round": 19,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 4,
+        "stretch": 7,
+        "memorability": 3,
+        "sayability": 8,
+        "fit": 4
+      },
+      "auditor_note": "Declaring honesty sounds inherently defensive. Feels like a generic corporate slogan or a baby shampoo brand."
+    },
+    {
+      "name": "Life Admin AI",
+      "round": 20,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 7,
+        "stretch": 4,
+        "memorability": 4,
+        "sayability": 7,
+        "fit": 4
+      },
+      "auditor_note": "Sounds like a sterile UK productivity blog. Completely alienates trades credibility and operating business reality."
+    },
+    {
+      "name": "Busywork AI",
+      "round": 20,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 6,
+        "stretch": 5,
+        "memorability": 4,
+        "sayability": 8,
+        "fit": 4
+      },
+      "auditor_note": "Lazy B2B software feature name. Misses the hosts' humor, grit, and hard-earned operating credibility."
+    },
+    {
+      "name": "Paperwork AI",
+      "round": 20,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 7,
+        "stretch": 4,
+        "memorability": 3,
+        "sayability": 8,
+        "fit": 3
+      },
+      "auditor_note": "Sounds like a boring PDF parser utility. Far too dry and restrictive for a broad conversational podcast."
+    },
+    {
+      "name": "Weekday AI",
+      "round": 20,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 8,
+        "stretch": 6,
+        "memorability": 5,
+        "sayability": 9,
+        "fit": 6
+      },
+      "auditor_note": "Clean and easy to say, but painfully dull. Lacks personality, stakes, and any hint of contractor grit."
+    },
+    {
+      "name": "Carpool AI",
+      "round": 20,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 5,
+        "stretch": 3,
+        "memorability": 5,
+        "sayability": 8,
+        "fit": 3
+      },
+      "auditor_note": "Evokes suburban soccer moms instead of job site trucks. A clumsy metaphor that misses the business angle."
+    },
+    {
+      "name": "Got It Handled",
+      "round": 20,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 5,
+        "stretch": 2,
+        "memorability": 3,
+        "sayability": 8,
+        "fit": 4
+      },
+      "auditor_note": "An invisible corporate cliché. Zero search discoverability and no indication that this is an AI show."
+    },
+    {
+      "name": "Less Paperwork",
+      "round": 20,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 6,
+        "stretch": 3,
+        "memorability": 3,
+        "sayability": 8,
+        "fit": 3
+      },
+      "auditor_note": "Drops the AI hook entirely. Sounds like a legacy bookkeeping seminar from twenty years ago."
+    },
+    {
+      "name": "Errand Runner",
+      "round": 20,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 4,
+        "stretch": 3,
+        "memorability": 4,
+        "sayability": 8,
+        "fit": 3
+      },
+      "auditor_note": "Trivializes AI to grocery trips. The metaphor collapses immediately once discussing company fleets, accounting, and operations."
+    },
+    {
+      "name": "AI Off the Clock",
+      "round": 21,
+      "stage": "audit",
+      "reason": "pun",
+      "scores": {
+        "cheesiness": 5,
+        "stretch": 4,
+        "memorability": 6,
+        "sayability": 8,
+        "fit": 4
+      },
+      "auditor_note": "A roofing timecard pun that collapses during enterprise business topics, forcing an apologetic tagline."
+    },
+    {
+      "name": "After Hours AI",
+      "round": 21,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 4,
+        "stretch": 4,
+        "memorability": 5,
+        "sayability": 8,
+        "fit": 3
+      },
+      "auditor_note": "Tired late night radio cliché that sounds like amateur hacking and undermines daytime commercial credibility."
+    },
+    {
+      "name": "Weekend AI",
+      "round": 21,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 6,
+        "stretch": 4,
+        "memorability": 4,
+        "sayability": 9,
+        "fit": 3
+      },
+      "auditor_note": "Demotes serious operators to weekend dabblers, abandoning the credibility needed for commercial business owners."
+    },
+    {
+      "name": "Real Life Operators",
+      "round": 21,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 6,
+        "stretch": 2,
+        "memorability": 5,
+        "sayability": 6,
+        "fit": 3
+      },
+      "auditor_note": "Omits AI entirely, misleading listeners into expecting military, heavy machinery, or private equity talk."
+    },
+    {
+      "name": "Nine to Five AI",
+      "round": 21,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 3,
+        "stretch": 4,
+        "memorability": 4,
+        "sayability": 8,
+        "fit": 3
+      },
+      "auditor_note": "Exhausted cubicle cliché that misrepresents active trade contracting and directly contradicts everyday personal life."
+    },
+    {
+      "name": "Saturday Morning AI",
+      "round": 21,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 2,
+        "stretch": 2,
+        "memorability": 6,
+        "sayability": 7,
+        "fit": 2
+      },
+      "auditor_note": "Heavy cartoon and cereal connotations fatally destroy credibility for commercial fleet and accounting operations."
+    },
+    {
+      "name": "Operators at Home",
+      "round": 21,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 5,
+        "stretch": 2,
+        "memorability": 4,
+        "sayability": 7,
+        "fit": 2
+      },
+      "auditor_note": "Omits AI entirely and confusingly sounds like a remote dispatch show or military parenting podcast."
+    },
+    {
+      "name": "Jargon-Free AI",
+      "round": 22,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 4,
+        "stretch": 8,
+        "memorability": 3,
+        "sayability": 8,
+        "fit": 6
+      },
+      "auditor_note": "Painfully generic title that reads like a downloadable lead magnet rather than an entertaining show."
+    },
+    {
+      "name": "Home Turf AI",
+      "round": 22,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 4,
+        "stretch": 6,
+        "memorability": 4,
+        "sayability": 8,
+        "fit": 5
+      },
+      "auditor_note": "Relying on a tired idiom creates an uninspired, local-radio feel with minimal punch or authority."
+    },
+    {
+      "name": "Home Base AI",
+      "round": 22,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 4,
+        "stretch": 5,
+        "memorability": 4,
+        "sayability": 8,
+        "fit": 5
+      },
+      "auditor_note": "Bland corporate cliché that sounds like off-the-shelf scheduling software rather than a real-world show."
+    },
+    {
+      "name": "Side Job AI",
+      "round": 22,
+      "stage": "audit",
+      "reason": "pun",
+      "scores": {
+        "cheesiness": 4,
+        "stretch": 4,
+        "memorability": 5,
+        "sayability": 8,
+        "fit": 4
+      },
+      "auditor_note": "Weak pun that diminishes business credibility and suggests AI is merely a casual weekend hobby."
+    },
+    {
+      "name": "Day to Day AI",
+      "round": 23,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 8,
+        "stretch": 8,
+        "memorability": 3,
+        "sayability": 8,
+        "fit": 6
+      },
+      "auditor_note": "Zero distinctiveness, gets lost instantly in search results against existing tech content."
+    },
+    {
+      "name": "Household AI",
+      "round": 23,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 6,
+        "stretch": 4,
+        "memorability": 4,
+        "sayability": 8,
+        "fit": 3
+      },
+      "auditor_note": "Suggests smart ovens and robot vacuums, completely missing commercial business operations."
+    },
+    {
+      "name": "Living Room AI",
+      "round": 23,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 5,
+        "stretch": 4,
+        "memorability": 5,
+        "sayability": 7,
+        "fit": 4
+      },
+      "auditor_note": "A clumsy domestic framing that collapses the moment you discuss commercial roofing fleets."
+    },
+    {
+      "name": "Workweek AI",
+      "round": 23,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 7,
+        "stretch": 6,
+        "memorability": 4,
+        "sayability": 8,
+        "fit": 5
+      },
+      "auditor_note": "Sounds like corporate productivity software and clashes directly with everyday home use cases."
+    },
+    {
+      "name": "Homeowner AI",
+      "round": 23,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 6,
+        "stretch": 3,
+        "memorability": 3,
+        "sayability": 7,
+        "fit": 3
+      },
+      "auditor_note": "Narrows the show to real estate maintenance, alienating both renters and commercial operators."
+    },
+    {
+      "name": "Ordinary Day AI",
+      "round": 23,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 6,
+        "stretch": 6,
+        "memorability": 3,
+        "sayability": 7,
+        "fit": 5
+      },
+      "auditor_note": "Sleepy and flat, offering zero punch or urgency for a podcast feed."
+    },
+    {
+      "name": "Dinner Table AI",
+      "round": 23,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 4,
+        "stretch": 4,
+        "memorability": 5,
+        "sayability": 7,
+        "fit": 4
+      },
+      "auditor_note": "Sounds like parenting advice rather than credible operational guidance from real contractors."
+    },
+    {
+      "name": "The Group Text",
+      "round": 24,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 7,
+        "stretch": 3,
+        "memorability": 4,
+        "sayability": 9,
+        "fit": 3
+      },
+      "auditor_note": "Sounds like a pop culture chat show, completely burying both the AI topic and operational business credibility."
+    },
+    {
+      "name": "Group Chat AI",
+      "round": 24,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 5,
+        "stretch": 5,
+        "memorability": 3,
+        "sayability": 8,
+        "fit": 4
+      },
+      "auditor_note": "Lazy SEO branding that feels too juvenile for commercial operations while remaining totally forgettable."
+    },
+    {
+      "name": "To-Do List AI",
+      "round": 24,
+      "stage": "audit",
+      "reason": "generic",
+      "scores": {
+        "cheesiness": 6,
+        "stretch": 5,
+        "memorability": 3,
+        "sayability": 8,
+        "fit": 4
+      },
+      "auditor_note": "Sounds like a boring software utility feature, trivializing real business operations into simple daily chores."
+    },
+    {
+      "name": "Junk Drawer AI",
+      "round": 24,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 4,
+        "stretch": 2,
+        "memorability": 6,
+        "sayability": 7,
+        "fit": 2
+      },
+      "auditor_note": "A forced domestic metaphor that destroys executive credibility and makes business operations sound sloppy."
+    },
+    {
+      "name": "Second Brain Operators",
+      "round": 24,
+      "stage": "audit",
+      "reason": "cliche",
+      "scores": {
+        "cheesiness": 4,
+        "stretch": 4,
+        "memorability": 6,
+        "sayability": 5,
+        "fit": 4
+      },
+      "auditor_note": "Uses tired tech-bro productivity jargon that intimidates normal people and contradicts the down-to-earth tone."
+    },
+    {
+      "name": "Front Office AI",
+      "round": 24,
+      "stage": "audit",
+      "reason": "forced",
+      "scores": {
+        "cheesiness": 6,
+        "stretch": 4,
+        "memorability": 4,
+        "sayability": 8,
+        "fit": 4
+      },
+      "auditor_note": "Forcing personal life into front office framing fails, while completely ignoring field production and fleets."
+    },
+    {
+      "name": "Ground Truth",
+      "stage": "collision check",
+      "reason": "Exact-name collision: 'Ground Truth' podcast (Dogpatch Advisors, operators and data) plus GBH's 'GroundTruth'.",
+      "scores": {
+        "cheesiness": 9,
+        "stretch": 8,
+        "memorability": 8,
+        "sayability": 8,
+        "fit": 9
+      }
+    },
+    {
+      "name": "Load Bearing",
+      "stage": "collision check",
+      "reason": "Exact-name collision: existing 'Load Bearing' podcast on Spotify about architectural product data.",
+      "scores": {
+        "cheesiness": 8,
+        "stretch": 7,
+        "memorability": 8,
+        "sayability": 8,
+        "fit": 8
+      }
+    },
+    {
+      "name": "Contractor Compute",
+      "stage": "collision check",
+      "reason": "Near sound-alike of 'The Contractor Commute' (ConGenius), an existing construction business podcast.",
+      "scores": {
+        "cheesiness": 8,
+        "stretch": 7,
+        "memorability": 7,
+        "sayability": 6,
+        "fit": 7
+      }
+    },
+    {
+      "name": "Plainspoken AI",
+      "stage": "collision check",
+      "reason": "Exact-name collision: Plainspoken AI (plain-spoken.ai), an existing AI explainer video brand, plus 'Plain Spoken' podcast.",
+      "scores": {
+        "cheesiness": 8,
+        "stretch": 8,
+        "memorability": 5,
+        "sayability": 7,
+        "fit": 7
+      }
+    },
+    {
+      "name": "Grounded AI",
+      "stage": "collision check",
+      "reason": "Exact-name collision: 'Grounded AI' YouTube channel and company, plus 'Grounded' and 'Grounding AI' AI podcasts.",
+      "scores": {
+        "cheesiness": 8,
+        "stretch": 7,
+        "memorability": 6,
+        "sayability": 8,
+        "fit": 7
+      }
+    },
+    {
+      "name": "Real Life AI",
+      "stage": "collision check",
+      "reason": "Exact-name collision: 'Real-Life AI Podcast' on Spotify, plus 'AI In Real Life' shows.",
+      "scores": {
+        "cheesiness": 9,
+        "stretch": 8,
+        "memorability": 5,
+        "sayability": 9,
+        "fit": 8
+      }
+    },
+    {
+      "name": "AI With a Fleet",
+      "stage": "final selection",
+      "reason": "Revision 1 final pass: auditor called it a clumsier clone of AI With a Payroll.",
+      "scores": {
+        "cheesiness": 8,
+        "stretch": 8,
+        "memorability": 6,
+        "sayability": 8,
+        "fit": 8
+      }
+    },
+    {
+      "name": "Hundred Truck Company",
+      "stage": "final selection",
+      "reason": "Revision 2: dropped at lead's request, states a fleet size that cannot be verified for Target.",
+      "scores": {
+        "cheesiness": 9,
+        "stretch": 7,
+        "memorability": 8,
+        "sayability": 8,
+        "fit": 8
+      }
+    },
+    {
+      "name": "Real Payroll",
+      "stage": "final selection",
+      "reason": "Revision 2: payroll/employee family cap (max 2); weakest of the payroll names.",
+      "scores": {
+        "cheesiness": 8,
+        "stretch": 7,
+        "memorability": 7,
+        "sayability": 8,
+        "fit": 7
+      }
+    },
+    {
+      "name": "AI With Employees",
+      "stage": "final selection",
+      "reason": "Revision 2: payroll/employee family cap (max 2).",
+      "scores": {
+        "cheesiness": 8,
+        "stretch": 8,
+        "memorability": 8,
+        "sayability": 8,
+        "fit": 8
+      }
+    },
+    {
+      "name": "Company Truck",
+      "stage": "final selection",
+      "reason": "Revision 2: truck/fleet family cap (max 2); Fleet and Payroll and More Than Two Trucks kept.",
+      "scores": {
+        "cheesiness": 8,
+        "stretch": 7,
+        "memorability": 7,
+        "sayability": 8,
+        "fit": 7
+      }
+    }
+  ],
+  "revisions": [
+    {
+      "revision": 1,
+      "date": "2026-09-23",
+      "summary": "Rounds 1-14 under the business brief produced 10 finalists; lead flagged too many payroll and truck names."
+    },
+    {
+      "revision": 2,
+      "date": "2026-09-23",
+      "summary": "Rounds 15-24 under the everyday-plus-business brief. Kept 6 (AI With a Payroll, Fleet and Payroll, After the Demo, Blue Collar Compute, More Than Two Trucks, The Automation Yard); added 4 new (Kitchen Table AI, Everyday Operators, Day Job AI, Everyday Company). After the Demo re-passed under the new brief (fit 8), so 5 of 10 cover everyday AI. The other 5 kept names failed the re-audit under the new brief and are offered as business-side options only."
+    }
+  ],
+  "totals": {
+    "generated": 322,
+    "passed_audit": 21,
+    "rejected_at_audit": 301,
+    "rejected_at_collision_check": 6,
+    "rejected_at_final_selection": 5,
+    "total_rejected": 312,
+    "final": 10,
+    "covers_everyday_ai": 5
+  },
+  "family_counts": {
+    "payroll_or_employees": [
+      "AI With a Payroll",
+      "Fleet and Payroll"
+    ],
+    "trucks_or_fleet": [
+      "Fleet and Payroll",
+      "More Than Two Trucks"
+    ],
+    "everyday_capable": [
+      "After the Demo",
+      "Day Job AI",
+      "Everyday Company",
+      "Everyday Operators",
+      "Kitchen Table AI"
+    ]
+  },
+  "notes": [
+    "Auditor flagged Everyday Company as close to Everyday Operators; offer one or the other if space is tight. Round 24 tried to replace it with a more distinct everyday name; none passed.",
+    "Near-misses worth a human look: 'The Everyday Operator', 'Twenty Trucks Deep', 'Before the Truck Rolls', 'The Second Estimator', 'Workhorse AI', 'Weekday AI', 'Day to Day AI', 'Can It Do That'."
+  ],
+  "logo_status": {
+    "generated": 10,
+    "missing": [],
+    "reason": "Codex CLI at its subscription limit and the OpenAI API key rejected, so all 10 were rendered with Ideogram 4 (Quality) from the planned art directions on 2026-09-23. Everyday Company and Blue Collar Compute were re-rendered once with larger titles for thumbnail legibility.",
+    "planned_art_direction": {
+      "ai-with-a-payroll": "Heritage editorial serif, title stacked AI / WITH A / PAYROLL in black with AI in brick red on warm off-white paper; faint ledger lines and a perforated paycheck-stub edge along the bottom.",
+      "fleet-and-payroll": "Flat graphic poster: a clean side-profile row of identical white work pickups in single-color silhouette across the lower third on solid black; bold condensed sans title in off-white with AND in red.",
+      "after-the-demo": "Minimal and moody: black background, a single empty presentation screen with its light just switched off, small in frame; crisp white modern serif title, thin red rule underneath.",
+      "blue-collar-compute": "Close crop of a work shirt collar in chambray with bold red stitched seam; title stamped in heavy black slab serif on a woven label sewn to the collar.",
+      "more-than-two-trucks": "Swiss-style typographic poster: giant numeral 2 crossed through with a red slash, title in bold grotesk, tiny rows of truck pictograms receding into many.",
+      "the-automation-yard": "Monoline isometric overhead of an organized equipment yard with numbered bays, gray lines on off-white, one bay highlighted red; title in a sturdy geometric sans across the top.",
+      "kitchen-table-ai": "Overhead photo-style illustration of a worn wooden kitchen table with a coffee mug, a phone and a folded job estimate; title in a warm bold serif across the top in black with AI in brick red.",
+      "everyday-operators": "Bold two-line wordmark EVERYDAY / OPERATORS in a sturdy condensed sans, off-white on black, with a thin red rule and a tiny subtle gray reticle as the dot of a separator.",
+      "day-job-ai": "Mid-century style lunch-pail / time-clock illustration in flat red and black on off-white; title set big in a friendly geometric sans.",
+      "everyday-company": "Clean typographic badge like a company door plaque: brushed metal gray plate, title engraved in black serif caps, small red accent line; photographed straight on."
+    }
+  }
+}
