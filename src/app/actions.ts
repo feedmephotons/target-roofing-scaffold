@@ -1,6 +1,7 @@
 'use server'
 
 import { supabase } from '@/lib/supabase'
+import { setAdminSession, clearAdminSession } from '@/lib/ops/session'
 
 // ---------------------------------------------------------------------------
 // Admin Authentication
@@ -10,10 +11,22 @@ const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'admin@targetroofers.com'
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'target2026'
 
 export async function verifyAdminLogin(email: string, password: string): Promise<{ success: boolean; error?: string }> {
-  if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
+  if (email.trim().toLowerCase() === ADMIN_EMAIL.toLowerCase() && password === ADMIN_PASSWORD) {
+    await setAdminSession(ADMIN_EMAIL)
     return { success: true }
   }
   return { success: false, error: 'Invalid admin credentials. Access Denied.' }
+}
+
+export async function logoutAdmin() {
+  await clearAdminSession()
+}
+
+// TEMPORARY pre-launch shortcut: triple-click the "Admin Access" badge on the login screen
+// to fill the admin credentials. Turn off by setting ADMIN_AUTOFILL=off, and remove before launch.
+export async function getAdminAutofill(): Promise<{ email: string; password: string } | null> {
+  if (process.env.ADMIN_AUTOFILL === 'off') return null
+  return { email: ADMIN_EMAIL, password: ADMIN_PASSWORD }
 }
 
 // ---------------------------------------------------------------------------

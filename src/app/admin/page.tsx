@@ -1,6 +1,7 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
+import { useSearchParams } from 'next/navigation'
 import {
   Search,
   CheckCircle,
@@ -9,8 +10,6 @@ import {
   Star,
   Inbox,
   Settings,
-  LogOut,
-  Shield,
   Filter,
   Globe,
   RefreshCw,
@@ -41,100 +40,17 @@ import {
   addJobListing,
   removeJobListing,
   toggleJobListing,
-  verifyAdminLogin,
   type LeadRecord,
   type ShowcaseVideo,
   type JobListing,
 } from '@/app/actions'
 
-function AdminLogin({ onLogin }: { onLogin: () => void }) {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [error, setError] = useState<string | null>(null)
-  const [loading, setLoading] = useState(false)
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setLoading(true)
-    setError(null)
-
-    const result = await verifyAdminLogin(email, password)
-    if (result.success) {
-      onLogin()
-    } else {
-      setError(result.error || 'Invalid admin credentials. Access Denied.')
-    }
-    setLoading(false)
-  }
-
-  return (
-    <div className="min-h-screen bg-[var(--gray-50)] flex items-center justify-center px-4">
-      <div className="w-full max-w-md bg-white border border-[var(--gray-200)] rounded-xl shadow-2xl p-8">
-        <div className="text-center mb-8">
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-[var(--red)]/10 px-4 py-1.5 text-xs font-bold text-[var(--red)] uppercase tracking-wider">
-            <Shield className="h-4 w-4" />
-            Admin Access
-          </div>
-          <h1 className="text-3xl font-bold font-[family-name:var(--font-display)] uppercase tracking-tight text-[var(--black)]">
-            Target Management
-          </h1>
-          <p className="text-xs text-[var(--gray-400)] font-semibold mt-1">Target Roofing Administrative Console</p>
-        </div>
-
-        <form onSubmit={handleSubmit} className="space-y-5">
-          {error && (
-            <div className="p-4 bg-red-50 border-l-4 border-red-500 rounded text-red-700 text-xs font-semibold">
-              {error}
-            </div>
-          )}
-
-          <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-[var(--gray-500)] mb-1.5">
-              Email
-            </label>
-            <input
-              type="email"
-              required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="admin@targetroofers.com"
-              className="w-full px-4 py-3 rounded-lg border border-[var(--gray-300)] bg-white text-base text-[var(--black)] focus:outline-none focus:ring-2 focus:ring-[var(--red)] focus:border-[var(--red)] transition-all"
-              autoComplete="username email"
-            />
-          </div>
-
-          <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-[var(--gray-500)] mb-1.5">
-              Access Password
-            </label>
-            <input
-              type="password"
-              required
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="••••••••"
-              className="w-full px-4 py-3 rounded-lg border border-[var(--gray-300)] bg-white text-base text-[var(--black)] focus:outline-none focus:ring-2 focus:ring-[var(--red)] focus:border-[var(--red)] transition-all"
-              autoComplete="current-password"
-            />
-          </div>
-
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full inline-flex items-center justify-center gap-2 py-4 bg-[var(--red)] hover:bg-[var(--red-dark)] text-white text-xs font-bold uppercase tracking-wider rounded-lg transition-all shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed font-[family-name:var(--font-display)]"
-          >
-            {loading ? 'Authenticating...' : 'Sign In to Console'}
-          </button>
-        </form>
-      </div>
-    </div>
-  )
-}
-
 type TabId = 'leads' | 'seo' | 'reviews' | 'videos' | 'jobs'
 
-function AdminDashboard({ onLogout }: { onLogout: () => void }) {
-  const [activeTab, setActiveTab] = useState<TabId>('leads')
+function AdminDashboard() {
+  const searchParams = useSearchParams()
+  const tabParam = searchParams.get('tab') as TabId | null
+  const activeTab: TabId = tabParam && ['leads', 'seo', 'reviews', 'videos', 'jobs'].includes(tabParam) ? tabParam : 'leads'
   const [leads, setLeads] = useState<LeadRecord[]>([])
   const [loadingLeads, setLoadingLeads] = useState(false)
   const [leadFilter, setLeadFilter] = useState<'all' | 'new' | 'processed' | 'spam'>('all')
@@ -465,61 +381,8 @@ function AdminDashboard({ onLogout }: { onLogout: () => void }) {
   const spamRate = totalLeads > 0 ? Math.round((leads.filter(l => l.status === 'spam').length / totalLeads) * 100) : 0
 
   return (
-    <div className="min-h-screen bg-[var(--gray-50)]">
-      {/* Top Admin Header */}
-      <div className="bg-[var(--black)] text-white border-b border-white/10 noise-overlay shadow-md">
-        <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8 flex justify-between items-center">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-[var(--red)] text-white font-bold rounded-lg flex items-center justify-center shadow-lg font-[family-name:var(--font-display)] uppercase">
-              TR
-            </div>
-            <div>
-              <h2 className="text-sm font-bold uppercase tracking-wider font-[family-name:var(--font-display)]">Target Roofing Admin</h2>
-              <p className="text-[10px] text-[var(--gray-400)] font-semibold">Administrative Console</p>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-4">
-            <span className="hidden md:inline text-xs text-[var(--gray-400)] font-medium">Logged in as: <span className="text-white font-bold">Admin</span></span>
-            <button
-              onClick={onLogout}
-              className="inline-flex items-center gap-1.5 px-4 py-3.5 border border-white/20 rounded hover:border-[var(--red)] hover:text-[var(--red-light)] transition-all text-xs font-bold uppercase bg-white/5"
-            >
-              <LogOut className="h-4 w-4" />
-              Log Out
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-        {/* Navigation Tabs */}
-        <div className="mb-6 flex flex-wrap border-b border-[var(--gray-200)] bg-white p-2 rounded-xl shadow-sm gap-2">
-          {([
-            { id: 'leads' as TabId, label: 'Lead Manager', icon: Inbox },
-            { id: 'videos' as TabId, label: 'Manage Videos', icon: Video },
-            { id: 'jobs' as TabId, label: 'Job Listings', icon: Briefcase },
-            { id: 'seo' as TabId, label: 'SEO Settings', icon: Globe },
-            { id: 'reviews' as TabId, label: 'Add Review', icon: Star },
-          ]).map(tab => {
-            const Icon = tab.icon
-            return (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={`flex items-center gap-2 rounded-lg px-6 py-3.5 text-xs font-bold uppercase tracking-wider transition-all ${
-                  activeTab === tab.id
-                    ? 'bg-[var(--red)] text-white shadow-md'
-                    : 'text-[var(--gray-500)] hover:bg-[var(--gray-50)] hover:text-[var(--black)]'
-                }`}
-              >
-                <Icon className="h-4.5 w-4.5" />
-                {tab.label}
-              </button>
-            )
-          })}
-        </div>
-
+    <div>
+      <div>
         {/* ── LEADS MANAGER TAB ── */}
         {activeTab === 'leads' && (
           <div className="space-y-6">
@@ -1486,11 +1349,9 @@ function AdminDashboard({ onLogout }: { onLogout: () => void }) {
 }
 
 export default function AdminPage() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
-
-  if (isLoggedIn) {
-    return <AdminDashboard onLogout={() => setIsLoggedIn(false)} />
-  }
-
-  return <AdminLogin onLogin={() => setIsLoggedIn(true)} />
+  return (
+    <Suspense fallback={null}>
+      <AdminDashboard />
+    </Suspense>
+  )
 }
