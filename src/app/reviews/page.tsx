@@ -1,28 +1,19 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { Star, Quote, ArrowRight, Phone } from 'lucide-react'
+import { Quote, ArrowRight, Phone } from 'lucide-react'
 import AnimateIn from '@/components/AnimateIn'
 import RoofSchematic from '@/components/RoofSchematic'
+import { googleReviews } from '@/lib/google-reviews'
 
 export const metadata: Metadata = {
   title: 'Reviews',
   description:
-    'Read what property managers, contractors, and property owners throughout Southwest Florida say about Target Roofing. 5.0 average rating from 34 verified reviews.',
+    `Read customer testimonials for Target Roofing and see its ${googleReviews.rating} Google rating from ${googleReviews.count} reviews, checked ${googleReviews.checkedOn}.`,
 }
 
 import { getReviews } from '@/app/actions'
 
 type Review = Awaited<ReturnType<typeof getReviews>>[number]
-
-function StarRating() {
-  return (
-    <div className="flex items-center gap-0.5">
-      {[...Array(5)].map((_, i) => (
-        <Star key={i} className="h-4 w-4 fill-amber-400 text-amber-400" />
-      ))}
-    </div>
-  )
-}
 
 function ReviewCard({ review, index }: { review: Review; index: number }) {
   return (
@@ -37,11 +28,6 @@ function ReviewCard({ review, index }: { review: Review; index: number }) {
 
       {/* Red top accent */}
       <div className="absolute top-0 left-6 right-6 h-[3px] bg-[var(--red)] rounded-b opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-      {/* Stars */}
-      <div className="mb-4">
-        <StarRating />
-      </div>
 
       {/* Review text */}
       <blockquote className="relative z-10 text-[var(--gray-700)] leading-relaxed mb-6 text-[15px]">
@@ -83,25 +69,6 @@ export default async function ReviewsPage() {
   const reviews = await getReviews()
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "RoofingContractor",
-            "@id": "https://targetroofers.com",
-            "name": "Target Roofing",
-            "url": "https://targetroofers.com",
-            "aggregateRating": {
-              "@type": "AggregateRating",
-              "ratingValue": "5.0",
-              "reviewCount": "34",
-              "bestRating": "5",
-              "worstRating": "1"
-            }
-          })
-        }}
-      />
       {/* ── Hero ── */}
       <section className="relative bg-[var(--black)] text-white overflow-hidden noise-overlay">
         {/* Roof schematic background */}
@@ -142,28 +109,15 @@ export default async function ReviewsPage() {
       {/* ── Stats Bar ── */}
       <section className="bg-[var(--red)] text-white py-0">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-white/20">
+          <div className="grid grid-cols-1 sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-white/20">
             {[
               {
-                value: '5.0',
-                label: 'Average Rating',
-                sub: (
-                  <div className="flex items-center justify-center gap-0.5 mt-1">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="h-3.5 w-3.5 fill-white text-white" />
-                    ))}
-                  </div>
-                ),
+                value: String(googleReviews.rating),
+                label: 'Google Rating',
               },
               {
-                value: '34',
-                label: 'Verified Reviews',
-                sub: null,
-              },
-              {
-                value: '5 Star',
-                label: 'Most Common Rating',
-                sub: null,
+                value: String(googleReviews.count),
+                label: 'Google Reviews',
               },
             ].map((stat, index) => (
               <div key={stat.label} className="py-8 sm:py-10 text-center px-4">
@@ -174,11 +128,16 @@ export default async function ReviewsPage() {
                   <div className="text-sm uppercase tracking-[0.15em] text-white/80 mt-1 font-semibold">
                     {stat.label}
                   </div>
-                  {stat.sub}
                 </AnimateIn>
               </div>
             ))}
           </div>
+          <p className="pb-5 text-center text-sm text-white/80">
+            <a href={googleReviews.profileUrl} target="_blank" rel="noopener noreferrer" className="underline hover:no-underline">
+              View Google Business Profile
+            </a>
+            {' · '}Rating checked {googleReviews.checkedOn}
+          </p>
         </div>
       </section>
 
@@ -191,8 +150,8 @@ export default async function ReviewsPage() {
               Trusted by Southwest Florida
             </h2>
             <p className="text-[var(--gray-500)] max-w-2xl mx-auto">
-              From emergency repairs to full reroofs, our customers rate us a perfect
-              5.0 across 34 verified reviews.
+              From emergency repairs to full reroofs, these selected testimonials describe customers&apos; experiences.
+              The overall Google rating is {googleReviews.rating} across {googleReviews.count} reviews.
             </p>
           </div>
 

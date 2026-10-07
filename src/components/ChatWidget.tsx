@@ -3,32 +3,25 @@
 import { useState, useRef, useEffect } from 'react'
 import { MessageCircle, X, Send, Phone, MapPin } from 'lucide-react'
 import Image from 'next/image'
-import Markdown from 'react-markdown'
+import Markdown, { defaultUrlTransform } from 'react-markdown'
+import { CHAT_GREETING, withEarlyPhoneOption } from '@/lib/chat-copy'
+
+const chatUrlTransform = (url: string) => url === 'tel:+12393325707' ? url : defaultUrlTransform(url)
 
 interface Message {
   role: 'user' | 'assistant'
   content: string
   satellite?: string
+  substantive?: boolean
 }
 
 export default function ChatWidget() {
   const [open, setOpen] = useState(false)
-  const [messages, setMessages] = useState<Message[]>([])
+  const [messages, setMessages] = useState<Message[]>([{ role: 'assistant', content: CHAT_GREETING }])
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
-  const [hasGreeted, setHasGreeted] = useState(false)
   const scrollRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
-
-  useEffect(() => {
-    if (open && !hasGreeted) {
-      setMessages([{
-        role: 'assistant',
-        content: 'Hey there! I\'m the Target Roofing assistant. Whether you have a roofing question or want to schedule a free inspection, I\'m here to help. What can I do for you?',
-      }])
-      setHasGreeted(true)
-    }
-  }, [open, hasGreeted])
 
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: 'smooth' })
@@ -58,7 +51,8 @@ export default function ChatWidget() {
         }),
       })
       const data = await res.json()
-      let content = data.message || 'Sorry, something went wrong.'
+      const modelText = typeof data.message === 'string' ? data.message : ''
+      let content = modelText || 'Sorry, something went wrong.'
       let satellite: string | undefined
 
       const satMatch = content.match(/\[SHOW_SATELLITE:(.*?)\]/)
@@ -67,7 +61,13 @@ export default function ChatWidget() {
         content = content.replace(/\[SHOW_SATELLITE:.*?\]/g, '').trim()
       }
 
-      setMessages(prev => [...prev, { role: 'assistant', content, satellite }])
+      const substantive = res.ok && !!modelText.trim() && !!content.trim()
+      if (substantive) {
+        const previousReplies = newMessages.filter(message => message.role === 'assistant' && message.substantive).length
+        content = withEarlyPhoneOption(content, previousReplies)
+      }
+
+      setMessages(prev => [...prev, { role: 'assistant', content, satellite, substantive }])
     } catch {
       setMessages(prev => [...prev, {
         role: 'assistant',
@@ -141,13 +141,14 @@ export default function ChatWidget() {
                   >
                     {msg.role === 'assistant' ? (
                       <Markdown
+                        urlTransform={chatUrlTransform}
                         components={{
                           p: ({ children }) => <p className="mb-1.5 last:mb-0">{children}</p>,
                           strong: ({ children }) => <strong className="font-bold">{children}</strong>,
                           ul: ({ children }) => <ul className="list-disc list-inside mb-1.5 space-y-0.5">{children}</ul>,
                           ol: ({ children }) => <ol className="list-decimal list-inside mb-1.5 space-y-0.5">{children}</ol>,
                           li: ({ children }) => <li className="text-sm">{children}</li>,
-                          a: ({ href, children }) => <a href={href} className="text-[var(--red)] underline hover:no-underline" target="_blank" rel="noopener noreferrer">{children}</a>,
+                          a: ({ href, children }) => <a href={href} className="text-[var(--red)] underline hover:no-underline" target={href?.startsWith('tel:') ? undefined : '_blank'} rel={href?.startsWith('tel:') ? undefined : 'noopener noreferrer'}>{children}</a>,
                         }}
                       >
                         {msg.content}

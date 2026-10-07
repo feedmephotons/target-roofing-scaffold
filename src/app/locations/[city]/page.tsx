@@ -19,6 +19,7 @@ import Breadcrumbs from '@/components/Breadcrumbs'
 import InlineLeadForm from '@/components/InlineLeadForm'
 import RoofSchematic from '@/components/RoofSchematic'
 import { CITIES, CITY_MAP, SERVICES, SERVICE_MAP, isCity, type CitySlug, type ServiceSlug } from '@/lib/locations'
+import { googleReviews } from '@/lib/google-reviews'
 
 export const dynamicParams = false
 
@@ -133,11 +134,6 @@ export default async function CityHubPage({ params }: PageProps) {
         '@type': 'AdministrativeArea',
         name: cityData.county,
       },
-    },
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: '5.0',
-      reviewCount: '34',
     },
     hasOfferCatalog: {
       '@type': 'OfferCatalog',
@@ -285,8 +281,8 @@ export default async function CityHubPage({ params }: PageProps) {
                       Licensed &amp; Trusted
                     </h3>
                     <p className="text-sm text-[var(--gray-600)] mt-0.5">
-                      FL License #CCC1334168. GAF Master Elite — the top 2% of U.S. roofers. Rated
-                      5.0 across 34 verified reviews.
+                      FL License #CCC1334168. GAF Master Elite — the top 2% of U.S. roofers. Rated{' '}
+                      {googleReviews.rating} on Google across {googleReviews.count} reviews.
                     </p>
                   </div>
                 </div>
@@ -351,7 +347,7 @@ export default async function CityHubPage({ params }: PageProps) {
 
               <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 rounded-lg bg-[var(--gray-50)] border border-[var(--gray-200)] p-5">
                 {[
-                  { icon: Star, label: '5.0 / 34 verified reviews' },
+                  { icon: Star, label: `${googleReviews.rating} Google rating / ${googleReviews.count} reviews` },
                   { icon: Award, label: 'GAF Master Elite' },
                   { icon: Clock, label: '24/7 dispatch' },
                 ].map((item) => {

@@ -127,11 +127,6 @@ export default function RootLayout({
                   'closes': '17:00',
                 },
               ],
-              'aggregateRating': {
-                '@type': 'AggregateRating',
-                'ratingValue': '5.0',
-                'reviewCount': '34',
-              },
               'areaServed': [
                 'Fort Myers',
                 'Cape Coral',

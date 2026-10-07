@@ -1,7 +1,6 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import {
-  Star,
   Quote,
   CheckCircle,
   Wrench,
@@ -17,6 +16,7 @@ import {
 import InlineLeadForm from '@/components/InlineLeadForm'
 import Breadcrumbs from '@/components/Breadcrumbs'
 import { getReviews } from '@/app/actions'
+import { googleReviews } from '@/lib/google-reviews'
 import projectsData from '@/data/projects.json'
 import RoofSchematic from '@/components/RoofSchematic'
 import {
@@ -514,11 +514,6 @@ export default async function LocationPage({ params }: PageProps) {
         },
       }],
     },
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: '5.0',
-      reviewCount: '34',
-    },
     priceRange: '$$',
     image: 'https://targetroofers.com/og-image.jpg',
   }
@@ -829,7 +824,7 @@ export default async function LocationPage({ params }: PageProps) {
             </h2>
             <div className="mt-2 h-1 w-16 bg-[var(--red)] mx-auto" />
             <p className="mt-4 text-[var(--gray-500)] max-w-xl mx-auto">
-              Rated 5.0 across 34 verified reviews. Hear what clients say about our professionalism, quality of work, and quick response times.
+              Rated {googleReviews.rating} on Google across {googleReviews.count} reviews. Hear what clients say about our professionalism, quality of work, and quick response times.
             </p>
           </div>
 
@@ -843,11 +838,6 @@ export default async function LocationPage({ params }: PageProps) {
                   <Quote className="h-12 w-12 text-[var(--red)] fill-[var(--red)]" />
                 </div>
                 <div>
-                  <div className="flex gap-0.5 mb-4">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="h-4 w-4 fill-amber-400 text-amber-400" />
-                    ))}
-                  </div>
                   <blockquote className="text-[var(--gray-700)] text-sm leading-relaxed mb-6 italic">
                     &ldquo;{review.text}&rdquo;
                   </blockquote>

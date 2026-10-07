@@ -26,6 +26,7 @@ import {
 import InlineLeadForm from '@/components/InlineLeadForm'
 import AnimateIn from '@/components/AnimateIn'
 import { getShowcaseVideos } from '@/app/actions'
+import { googleReviews } from '@/lib/google-reviews'
 
 /* ------------------------------------------------------------------ */
 /*  Animated Counter Hook                                              */
@@ -124,8 +125,8 @@ function TrustSignalsSection() {
               <Star className="h-6 w-6 fill-current text-[var(--red)]" />
             </div>
             <div className="text-center sm:text-left">
-              <div className="font-bold text-sm tracking-wider uppercase font-[family-name:var(--font-display)]">5.0 Stars</div>
-              <div className="text-xs text-[var(--gray-400)]">34 Verified Reviews</div>
+              <div className="font-bold text-sm tracking-wider uppercase font-[family-name:var(--font-display)]">{googleReviews.rating} Google Rating</div>
+              <div className="text-xs text-[var(--gray-400)]">{googleReviews.count} Google Reviews</div>
             </div>
           </div>
           <div className="flex flex-col sm:flex-row items-center gap-3">
@@ -753,11 +754,6 @@ function TestimonialsSection() {
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white font-[family-name:var(--font-display)] uppercase mb-4">
               What Customers Say About<br className="hidden sm:block" /> Target Roofing
             </h2>
-            <div className="flex items-center justify-center gap-1 mb-2">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} className="h-6 w-6 fill-[var(--red)] text-[var(--red)]" />
-              ))}
-            </div>
           </AnimateIn>
 
           {/* Testimonial grid */}
@@ -767,13 +763,6 @@ function TestimonialsSection() {
                 <article className="relative rounded-lg border border-white/10 bg-white/5 p-8 backdrop-blur-sm transition-all duration-300 hover:bg-white/10 hover:border-white/20 h-full">
                   {/* Quote icon */}
                   <Quote className="absolute top-6 right-6 h-8 w-8 text-[var(--red)]/30" />
-
-                  {/* Stars */}
-                  <div className="mb-4 flex gap-1">
-                    {[...Array(5)].map((_, j) => (
-                      <Star key={j} className="h-4 w-4 fill-[var(--red)] text-[var(--red)]" />
-                    ))}
-                  </div>
 
                   {/* Quote text */}
                   <p className="mb-6 text-white/80 leading-relaxed italic">

@@ -16,6 +16,7 @@ import {
 import Breadcrumbs from '@/components/Breadcrumbs'
 import RoofSchematic from '@/components/RoofSchematic'
 import { CITIES, CITIES_BY_COUNTY, CITY_MAP, SERVICES, SERVICE_MAP, type ServiceSlug } from '@/lib/locations'
+import { googleReviews } from '@/lib/google-reviews'
 
 const PHONE_DISPLAY = '239-332-5707'
 const PHONE_HREF = 'tel:+12393325707'
@@ -138,7 +139,7 @@ export default function LocationsHubPage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
             {[
-              { icon: Star, label: '5.0 from 34 verified reviews' },
+              { icon: Star, label: `${googleReviews.rating} on Google from ${googleReviews.count} reviews` },
               { icon: Award, label: 'GAF Master Elite — Top 2% of U.S. roofers' },
               { icon: ShieldCheck, label: 'FL License #CCC1334168' },
               { icon: Clock, label: '24/7 Emergency Storm Dispatch' },
