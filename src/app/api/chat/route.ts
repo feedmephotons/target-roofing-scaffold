@@ -39,7 +39,7 @@ interface ChatMessage {
 
 export async function POST(request: NextRequest) {
   try {
-    const { messages } = (await request.json()) as { messages: ChatMessage[] }
+    const { messages, attribution } = (await request.json()) as { messages: ChatMessage[]; attribution?: string }
 
     const contents = messages.map(m => ({
       role: m.role === 'assistant' ? 'model' as const : 'user' as const,
@@ -70,28 +70,40 @@ export async function POST(request: NextRequest) {
           phone: leadData.phone,
           street_address: leadData.address,
           service: leadData.roofType || 'Inspection',
-          message: leadData.issue || 'Chatbot lead - inspection request',
+          message: [leadData.issue || 'Inspection request', 'Lead channel: website chat', typeof attribution === 'string' ? attribution.slice(0, 3000) : ''].filter(Boolean).join('\n\n'),
         }).select('id').single()
         if (error) throw error
 
-        const notification = await sendNotification({
-          to: recipientList(process.env.LEAD_NOTIFY_TO),
-          subject: 'Website Lead - Chatbot',
-          heading: 'New chatbot inspection request',
-          fromName: 'Website Inquiry',
-          replyTo: leadData.email,
-          fields: [
-            ['Name', [firstName, lastName].filter(Boolean).join(' ')],
-            ['Phone', leadData.phone],
-            ['Email', leadData.email],
-            ['Property address', leadData.address],
-            ['Roof type', leadData.roofType],
-            ['Issue', leadData.issue],
-            ['Lead ID', lead?.id],
-            ['Lead manager', (process.env.NEXT_PUBLIC_SITE_URL || 'https://targetroofers.com') + '/admin'],
-          ],
+        let notified = false
+        try {
+          const notification = await sendNotification({
+            to: recipientList(process.env.LEAD_NOTIFY_TO || 'projects@targetroofers.com'),
+            subject: 'Website Lead - Chatbot',
+            heading: 'New chatbot inspection request',
+            fromName: 'Website Inquiry',
+            replyTo: leadData.email,
+            fields: [
+              ['Name', [firstName, lastName].filter(Boolean).join(' ')],
+              ['Phone', leadData.phone],
+              ['Email', leadData.email],
+              ['Property address', leadData.address],
+              ['Roof type', leadData.roofType],
+              ['Issue', leadData.issue],
+              ['Lead ID', lead?.id],
+              ['Lead manager', (process.env.NEXT_PUBLIC_SITE_URL || 'https://targetroofers.com') + '/admin'],
+            ],
+          })
+          notified = notification.sent
+          if (!notified) console.error('[chat] Lead saved but notification not sent:', lead?.id, notification.error)
+        } catch (notificationError) {
+          console.error('[chat] Lead saved but notification failed:', lead?.id, notificationError)
+        }
+        return NextResponse.json({
+          message: notified
+            ? 'Your request is saved. Our team will follow up to discuss the next step.'
+            : 'Your request is saved, but I could not notify the team. Please call 239-332-5707 and mention your website request.',
+          lead: { id: String(lead.id), notified },
         })
-        if (!notification.sent) console.error('[chat] Lead saved but notification not sent:', lead?.id, notification.error)
       } catch (error) {
         console.error('[chat] Could not save chatbot lead:', error)
         return NextResponse.json({

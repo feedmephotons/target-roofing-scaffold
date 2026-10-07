@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from 'react'
 import { MessageCircle, X, Send, Phone, MapPin } from 'lucide-react'
 import Image from 'next/image'
 import Markdown, { defaultUrlTransform } from 'react-markdown'
+import { trackLead, attributionSummary } from '@/lib/tracking'
 import { CHAT_GREETING, withEarlyPhoneOption } from '@/lib/chat-copy'
 
 const chatUrlTransform = (url: string) => url === 'tel:+12393325707' ? url : defaultUrlTransform(url)
@@ -48,9 +49,13 @@ export default function ChatWidget() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           messages: newMessages.map(m => ({ role: m.role, content: m.content })),
+          attribution: attributionSummary(),
         }),
       })
       const data = await res.json()
+      if (res.ok && typeof data.lead?.id === 'string') {
+        trackLead(data.lead.id, { form_id: 'chat' })
+      }
       const modelText = typeof data.message === 'string' ? data.message : ''
       let content = modelText || 'Sorry, something went wrong.'
       let satellite: string | undefined

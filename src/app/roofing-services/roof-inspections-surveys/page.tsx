@@ -13,7 +13,6 @@ import {
   ArrowRight,
   ShieldCheck,
   Users,
-  Award,
   Building2,
   Search,
 } from 'lucide-react'
@@ -25,11 +24,13 @@ import { CITIES, CITY_MAP } from '@/lib/locations'
 export const metadata: Metadata = {
   title: 'Roof Inspections & Surveys',
   description:
-    'Comprehensive commercial roof inspections using infrared moisture detection, core sampling, and visual survey methods. Detailed reports identify issues before they become expensive problems. Serving Southwest Florida.',
+    'Commercial roof inspections and surveys in Southwest Florida. Plan the assessment scope, photo documentation, optional testing and repair priorities for your property.',
+  alternates: { canonical: '/roofing-services/roof-inspections-surveys' },
   openGraph: {
     title: 'Commercial Roof Inspections & Surveys | Target Roofing',
     description:
-      'Infrared moisture scanning, core sampling, and detailed photo documentation for commercial properties across Southwest Florida. 30+ years of experience.',
+      'Roof condition surveys for property managers and HOAs. Confirm inspection methods, report deliverables and next steps for your building.',
+    url: 'https://targetroofers.com/roofing-services/roof-inspections-surveys',
     images: ['/images/crew/crew-roof-inspection-hires.png'],
   },
 }
@@ -38,66 +39,46 @@ const inspectionFeatures = [
   {
     label: 'Infrared Thermographic Moisture Scanning',
     description:
-      'Non-invasive infrared cameras detect trapped moisture beneath the membrane, pinpointing wet insulation invisible to the naked eye.',
+      'Where suitable and included in the scope, infrared scanning can help identify areas for further investigation. Conditions and roof assembly affect interpretation; confirm findings with appropriate follow-up.',
     icon: Thermometer,
   },
   {
     label: 'Core Sample Analysis for Membrane Integrity',
     description:
-      'Strategic core cuts reveal the full roof assembly condition, from membrane to deck, confirming insulation R-values and adhesion quality.',
+      'Where authorized and appropriate, targeted samples can help evaluate the assembly at the sampled locations. Agree on sample locations, any laboratory work and how openings will be repaired.',
     icon: Layers,
   },
   {
     label: 'Detailed Photo Documentation with GPS Mapping',
     description:
-      'Every deficiency is photographed, annotated, and mapped to exact roof coordinates so your team knows precisely where each issue is located.',
+      'Agree on photo documentation and a location reference for findings, such as a roof plan or area labels. Confirm whether GPS mapping is part of your assignment.',
     icon: Camera,
   },
   {
     label: 'Prioritized Repair Recommendations with Cost Estimates',
     description:
-      'Our reports rank every finding by urgency and include line-item cost estimates, giving you a clear roadmap for budgeting and capital planning.',
+      'Discuss repair priorities and whether your assignment includes a separate itemized repair proposal or budget guidance. Confirm pricing and timing before authorizing work.',
     icon: ClipboardList,
   },
   {
     label: 'Pre-Purchase and Post-Storm Assessment Reports',
     description:
-      'Due-diligence inspections for acquisitions and insurance-grade storm damage documentation with before-and-after comparisons.',
+      'Explain the purpose of the assessment and any records your buyer, insurer or property team needs. A roof condition report does not determine insurance coverage or guarantee acceptance by another party.',
     icon: CloudLightning,
   },
   {
     label: 'Annual Inspection Programs for Proactive Maintenance',
     description:
-      'Scheduled recurring inspections catch small problems before they escalate, satisfying manufacturer warranty requirements and extending roof life.',
+      'Recurring visits can help track condition changes. Review the written manufacturer warranty to confirm required care, documentation and authorized repair methods.',
     icon: CalendarCheck,
   },
 ]
 
 const whyTargetReasons = [
-  {
-    label: '30+ Years of Commercial Experience',
-    description:
-      'Three decades inspecting every commercial roof system in Southwest Florida means we know exactly what to look for and where to find it.',
-    icon: Award,
-  },
-  {
-    label: 'GAF Master Elite Certified',
-    description:
-      'Only 2% of roofing contractors earn this distinction. Our inspectors are trained to the highest manufacturer standards in the industry.',
-    icon: ShieldCheck,
-  },
-  {
-    label: 'Direct Employees, Never Subcontractors',
-    description:
-      'Every inspector on your roof is a full-time, background-checked Target Roofing employee in a red polo. No day-labor, no surprises.',
-    icon: Users,
-  },
-  {
-    label: 'All Commercial Roof Types',
-    description:
-      'TPO, PVC, EPDM, modified bitumen, built-up, metal, tile, and coated systems. We inspect and report on every system used in commercial construction.',
-    icon: Building2,
-  },
+  { label: 'Purpose and Roof History', description: 'Share the decision you need to make, affected areas, previous repairs and available roof documents.', icon: ClipboardList },
+  { label: 'Access and Authorization', description: 'Identify the on-site contact, restricted areas and who can approve samples or additional investigation.', icon: Users },
+  { label: 'Scope and Limitations', description: 'Confirm which roof areas and methods are included and how inaccessible or concealed conditions will be reported.', icon: ShieldCheck },
+  { label: 'Report and Follow-Up', description: 'Agree on recipients, delivery timing and whether separate repair pricing or another specialist is needed.', icon: Building2 },
 ]
 
 export default function RoofInspectionsSurveysPage() {
@@ -110,8 +91,9 @@ export default function RoofInspectionsSurveysPage() {
             '@context': 'https://schema.org',
             '@type': 'Service',
             name: 'Roof Inspections & Surveys',
+            url: 'https://targetroofers.com/roofing-services/roof-inspections-surveys',
             description:
-              'Comprehensive commercial roof inspections using infrared moisture detection, core sampling, and visual survey methods. Detailed reports identify issues before they become expensive problems. Serving Southwest Florida.',
+              'Evaluate commercial roof conditions and plan the next step. Confirm the visual survey, documentation and any specialized testing appropriate for your property.',
             provider: {
               '@type': 'RoofingContractor',
               '@id': 'https://targetroofers.com',
@@ -161,7 +143,7 @@ export default function RoofInspectionsSurveysPage() {
               Roof Inspections &amp; Surveys
             </h1>
             <p className="text-lg md:text-xl text-[var(--gray-300)] leading-relaxed mb-8 max-w-2xl">
-              Comprehensive commercial roof inspections using infrared moisture detection, core sampling, and visual survey methods. Our detailed reports identify issues before they become expensive problems.
+              Commercial roof condition surveys for your next property decision. Confirm the visual assessment, documentation and any specialized testing appropriate for your roof and the agreed scope.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <a
@@ -205,20 +187,20 @@ export default function RoofInspectionsSurveysPage() {
               <AnimateIn animation="fade-up" delay={100}>
                 <div className="red-accent-left mb-8">
                   <p className="text-lg text-[var(--gray-600)] leading-relaxed">
-                    In Southwest Florida, commercial roofs endure relentless UV exposure, hurricane-force winds, heavy tropical rain, and salt-laden coastal air. These conditions degrade roofing membranes, flashings, and insulation far faster than in temperate climates. A professional roof inspection is the only way to accurately assess what is happening beneath the surface before minor deterioration turns into a six-figure problem.
+                    A useful roof assessment starts with the question you need answered: the source of a leak, changes after a storm, current condition or options for an upcoming capital decision. Share the roof history and agree on the areas and methods to be evaluated.
                   </p>
                 </div>
               </AnimateIn>
 
               <AnimateIn animation="fade-up" delay={200}>
                 <p className="text-[var(--gray-600)] leading-relaxed mb-6">
-                  Target Roofing&apos;s inspection program goes well beyond a simple visual walkover. Our certified technicians use infrared thermographic imaging to map trapped moisture that is invisible to the naked eye, then confirm findings with targeted core samples that reveal the full condition of every layer in the roof assembly. Every deficiency is photographed, GPS-tagged, and compiled into a prioritized report with repair cost estimates your facilities team or board can act on immediately.
+                  A visual survey can document accessible roof surfaces, flashings, penetrations and drainage details. Concealed conditions may need additional investigation. Infrared scanning, core samples and other testing should be selected for the roof assembly and purpose, with access, weather and any destructive testing agreed in advance.
                 </p>
               </AnimateIn>
 
               <AnimateIn animation="fade-up" delay={300}>
                 <p className="text-[var(--gray-600)] leading-relaxed">
-                  Whether you are evaluating a property for acquisition, documenting storm damage for an insurance claim, fulfilling manufacturer warranty maintenance requirements, or simply keeping your annual capital budget on track, our inspection reports give you the objective, data-driven intelligence you need to make confident roofing decisions.
+                  For a purchase, storm review, warranty concern or budget meeting, explain who will use the findings. Agree on the report format and timing, and distinguish observed conditions from assumptions, inaccessible areas and recommendations for further evaluation.
                 </p>
               </AnimateIn>
             </div>
@@ -250,12 +232,12 @@ export default function RoofInspectionsSurveysPage() {
                 </span>
               </div>
               <h2 className="text-3xl md:text-4xl font-bold text-[var(--black)] mb-6">
-                What Our Inspections Include
+                Define the Inspection Methods
               </h2>
             </AnimateIn>
             <AnimateIn animation="fade-up" delay={100}>
               <p className="text-lg text-[var(--gray-600)] leading-relaxed max-w-3xl mx-auto">
-                Every Target Roofing inspection combines advanced technology with hands-on expertise to deliver a complete picture of your roof&apos;s condition, not just what is visible on the surface.
+                Select the assessment methods for the question you need answered. The options below may be included where suitable and agreed in advance; the report should explain accessible findings, testing limits and any concealed conditions that still need investigation.
               </p>
             </AnimateIn>
           </div>
@@ -294,25 +276,25 @@ export default function RoofInspectionsSurveysPage() {
                 <div className="inline-flex items-center gap-2 mb-4 px-3 py-1.5 bg-[var(--red)]/10 rounded">
                   <ShieldCheck className="h-5 w-5 text-[var(--red)]" />
                   <span className="text-sm font-semibold text-[var(--red)] uppercase tracking-wider font-[family-name:var(--font-display)]">
-                    The Target Roofing Difference
+                    Inspection Planning
                   </span>
                 </div>
                 <h2 className="text-3xl md:text-4xl font-bold text-[var(--black)] mb-6">
-                  Why Target Roofing for Your Inspection
+                  Prepare for a Useful Roof Inspection
                 </h2>
               </AnimateIn>
 
               <AnimateIn animation="fade-up" delay={100}>
                 <div className="red-accent-left mb-8">
                   <p className="text-lg text-[var(--gray-600)] leading-relaxed">
-                    Not all roof inspections are created equal. A general contractor walking your roof with a phone camera is not the same as a certified commercial roofing firm deploying infrared imaging and core sampling with three decades of local knowledge. Here is what sets us apart.
+                    Give the assessment a clear purpose and assemble the information your property team already has. The items below help define a useful assignment and avoid gaps in the report or follow-up.
                   </p>
                 </div>
               </AnimateIn>
 
               <AnimateIn animation="fade-up" delay={200}>
                 <p className="text-[var(--gray-600)] leading-relaxed mb-8">
-                  Target Roofing has inspected thousands of commercial properties across Lee, Collier, Charlotte, and Sarasota counties. We know the common failure points for every roof system used in this market, from TPO and modified bitumen on flat retail centers to standing-seam metal on industrial facilities. Our inspection reports are trusted by property managers, HOA boards, insurance adjusters, and commercial real estate attorneys throughout Southwest Florida.
+                  Target Roofing serves Lee, Collier, Charlotte and Sarasota counties. Before requesting a survey, collect earlier reports, roof plans if available, known system information and the history of leaks or repairs. Identify an on-site contact and any access restrictions so the assessment can be planned around your property.
                 </p>
               </AnimateIn>
 
@@ -369,7 +351,7 @@ export default function RoofInspectionsSurveysPage() {
             </AnimateIn>
             <AnimateIn animation="fade-up" delay={100}>
               <p className="text-lg text-[var(--gray-600)] leading-relaxed">
-                Every inspection concludes with a professional report delivered same-day or next business day, depending on property size. Here is what is included.
+                Confirm these deliverables in your inspection scope before scheduling. Report timing depends on the agreed assignment, access, property size and any additional testing. Not every inspection includes every item below.
               </p>
             </AnimateIn>
           </div>
@@ -378,18 +360,18 @@ export default function RoofInspectionsSurveysPage() {
             <div className="max-w-2xl mx-auto">
               <div className="bg-white rounded-lg shadow-md p-8 border-t-4 border-[var(--red)]">
                 <h3 className="text-xl font-bold text-[var(--black)] mb-6 font-[family-name:var(--font-display)] uppercase tracking-wide">
-                  Inspection Report Includes:
+                  Agree on the Report Deliverables:
                 </h3>
                 <ul className="space-y-4">
                   {[
                     'Executive summary with overall roof condition rating',
-                    'Annotated photo documentation of every deficiency',
-                    'Infrared moisture scan results with heat-map overlays',
-                    'Core sample lab results (when applicable)',
-                    'Prioritized repair schedule ranked by urgency',
-                    'Itemized cost estimates for recommended repairs',
-                    'Remaining useful life estimate for each roof section',
-                    'Manufacturer warranty compliance status',
+                    'Photos and location references for observed findings',
+                    'Infrared findings and limitations, if scanning is included',
+                    'Sample locations and testing results, if authorized and included',
+                    'Recommended next actions and repair priorities',
+                    'Separate repair estimates or budget guidance, if requested',
+                    'Condition-based planning guidance with assumptions explained',
+                    'Warranty documents to review and any required follow-up',
                   ].map((item, idx) => (
                     <li key={idx} className="flex items-start gap-3">
                       <CheckCircle className="h-5 w-5 text-[var(--red)] flex-shrink-0 mt-0.5" />
@@ -403,6 +385,16 @@ export default function RoofInspectionsSurveysPage() {
         </div>
       </section>
 
+      <section className="bg-white py-16"><div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <h2 className="text-3xl font-bold mb-6 font-[family-name:var(--font-display)] uppercase">Turn the Findings into the Next Step</h2>
+        <p className="text-[var(--gray-600)] leading-relaxed mb-6">An inspection documents the agreed assessment at a point in time. It does not guarantee future performance, certify concealed conditions or automatically establish manufacturer warranty or insurance compliance. Ask which findings need attention, what remains uncertain and whether another evaluation is appropriate.</p>
+        <div className="grid gap-6 sm:grid-cols-3">
+          <p><Link href="/roofing-services/commercial-roof-repair" className="font-bold text-[var(--red)] underline underline-offset-4">Plan a commercial roof repair</Link></p>
+          <p><Link href="/commercial-hoa-roof-maintenance" className="font-bold text-[var(--red)] underline underline-offset-4">Organize recurring maintenance</Link></p>
+          <p><Link href="/roofing-services/roof-replacement" className="font-bold text-[var(--red)] underline underline-offset-4">Compare replacement options</Link></p>
+        </div>
+      </div></section>
+
       {/* ==================== CTA / BREADCRUMB ==================== */}
       <section className="bg-[var(--black)] text-white py-16 noise-overlay relative">
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -413,7 +405,7 @@ export default function RoofInspectionsSurveysPage() {
                   Protect Your Investment
                 </h2>
                 <p className="text-[var(--gray-400)] leading-relaxed">
-                  A professional inspection today can save you hundreds of thousands in emergency repairs tomorrow.
+                  Use the findings to plan repair priorities, routine care and the next property decision.
                 </p>
               </div>
               <div className="flex flex-col sm:flex-row gap-4 flex-shrink-0">
@@ -442,8 +434,9 @@ export default function RoofInspectionsSurveysPage() {
           <AnimateIn animation="scale">
             <InlineLeadForm
               defaultService="inspection"
+              formId="inspection"
               title="Schedule a Roof Inspection"
-              subtitle="Get a comprehensive inspection report with infrared moisture mapping, prioritized repair recommendations, and itemized cost estimates. Our team will survey your property and deliver findings within 24 hours."
+              subtitle="Tell us what you need evaluated and how the findings will be used. Our team will follow up to confirm scope, access and scheduling."
               buttonText="Request Inspection"
               darkTheme={true}
             />

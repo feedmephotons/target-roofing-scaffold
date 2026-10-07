@@ -15,6 +15,7 @@ import {
   Award,
   FileCheck,
 } from 'lucide-react'
+import LocalRoofPlanning from '@/components/LocalRoofPlanning'
 import Breadcrumbs from '@/components/Breadcrumbs'
 import InlineLeadForm from '@/components/InlineLeadForm'
 import RoofSchematic from '@/components/RoofSchematic'
@@ -209,6 +210,8 @@ export default async function CityHubPage({ params }: PageProps) {
           </div>
         </div>
       </section>
+
+      <LocalRoofPlanning city={city as CitySlug} />
 
       {/* 24/7 emergency strip */}
       <section className="bg-[var(--red)] text-white">

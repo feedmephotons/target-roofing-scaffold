@@ -63,7 +63,7 @@ const reroofingFeatures = [
 
 const repairFeatures = [
   { label: 'Thorough Inspections with Detailed Reports', icon: Search },
-  { label: 'A 1-Year Warranty on Repairs', icon: ShieldCheck },
+  { label: 'Written Repair Warranty Terms', icon: ShieldCheck },
   { label: 'Full Roof Replacements', icon: RotateCcw },
   { label: 'Help with Insurance Claims', icon: FileText },
   { label: 'Online Asset Analysis', icon: BarChart3 },
@@ -73,9 +73,9 @@ const maintenanceServices = [
   { label: 'Comprehensive Roof System Inspections', icon: Search },
   { label: 'Extensive Reports with Photos', icon: FileText },
   { label: 'Proposals for Work Needed', icon: ClipboardList },
-  { label: 'Manufacturer\'s Warranty Maintenance & Extensions', icon: ShieldCheck },
-  { label: 'Online Customer Portal', icon: BarChart3 },
-  { label: 'Online Asset Analysis', icon: BarChart3 },
+  { label: 'Review of Written Warranty Maintenance Requirements', icon: ShieldCheck },
+  { label: 'Maintenance Records for Property Teams', icon: ClipboardList },
+  { label: 'Condition-Based Capital Planning', icon: BarChart3 },
 ]
 
 export default function RoofingServicesPage() {
@@ -328,6 +328,16 @@ export default function RoofingServicesPage() {
         </div>
       </section>
 
+      <section className="bg-[var(--gray-50)] py-12"><div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <h2 className="text-2xl font-bold mb-4 font-[family-name:var(--font-display)] uppercase">Plan work for your commercial property</h2>
+        <p className="text-[var(--gray-600)] leading-relaxed max-w-3xl mb-5">For a business, condominium or HOA, connect the roof findings with access, occupant needs and the approval process. Review the scope before scheduling repairs or recurring maintenance.</p>
+        <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:gap-8">
+          <Link href="/roofing-services/commercial-roof-repair" className="font-bold text-[var(--red)] underline underline-offset-4">Commercial roof repair</Link>
+          <Link href="/commercial-hoa-roof-maintenance" className="font-bold text-[var(--red)] underline underline-offset-4">Commercial &amp; HOA maintenance</Link>
+          <Link href="/roofing-services/roof-inspections-surveys" className="font-bold text-[var(--red)] underline underline-offset-4">Roof inspections and surveys</Link>
+        </div>
+      </div></section>
+
       {/* ==================== MAINTENANCE PLANS OVERVIEW ==================== */}
       <section id="maintenance-plans" className="relative bg-white py-20 md:py-28 scroll-mt-32">
         {/* Subtle monochrome background */}
@@ -349,7 +359,7 @@ export default function RoofingServicesPage() {
             </AnimateIn>
             <AnimateIn animation="fade-up" delay={100}>
               <p className="text-lg text-[var(--gray-600)] leading-relaxed">
-                Many property managers take advantage of Target Roofing&apos;s preventative maintenance plans. Regular checks identify minor repair needs before they create massive interior damage. Regular maintenance satisfies manufacturer warranties and helps extend your roof&apos;s service life by years.
+                Many property managers take advantage of Target Roofing&apos;s preventative maintenance plans. Regular checks identify minor repair needs before they create massive interior damage. Review the inspection and maintenance requirements in your roof&apos;s written warranty. Routine maintenance does not automatically extend coverage or guarantee remaining service life.
               </p>
             </AnimateIn>
           </div>
@@ -449,6 +459,7 @@ export default function RoofingServicesPage() {
             <div className="max-w-2xl mx-auto text-center">
               <p className="text-[var(--gray-600)] leading-relaxed">
                 We are happy to provide references from the many property owners, property managers and condo/HOA boards we have served through replacement transitions over the years.
+                <Link href="/roofing-services/roof-replacement" className="block mt-5 font-bold text-[var(--red)] underline underline-offset-4">Explore roof replacement systems and planning</Link>
               </p>
             </div>
           </AnimateIn>

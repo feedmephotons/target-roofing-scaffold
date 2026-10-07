@@ -45,6 +45,7 @@ export function captureAttribution(): void {
     if (oai) found.oai_click_id = oai.slice(0, 200)
 
     const existing = getAttribution()
+    if (UTM_KEYS.some(key => existing?.[key]) || existing?.oai_click_id) return
     // Only (re)write when this landing actually carried campaign params, so
     // first-touch attribution isn't wiped by later internal navigation.
     if (Object.keys(found).length > 0) {
@@ -89,7 +90,7 @@ export function attributionSummary(): string {
 
 /**
  * Conversion firing. Two sinks with different rules:
- *  - GA4 (gtag): accepts arbitrary params, so we attach the full UTM attribution.
+ *  - GA4 (gtag): send only event labels, saved-row ID and safe campaign labels.
  *  - OpenAI pixel (oaiq): validates event props against a strict allowlist, so we
  *    send only its supported shape (never raw utm_* keys, which it would reject).
  *
@@ -99,9 +100,22 @@ export function attributionSummary(): string {
  *   page_viewed   -> auto-fired by the pixel on init; re-fired on SPA route change
  */
 
+// Campaign labels only. Never send inquiry text, names, email, address or raw referrer URLs.
+const GA_PARAM_KEYS = ['form_id', 'service', 'phone_number', 'lead_id']
+const GA_CAMPAIGN_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content'] as const
 function fireGa(event: string, params: Record<string, unknown>): void {
   try {
-    window.gtag?.('event', event, { ...params, ...(getAttribution() || {}) })
+    const safe: Record<string, string> = {}
+    for (const key of GA_PARAM_KEYS) {
+      const value = params[key]
+      if (typeof value === 'string' && /^[a-zA-Z0-9_+ -]{1,100}$/.test(value)) safe[key] = value
+    }
+    const attribution = getAttribution()
+    for (const key of GA_CAMPAIGN_KEYS) {
+      const value = attribution?.[key]
+      if (value && /^[a-zA-Z0-9_ -]{1,100}$/.test(value)) safe[key] = value
+    }
+    window.gtag?.('event', event, safe)
   } catch {
     /* no-op */
   }
@@ -139,8 +153,10 @@ function fireOaiqMeasure(
  * was saved, passing the saved lead's ID. The OpenAI event_id is tied to that row
  * (tr-lead-<id>), so each saved lead is reported once and never under a random ID.
  */
+const reportedLeads = new Set<string>()
+
 export function trackLead(leadId: string | undefined, params: Record<string, unknown> = {}): void {
-  if (typeof window === 'undefined' || !leadId) return
+  if (typeof window === 'undefined' || !leadId || reportedLeads.has(leadId)) return
   const key = `tr_lead_${leadId}`
   try {
     if (sessionStorage.getItem(key)) return
@@ -148,6 +164,7 @@ export function trackLead(leadId: string | undefined, params: Record<string, unk
   } catch {
     /* storage unavailable: still report once for this call */
   }
+  reportedLeads.add(leadId)
   fireGa('generate_lead', { ...params, lead_id: leadId })
   fireOaiqMeasure('lead_created', { type: 'customer_action' }, { event_id: `tr-lead-${leadId}` })
 }

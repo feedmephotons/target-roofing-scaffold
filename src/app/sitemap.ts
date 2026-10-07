@@ -1,5 +1,6 @@
 import type { MetadataRoute } from 'next'
 import { CITIES, SERVICES } from '@/lib/locations'
+import { NEWS_PAGE_COUNT, newsPageHref } from '@/lib/news'
 import blogsData from '@/data/blogs.json'
 
 const BASE_URL = 'https://targetroofers.com'
@@ -10,6 +11,7 @@ const BUILD_DATE = new Date()
 interface BlogPost {
   slug: string
   date: string
+  updatedAt?: string
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -24,6 +26,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/reviews',
     '/roofing-services',
     '/roofing-services/roof-repair',
+    '/roofing-services/commercial-roof-repair',
+    '/roofing-services/roof-replacement',
     '/softwash',
     '/target-news',
     '/video-gallery',
@@ -51,6 +55,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const staticEntries: MetadataRoute.Sitemap = [
     ...staticPages,
+    ...Array.from({ length: NEWS_PAGE_COUNT - 1 }, (_, i) => newsPageHref(i + 2)),
     ...cityHubPages,
     ...locationPages,
   ].map((path) => ({
@@ -69,7 +74,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const blogEntries: MetadataRoute.Sitemap = (blogsData as BlogPost[]).map((post) => ({
     url: `${BASE_URL}/target-news/${post.slug}`,
-    lastModified: new Date(post.date),
+    lastModified: new Date(post.updatedAt || post.date),
     changeFrequency: 'yearly',
     priority: 0.5,
   }))

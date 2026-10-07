@@ -25,7 +25,9 @@ import {
 export const metadata: Metadata = {
   title: 'Commercial & HOA Roof Maintenance',
   description:
-    'TotalCoverage Maintenance Plan by Target Roofing. Proactive commercial and HOA roof maintenance with 50+ point inspections. Serving Lee, Collier, Charlotte & Sarasota Counties.',
+    'Commercial and HOA roof maintenance in Lee, Collier, Charlotte and Sarasota counties. Plan inspections, drainage care, repair approvals and records for your property.',
+  alternates: { canonical: '/commercial-hoa-roof-maintenance' },
+  openGraph: { title: 'Commercial & HOA Roof Maintenance | Target Roofing', description: 'Plan roof inspections, maintenance scope and records for managed properties in Southwest Florida.', url: 'https://targetroofers.com/commercial-hoa-roof-maintenance' },
 }
 
 /* ------------------------------------------------------------------ */
@@ -33,22 +35,22 @@ export const metadata: Metadata = {
 /* ------------------------------------------------------------------ */
 
 const whyYouNeed = [
-  { icon: Sun, text: 'Harsh Florida UV and weather exposure breaks down sealants and wears on roofs' },
-  { icon: Droplets, text: 'If left unchecked ponding water will cause leaks at seams and/or penetrations' },
-  { icon: Wrench, text: 'Damage from other trades can quickly create costly problems' },
-  { icon: Leaf, text: 'Small resolvable issues such as clearing drainage systems of debris will prevent future leaks' },
-  { icon: FileText, text: 'Most warranties or HOA bylaws recommend it' },
-  { icon: ShieldCheck, text: 'A proactive maintenance plan will save you money in the long run' },
+  { icon: Sun, text: 'Track changes in exposed roofing, sealants and flashing over time.' },
+  { icon: Droplets, text: 'Review drainage and areas where water remains after rain.' },
+  { icon: Wrench, text: 'Document damage or changes after HVAC and other rooftop work.' },
+  { icon: Leaf, text: 'Include drainage debris removal in an agreed maintenance scope.' },
+  { icon: FileText, text: 'Keep inspection records with the roof warranty and prior repair documents.' },
+  { icon: ShieldCheck, text: 'Separate routine care, approved repairs and longer-term capital planning.' },
 ]
 
-const howWeDiffer = [
-  'Comprehensive checklist of over 50 points for thorough seasonal inspections',
-  'GAF Certified Maintenance Professional',
-  'Offer maintenance plans on all roofs, even if we did not install it',
-  'Priority response times for service calls',
-  'Detailed photo inspections and reports',
-  'Same-day itemized estimates and recommendations',
-  'Fixed or its free guarantee repair program',
+const maintenanceScope = [
+  'Roof areas and systems covered, including any excluded or inaccessible areas.',
+  'Visit frequency, scheduling and the process for additional checks after storms or rooftop work.',
+  'Inspection documentation, drainage care and minor work included in the plan.',
+  'Findings that require a separate repair estimate and who can authorize that work.',
+  'Report format, delivery timing and the contact who receives updates.',
+  'Service-call availability, billing, renewal and cancellation terms in the written agreement.',
+  'Any warranty-related obligations, exclusions or repair coverage confirmed in writing.',
 ]
 
 const buildingTypes = [
@@ -112,18 +114,25 @@ const testimonials = [
 export default function MaintenancePage() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        '@context': 'https://schema.org', '@type': 'Service', name: 'Commercial & HOA Roof Maintenance',
+        url: 'https://targetroofers.com/commercial-hoa-roof-maintenance',
+        provider: { '@type': 'RoofingContractor', '@id': 'https://targetroofers.com', name: 'Target Roofing' },
+        areaServed: ['Lee', 'Collier', 'Charlotte', 'Sarasota'].map(name => ({ '@type': 'AdministrativeArea', name: `${name} County, Florida` })),
+        serviceType: 'Roof Maintenance',
+      }) }} />
       {/* ==================== HERO ==================== */}
       <section className="relative bg-[var(--black)] text-white noise-overlay">
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-24 md:py-32 lg:py-40">
           <div className="max-w-4xl mx-auto text-center">
             <p className="text-[var(--red)] font-semibold uppercase tracking-widest text-sm mb-4 font-[family-name:var(--font-display)]">
-              Proactive Roof Maintenance
+              TotalCoverage&trade; Maintenance Plan
             </p>
             <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold mb-6 font-[family-name:var(--font-display)] uppercase">
-              TotalCoverage&trade; Maintenance Plan
+              Commercial &amp; HOA Roof Maintenance
             </h1>
             <p className="text-lg md:text-xl text-[var(--gray-300)] leading-relaxed mb-10">
-              Cost-Saving Proactive Maintenance Plan &mdash; Total Coverage, Total Confidence, Total Satisfaction
+              Commercial and HOA roof care built around inspections, documented findings and an agreed maintenance scope.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
@@ -156,7 +165,7 @@ export default function MaintenancePage() {
               <div className="red-accent-left">
                 <p className="text-lg text-[var(--gray-600)] leading-relaxed">
                   Florida&apos;s climate is relentless on commercial roofs. A proactive maintenance
-                  plan identifies and resolves issues before they become expensive emergencies.
+                  plan helps your team track condition changes and decide which issues need attention. The right scope depends on the roof system, access and the property&apos;s needs.
                 </p>
               </div>
             </div>
@@ -183,17 +192,17 @@ export default function MaintenancePage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center mb-14">
             <h2 className="text-3xl md:text-4xl font-bold text-[var(--black)] font-[family-name:var(--font-display)] uppercase mb-6">
-              How We Differ
+              What to Confirm in Your Maintenance Plan
             </h2>
             <p className="text-lg text-[var(--gray-600)] leading-relaxed">
-              Our maintenance program goes above and beyond what other roofers offer.
+              Before approving a plan, agree on the visits, deliverables and work included. Ask our team to confirm the current TotalCoverage scope for your property.
             </p>
           </div>
 
           <div className="max-w-3xl mx-auto">
             <div className="bg-white rounded-lg shadow-md p-8 md:p-10 border-t-4 border-[var(--red)]">
               <ul className="space-y-5">
-                {howWeDiffer.map((item) => (
+                {maintenanceScope.map((item) => (
                   <li key={item} className="flex items-start gap-4">
                     <CheckCircle className="h-6 w-6 text-[var(--red)] flex-shrink-0 mt-0.5" />
                     <span className="text-[var(--gray-700)] leading-relaxed">{item}</span>
@@ -219,22 +228,9 @@ export default function MaintenancePage() {
 
       <section className="relative bg-[var(--black)] py-20 md:py-28 noise-overlay">
         <div className="relative z-10 mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
-          <Quote className="h-12 w-12 text-[var(--red)] mx-auto mb-6 opacity-50" />
-          <blockquote className="text-xl md:text-2xl lg:text-3xl text-white leading-relaxed italic mb-8">
-            &ldquo;Preventative maintenance is an essential tool in keeping your facility or HOA roofs
-            leak-free and protect your warranty.&rdquo;
-          </blockquote>
-          <div className="flex items-center justify-center gap-3">
-            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--red)] text-white font-bold text-lg font-[family-name:var(--font-display)]">
-              RB
-            </div>
-            <div className="text-left">
-              <p className="font-bold text-white font-[family-name:var(--font-display)] uppercase tracking-wide">
-                Rast Bryant
-              </p>
-              <p className="text-sm text-[var(--gray-400)]">Target Roofing</p>
-            </div>
-          </div>
+          <h2 className="text-3xl md:text-4xl font-bold text-white uppercase mb-6 font-[family-name:var(--font-display)]">Keep the roof record with the property</h2>
+          <p className="text-lg text-[var(--gray-300)] leading-relaxed">A useful maintenance record connects the roof area, inspection date, photos, findings and action taken. Keep the approved scope and completed repairs with earlier reports so the next manager or HOA board can follow the history.</p>
+          <p className="text-lg text-[var(--gray-300)] leading-relaxed mt-5">Maintenance does not guarantee a leak-free roof or automatically renew a manufacturer warranty. Review the actual coverage, required care and any approved repair methods in the written documents.</p>
         </div>
       </section>
 
@@ -414,6 +410,21 @@ export default function MaintenancePage() {
         />
       </div>
 
+      <section className="bg-white py-16 md:py-24"><div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 grid gap-12 lg:grid-cols-2">
+        <div><h2 className="text-3xl font-bold uppercase mb-5 font-[family-name:var(--font-display)]">A practical handoff for managers and boards</h2>
+          <p className="text-[var(--gray-600)] leading-relaxed mb-5">Before the first visit, gather the roof system information, installation date if known, warranty documents and earlier leak or repair reports. Identify safe access arrangements, the on-site contact and the person authorized to approve additional work.</p>
+          <p className="text-[var(--gray-600)] leading-relaxed">After each visit, ask which findings need prompt attention, which can be scheduled and which should be monitored. Keep a record of approved and deferred work, with the reason for each decision. Confirm the next review date rather than treating one visit as ongoing coverage.</p>
+        </div>
+        <div><h2 className="text-3xl font-bold uppercase mb-5 font-[family-name:var(--font-display)]">Connect maintenance with the next decision</h2>
+          <p className="text-[var(--gray-600)] leading-relaxed mb-5">Routine care, a condition survey and a repair project serve different purposes. Confirm whether testing or a broader evaluation is appropriate when leaks recur or the condition changes.</p>
+          <div className="space-y-5">
+            <p><Link href="/roofing-services/roof-inspections-surveys" className="font-bold text-[var(--red)] underline underline-offset-4">Review roof inspections and report scope</Link></p>
+            <p><Link href="/roofing-services/commercial-roof-repair" className="font-bold text-[var(--red)] underline underline-offset-4">Plan commercial roof leak repairs</Link></p>
+            <p><Link href="/roofing-services/roof-replacement" className="font-bold text-[var(--red)] underline underline-offset-4">Compare replacement for capital planning</Link></p>
+          </div>
+        </div>
+      </div></section>
+
       {/* ==================== FINAL CTA ==================== */}
       <section className="bg-[var(--red)] text-white py-20 md:py-28">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
@@ -426,7 +437,7 @@ export default function MaintenancePage() {
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
-              href="/contact"
+              href="/contact?service=free-estimate"
               className="inline-flex items-center justify-center gap-2 px-10 py-4 bg-white text-[var(--black)] font-bold uppercase tracking-wide rounded hover:bg-white/90 transition-colors shadow-lg text-sm"
             >
               Contact Us Today

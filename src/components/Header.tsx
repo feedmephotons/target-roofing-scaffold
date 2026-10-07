@@ -76,9 +76,10 @@ const servicesMega: MegaPanel = {
       heading: 'Core Services',
       links: [
         { name: 'Roof Repairs', href: '/roofing-services/roof-repair', description: 'Expert leak detection & repair', icon: Wrench },
+        { name: 'Commercial Roof Repair', href: '/roofing-services/commercial-roof-repair', description: 'Repair planning for occupied properties', icon: Building2 },
         { name: 'Emergency Storm Repair', href: '/roofing-services/emergency-storm-repair', description: '24/7 storm damage response', icon: CloudLightning },
         { name: 'Maintenance Plans', href: '/commercial-hoa-roof-maintenance', description: 'Proactive roof care programs', icon: ShieldCheck },
-        { name: 'Reroofing', href: '/roofing-services#reroofing', description: 'Complete roof replacement', icon: Home },
+        { name: 'Roof Replacement', href: '/roofing-services/roof-replacement', description: 'Complete roof replacement', icon: Home },
         { name: 'New Roofs', href: '/roofing-services#new-roofs', description: 'New construction roofing', icon: HardHat },
       ],
     },
@@ -445,7 +446,7 @@ export default function Header() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 max-w-full overflow-x-clip" ref={navRef}>
+      <header className="fixed top-0 left-0 right-0 z-50 max-w-full" ref={navRef}>
         {/* ── Top red bar ── */}
         <div className="bg-[var(--red)] text-white">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

@@ -14,6 +14,8 @@ interface BlogPost {
   image?: string | null
   color?: string | null
   content?: string
+  updatedAt?: string
+  editorialNote?: string
 }
 
 interface PageProps {
@@ -171,6 +173,11 @@ export default async function BlogPostDetailPage({ params }: PageProps) {
                   />
                 </div>
               )}
+
+              {post.updatedAt && <aside className="mb-8 border-l-4 border-[var(--red)] bg-[var(--gray-50)] p-5 text-sm text-[var(--gray-600)]">
+                <p className="font-bold mb-2">Updated {new Date(post.updatedAt + 'T12:00:00Z').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' })}</p>
+                <p>{post.editorialNote}</p>
+              </aside>}
 
               {/* Blog body / Fallsback dynamically */}
               {post.content ? (

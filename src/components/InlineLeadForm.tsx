@@ -18,7 +18,7 @@ interface InlineLeadFormProps {
 export default function InlineLeadForm({
   defaultService = '',
   title = 'Request a Roof Repair Survey',
-  subtitle = 'Get a professional evaluation and itemized estimate within 24 hours.',
+  subtitle = 'Share your roof concerns and request an evaluation and written estimate.',
   buttonText = 'Submit Repair Request',
   darkTheme = false,
   formId = 'lead',
@@ -37,6 +37,7 @@ export default function InlineLeadForm({
   const [errors, setErrors] = useState<Record<string, string>>({})
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
+  const [notificationFailed, setNotificationFailed] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
   function handleChange(
@@ -58,11 +59,13 @@ export default function InlineLeadForm({
     setError(null)
     setErrors({})
     setSuccess(false)
+    setNotificationFailed(false)
 
     try {
       const res = await submitContactLead({ ...form, attribution: attributionSummary(), source: 'estimate' })
       if (res.success) {
         trackLead(res.leadId, { form_id: formId, service: form.service })
+        setNotificationFailed('notified' in res && res.notified === false)
         setSuccess(true)
         setForm({
           firstName: '',
@@ -115,8 +118,11 @@ export default function InlineLeadForm({
           Thank You!
         </h3>
         <p className={subtextClass}>
-          Your roof repair request has been submitted. A Target Roofing technician will contact you shortly to schedule your survey.
+          {notificationFailed
+            ? 'Your request is saved, but we could not notify the team. Please call 239-332-5707 and mention your website request.'
+            : 'Your request is saved. Our team will follow up to discuss the next step.'}
         </p>
+        {notificationFailed && <a href="tel:+12393325707" className="inline-block mt-4 font-semibold text-[var(--red)] underline underline-offset-4">Call 239-332-5707</a>}
       </div>
     )
   }
@@ -328,6 +334,7 @@ export default function InlineLeadForm({
             >
               <option value="">Select service...</option>
               <option value="repairs">Roof Repair</option>
+                <option value="inspection">Roof Inspection</option>
               <option value="emergency-storm-repair">Emergency / Storm Damage</option>
               <option value="maintenance-plans">Maintenance Plan</option>
               <option value="reroofing">Reroofing</option>
@@ -370,7 +377,7 @@ export default function InlineLeadForm({
           {loading ? 'Submitting Request...' : buttonText}
         </button>
 
-        {/* Emergency? Skip the form and call the 24/7 line directly. */}
+        {/* For an active leak, call to discuss the situation directly. */}
         <p className={`flex items-center justify-center gap-1.5 text-xs ${subtextClass}`}>
           <Phone className="w-3.5 h-3.5 text-[var(--red)]" aria-hidden="true" />
           Roof emergency?

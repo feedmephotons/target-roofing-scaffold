@@ -5,9 +5,10 @@ import { Phone, Mail, MapPin, Clock } from 'lucide-react'
 const footerLinks = {
   services: [
     { name: 'Roof Repairs', href: '/roofing-services/roof-repair' },
+    { name: 'Commercial Roof Repair', href: '/roofing-services/commercial-roof-repair' },
     { name: '24/7 Emergency Storm Repair', href: '/roofing-services/emergency-storm-repair' },
-    { name: 'Maintenance Plans', href: '/roofing-services#maintenance-plans' },
-    { name: 'Reroofing', href: '/roofing-services#reroofing' },
+    { name: 'Maintenance Plans', href: '/commercial-hoa-roof-maintenance' },
+    { name: 'Roof Replacement', href: '/roofing-services/roof-replacement' },
     { name: 'New Roofs', href: '/roofing-services#new-roofs' },
     { name: 'Softwash', href: '/softwash' },
   ],

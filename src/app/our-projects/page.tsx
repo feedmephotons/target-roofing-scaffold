@@ -590,6 +590,7 @@ function ProjectLightbox({
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mt-6 pt-6 border-t border-white/5">
             <p className="text-white/60 text-sm max-w-md">
               Need roofing work on a similar property in Southwest Florida? We specialize in reroofing, new construction, repairs, and proactive maintenance.
+              <Link href="/roofing-services/roof-replacement" className="block mt-3 text-white underline underline-offset-4">Plan a roof replacement</Link>
             </p>
             <Link 
               href={`/contact?service=free-estimate&project=${encodeURIComponent(project.name)}`}

@@ -14,6 +14,7 @@ import {
   MapPin,
 } from 'lucide-react'
 import InlineLeadForm from '@/components/InlineLeadForm'
+import LocalRoofPlanning from '@/components/LocalRoofPlanning'
 import Breadcrumbs from '@/components/Breadcrumbs'
 import { getReviews } from '@/app/actions'
 import { googleReviews } from '@/lib/google-reviews'
@@ -607,6 +608,8 @@ export default async function LocationPage({ params }: PageProps) {
           </div>
         </div>
       </section>
+
+      <LocalRoofPlanning city={city as CitySlug} />
 
       {/* Localized Details Section */}
       <section className="bg-white py-16 md:py-24">

@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState, type ReactNode } from 'react'
+import { useEffect, useRef, useState, type ElementType, type ReactNode } from 'react'
 
 type Animation = 'fade-up' | 'fade-down' | 'fade-left' | 'fade-right' | 'scale' | 'blur'
 
@@ -73,9 +73,9 @@ export default function AnimateIn({
 
   const { from, to } = animationStyles[animation]
 
+  const Element = Tag as ElementType
   return (
-    // @ts-expect-error dynamic tag
-    <Tag
+    <Element
       ref={ref}
       className={`transition-all ease-out ${visible ? to : from} ${className}`}
       style={{
@@ -84,7 +84,7 @@ export default function AnimateIn({
       }}
     >
       {children}
-    </Tag>
+    </Element>
   )
 }
 
