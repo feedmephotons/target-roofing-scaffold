@@ -88,6 +88,7 @@ export default function ChatWidget() {
       {/* Chat bubble */}
       {!open && (
         <button
+          aria-label="Chat with Target Roofing"
           onClick={() => setOpen(true)}
           className="fixed bottom-6 right-6 z-50 flex items-center gap-3 bg-[var(--red)] hover:bg-[var(--red-dark)] text-white px-5 py-3.5 rounded-full shadow-2xl transition-all hover:scale-105 group"
         >
@@ -123,10 +124,10 @@ export default function ChatWidget() {
               </div>
             </div>
             <div className="flex items-center gap-2">
-              <a href="tel:+12393325707" className="w-8 h-8 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors">
+              <a aria-label="Call Target Roofing" href="tel:+12393325707" className="w-8 h-8 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors">
                 <Phone className="w-4 h-4" />
               </a>
-              <button onClick={() => setOpen(false)} className="w-8 h-8 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors">
+              <button aria-label="Close chat" onClick={() => setOpen(false)} className="w-8 h-8 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors">
                 <X className="w-4 h-4" />
               </button>
             </div>
