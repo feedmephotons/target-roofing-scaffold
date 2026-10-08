@@ -90,8 +90,35 @@ export default async function BlogPostDetailPage({ params }: PageProps) {
     day: 'numeric',
   })
 
+  const articleUrl = `https://targetroofers.com/target-news/${post.slug}`
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'BlogPosting',
+        '@id': `${articleUrl}#article`,
+        headline: post.title,
+        description: post.excerpt,
+        image: new URL(post.image || '/og-image.jpg', 'https://targetroofers.com').href,
+        datePublished: post.date,
+        ...(post.updatedAt ? { dateModified: post.updatedAt } : {}),
+        mainEntityOfPage: articleUrl,
+        publisher: { '@id': 'https://targetroofers.com' },
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://targetroofers.com/' },
+          { '@type': 'ListItem', position: 2, name: 'Target News', item: 'https://targetroofers.com/target-news' },
+          { '@type': 'ListItem', position: 3, name: post.title, item: articleUrl },
+        ],
+      },
+    ],
+  }
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, '\\u003c') }} />
       {/* CSS Styles for dangerouslySetInnerHTML premium typography */}
       <style dangerouslySetInnerHTML={{ __html: `
         .blog-body-content p {
