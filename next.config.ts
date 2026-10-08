@@ -55,6 +55,9 @@ try {
 
 // Old WordPress pages and posts whose address changed.
 const LEGACY_PAGE_REDIRECTS: Record<string, string> = {
+  // Consolidate the duplicate award summary into the recovered original report.
+  '/gaf-triple-excellence-award': '/target-news/gaf-honors-target-roofing-with-triple-excellence-award',
+  '/target-news/gaf-triple-excellence-award': '/target-news/gaf-honors-target-roofing-with-triple-excellence-award',
   '/about-us': '/about',
   '/brand-guide': '/about',
   '/commercial-roofing-repairs-from-sarasota-to-marco-island': '/roofing-services/roof-repair',
