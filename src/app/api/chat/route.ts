@@ -59,8 +59,9 @@ export async function POST(request: NextRequest) {
     if (leadMatch) {
       try {
         const leadData = JSON.parse(leadMatch.json)
-        const nameParts = (leadData.firstName || '').split(' ')
-        const firstName = nameParts[0] || leadData.firstName
+        const suppliedFirstName = (leadData.firstName || '').trim()
+        const nameParts = suppliedFirstName.split(/\s+/)
+        const firstName = leadData.lastName ? suppliedFirstName : nameParts[0]
         const lastName = leadData.lastName || nameParts.slice(1).join(' ') || ''
         const { data: lead, error } = await supabase.from('leads').insert({
           form_type: 'contact',
