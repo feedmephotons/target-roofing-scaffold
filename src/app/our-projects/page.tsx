@@ -542,6 +542,7 @@ function ProjectLightbox({
   const colors = CATEGORY_COLORS[primaryCategory]
 
   const closeButton = useRef<HTMLButtonElement>(null)
+  const dialog = useRef<HTMLDivElement>(null)
 
   // Keep keyboard focus inside the viewer and restore it when closed.
   useEffect(() => {
@@ -552,8 +553,17 @@ function ProjectLightbox({
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') onClose()
       if (event.key === 'Tab') {
-        event.preventDefault()
-        closeButton.current?.focus()
+        const controls = dialog.current?.querySelectorAll<HTMLElement>('button:not([disabled]), a[href]')
+        if (!controls?.length) return
+        const first = controls[0]
+        const last = controls[controls.length - 1]
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault()
+          last.focus()
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault()
+          first.focus()
+        }
       }
     }
     document.addEventListener('keydown', onKeyDown)
@@ -570,6 +580,7 @@ function ProjectLightbox({
       onClick={onClose}
     >
       <div 
+        ref={dialog}
         role="dialog"
         aria-modal="true"
         aria-label={`${project.name} project`}

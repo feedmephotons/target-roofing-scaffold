@@ -22,6 +22,13 @@ const cityPlanning: Record<CitySlug, string> = {
   'arcadia': 'For an Arcadia property, identify the building use and any separate agricultural or accessory roofs. Provide the exact property address and access details so the inspection and proposal cover the structures you need evaluated.',
 }
 
+const countyProjects: Record<string, { href: string; title: string }> = {
+  'Lee County': { href: '/target-news/salvation-army-fort-myers-roof-deck-replacement', title: 'Salvation Army roof replacement in Fort Myers' },
+  'Collier County': { href: '/target-news/saint-ann-jubilee-center-naples-tpo-reroof', title: 'Saint Ann Jubilee Center TPO reroof in Naples' },
+  'Charlotte County': { href: '/target-news/willow-glen-port-charlotte-tile-reroof', title: 'Willow Glen tile reroof in Port Charlotte' },
+  'Sarasota County': { href: '/target-news/southern-spring-stamping-venice-coating-reroof', title: 'Southern Spring & Stamping coating reroof in Venice' },
+}
+
 export default function LocalRoofPlanning({ city }: { city: CitySlug }) {
   const info = CITY_MAP[city]
   const resources = city === 'southwest-florida' ? Object.entries(countyResources) : Object.entries(countyResources).filter(([county]) => county === info.county)
@@ -33,6 +40,7 @@ export default function LocalRoofPlanning({ city }: { city: CitySlug }) {
         <div className="flex flex-wrap gap-4"><Link href="/roofing-services/roof-repair" className="font-bold text-[var(--red)] underline underline-offset-4">Repair guidance</Link><Link href="/roofing-services/roof-replacement" className="font-bold text-[var(--red)] underline underline-offset-4">Replacement planning</Link><Link href="/commercial-hoa-roof-maintenance" className="font-bold text-[var(--red)] underline underline-offset-4">Commercial &amp; HOA maintenance</Link></div>
       </div>
       <div className="space-y-6">{resources.map(([county, resource]) => <div key={county}><h3 className="text-xl font-bold mb-3">{county} owner resources</h3><p className="text-[var(--gray-600)] leading-relaxed mb-3">{resource.text}</p><a href={resource.href} className="text-[var(--red)] underline underline-offset-4">{resource.title}</a></div>)}
+        {resources.map(([county]) => countyProjects[county] ? <p key={county} className="text-[var(--gray-600)] leading-relaxed">Historical project: <Link href={countyProjects[county].href} className="text-[var(--red)] underline underline-offset-4">{countyProjects[county].title}</Link>.</p> : null)}
         <p className="text-sm text-[var(--gray-600)]">The city or county building department determines requirements for the exact address and scope. Review current guidance with the project team.</p>
       </div>
     </div>
