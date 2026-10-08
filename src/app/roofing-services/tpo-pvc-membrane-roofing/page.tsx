@@ -228,7 +228,10 @@ export default function TpoPvcMembraneRoofingPage() {
 
               <AnimateIn animation="fade-up" delay={300}>
                 <p className="text-[var(--gray-600)] leading-relaxed">
-                  Target Roofing installs both systems with fully adhered, mechanically attached, or ballasted configurations depending on building structure, wind zone requirements, and insulation design. Every installation is engineered to meet Florida Building Code Section 1504 and the High Velocity Hurricane Zone provisions that govern Lee, Collier, and Charlotte counties.
+                  Target Roofing installs both systems with fully adhered, mechanically attached, or ballasted configurations depending on building structure, wind zone requirements, and insulation design. Product approvals, wind-uplift design and installation requirements depend on the exact address, roof assembly and applicable Florida Building Code. Confirm permitting requirements with the project team.
+                  {' '}Read our historical TPO project summaries for{' '}
+                  <Link href="/target-news/salvation-army-fort-myers-roof-deck-replacement" className="text-[var(--red)] underline underline-offset-4">Salvation Army in Fort Myers</Link> and{' '}
+                  <Link href="/target-news/saint-ann-jubilee-center-naples-tpo-reroof" className="text-[var(--red)] underline underline-offset-4">Saint Ann Jubilee Center in Naples</Link>.
                 </p>
               </AnimateIn>
             </div>
