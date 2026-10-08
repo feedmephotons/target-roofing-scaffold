@@ -263,6 +263,7 @@ function HeroSection() {
               subtitle="SWFL's local, reliable roofing experts. 24-hour response."
               buttonText="Schedule Inspection Survey"
               formId="hero"
+              headingLevel={2}
             />
           </div>
         </div>
@@ -422,6 +423,7 @@ function RepairFormSection() {
                 subtitle="Timely repairs extend roof life. Describe your leak or damage, and our certified crew in red polos will perform a comprehensive survey and provide an itemized estimate."
                 buttonText="Schedule Inspection Survey"
                 formId="repair"
+                headingLevel={2}
                 darkTheme={true}
               />
             </div>
