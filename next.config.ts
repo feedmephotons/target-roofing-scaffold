@@ -55,6 +55,7 @@ try {
 
 // Old WordPress pages and posts whose address changed.
 const LEGACY_PAGE_REDIRECTS: Record<string, string> = {
+  '/portfolio-items/willow-glen': '/target-news/willow-glen-port-charlotte-tile-reroof',
   // Consolidate the duplicate award summary into the recovered original report.
   '/gaf-triple-excellence-award': '/target-news/gaf-honors-target-roofing-with-triple-excellence-award',
   '/target-news/gaf-triple-excellence-award': '/target-news/gaf-honors-target-roofing-with-triple-excellence-award',
