@@ -13,6 +13,7 @@ interface InlineLeadFormProps {
   buttonText?: string
   darkTheme?: boolean
   formId?: string
+  headingLevel?: 2 | 3
 }
 
 export default function InlineLeadForm({
@@ -22,7 +23,9 @@ export default function InlineLeadForm({
   buttonText = 'Submit Repair Request',
   darkTheme = false,
   formId = 'lead',
+  headingLevel = 3,
 }: InlineLeadFormProps) {
+  const Heading = headingLevel === 2 ? 'h2' : 'h3'
   const [form, setForm] = useState({
     firstName: '',
     lastName: '',
@@ -114,9 +117,9 @@ export default function InlineLeadForm({
         className={`rounded-lg p-8 text-center border-t-4 border-[var(--red)] ${bgClass}`}
       >
         <CheckCircle className="h-12 w-12 text-[var(--red)] mx-auto mb-4 animate-bounce" />
-        <h3 className={`text-2xl font-bold uppercase mb-2 font-[family-name:var(--font-display)] ${textClass}`}>
+        <Heading className={`text-2xl font-bold uppercase mb-2 font-[family-name:var(--font-display)] ${textClass}`}>
           Thank You!
-        </h3>
+        </Heading>
         <p className={subtextClass}>
           {notificationFailed
             ? 'Your request is saved, but we could not notify the team. Please call 239-332-5707 and mention your website request.'
@@ -141,9 +144,9 @@ export default function InlineLeadForm({
         />
       )}
       <div className="relative z-10 mb-6">
-        <h3 className={`text-2xl sm:text-3xl font-bold uppercase tracking-wide font-[family-name:var(--font-display)] ${textClass}`}>
+        <Heading className={`text-2xl sm:text-3xl font-bold uppercase tracking-wide font-[family-name:var(--font-display)] ${textClass}`}>
           {title}
-        </h3>
+        </Heading>
         <p className={`text-sm mt-1 leading-relaxed ${subtextClass}`}>
           {subtitle}
         </p>
