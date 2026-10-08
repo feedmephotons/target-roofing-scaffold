@@ -148,6 +148,15 @@ function TrustSignalsSection() {
 /*  1. HERO                                                            */
 /* ------------------------------------------------------------------ */
 function HeroSection() {
+  const [showBackgroundVideo, setShowBackgroundVideo] = useState(false)
+  useEffect(() => {
+    // CSS hiding alone still lets the mobile browser load YouTube scripts.
+    const desktop = window.matchMedia('(min-width: 768px)')
+    const update = () => setShowBackgroundVideo(desktop.matches)
+    update()
+    desktop.addEventListener('change', update)
+    return () => desktop.removeEventListener('change', update)
+  }, [])
   const audiences = ['Homeowners', 'Property Managers', 'Property Owners', 'Condos/HOAs', 'Contractors']
 
   return (
@@ -159,7 +168,7 @@ function HeroSection() {
           - TODO: Add a WebP poster image for the video container to improve
             perceived load time (show static frame while YouTube iframe loads) */}
       <div className="absolute inset-0 z-0 bg-black">
-        <iframe
+        {showBackgroundVideo && <iframe
           className="hidden md:block absolute top-1/2 left-1/2 h-[120%] w-[120%] -translate-x-1/2 -translate-y-1/2 pointer-events-none"
           style={{ minWidth: '100vw', minHeight: '100vh' }}
           src="https://www.youtube.com/embed/yz5H6FkrWhs?autoplay=1&mute=1&loop=1&playlist=yz5H6FkrWhs&controls=0&showinfo=0&modestbranding=1&playsinline=1&rel=0&enablejsapi=1&start=3&origin=https://targetroofers.com"
@@ -167,7 +176,7 @@ function HeroSection() {
           allow="autoplay; encrypted-media"
           allowFullScreen
           loading="lazy"
-        />
+        />}
         {/* Mobile fallback: no iframe/video load on small screens for performance */}
         <div className="md:hidden absolute inset-0 bg-gradient-to-b from-black via-gray-900 to-black">
           <Image
@@ -919,6 +928,7 @@ const FALLBACK_VIDEOS = [
 const PAGE_SIZE = 5
 
 function VideoShowcaseSection() {
+  const { ref: playerRef, inView: playerInView } = useInView(0.01)
   const [activeIdx, setActiveIdx] = useState(0)
   const [page, setPage] = useState(0)
   const [showcaseVideos, setShowcaseVideos] = useState(FALLBACK_VIDEOS)
@@ -967,8 +977,8 @@ function VideoShowcaseSection() {
           <div className="flex flex-col lg:flex-row gap-6">
             {/* Main player */}
             <div className="flex-1 min-w-0">
-              <div className="relative w-full aspect-video rounded-lg overflow-hidden shadow-2xl bg-black">
-                <iframe
+              <div ref={playerRef} className="relative w-full aspect-video rounded-lg overflow-hidden shadow-2xl bg-black">
+                {playerInView && <iframe
                   key={active.id}
                   src={`https://www.youtube.com/embed/${active.id}?rel=0&modestbranding=1`}
                   title={active.title}
@@ -976,7 +986,7 @@ function VideoShowcaseSection() {
                   allowFullScreen
                   loading="lazy"
                   className="absolute inset-0 w-full h-full"
-                />
+                />}
               </div>
               {/* Now playing info */}
               <div className="mt-4 flex items-start gap-3">
