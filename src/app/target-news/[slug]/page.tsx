@@ -61,6 +61,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       url: `/target-news/${post.slug}`,
       siteName: 'Target Roofing',
       type: 'article',
+      publishedTime: post.date,
       ...(post.updatedAt ? { modifiedTime: post.updatedAt } : {}),
       images: [{ url: post.image || '/og-image.jpg', alt: post.title }],
     },
