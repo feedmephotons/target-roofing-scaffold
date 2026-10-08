@@ -423,7 +423,6 @@ function RepairFormSection() {
                 alt="Target Roofing crew member performing a commercial roof inspection"
                 fill
                 className="object-cover"
-                priority
                 sizes="(max-width: 1024px) 100vw, 42vw"
               />
             </div>
@@ -944,7 +943,6 @@ function VideoShowcaseSection() {
           fill
           className="object-fill"
           sizes="100vw"
-          priority
         />
       </div>
 
@@ -976,6 +974,7 @@ function VideoShowcaseSection() {
                   title={active.title}
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
+                  loading="lazy"
                   className="absolute inset-0 w-full h-full"
                 />
               </div>
