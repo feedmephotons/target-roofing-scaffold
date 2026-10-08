@@ -78,6 +78,7 @@ export function attributionSummary(): string {
   const a = getAttribution()
   if (!a) return ''
   const parts: string[] = []
+  if (a.landing_page) parts.push(`landing_page=${a.landing_page}`)
   if (a.utm_source) parts.push(`source=${a.utm_source}`)
   if (a.utm_medium) parts.push(`medium=${a.utm_medium}`)
   if (a.utm_campaign) parts.push(`campaign=${a.utm_campaign}`)

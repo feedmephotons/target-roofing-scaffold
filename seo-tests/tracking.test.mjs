@@ -53,3 +53,14 @@ test('first tagged source survives internal navigation and a later campaign tag'
   assert.equal(getAttribution().utm_campaign, 'roof-replacement')
   assert.equal(getAttribution().landing_page, '/roofing-services/roof-replacement')
 })
+
+
+test('saved inquiry attribution includes the original landing page after internal navigation', () => {
+  const { captureAttribution, attributionSummary, window } = load()
+  captureAttribution()
+  window.location.pathname = '/contact'
+  window.location.search = ''
+  captureAttribution()
+  assert.match(attributionSummary(), /landing_page=\/roofing-services\/roof-replacement/)
+  assert.match(attributionSummary(), /source=search/)
+})

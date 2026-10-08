@@ -5,9 +5,6 @@ import blogsData from '@/data/blogs.json'
 
 const BASE_URL = 'https://targetroofers.com'
 
-// Frozen at build time so unchanged pages don't report "modified now" on every crawl.
-const BUILD_DATE = new Date()
-
 interface BlogPost {
   slug: string
   date: string
@@ -60,7 +57,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...locationPages,
   ].map((path) => ({
     url: `${BASE_URL}${path}`,
-    lastModified: BUILD_DATE,
     changeFrequency: path === '' ? 'weekly' : 'monthly',
     priority:
       path === ''

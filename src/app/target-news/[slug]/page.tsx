@@ -54,6 +54,23 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title: post.title,
     description,
+    alternates: { canonical: `/target-news/${post.slug}` },
+    openGraph: {
+      title: `${post.title} | Target Roofing`,
+      description,
+      url: `/target-news/${post.slug}`,
+      siteName: 'Target Roofing',
+      type: 'article',
+      publishedTime: post.date,
+      ...(post.updatedAt ? { modifiedTime: post.updatedAt } : {}),
+      images: [{ url: post.image || '/og-image.jpg', alt: post.title }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${post.title} | Target Roofing`,
+      description,
+      images: [post.image || '/og-image.jpg'],
+    },
   }
 }
 
@@ -67,6 +84,7 @@ export default async function BlogPostDetailPage({ params }: PageProps) {
 
   const postColor = post.color || CATEGORY_COLORS[post.category] || 'bg-[var(--red)]'
   const formattedDate = new Date(post.date).toLocaleDateString('en-US', {
+    timeZone: 'UTC',
     year: 'numeric',
     month: 'long',
     day: 'numeric',
