@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <!-- Reference diameter: 237 units. Overall diameter: 88% of the canvas. -->
+  <!-- The stepped arms retain a small, transparent gap at the exact center. -->
+  <g transform="translate(512 512) scale(3.802194092827004)" fill="#FFFFFF">
+    <path fill-rule="evenodd" d="M 118.5 0 A 118.5 118.5 0 1 0 -118.5 0 A 118.5 118.5 0 1 0 118.5 0 Z M 113.2 0 A 113.2 113.2 0 1 0 -113.2 0 A 113.2 113.2 0 1 0 113.2 0 Z"/>
+    <path fill-rule="evenodd" d="M 24.25 0 A 24.25 24.25 0 1 0 -24.25 0 A 24.25 24.25 0 1 0 24.25 0 Z M 20.15 0 A 20.15 20.15 0 1 0 -20.15 0 A 20.15 20.15 0 1 0 20.15 0 Z"/>
+    <path d="M -4.5 -115.85 H 4.5 V -45 H 1.625 V -2.5 H -1.625 V -45 H -4.5 Z"/>
+    <path d="M -4.5 115.85 H 4.5 V 45 H 1.625 V 2.5 H -1.625 V 45 H -4.5 Z"/>
+    <path d="M -115.85 -4.5 V 4.5 H -45 V 1.625 H -2.5 V -1.625 H -45 V -4.5 Z"/>
+    <path d="M 115.85 -4.5 V 4.5 H 45 V 1.625 H 2.5 V -1.625 H 45 V -4.5 Z"/>
+  </g>
+</svg>

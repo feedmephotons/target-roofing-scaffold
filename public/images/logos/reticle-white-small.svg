@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <!-- reticle-white.svg with heavier strokes so it stays crisp at 32-48px (sidebar, guide header). -->
+  <g transform="translate(512 512) scale(3.802194092827004)" fill="#FFFFFF">
+    <path fill-rule="evenodd" d="M 118.5 0 A 118.5 118.5 0 1 0 -118.5 0 A 118.5 118.5 0 1 0 118.5 0 Z M 109.5 0 A 109.5 109.5 0 1 0 -109.5 0 A 109.5 109.5 0 1 0 109.5 0 Z"/>
+    <path fill-rule="evenodd" d="M 26 0 A 26 26 0 1 0 -26 0 A 26 26 0 1 0 26 0 Z M 18.5 0 A 18.5 18.5 0 1 0 -18.5 0 A 18.5 18.5 0 1 0 18.5 0 Z"/>
+    <path d="M -6 -114 H 6 V -45 H 3.25 V -4 H -3.25 V -45 H -6 Z"/>
+    <path d="M -6 114 H 6 V 45 H 3.25 V 4 H -3.25 V 45 H -6 Z"/>
+    <path d="M -114 -6 V 6 H -45 V 3.25 H -4 V -3.25 H -45 V -6 Z"/>
+    <path d="M 114 -6 V 6 H 45 V 3.25 H 4 V -3.25 H 45 V -6 Z"/>
+  </g>
+</svg>
