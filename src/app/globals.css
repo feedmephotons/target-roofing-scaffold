@@ -149,7 +149,7 @@ body {
 
 /* Premium backgrounds & textures */
 .bg-blueprint-light {
-  background-image: linear-gradient(rgba(255, 255, 255, 0.94), rgba(255, 255, 255, 0.94)), url("/images/backgrounds/blueprint-light.png");
+  background-image: linear-gradient(rgba(255, 255, 255, 0.94), rgba(255, 255, 255, 0.94)), url("/images/backgrounds/blueprint-light.webp");
   background-size: cover;
   background-position: center;
 }
