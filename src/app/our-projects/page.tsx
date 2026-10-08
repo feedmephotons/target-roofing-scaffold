@@ -251,6 +251,11 @@ function HeroSection() {
           <p className="max-w-2xl text-lg leading-relaxed text-white/70 sm:text-xl">
             You&apos;ll see our handiwork, including roofing for new construction,
             full roof replacement projects, and repairs and maintenance.
+            {' '}Read historical project details for{' '}
+            <Link href="/target-news/salvation-army-fort-myers-roof-deck-replacement" className="text-white underline underline-offset-4">Salvation Army in Fort Myers</Link>,{' '}
+            <Link href="/target-news/saint-ann-jubilee-center-naples-tpo-reroof" className="text-white underline underline-offset-4">Saint Ann Jubilee Center in Naples</Link>,{' '}
+            <Link href="/target-news/willow-glen-port-charlotte-tile-reroof" className="text-white underline underline-offset-4">Willow Glen in Port Charlotte</Link> and{' '}
+            <Link href="/target-news/southern-spring-stamping-venice-coating-reroof" className="text-white underline underline-offset-4">Southern Spring &amp; Stamping in Venice</Link>.
           </p>
         </AnimateIn>
       </div>
