@@ -149,13 +149,13 @@ body {
 
 /* Premium backgrounds & textures */
 .bg-blueprint-light {
-  background-image: linear-gradient(rgba(255, 255, 255, 0.94), rgba(255, 255, 255, 0.94)), url("/images/backgrounds/blueprint-light.webp");
+  background-image: linear-gradient(rgba(255, 255, 255, 0.94), rgba(255, 255, 255, 0.94)), url("/images/backgrounds/blueprint-light-optimized.webp");
   background-size: cover;
   background-position: center;
 }
 
 .bg-blueprint-dark {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.94), rgba(0, 0, 0, 0.94)), url("/images/backgrounds/blueprint-dark.png");
+  background-image: linear-gradient(rgba(0, 0, 0, 0.94), rgba(0, 0, 0, 0.94)), url("/images/backgrounds/blueprint-dark.webp");
   background-size: cover;
   background-position: center;
 }

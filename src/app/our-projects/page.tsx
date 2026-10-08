@@ -26,10 +26,12 @@ import RoofSchematic from '@/components/RoofSchematic'
 /* ------------------------------------------------------------------ */
 function useInView(threshold = 0.2) {
   const ref = useRef<HTMLDivElement>(null)
-  const [inView, setInView] = useState(false)
+  const [inView, setInView] = useState(true)
   useEffect(() => {
     const el = ref.current
-    if (!el) return
+    if (!el || !('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const bounds = el.getBoundingClientRect()
+    if (bounds.top < window.innerHeight && bounds.bottom > 0) return
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -40,7 +42,11 @@ function useInView(threshold = 0.2) {
       { threshold }
     )
     observer.observe(el)
-    return () => observer.disconnect()
+    const frame = requestAnimationFrame(() => setInView(false))
+    return () => {
+      cancelAnimationFrame(frame)
+      observer.disconnect()
+    }
   }, [threshold])
   return { ref, inView }
 }
@@ -49,9 +55,9 @@ function useInView(threshold = 0.2) {
 /*  Animated Counter Hook                                              */
 /* ------------------------------------------------------------------ */
 function useCountUp(end: number, duration = 2000, start = false) {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(end)
   useEffect(() => {
-    if (!start) return
+    if (!start || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
     let startTime: number | null = null
     let raf: number
     const step = (timestamp: number) => {
@@ -63,7 +69,7 @@ function useCountUp(end: number, duration = 2000, start = false) {
     raf = requestAnimationFrame(step)
     return () => cancelAnimationFrame(raf)
   }, [end, duration, start])
-  return count
+  return start ? count : end
 }
 
 /* ------------------------------------------------------------------ */
@@ -434,6 +440,15 @@ function ProjectCard({
 
   return (
     <article
+      role="button"
+      tabIndex={0}
+      aria-label={`View ${project.name} project`}
+      onKeyDown={(event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault()
+          onClick()
+        }
+      }}
       onClick={onClick}
       className={`group relative overflow-hidden rounded-lg shadow-md transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 cursor-pointer ${
         inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
@@ -526,13 +541,28 @@ function ProjectLightbox({
   const primaryCategory = project.categories[0]
   const colors = CATEGORY_COLORS[primaryCategory]
 
-  // Prevent scroll when modal is open
+  const closeButton = useRef<HTMLButtonElement>(null)
+
+  // Keep keyboard focus inside the viewer and restore it when closed.
   useEffect(() => {
+    const previousFocus = document.activeElement as HTMLElement | null
+    const previousOverflow = document.body.style.overflow
     document.body.style.overflow = 'hidden'
-    return () => {
-      document.body.style.overflow = 'unset'
+    closeButton.current?.focus()
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') onClose()
+      if (event.key === 'Tab') {
+        event.preventDefault()
+        closeButton.current?.focus()
+      }
     }
-  }, [])
+    document.addEventListener('keydown', onKeyDown)
+    return () => {
+      document.body.style.overflow = previousOverflow
+      document.removeEventListener('keydown', onKeyDown)
+      previousFocus?.focus()
+    }
+  }, [onClose])
 
   return (
     <div 
@@ -540,11 +570,16 @@ function ProjectLightbox({
       onClick={onClose}
     >
       <div 
+        role="dialog"
+        aria-modal="true"
+        aria-label={`${project.name} project`}
         className="relative max-w-4xl w-full bg-black rounded-xl overflow-hidden border border-white/10 shadow-2xl flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close Button */}
-        <button 
+        <button
+          ref={closeButton}
+          aria-label="Close project viewer"
           onClick={onClose}
           className="absolute top-4 right-4 z-35 rounded-full bg-black/60 p-3 text-white/80 hover:text-white hover:bg-black/90 transition-colors"
         >
@@ -670,7 +705,7 @@ function StatsBar() {
                     <Icon className="h-7 w-7 text-[var(--red)]" />
                   </div>
                   <div className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white font-[family-name:var(--font-display)]">
-                    {stat.noAnimate ? stat.value : (stat.value === 0 && !inView ? '0' : stat.value)}
+                    {stat.value}
                     <span className="text-[var(--red)]">{stat.suffix}</span>
                   </div>
                   <div className="mt-2 text-sm font-semibold uppercase tracking-widest text-white/60 font-[family-name:var(--font-display)]">
