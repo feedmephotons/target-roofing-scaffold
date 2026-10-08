@@ -252,6 +252,7 @@ export default function TileRoofingPage() {
               <AnimateIn animation="fade-up" delay={300}>
                 <p className="text-[var(--gray-600)] leading-relaxed">
                   Target Roofing has installed and maintained tile roof systems across Fort Myers, Naples, Cape Coral, Bonita Springs, and Estero for over three decades. We work with every major tile profile and manufacturer, and every installation is engineered to meet current Florida Building Code requirements for wind uplift, underlayment, and hurricane strapping.
+                  {' '}Our historical <Link href="/target-news/willow-glen-port-charlotte-tile-reroof" className="text-[var(--red)] underline underline-offset-4">Willow Glen tile reroof in Port Charlotte</Link> documents work across 33 condo buildings.
                 </p>
               </AnimateIn>
             </div>

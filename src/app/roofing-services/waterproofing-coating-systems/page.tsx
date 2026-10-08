@@ -221,6 +221,7 @@ export default function WaterproofingCoatingSystemsPage() {
               <AnimateIn animation="fade-up" delay={300}>
                 <p className="text-[var(--gray-600)] leading-relaxed">
                   Target Roofing evaluates each roof on a case-by-case basis, performing moisture scans and adhesion testing to confirm the existing substrate is a viable candidate for a coating application. We then specify the correct chemistry, whether silicone for ponding-water conditions or elastomeric acrylic for sloped configurations, and apply the system with our own trained crews under strict quality-control protocols. The result is a renewable, warrantied roof system that protects your building and your budget.
+                  {' '}See the historical <Link href="/target-news/southern-spring-stamping-venice-coating-reroof" className="text-[var(--red)] underline underline-offset-4">Southern Spring &amp; Stamping coating reroof in Venice</Link>, recorded as completed in 2020.
                 </p>
               </AnimateIn>
             </div>
