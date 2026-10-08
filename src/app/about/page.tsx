@@ -258,7 +258,7 @@ export default function AboutPage() {
       </section>
 
       {/* ─── CERTIFICATIONS & AWARDS ─── */}
-      <section className="relative bg-[var(--black)] text-white py-24 md:py-32 overflow-hidden">
+      <section id="certifications" className="relative bg-[var(--black)] text-white py-24 md:py-32 overflow-hidden scroll-mt-32">
         {/* Noise overlay */}
         <div className="noise-overlay absolute inset-0" />
 
