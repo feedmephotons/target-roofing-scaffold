@@ -4,14 +4,14 @@ import test from 'node:test'
 import vm from 'node:vm'
 import ts from 'typescript'
 
-function route({ saveFails = false, sent = true, notifyThrows = false, marker = true } = {}) {
+function route({ saveFails = false, sent = true, notifyThrows = false, marker = true, firstName = 'Test', lastName = 'Customer' } = {}) {
   const module = { exports: {} }, rows = [], notices = []
   const require = name => {
     if (name === 'next/server') return { NextResponse: { json: (body, options) => ({ body, status: options?.status ?? 200 }) } }
     if (name === '@google/genai') return { GoogleGenAI: class { models = { generateContent: async () => ({ text: 'Your request was emailed.' }) } } }
     if (name === '@/lib/supabase') return { supabase: { from: () => ({ insert: row => { rows.push(row); return { select: () => ({ single: async () => saveFails ? { error: Error('save failed') } : { data: { id: 'saved-chat-row' }, error: null } }) } } }) } }
     if (name === '@/lib/notify') return { recipientList: value => [value], sendNotification: async notice => { notices.push(notice); if (notifyThrows) throw Error('mail failed'); return { sent, error: sent ? undefined : 'mail unavailable' } } }
-    if (name === '@/lib/chat-lead-marker') return { extractChatLeadMarkers: () => ({ cleanText: 'Helpful reply', markers: marker ? [{ json: JSON.stringify({ firstName: 'Test', lastName: 'Customer', phone: '2390000000', email: 'test@example.com', address: 'TEST ONLY', issue: 'TEST ONLY leak' }) }] : [] }) }
+    if (name === '@/lib/chat-lead-marker') return { extractChatLeadMarkers: () => ({ cleanText: 'Helpful reply', markers: marker ? [{ json: JSON.stringify({ firstName, lastName, phone: '2390000000', email: 'test@example.com', address: 'TEST ONLY', issue: 'TEST ONLY leak' }) }] : [] }) }
     throw Error('Unexpected import ' + name)
   }
   vm.runInNewContext(ts.transpileModule(fs.readFileSync('src/app/api/chat/route.ts', 'utf8'), { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2020 } }).outputText,
@@ -58,4 +58,16 @@ test('casual chat returns no lead ID and writes nothing', async () => {
   assert.equal(res.body.lead, undefined)
   assert.equal(rows.length, 0)
   assert.equal(notices.length, 0)
+})
+
+for (const [firstName, lastName, expectedFirst, expectedLast] of [
+  ['Mary Jane', 'Smith', 'Mary Jane', 'Smith'],
+  ['Mary Smith', '', 'Mary', 'Smith'],
+  ['  Mary  Smith  ', '', 'Mary', 'Smith'],
+]) test(`chat preserves supplied name fields: ${firstName} / ${lastName}`, async () => {
+  const { POST, rows, notices } = route({ firstName, lastName })
+  await POST(request)
+  assert.equal(rows[0].first_name, expectedFirst)
+  assert.equal(rows[0].last_name, expectedLast)
+  assert.equal(notices[0].fields.find(([label]) => label === 'Name')[1], `${expectedFirst} ${expectedLast}`)
 })
