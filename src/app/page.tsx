@@ -32,9 +32,9 @@ import { googleReviews } from '@/lib/google-reviews'
 /*  Animated Counter Hook                                              */
 /* ------------------------------------------------------------------ */
 function useCountUp(end: number, duration = 2000, start = false) {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(end)
   useEffect(() => {
-    if (!start) return
+    if (!start || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
     let startTime: number | null = null
     let raf: number
     const step = (timestamp: number) => {
@@ -292,13 +292,13 @@ const services = [
     iconSrc: '/images/icons/replacement-transition.png',
     title: 'Roof Replacement',
     desc: 'When a repair no longer makes financial sense, we tell you straight and manage the re-roof start to finish.',
-    href: '/roofing-services#reroofing',
+    href: '/roofing-services/roof-replacement',
   },
   {
     iconSrc: '/images/icons/proactive-maintenance.png',
     title: 'Proactive Maintenance',
     desc: 'Preventative checkups and minor repairs designed to maximize roof service life and satisfy warranties.',
-    href: '/roofing-services#maintenance-plans',
+    href: '/commercial-hoa-roof-maintenance',
   },
   {
     iconSrc: '/images/icons/new-construction.png',
@@ -815,17 +815,17 @@ const blogPosts = [
   {
     img: '/images/blog/good-service-header.webp',
     title: "Here's What a Great Roofing Service Team Looks Like",
-    href: '/target-news',
+    href: '/target-news/great-roofing-service-team',
   },
   {
     img: '/images/blog/hurricane-preparedness.jpg',
     title: 'Hurricane Preparedness',
-    href: '/target-news',
+    href: '/target-news/hurricane-preparedness',
   },
   {
     img: '/images/blog/rainy-season.jpg',
     title: 'Preparing Your Commercial Roof for Rainy Season',
-    href: '/target-news',
+    href: '/target-news/preparing-commercial-roof-rainy-season',
   },
 ]
 

@@ -51,11 +51,15 @@ export default function AnimateIn({
   as: Tag = 'div',
 }: AnimateInProps) {
   const ref = useRef<HTMLElement>(null)
-  const [visible, setVisible] = useState(false)
+  const [visible, setVisible] = useState(true)
 
   useEffect(() => {
     const el = ref.current
-    if (!el) return
+    if (!el || !('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
+    // Keep first-screen and no-JavaScript content visible; animate offscreen content only.
+    const bounds = el.getBoundingClientRect()
+    if (bounds.top < window.innerHeight && bounds.bottom > 0) return
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -68,6 +72,7 @@ export default function AnimateIn({
     )
 
     observer.observe(el)
+    setVisible(false)
     return () => observer.disconnect()
   }, [threshold])
 
