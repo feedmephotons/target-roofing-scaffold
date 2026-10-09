@@ -6,7 +6,7 @@ import { Suspense, useCallback, useEffect, useState } from 'react'
 import { LogOut, Menu } from 'lucide-react'
 import { logoutAdmin } from '@/app/actions'
 import { ADMIN_SECTIONS } from './nav'
-import { GuideIcon } from './icons'
+import { AddToolIcon, GuideIcon } from './icons'
 import AdminWelcome, { hasSeenWelcome, markWelcomeSeen } from './AdminWelcome'
 
 function Nav({ onNavigate }: { onNavigate?: () => void }) {
@@ -34,6 +34,13 @@ function Nav({ onNavigate }: { onNavigate?: () => void }) {
           </ul>
         </div>
       ))}
+      <div>
+        <p className="px-3 mb-2 text-[10px] font-bold uppercase tracking-[0.18em] text-white/40">Office tools</p>
+        <a href="/office/admin" onClick={onNavigate}
+          className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-[13px] font-semibold text-white/70 transition-colors hover:bg-white/10 hover:text-white">
+          <AddToolIcon className="h-5 w-5 shrink-0" />Tools &amp; Access
+        </a>
+      </div>
     </nav>
   )
 }
