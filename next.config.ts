@@ -1,6 +1,7 @@
 import type { NextConfig } from 'next'
 import fs from 'fs'
 import path from 'path'
+import { companyToolRewrites } from './config/company-tool-routes.mjs'
 
 // Dynamic generation of datasets during build/config loading
 try {
@@ -99,6 +100,7 @@ const LEGACY_SECTION_REDIRECTS: Record<string, string> = {
 
 // Top-level routes on this site; a blog slug never shadows one of these.
 const RESERVED_TOP_LEVEL = new Set([
+  'office', 'office-assets', 'radar', 'commissions',
   'about', 'admin', 'api', 'careers', 'commercial-hoa-roof-maintenance', 'contact', 'financing',
   'locations', 'mobile-privacy-policy', 'our-process', 'prospect-intake-form', 'our-projects', 'our-team', 'podcast',
   'portal', 'reviews', 'roofing-services', 'softwash', 'target-news', 'video-gallery',
@@ -120,6 +122,9 @@ function legacyBlogRedirects() {
 }
 
 const nextConfig: NextConfig & { eslint?: { ignoreDuringBuilds?: boolean } } = {
+  async rewrites() {
+    return { beforeFiles: companyToolRewrites(), afterFiles: [], fallback: [] }
+  },
   async redirects() {
     return [
       // The former customer portal was a non-production demo. Send visitors to
